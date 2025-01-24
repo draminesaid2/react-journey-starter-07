@@ -37,10 +37,7 @@ const ProductDetailContainer = ({ product, onProductAdded }: ProductDetailContai
   const getAvailableSizes = () => {
     const sizeEntries = Object.entries(product.sizes);
     return sizeEntries
-      .filter(([_, quantity]) => {
-        const quantityNum = Number(quantity);
-        return !isNaN(quantityNum) && quantityNum > 0;
-      })
+      .filter(([_, quantity]) => quantity > 0 && quantity !== '')
       .map(([size]) => size.toUpperCase());
   };
 

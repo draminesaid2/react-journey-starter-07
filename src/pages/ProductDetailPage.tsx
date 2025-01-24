@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllProducts } from '@/services/productsApi';
 import { motion } from 'framer-motion';
-import { CartProvider } from '@/components/cart/CartProvider';
 import RelatedProducts from '@/components/product-detail/RelatedProducts';
 import ProductDetailLayout from '@/components/product-detail/ProductDetailLayout';
 import ProductDetailContainer from '@/components/product-detail/ProductDetailContainer';
@@ -49,33 +48,39 @@ const ProductDetailPage = () => {
     setShowCheckoutModal(true);
   };
 
+  // Get related products if any are specified
+  const relatedProductIds = product.relatedProducts
+    ? product.relatedProducts.split(',').map(Number)
+    : [];
+  const relatedProductsList = products?.filter(p => 
+    relatedProductIds.includes(p.id)
+  ) || [];
+
   return (
-    <CartProvider>
-      <ProductDetailLayout onBack={() => navigate(-1)}>
-        <ProductDetailContainer 
-          product={product} 
-          onProductAdded={handleProductAdded}
-        />
-        
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mt-8 mb-8"
-        >
-          <RelatedProducts currentProduct={product} />
-        </motion.section>
-        
-        <CheckoutConfirmationModal
-          isOpen={showCheckoutModal}
-          onClose={() => setShowCheckoutModal(false)}
-          productName={addedProductName}
-        />
+    <ProductDetailLayout onBack={() => navigate(-1)}>
+      <ProductDetailContainer 
+        product={product} 
+        onProductAdded={handleProductAdded}
+      />
+      
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mt-8 mb-8"
+      >
+        <RelatedProducts currentProduct={product} />
+      </motion.section>
+      
+      <CheckoutConfirmationModal
+        isOpen={showCheckoutModal}
+        onClose={() => setShowCheckoutModal(false)}
+        productName={addedProductName}
+      />
         <Suspense fallback={null}>
-          <WhatsAppPopup />
-        </Suspense>
-      </ProductDetailLayout>
-    </CartProvider>
+                      <WhatsAppPopup />
+   </Suspense>
+    </ProductDetailLayout>
   );
 };
 
