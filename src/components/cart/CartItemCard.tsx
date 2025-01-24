@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { savePersonalization } from '@/utils/personalizationStorage';
 import { toast } from "@/hooks/use-toast";
-import { getAvailableStockForSize } from '@/utils/stockValidation';
+import { getAvailableStockForSize, getTotalStock } from '@/utils/stockValidation';
 import { getProducts } from '@/utils/productStorage';
+import { NO_SIZE_PRODUCTS } from '@/utils/sizeUtils';
 
 interface CartItemCardProps {
   item: CartItem;
@@ -26,17 +27,26 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
   const hasPersonalization = !isPackagingFee && item.personalization && item.personalization !== '-';
   const isChemise = item.itemgroup_product === 'chemises';
   const showPersonalizationCost = hasPersonalization && isChemise && !isFromPack;
+  const isNoSizeProduct = item.itemgroup_product && NO_SIZE_PRODUCTS.includes(item.itemgroup_product);
 
   const maxLength = isChemise ? 4 : 100;
   const remainingChars = maxLength - personalizationText.length;
 
-  // Get available stock for the current size
+  // Get available stock based on product type
   const getAvailableStock = () => {
-    if (!item.size || isPackagingFee) return Infinity;
+    if (isPackagingFee) return Infinity;
+    
     const products = getProducts();
     const product = products.find(p => p.id === item.id);
     if (!product) return 0;
-    return getAvailableStockForSize(product, item.size);
+
+    // For products without sizes, check total quantity
+    if (isNoSizeProduct) {
+      return getTotalStock(product);
+    }
+
+    // For products with sizes, check size-specific stock
+    return item.size ? getAvailableStockForSize(product, item.size) : 0;
   };
 
   const handleQuantityChange = (change: number) => {
@@ -50,7 +60,7 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
     if (newQuantity > availableStock) {
       toast({
         title: "Stock insuffisant",
-        description: `Il ne reste que ${availableStock} article(s) en stock pour cette taille`,
+        description: `Il ne reste que ${availableStock} article(s) en stock`,
         variant: "destructive",
       });
       return;
