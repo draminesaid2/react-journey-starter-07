@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { MinusCircle, PlusCircle, Trash2, Tag, Package, Gift, PenLine } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { CartItem } from './CartProvider';
+import { MinusCircle, PlusCircle, Trash2, Tag, Package, Gift, PenLine } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { savePersonalization } from '@/utils/personalizationStorage';
 import { toast } from "@/hooks/use-toast";
+import { CartItem } from './CartProvider';
 
 interface CartItemCardProps {
   item: CartItem;
@@ -37,7 +36,6 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
       });
       return;
     }
-    savePersonalization(item.id, personalizationText);
     item.personalization = personalizationText;
     setIsPersonalizationOpen(false);
   };
@@ -83,53 +81,28 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
                 -{item.discount_product}%
               </span>
             )}
-            <div className="flex flex-wrap gap-1">
-              {isFromPack && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#700100]/10 text-[#700100] whitespace-nowrap">
-                  <Package size={12} />
-                  {packType}
-                </span>
-              )}
-              {item.withBox && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#700100]/10 text-[#700100] whitespace-nowrap">
-                  <Gift size={12} />
-                  + Box cadeau (30 TND)
-                </span>
-              )}
-              {showPersonalizationCost && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#700100]/10 text-[#700100] whitespace-nowrap">
-                  <PenLine size={12} />
-                  + Personnalisation (30 TND)
-                </span>
-              )}
-            </div>
           </div>
           
-          {(item.size !== '-' || item.color !== '-') && !isPackagingFee && (
-            <div className="flex flex-wrap gap-2 mb-2">
-              {item.size !== '-' && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 whitespace-nowrap">
-                  Taille: {item.size}
-                </span>
-              )}
-              {item.color !== '-' && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 whitespace-nowrap">
-                  Couleur: {item.color}
-                </span>
-              )}
-            </div>
-          )}
+          <div className="flex flex-wrap gap-1">
+            {isFromPack && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#700100]/10 text-[#700100] whitespace-nowrap">
+                <Package size={12} />
+                {packType}
+              </span>
+            )}
+            {item.withBox && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#700100]/10 text-[#700100] whitespace-nowrap">
+                <Gift size={12} />
+                + Box cadeau (30 TND)
+              </span>
+            )}
+          </div>
 
-          {!isPackagingFee && item.personalization && item.personalization !== '-' && (
-           /*  onClick={() => setIsPersonalizationOpen(true)} */
-            <div className="mb-2 bg-gray-50 p-3 rounded-lg relative group cursor-pointer" >
+          {hasPersonalization && (
+            <div className="mb-2 bg-gray-50 p-3 rounded-lg relative group">
               <p className="text-sm text-gray-600 pr-8">
                 Personnalisation: {item.personalization}
               </p>
-             {/*  <PenLine 
-                size={16} 
-                className="absolute right-2 top-2 text-[#700100] opacity-0 group-hover:opacity-100 transition-opacity"
-              /> */}
             </div>
           )}
 
