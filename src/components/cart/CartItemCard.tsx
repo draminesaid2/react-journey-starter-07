@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { savePersonalization } from '@/utils/personalizationStorage';
 import { toast } from "@/hooks/use-toast";
+import { getAvailableStockForSize } from '@/utils/stockValidation';
+import { getProducts } from '@/utils/productStorage';
 
 interface CartItemCardProps {
   item: CartItem;
@@ -27,6 +29,35 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
 
   const maxLength = isChemise ? 4 : 100;
   const remainingChars = maxLength - personalizationText.length;
+
+  // Get available stock for the current size
+  const getAvailableStock = () => {
+    if (!item.size || isPackagingFee) return Infinity;
+    const products = getProducts();
+    const product = products.find(p => p.id === item.id);
+    if (!product) return 0;
+    return getAvailableStockForSize(product, item.size);
+  };
+
+  const handleQuantityChange = (change: number) => {
+    const newQuantity = item.quantity + change;
+    const availableStock = getAvailableStock();
+
+    if (newQuantity < 1) {
+      return;
+    }
+
+    if (newQuantity > availableStock) {
+      toast({
+        title: "Stock insuffisant",
+        description: `Il ne reste que ${availableStock} article(s) en stock pour cette taille`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    onUpdateQuantity(item.id, newQuantity);
+  };
 
   const handleSavePersonalization = () => {
     if (isChemise && personalizationText.length > 4) {
@@ -56,6 +87,8 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
       });
     }
   };
+
+  // ... keep existing code (JSX rendering part)
 
   return (
     <motion.div 
@@ -121,22 +154,17 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
           )}
 
           {!isPackagingFee && item.personalization && item.personalization !== '-' && (
-           /*  onClick={() => setIsPersonalizationOpen(true)} */
-            <div className="mb-2 bg-gray-50 p-3 rounded-lg relative group cursor-pointer" >
+            <div className="mb-2 bg-gray-50 p-3 rounded-lg relative group cursor-pointer">
               <p className="text-sm text-gray-600 pr-8">
                 Personnalisation: {item.personalization}
               </p>
-             {/*  <PenLine 
-                size={16} 
-                className="absolute right-2 top-2 text-[#700100] opacity-0 group-hover:opacity-100 transition-opacity"
-              /> */}
             </div>
           )}
 
           <div className="flex items-center justify-between sm:justify-start gap-4 mt-3">
             <div className="flex items-center bg-[#F1F0FB] rounded-full px-3 py-1">
               <button
-                onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                onClick={() => handleQuantityChange(-1)}
                 className="text-[#8E9196] hover:text-[#700100] transition-colors p-1"
                 aria-label="Diminuer la quantité"
               >
@@ -144,7 +172,7 @@ const CartItemCard = ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) =
               </button>
               <span className="w-8 text-center font-medium text-[#1A1F2C] text-sm">{item.quantity}</span>
               <button
-                onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                onClick={() => handleQuantityChange(1)}
                 className="text-[#8E9196] hover:text-[#700100] transition-colors p-1"
                 aria-label="Augmenter la quantité"
               >
