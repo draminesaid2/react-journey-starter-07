@@ -71,6 +71,42 @@ const Seasons = () => {
         </div>
       </div>
 
+      {/* Seasons Overview Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {seasonsData?.saisons.map((season) => (
+          <Card key={`overview-${season.id_saison}`} className="bg-dashboard-card border-border/40">
+            <CardHeader className="space-y-1">
+              <div className="flex items-center space-x-4">
+                {season.photo_saison ? (
+                  <div className="w-16 h-16 rounded-lg overflow-hidden">
+                    <img
+                      src={`https://draminesaid.com/videos/${season.photo_saison}`}
+                      alt={season.name_saison}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = '/placeholder.svg';
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <BookOpen className="h-16 w-16 text-primary p-4 bg-primary/10 rounded-lg" />
+                )}
+                <div>
+                  <CardTitle className="text-xl font-semibold">{season.name_saison}</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {chaptersData?.chapters.filter(chapter => chapter.id_saison === season.id_saison).length || 0} chapitres
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+
+      <h2 className="text-2xl font-bold mt-12 mb-6">Détails des saisons et chapitres</h2>
+
+      {/* Detailed Seasons with Chapters Section */}
       <div className="grid gap-6">
         {seasonsData?.saisons.map((season) => (
           <Card key={season.id_saison} className="bg-dashboard-card border-border/40">
