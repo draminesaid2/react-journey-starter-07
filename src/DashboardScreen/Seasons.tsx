@@ -76,8 +76,22 @@ const Seasons = () => {
           <Card key={season.id_saison} className="bg-dashboard-card border-border/40">
             <CardHeader className="space-y-1">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="h-5 w-5 text-primary" />
+                <div className="flex items-center space-x-4">
+                  {season.photo_saison ? (
+                    <div className="w-12 h-12 rounded-lg overflow-hidden">
+                      <img
+                        src={`https://draminesaid.com/videos/${season.photo_saison}`}
+                        alt={season.name_saison}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/placeholder.svg';
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <BookOpen className="h-5 w-5 text-primary" />
+                  )}
                   <CardTitle className="text-xl font-semibold">{season.name_saison}</CardTitle>
                 </div>
                 <span className="text-sm text-muted-foreground">
