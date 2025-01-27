@@ -79,7 +79,7 @@ const Clients: React.FC<ClientsProps> = ({ user }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://plateform.draminesaid.com/app/get_users.php');
+        const response = await fetch('https://plateform.draminesaid.com/app/get_usersnew.php');
         const data = await response.json();
         if (data.success) {
           setUsers(data.users);
