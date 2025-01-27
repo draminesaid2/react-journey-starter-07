@@ -4,7 +4,6 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { ChapterManager } from '@/components/video-upload/ChapterManager';
 import { VideoUploadForm } from '@/components/video-upload/VideoUploadForm';
 import { formatFileSize } from '@/utils/compression';
 import { useVideoCompression } from '@/hooks/useVideoCompression';
@@ -134,8 +133,6 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
 
   return (
     <div className="p-6 mt-16 max-w-5xl mx-auto space-y-6">
-      <ChapterManager />
-      
       <Card className="bg-dashboard-card border-border/40">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-between">
