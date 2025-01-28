@@ -41,7 +41,15 @@ export const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   // Define accepted file types
   const acceptedTypes = type === 'thumbnail' 
     ? 'image/*'
-    : '.mp4,.mov,.avi,.mkv,.webm,video/*';
+    : 'video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm';
+
+  const uploadText = type === 'thumbnail' 
+    ? 'Déposez la miniature ici ou cliquez pour parcourir'
+    : 'Déposez la vidéo ici ou cliquez pour parcourir';
+
+  const formatText = type === 'thumbnail'
+    ? 'Images uniquement'
+    : 'Formats acceptés: MP4, MOV, AVI, MKV, WebM';
 
   return (
     <div 
@@ -134,10 +142,10 @@ export const FileUploadBox: React.FC<FileUploadBoxProps> = ({
         <>
           <Icon className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
-            {isCompressing ? 'Compression en cours...' : `Déposez ${type === 'thumbnail' ? 'la miniature' : 'la vidéo'} ici ou cliquez pour parcourir`}
+            {isCompressing ? 'Compression en cours...' : uploadText}
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            {type === 'thumbnail' ? 'Images uniquement' : 'Formats acceptés: MP4, MOV, AVI, MKV, WebM'}
+            {formatText}
           </p>
         </>
       )}

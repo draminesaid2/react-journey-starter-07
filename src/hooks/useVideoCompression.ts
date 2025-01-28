@@ -102,19 +102,21 @@ export const useVideoCompression = () => {
       const videoBitrate = Math.floor(targetBitrate * 0.95);
       const audioBitrate = Math.floor(targetBitrate * 0.05);
 
+      // Updated compression command with better quality settings
       await ffmpeg.exec([
         '-i', 'input.mp4',
         '-c:v', 'libx264',
-        '-preset', 'veryfast',
+        '-preset', 'medium',
+        '-crf', '23',
         '-b:v', `${videoBitrate}`,
-        '-maxrate', `${videoBitrate * 1.5}`,
-        '-bufsize', `${videoBitrate * 2}`,
+        '-maxrate', `${videoBitrate * 2}`,
+        '-bufsize', `${videoBitrate * 3}`,
         '-c:a', 'aac',
         '-b:a', `${audioBitrate}`,
         '-movflags', '+faststart',
         '-y',
         'output.mp4'
-      ], 30000);
+      ]);
 
       const data = await ffmpeg.readFile('output.mp4');
       const compressedBlob = new Blob([data], { type: 'video/mp4' });
