@@ -99,7 +99,7 @@ export const VideoUploadForm: React.FC<VideoUploadFormProps> = ({
         <div className="space-y-2">
           <label className="text-sm font-medium">Fichier vidéo</label>
           <FileUploadBox
-            type="thumbnail"
+            type="video"
             file={videoFile}
             isCompressing={isCompressing}
             compressionProgress={compressionProgress}
