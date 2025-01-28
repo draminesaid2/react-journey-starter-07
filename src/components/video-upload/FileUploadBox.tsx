@@ -38,18 +38,21 @@ export const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   const Icon = type === 'thumbnail' ? ImageIcon : FileVideo;
   const inputId = `${type}Input`;
   
-  // Define accepted file types
+  // Define accepted file types and text based on type
   const acceptedTypes = type === 'thumbnail' 
     ? 'image/*'
     : 'video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm';
 
-  const uploadText = type === 'thumbnail' 
-    ? 'Déposez la miniature ici ou cliquez pour parcourir'
-    : 'Déposez la vidéo ici ou cliquez pour parcourir';
+  const getUploadText = () => {
+    if (isCompressing) return 'Compression en cours...';
+    if (type === 'thumbnail') return 'Déposez la miniature ici ou cliquez pour parcourir';
+    return 'Déposez la vidéo ici ou cliquez pour parcourir';
+  };
 
-  const formatText = type === 'thumbnail'
-    ? 'Images uniquement'
-    : 'Formats acceptés: MP4, MOV, AVI, MKV, WebM';
+  const getFormatText = () => {
+    if (type === 'thumbnail') return 'Images uniquement';
+    return 'Formats acceptés: MP4, MOV, AVI, MKV, WebM';
+  };
 
   return (
     <div 
@@ -142,10 +145,10 @@ export const FileUploadBox: React.FC<FileUploadBoxProps> = ({
         <>
           <Icon className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
-            {isCompressing ? 'Compression en cours...' : uploadText}
+            {getUploadText()}
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            {formatText}
+            {getFormatText()}
           </p>
         </>
       )}
