@@ -32,7 +32,10 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
     compressedSize,
     compressionProgress,
     loadingMessage,
+    timeLeft,
+    speed,
     handleFileCompression,
+    cancelCompression
   } = useVideoCompression();
 
   const {
@@ -98,7 +101,7 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
     const newTotalSize = file.size + otherFileSize;
 
     try {
-      if (type === 'video' && (file.size > SIZE_THRESHOLD || newTotalSize > MAX_TOTAL_SIZE)) {
+      if (type === 'video' && enableCompression && (file.size > SIZE_THRESHOLD || newTotalSize > MAX_TOTAL_SIZE)) {
         console.log('Starting video compression...');
         // Calculate target size to ensure final size is under 450MB
         const targetSize = Math.min(MAX_TOTAL_SIZE - otherFileSize, MAX_TOTAL_SIZE);
@@ -161,29 +164,6 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
             </Alert>
           )}
 
-          {isCompressing && (
-            <div className="mt-4 space-y-2">
-              <div className="flex justify-between text-sm text-muted-foreground">
-                <span>{loadingMessage}</span>
-                <span>{compressionProgress}%</span>
-              </div>
-              <Progress value={compressionProgress} className="h-2" />
-              {originalSize && (
-                <p className="text-sm text-muted-foreground">
-                  Taille originale: {formatFileSize(originalSize)}
-                  {compressedSize && (
-                    <>
-                      <br />
-                      Taille compressée: {formatFileSize(compressedSize)}
-                      <br />
-                      Réduction: {((originalSize - compressedSize) / originalSize * 100).toFixed(1)}%
-                    </>
-                  )}
-                </p>
-              )}
-            </div>
-          )}
-
           <p className="text-sm text-muted-foreground">
             Partagez votre contenu avec votre audience. Les fichiers de plus de 500MB seront automatiquement compressés pour optimiser le stockage.
           </p>
@@ -202,6 +182,8 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
             compressionProgress={compressionProgress}
             originalSize={originalSize}
             compressedSize={compressedSize}
+            timeLeft={timeLeft}
+            speed={speed}
             onTitleChange={setTitle}
             onDescriptionChange={setDescription}
             onVideoSelect={(e) => handleFileChange(e, 'video')}
@@ -210,6 +192,7 @@ const Videos: React.FC<VideosProps> = ({ user }) => {
             onSubchapterChange={setSelectedSubchapter}
             onSubmit={handleSubmit}
             onThumbnailRemove={() => setThumbnailFile(null)}
+            onCancelCompression={cancelCompression}
           />
         </CardContent>
       </Card>
