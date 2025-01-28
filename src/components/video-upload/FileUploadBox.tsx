@@ -35,23 +35,22 @@ export const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   onFileRemove,
   onCancel
 }) => {
-  const Icon = type === 'thumbnail' ? ImageIcon : FileVideo;
+  const Icon = type === 'video' ? FileVideo : ImageIcon;
   const inputId = `${type}Input`;
   
-  // Define accepted file types and text based on type
-  const acceptedTypes = type === 'thumbnail' 
-    ? 'image/*'
-    : 'video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm';
+  const acceptedTypes = type === 'video'
+    ? 'video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm'
+    : 'image/*';
 
   const getUploadText = () => {
     if (isCompressing) return 'Compression en cours...';
-    if (type === 'thumbnail') return 'Déposez la miniature ici ou cliquez pour parcourir';
-    return 'Déposez la vidéo ici ou cliquez pour parcourir';
+    if (type === 'video') return 'Déposez la vidéo ici ou cliquez pour parcourir';
+    return 'Déposez la miniature ici ou cliquez pour parcourir';
   };
 
   const getFormatText = () => {
-    if (type === 'thumbnail') return 'Images uniquement';
-    return 'Formats acceptés: MP4, MOV, AVI, MKV, WebM';
+    if (type === 'video') return 'Formats acceptés: MP4, MOV, AVI, MKV, WebM';
+    return 'Images uniquement';
   };
 
   return (
