@@ -2,194 +2,271 @@
 import React from 'react';
 import { 
   StyleSheet, 
-  Text, 
   View, 
+  Text, 
   TouchableOpacity, 
-  ScrollView,
-  SafeAreaView,
-  Platform
+  ScrollView, 
+  SafeAreaView, 
+  StatusBar 
 } from 'react-native';
-import { 
-  User, 
-  CalendarCheck, 
-  MessageSquare, 
-  Star, 
-  LogOut 
-} from 'lucide-react-native';
 import { COLORS } from '../../theme/colors';
 import { SPACING } from '../../theme/spacing';
 import { FONT_SIZE } from '../../theme/typography';
-import * as Animatable from 'react-native-animatable';
+import { 
+  BarChart2, 
+  Users, 
+  Calendar, 
+  Star, 
+  Tag, 
+  Settings,
+  MessageCircle,
+  Clipboard,
+  TrendingUp,
+  HelpCircle
+} from 'lucide-react-native';
 
-const ProviderDashboardScreen = ({ navigation }) => {
+export default function ProviderDashboardScreen({ navigation }) {
   const menuItems = [
     {
-      title: 'Gestion du compte',
-      icon: <User size={24} color={COLORS.white} />,
-      background: COLORS.primary,
-      onPress: () => navigation.navigate('AccountManagement')
+      icon: <Users size={24} color={COLORS.primary} />,
+      title: 'Gérer mon compte',
+      screen: 'AccountManagement'
     },
     {
-      title: 'Gestion des réservations',
-      icon: <CalendarCheck size={24} color={COLORS.white} />,
-      background: COLORS.secondary,
-      onPress: () => navigation.navigate('ReservationManagement')
+      icon: <Calendar size={24} color={COLORS.primary} />,
+      title: 'Gérer les réservations',
+      screen: 'ReservationManagement'
     },
     {
-      title: 'Gestion des messages',
-      icon: <MessageSquare size={24} color={COLORS.white} />,
-      background: COLORS.tertiary,
-      onPress: () => navigation.navigate('MessageListScreen')
+      icon: <Star size={24} color={COLORS.primary} />,
+      title: 'Gérer les avis',
+      screen: 'ReviewManagement'
     },
     {
-      title: 'Gestion des avis',
-      icon: <MessageSquare size={24} color={COLORS.white} />,
-      background: COLORS.tertiary,
-      onPress: () => navigation.navigate('ReviewManagement')
+      icon: <Tag size={24} color={COLORS.primary} />,
+      title: 'Gérer les promotions',
+      screen: 'PromotionManagement'
     },
     {
-      title: 'Gestion des promotions',
-      icon: <Star size={24} color={COLORS.white} />,
-      background: COLORS.secondary_light,
-      onPress: () => navigation.navigate('PromotionManagement')
+      icon: <MessageCircle size={24} color={COLORS.primary} />,
+      title: 'Messages clients',
+      screen: 'ProviderMessageList'
+    },
+    {
+      icon: <Settings size={24} color={COLORS.primary} />,
+      title: 'Paramètres',
+      screen: 'Settings'
+    }
+  ];
+
+  const statistics = [
+    {
+      icon: <Clipboard size={20} color={COLORS.primary} />,
+      title: 'Réservations',
+      value: '24',
+      change: '+12%',
+      positive: true
+    },
+    {
+      icon: <MessageCircle size={20} color={COLORS.primary} />,
+      title: 'Messages',
+      value: '15',
+      change: '+5',
+      positive: true
+    },
+    {
+      icon: <TrendingUp size={20} color={COLORS.primary} />,
+      title: 'Visites',
+      value: '142',
+      change: '+22%',
+      positive: true
+    },
+    {
+      icon: <Star size={20} color={COLORS.primary} />,
+      title: 'Avis',
+      value: '4.7',
+      change: '+0.2',
+      positive: true
     }
   ];
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animatable.View 
-        animation="fadeInDown" 
-        duration={1000} 
-        style={styles.header}
-      >
-        <Text style={styles.title}>Tableau de bord</Text>
-        <Text style={styles.subtitle}>Gérez votre service JenCity</Text>
-      </Animatable.View>
+      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+      
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.welcomeText}>Bienvenue,</Text>
+          <Text style={styles.businessName}>Carthage Découvertes</Text>
+        </View>
+        <TouchableOpacity style={styles.helpButton}>
+          <HelpCircle size={24} color={COLORS.white} />
+        </TouchableOpacity>
+      </View>
 
-      <ScrollView style={styles.content}>
-        <View style={styles.menuGrid}>
-          {menuItems.map((item, index) => (
-            <Animatable.View
-              key={index}
-              animation="fadeInUp"
-              delay={300 + index * 100}
-              style={styles.menuItemContainer}
-            >
-              <TouchableOpacity
-                style={[styles.menuItem, { backgroundColor: item.background }]}
-                onPress={item.onPress}
-              >
-                <View style={styles.iconContainer}>
-                  {item.icon}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.statsContainer}>
+          <Text style={styles.sectionTitle}>Vue d'ensemble</Text>
+          <View style={styles.statsGrid}>
+            {statistics.map((stat, index) => (
+              <View key={index} style={styles.statCard}>
+                <View style={styles.statHeader}>
+                  {stat.icon}
+                  <Text style={styles.statTitle}>{stat.title}</Text>
                 </View>
-                <Text style={styles.menuItemText}>{item.title}</Text>
-              </TouchableOpacity>
-            </Animatable.View>
-          ))}
+                <Text style={styles.statValue}>{stat.value}</Text>
+                <Text style={[
+                  styles.statChange,
+                  stat.positive ? styles.positiveChange : styles.negativeChange
+                ]}>
+                  {stat.change}
+                </Text>
+              </View>
+            ))}
+          </View>
         </View>
 
-        <Animatable.View
-          animation="fadeInUp"
-          delay={700}
-        >
-          <TouchableOpacity 
-            style={styles.logoutButton}
-            onPress={() => navigation.navigate('Login')}
-          >
-            <LogOut size={24} color={COLORS.error} />
-            <Text style={styles.logoutText}>Se déconnecter</Text>
-          </TouchableOpacity>
-        </Animatable.View>
+        <View style={styles.menuContainer}>
+          <Text style={styles.sectionTitle}>Gérer mon établissement</Text>
+          <View style={styles.menuGrid}>
+            {menuItems.map((item, index) => (
+              <TouchableOpacity 
+                key={index} 
+                style={styles.menuItem}
+                onPress={() => navigation.navigate(item.screen)}
+              >
+                <View style={styles.menuIconContainer}>
+                  {item.icon}
+                </View>
+                <Text style={styles.menuText}>{item.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.light_gray,
   },
   header: {
     backgroundColor: COLORS.primary,
-    padding: SPACING.lg,
-    paddingTop: Platform.OS === 'android' ? SPACING.xl * 2 : SPACING.xl,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : SPACING.md,
+    paddingBottom: SPACING.xl,
+    paddingHorizontal: SPACING.lg,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  title: {
+  welcomeText: {
+    color: COLORS.white,
+    fontSize: FONT_SIZE.md,
+    opacity: 0.9,
+  },
+  businessName: {
+    color: COLORS.white,
     fontSize: FONT_SIZE.xl,
     fontWeight: 'bold',
-    color: COLORS.white,
-  },
-  subtitle: {
-    fontSize: FONT_SIZE.md,
-    color: COLORS.white,
-    opacity: 0.8,
     marginTop: SPACING.xs,
   },
-  content: {
-    flex: 1,
+  helpButton: {
+    padding: SPACING.sm,
+  },
+  scrollContent: {
+    padding: SPACING.lg,
+  },
+  sectionTitle: {
+    fontSize: FONT_SIZE.lg,
+    fontWeight: 'bold',
+    marginBottom: SPACING.md,
+    color: COLORS.black,
+  },
+  statsContainer: {
+    marginBottom: SPACING.xl,
+  },
+  statsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  statCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
     padding: SPACING.md,
+    marginBottom: SPACING.md,
+    width: '48%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.xs,
+  },
+  statTitle: {
+    fontSize: FONT_SIZE.sm,
+    color: COLORS.gray,
+    marginLeft: SPACING.sm,
+  },
+  statValue: {
+    fontSize: FONT_SIZE.xl,
+    fontWeight: 'bold',
+    color: COLORS.black,
+    marginVertical: SPACING.xs,
+  },
+  statChange: {
+    fontSize: FONT_SIZE.sm,
+    fontWeight: 'bold',
+  },
+  positiveChange: {
+    color: COLORS.success,
+  },
+  negativeChange: {
+    color: COLORS.error,
+  },
+  menuContainer: {
+    marginBottom: SPACING.xl,
   },
   menuGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginTop: SPACING.lg,
-  },
-  menuItemContainer: {
-    width: '48%',
-    marginBottom: SPACING.md,
   },
   menuItem: {
+    backgroundColor: COLORS.white,
     borderRadius: 12,
-    padding: SPACING.lg,
-    height: 150,
-    justifyContent: 'center',
+    padding: SPACING.md,
+    marginBottom: SPACING.lg,
+    width: '48%',
     alignItems: 'center',
-    ...Platform.select({
-      ios: {
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 4,
-      },
-    }),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  iconContainer: {
+  menuIconContainer: {
+    backgroundColor: COLORS.light_gray,
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: SPACING.md,
+    marginBottom: SPACING.sm,
   },
-  menuItemText: {
-    color: COLORS.white,
+  menuText: {
+    fontSize: FONT_SIZE.sm,
     fontWeight: 'bold',
-    fontSize: FONT_SIZE.md,
+    color: COLORS.black,
     textAlign: 'center',
-  },
-  logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255, 68, 68, 0.1)',
-    padding: SPACING.md,
-    borderRadius: 12,
-    marginTop: SPACING.xl,
-    marginBottom: SPACING.xl,
-  },
-  logoutText: {
-    color: COLORS.error,
-    fontWeight: 'bold',
-    marginLeft: SPACING.sm,
-  },
+  }
 });
-
-export default ProviderDashboardScreen;

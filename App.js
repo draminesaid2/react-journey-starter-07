@@ -23,6 +23,7 @@ import PromotionManagementScreen from './src/screens/provider/PromotionManagemen
 import ProviderListScreen from './src/screens/ProviderListScreen';
 import MessageScreen from './src/screens/MessageScreen';
 import MessageListScreen from './src/screens/MessageListScreen';
+import ProviderMessageListScreen from './src/screens/provider/ProviderMessageListScreen';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './src/i18n';
 import ClerkProviderWrapper from './src/auth/ClerkProviderWrapper';
@@ -48,6 +49,7 @@ export default function App() {
             <Stack.Screen name="ProviderList" component={ProviderListScreen} />
             <Stack.Screen name="Message" component={MessageScreen} />
             <Stack.Screen name="MessageListScreen" component={MessageListScreen} />
+            <Stack.Screen name="ProviderMessageList" component={ProviderMessageListScreen} />
             
             {/* Admin Screens */}
             <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />

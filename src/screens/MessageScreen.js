@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   StyleSheet, 
@@ -9,7 +10,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  Image
 } from 'react-native';
 import { COLORS } from '../theme/colors';
 import { SPACING } from '../theme/spacing';
@@ -20,13 +22,15 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Send } from 'lucide-react-native';
 
 export default function MessageScreen({ route, navigation }) {
-  const { providerId, providerName } = route.params;
+  const { providerId, providerName, userId, userName, isProvider } = route.params;
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([
     {
       id: '1',
-      text: 'Bonjour, comment puis-je vous aider ?',
-      sender: 'provider',
+      text: isProvider 
+        ? 'Comment puis-je vous aider aujourd\'hui ?' 
+        : 'Bonjour, comment puis-je vous aider ?',
+      sender: isProvider ? 'user' : 'provider',
       timestamp: new Date(Date.now() - 3600000).toISOString(),
     }
   ]);
@@ -40,22 +44,24 @@ export default function MessageScreen({ route, navigation }) {
     const newMessage = {
       id: Date.now().toString(),
       text: message,
-      sender: 'user',
+      sender: isProvider ? 'provider' : 'user',
       timestamp: new Date().toISOString(),
     };
     
     setMessages([...messages, newMessage]);
     setMessage('');
     
-    // Simulate provider response after 1 second
+    // Simulate response after 1 second
     setTimeout(() => {
-      const providerResponse = {
+      const responseMessage = {
         id: (Date.now() + 1).toString(),
-        text: `Merci pour votre message. Notre équipe vous répondra bientôt.`,
-        sender: 'provider',
+        text: isProvider
+          ? `Merci pour votre message. Nous ferons de notre mieux pour répondre à votre demande.`
+          : `Merci pour votre message. Notre équipe vous répondra bientôt.`,
+        sender: isProvider ? 'user' : 'provider',
         timestamp: new Date().toISOString(),
       };
-      setMessages(prevMessages => [...prevMessages, providerResponse]);
+      setMessages(prevMessages => [...prevMessages, responseMessage]);
     }, 1000);
   };
 
@@ -79,13 +85,31 @@ export default function MessageScreen({ route, navigation }) {
       duration={500}
       style={[
         styles.messageContainer,
-        item.sender === 'user' ? styles.userMessage : styles.providerMessage
+        item.sender === (isProvider ? 'provider' : 'user') ? styles.userMessage : styles.providerMessage
       ]}
     >
-      <Text style={styles.messageText}>{item.text}</Text>
-      <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
+      <Text style={[
+        styles.messageText,
+        { color: item.sender === (isProvider ? 'provider' : 'user') ? COLORS.white : COLORS.black }
+      ]}>
+        {item.text}
+      </Text>
+      <Text style={[
+        styles.messageTime,
+        { color: item.sender === (isProvider ? 'provider' : 'user') ? 'rgba(255, 255, 255, 0.7)' : COLORS.gray }
+      ]}>
+        {formatTime(item.timestamp)}
+      </Text>
     </Animatable.View>
   );
+
+  const navigateBack = () => {
+    if (isProvider) {
+      navigation.navigate('ProviderMessageList');
+    } else {
+      navigation.navigate('MessageListScreen');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,11 +117,13 @@ export default function MessageScreen({ route, navigation }) {
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton}
-          onPress={() => navigation.navigate('MessageListScreen')}
+          onPress={navigateBack}
         >
           <ArrowLeft color={COLORS.white} size={24} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{providerName}</Text>
+        <Text style={styles.headerTitle}>
+          {isProvider ? userName : providerName}
+        </Text>
       </View>
 
       <FlatList
@@ -116,7 +142,7 @@ export default function MessageScreen({ route, navigation }) {
             style={styles.input}
             value={message}
             onChangeText={setMessage}
-            placeholder="Écrivez votre message ici..."
+            placeholder={isProvider ? "Écrivez votre réponse ici..." : "Écrivez votre message ici..."}
             placeholderTextColor={COLORS.gray}
             multiline
           />
