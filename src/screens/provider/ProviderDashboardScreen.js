@@ -6,7 +6,7 @@ import {
   View, 
   TouchableOpacity, 
   ScrollView,
-  SafeAreaView ,
+  SafeAreaView,
   Platform
 } from 'react-native';
 import { 
@@ -34,6 +34,12 @@ const ProviderDashboardScreen = ({ navigation }) => {
       icon: <CalendarCheck size={24} color={COLORS.white} />,
       background: COLORS.secondary,
       onPress: () => navigation.navigate('ReservationManagement')
+    },
+    {
+      title: 'Gestion des messages',
+      icon: <MessageSquare size={24} color={COLORS.white} />,
+      background: COLORS.tertiary,
+      onPress: () => navigation.navigate('MessageListScreen')
     },
     {
       title: 'Gestion des avis',

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, Platform, TouchableOpacity, Animated, StatusBar } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
@@ -8,7 +7,7 @@ import { COLORS } from '../theme/colors';
 import { SPACING } from '../theme/spacing';
 import { FONT_SIZE, FONT_WEIGHT, getFontWeight } from '../theme/typography';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Navigation2, Info, Hotel, Utensils, Landmark, Crosshair, Coffee, Compass, AlertCircle } from 'lucide-react-native';
+import { MapPin, Navigation2, Info, Hotel, Utensils, Landmark, Crosshair, Coffee, Compass, AlertCircle, Calendar } from 'lucide-react-native';
 
 const places = [
   {
@@ -139,12 +138,10 @@ const MapScreen = ({ navigation }) => {
           return;
         }
 
-        // Set a timeout to prevent infinite loading
         const locationTimeout = setTimeout(() => {
           if (isMounted && loading) {
             console.log('Location request timed out');
             setLoading(false);
-            // Use default location if we timeout
             if (!location) {
               mapRef.current?.animateToRegion(initialRegion, 1000);
             }
@@ -153,8 +150,8 @@ const MapScreen = ({ navigation }) => {
 
         try {
           let location = await Location.getCurrentPositionAsync({
-            accuracy: Location.Accuracy.Low, // Lower accuracy for faster response
-            timeout: 5000 // 5 second timeout
+            accuracy: Location.Accuracy.Low,
+            timeout: 5000
           });
           
           if (isMounted) {
@@ -176,7 +173,6 @@ const MapScreen = ({ navigation }) => {
           clearTimeout(locationTimeout);
           
           if (isMounted) {
-            // Fall back to default region
             setLoading(false);
             mapRef.current?.animateToRegion(initialRegion, 1000);
           }
@@ -275,8 +271,17 @@ const MapScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={COLORS.primary_dark} />
         <View style={styles.header}>
-          <Text style={styles.title}>{t('map.title') || 'Carte'}</Text>
-          <Text style={styles.subtitle}>{t('map.subtitle') || 'Découvrez les sites et attractions'}</Text>
+          <View style={styles.headerContent}>
+            <Text style={styles.title}>{t('map.title') || 'Carte'}</Text>
+            <Text style={styles.subtitle}>{t('map.subtitle') || 'Découvrez les sites et attractions'}</Text>
+          </View>
+          <TouchableOpacity 
+            style={styles.reservationButton}
+            onPress={() => navigation.navigate('Reservation')}
+          >
+            <Calendar size={20} color={COLORS.white} />
+            <Text style={styles.reservationButtonText}>Réserver</Text>
+          </TouchableOpacity>
         </View>
         
         <View style={styles.errorContainer}>
@@ -299,8 +304,17 @@ const MapScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={COLORS.primary_dark} />
       <View style={styles.header}>
-        <Text style={styles.title}>{t('map.title') || 'Carte'}</Text>
-        <Text style={styles.subtitle}>{t('map.subtitle') || 'Découvrez les sites et attractions'}</Text>
+        <View style={styles.headerContent}>
+          <Text style={styles.title}>{t('map.title') || 'Carte'}</Text>
+          <Text style={styles.subtitle}>{t('map.subtitle') || 'Découvrez les sites et attractions'}</Text>
+        </View>
+        <TouchableOpacity 
+          style={styles.reservationButton}
+          onPress={() => navigation.navigate('Reservation')}
+        >
+          <Calendar size={20} color={COLORS.white} />
+          <Text style={styles.reservationButtonText}>Réserver</Text>
+        </TouchableOpacity>
       </View>
 
       <Animated.View style={[styles.mapContainerFullscreen, { opacity: fadeAnim }]}>
@@ -503,6 +517,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerContent: {
+    flex: 1,
   },
   title: {
     fontSize: FONT_SIZE.xl,
@@ -687,7 +707,27 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontWeight: getFontWeight('bold'),
     fontSize: FONT_SIZE.sm,
+  },
+  reservationButton: {
+    backgroundColor: COLORS.secondary,
+    borderRadius: 8,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  reservationButtonText: {
+    color: COLORS.white,
+    fontWeight: getFontWeight('bold'),
+    marginLeft: SPACING.xs,
+    fontSize: FONT_SIZE.sm,
   }
 });
 
 export default MapScreen;
+

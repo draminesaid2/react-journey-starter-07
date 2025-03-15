@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, TouchableOpacity, Platform, Text, StyleSheet } from 'react-native';
 import { HomeIcon, Settings, MapPin, MessageCircle } from 'lucide-react-native';
@@ -12,6 +13,10 @@ export const FooterNav = ({ navigation, activeScreen }) => {
   
   const handleHomePress = () => {
     navigation.navigate('Map');
+  };
+
+  const handleMessagePress = () => {
+    navigation.navigate('MessageListScreen');
   };
   
   return (
@@ -58,7 +63,7 @@ export const FooterNav = ({ navigation, activeScreen }) => {
 
       <TouchableOpacity 
         style={styles.navItem}
-        onPress={() => navigation.navigate('MessageListScreen')}
+        onPress={handleMessagePress}
       >
         <View style={[
           styles.iconContainer, 
