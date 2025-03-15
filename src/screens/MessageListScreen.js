@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   StyleSheet, 
@@ -143,7 +144,7 @@ export default function MessageListScreen({ navigation }) {
             <Text style={styles.loginButtonText}>Se connecter</Text>
           </TouchableOpacity>
         </View>
-        <FooterNav navigation={navigation} activeScreen="MessageList" />
+        <FooterNav navigation={navigation} activeScreen="MessageListScreen" />
       </SafeAreaView>
     );
   }
@@ -173,7 +174,7 @@ export default function MessageListScreen({ navigation }) {
         </View>
       )}
 
-      <FooterNav navigation={navigation} activeScreen="MessageList" />
+      <FooterNav navigation={navigation} activeScreen="MessageListScreen" />
     </SafeAreaView>
   );
 }

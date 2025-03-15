@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { View, TouchableOpacity, Platform, Text, StyleSheet } from 'react-native';
-import { HomeIcon, UserIcon, Settings, Clock, MapPin, CalendarIcon, MessageCircle } from 'lucide-react-native';
+import { HomeIcon, Settings, MapPin, MessageCircle } from 'lucide-react-native';
 import { COLORS } from '../theme/colors';
 import { SPACING } from '../theme/spacing';
 import { FONT_SIZE, FONT_WEIGHT } from '../theme/typography';
@@ -39,26 +38,6 @@ export const FooterNav = ({ navigation, activeScreen }) => {
 
       <TouchableOpacity 
         style={styles.navItem}
-        onPress={() => navigation.navigate('Reservation')}
-      >
-        <View style={[
-          styles.iconContainer, 
-          activeScreen === 'Reservation' && styles.activeIconContainer
-        ]}>
-          <CalendarIcon 
-            size={22} 
-            color={activeScreen === 'Reservation' ? COLORS.white : COLORS.gray} 
-          />
-        </View>
-        <Text style={[
-          styles.navText,
-          activeScreen === 'Reservation' && styles.activeText
-        ]}>Réservation</Text>
-        {activeScreen === 'Reservation' && <View style={styles.activeIndicator} />}
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-        style={styles.navItem}
         onPress={() => navigation.navigate('Acote')}
       >
         <View style={[
@@ -79,22 +58,22 @@ export const FooterNav = ({ navigation, activeScreen }) => {
 
       <TouchableOpacity 
         style={styles.navItem}
-        onPress={() => navigation.navigate('MessageList')}
+        onPress={() => navigation.navigate('MessageListScreen')}
       >
         <View style={[
           styles.iconContainer, 
-          activeScreen === 'MessageList' && styles.activeIconContainer
+          activeScreen === 'MessageListScreen' && styles.activeIconContainer
         ]}>
           <MessageCircle 
             size={22} 
-            color={activeScreen === 'MessageList' ? COLORS.white : COLORS.gray} 
+            color={activeScreen === 'MessageListScreen' ? COLORS.white : COLORS.gray} 
           />
         </View>
         <Text style={[
           styles.navText,
-          activeScreen === 'MessageList' && styles.activeText
+          activeScreen === 'MessageListScreen' && styles.activeText
         ]}>Messages</Text>
-        {activeScreen === 'MessageList' && <View style={styles.activeIndicator} />}
+        {activeScreen === 'MessageListScreen' && <View style={styles.activeIndicator} />}
       </TouchableOpacity>
 
       <TouchableOpacity 

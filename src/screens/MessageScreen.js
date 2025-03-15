@@ -9,8 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  StatusBar,
-  Image
+  StatusBar
 } from 'react-native';
 import { COLORS } from '../theme/colors';
 import { SPACING } from '../theme/spacing';
@@ -18,6 +17,7 @@ import { FONT_SIZE } from '../theme/typography';
 import * as Animatable from 'react-native-animatable';
 import { useAuth } from '../auth/useAuth';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft, Send } from 'lucide-react-native';
 
 export default function MessageScreen({ route, navigation }) {
   const { providerId, providerName } = route.params;
@@ -93,9 +93,9 @@ export default function MessageScreen({ route, navigation }) {
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('MessageListScreen')}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <ArrowLeft color={COLORS.white} size={24} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{providerName}</Text>
       </View>
@@ -128,7 +128,7 @@ export default function MessageScreen({ route, navigation }) {
             onPress={sendMessage}
             disabled={!message.trim()}
           >
-            <Text style={styles.sendButtonText}>➤</Text>
+            <Send size={20} color={COLORS.white} />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

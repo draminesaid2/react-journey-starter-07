@@ -1,4 +1,5 @@
-himport React from 'react';
+
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from './src/screens/StartScreen';
@@ -21,6 +22,7 @@ import ReviewManagementScreen from './src/screens/provider/ReviewManagementScree
 import PromotionManagementScreen from './src/screens/provider/PromotionManagementScreen';
 import ProviderListScreen from './src/screens/ProviderListScreen';
 import MessageScreen from './src/screens/MessageScreen';
+import MessageListScreen from './src/screens/MessageListScreen';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './src/i18n';
 import ClerkProviderWrapper from './src/auth/ClerkProviderWrapper';
@@ -45,6 +47,7 @@ export default function App() {
             <Stack.Screen name="Acote" component={AcoteScreen} />
             <Stack.Screen name="ProviderList" component={ProviderListScreen} />
             <Stack.Screen name="Message" component={MessageScreen} />
+            <Stack.Screen name="MessageListScreen" component={MessageListScreen} />
             
             {/* Admin Screens */}
             <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
