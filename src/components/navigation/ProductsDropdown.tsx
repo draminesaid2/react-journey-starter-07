@@ -79,6 +79,14 @@ const MENU_ITEMS: MenuItem[] = [
       category: "cafe-dattes",
       productId: "11"  // Correct productId for Café de Dattes
     }
+  },
+  {
+    label: "Produits Techniques",
+    translationKey: "navbar.technical_products",
+    directLink: {
+      href: "technical-products",
+      category: "technical-products"
+    }
   }
 ];
 

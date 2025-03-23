@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Instagram, Facebook, Phone, Mail, MapPin, Building2, Users, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -107,15 +106,13 @@ const Navbar = ({ clientType, currentPage, onPageChange, onClientTypeChange }: N
   const B2C_ITEMS: NavItem[] = [
     ...BASE_ITEMS,
     { label: t('navbar.resellers'), href: 'resellers' },
-    { label: t('navbar.consumer_service'), href: 'contact' },
-    { label: t('navbar.technical_products'), href: 'technical-products' } // Added new item for B2C
+    { label: t('navbar.consumer_service'), href: 'contact' }
   ];
 
   const B2B_ITEMS: NavItem[] = [
     ...BASE_ITEMS,
     { label: t('navbar.partners'), href: 'partners' },
-    { label: t('navbar.contact'), href: 'contact' },
-    { label: t('navbar.technical_products'), href: 'technical-products' } // Added new item for B2B
+    { label: t('navbar.contact'), href: 'contact' }
   ];
   
   const navItems = clientType === 'B2B' ? B2B_ITEMS : B2C_ITEMS;

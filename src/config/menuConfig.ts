@@ -43,11 +43,5 @@ export const menuItems: MenuItem[] = [
     bottomText: "Service client",
     path: "/contact",
     subItems: []
-  },
-  {
-    topText: "Produits Techniques",
-    bottomText: "Solutions industrielles",
-    path: "/technical-products",
-    subItems: []
   }
 ];
