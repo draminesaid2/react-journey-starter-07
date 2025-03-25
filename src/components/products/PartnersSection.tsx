@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../../components/ui/carousel";
 import { useRef, useEffect } from 'react';
 import { partners } from '../../config/partners';
+import Image from '../ui/image';
 
 interface PartnersSectionProps {
   onNavigateToRevendeurs: (e: React.MouseEvent) => void;
@@ -23,27 +24,19 @@ const PartnersSection = ({ onNavigateToRevendeurs }: PartnersSectionProps) => {
     const scrollSpeed = 0.7; // Slower, smoother scrolling
     
     const startAutoScroll = () => {
-      clearInterval(interval);
+      if (progressInterval.current) {
+        clearInterval(progressInterval.current);
+      }
+  
+      setProgress(0);
       
-      interval = setInterval(() => {
-        if (carouselRef.current) {
-          const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
-          
-          // Reverse direction when reaching the end or beginning with a small buffer
-          if (scrollAmount >= maxScroll - 5) {
-            scrollDirection = -1;
-          } else if (scrollAmount <= 5) {
-            scrollDirection = 1;
-          }
-          
-          scrollAmount += scrollSpeed * scrollDirection;
-          
-          animationFrameId = requestAnimationFrame(() => {
-            if (carouselRef.current) {
-              carouselRef.current.scrollLeft = scrollAmount;
-            }
-          });
-        }
+      const startTime = Date.now();
+      const duration = 5000;
+      
+      progressInterval.current = window.setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const newProgress = Math.min((elapsed / duration) * 100, 100);
+        setProgress(newProgress);
       }, 16); // 60fps for smoother animation
     };
     
@@ -96,12 +89,20 @@ const PartnersSection = ({ onNavigateToRevendeurs }: PartnersSectionProps) => {
                       <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#96cc39]/10 to-[#700100]/5 rounded-bl-full -z-0"></div>
                       <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-[#700100]/5 to-[#96cc39]/10 rounded-tr-full -z-0"></div>
                       
-                      <div className="h-16 flex items-center justify-center mb-4 relative z-10">
-                        <img
-                          src={partner.logo}
-                          alt={partner.name}
-                          className="h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105"
-                        />
+                      <div className="h-20 flex items-center justify-center mb-4 relative z-10">
+                        {partner.id === 'monoprix' ? (
+                          <img
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <Image
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="h-20 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                          />
+                        )}
                       </div>
                       
                       <div className="relative z-10 mt-auto">
