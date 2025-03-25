@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useIsMobile } from "../hooks/use-mobile";
+import { useApp } from "../context/AppContext";
 
 // Define types
 interface SubMenuItem {
@@ -23,6 +24,7 @@ interface MenuItem {
     category: string;
     productId?: string;
   };
+  b2bOnly?: boolean; // Added this property to flag B2B-only items
 }
 
 // Define the menu structure
@@ -87,7 +89,8 @@ const MENU_ITEMS: MenuItem[] = [
     directLink: {
       href: "technical-products",
       category: "technical-products"
-    }
+    },
+    b2bOnly: true // Set this item to be B2B only
   }
 ];
 
@@ -102,6 +105,13 @@ const ProductsDropdown = ({ onPageChange }: ProductsDropdownProps) => {
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();
   const isMobile = useIsMobile();
+  const { clientType } = useApp(); // Get the client type from context
+
+  // Filter menu items based on client type
+  const filteredMenuItems = MENU_ITEMS.filter(item => {
+    // Show the item if it's not b2bOnly or if we're in B2B mode
+    return !item.b2bOnly || clientType === 'B2B';
+  });
 
   const handleClick = (href: string, category: string, subcategory?: string, productId?: string, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
@@ -190,7 +200,7 @@ const ProductsDropdown = ({ onPageChange }: ProductsDropdownProps) => {
       {/* Main Dropdown Menu */}
       {isOpen && (
         <div className={`absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50 ${isMobile ? 'w-full' : 'w-64'}`}>
-          {MENU_ITEMS.map((item) => (
+          {filteredMenuItems.map((item) => (
             <div 
               key={item.translationKey} 
               className="relative group"
