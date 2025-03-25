@@ -48,12 +48,12 @@ const Partners = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="glass-card p-8 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="h-28 flex items-center justify-center mb-8 relative overflow-hidden">
+                <div className={`${partner.id === 'monoprix' ? 'h-28' : 'h-40'} flex items-center justify-center mb-8 relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/30 opacity-80 rounded-lg"></div>
                   <img 
                     src={partner.logo} 
                     alt={partner.name}
-                    className="h-20 object-contain relative z-10"
+                    className={`${partner.id === 'monoprix' ? 'h-20' : 'h-32'} object-contain relative z-10 transition-transform duration-300 hover:scale-105`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = '/images/placeholder-logo.png';
@@ -88,12 +88,12 @@ const Partners = () => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="glass-card p-8 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                 >
-                  <div className="h-28 flex items-center justify-center mb-8 relative overflow-hidden">
+                  <div className={`${partner.id === 'monoprix' ? 'h-28' : 'h-40'} flex items-center justify-center mb-8 relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/30 opacity-80 rounded-lg"></div>
                     <img 
                       src={partner.logo} 
                       alt={partner.name}
-                      className="h-20 object-contain relative z-10"
+                      className={`${partner.id === 'monoprix' ? 'h-20' : 'h-32'} object-contain relative z-10 transition-transform duration-300 hover:scale-105`}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = '/images/placeholder-logo.png';

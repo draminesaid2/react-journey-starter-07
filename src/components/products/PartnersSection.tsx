@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Building2, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../../components/ui/carousel";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { partners } from '../../config/partners';
 import Image from '../ui/image';
 
@@ -14,16 +14,16 @@ interface PartnersSectionProps {
 const PartnersSection = ({ onNavigateToRevendeurs }: PartnersSectionProps) => {
   const { t } = useTranslation();
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-scroll effect with improved animation
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let animationFrameId: number;
-    let scrollAmount = 0;
-    let scrollDirection = 1;
-    const scrollSpeed = 0.7; // Slower, smoother scrolling
     
-    const startAutoScroll = () => {
+    // Add a small delay before starting to allow the component to fully render
+    const initTimeout = setTimeout(() => {
       if (progressInterval.current) {
         clearInterval(progressInterval.current);
       }
@@ -38,17 +38,15 @@ const PartnersSection = ({ onNavigateToRevendeurs }: PartnersSectionProps) => {
         const newProgress = Math.min((elapsed / duration) * 100, 100);
         setProgress(newProgress);
       }, 16); // 60fps for smoother animation
-    };
-    
-    // Add a small delay before starting to allow the component to fully render
-    const initTimeout = setTimeout(() => {
-      startAutoScroll();
     }, 1000);
     
     return () => {
       clearTimeout(initTimeout);
       clearInterval(interval);
       cancelAnimationFrame(animationFrameId);
+      if (progressInterval.current) {
+        clearInterval(progressInterval.current);
+      }
     };
   }, []);
   
