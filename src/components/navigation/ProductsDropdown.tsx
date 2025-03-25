@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
-import { ProductCategory } from '../../types/product';
 import { useIsMobile } from '../../hooks/use-mobile';
 import { useApp } from '../../context/AppContext';
 
@@ -46,11 +45,11 @@ const MENU_ITEMS: MenuItem[] = [
     translationKey: "navbar.dried_figs",
     directLink: {
       href: "products",
-      category: "figues-sechees-djebaa,figues-sechees-zidi,figues-sechees-toujane,figues-sechees-vrac"
+      category: "figues-sechees-zidi,figues-sechees-djebaa,figues-sechees-toujane,figues-sechees-vrac"
     },    
     items: [
-      { label: "Figues djebaa", href: "products", category: "figues-sechees-djebaa", productId: "15", translationKey: "navbar.djebaa_figs" },
       { label: "Figues ZIDI 200g", href: "products", category: "figues-sechees-zidi", productId: "9", translationKey: "navbar.zidi_figs" },
+      { label: "Figues djebaa", href: "products", category: "figues-sechees-djebaa", productId: "15", translationKey: "navbar.djebaa_figs" },
       { label: "Figues Toujane", href: "products", category: "figues-sechees-toujane", productId: "14", translationKey: "navbar.toujane_figs" },
       { label: "Figues Séchées en Vrac", href: "products", category: "figues-sechees-vrac", productId: "10", translationKey: "navbar.bulk_dried_figs" }
     ]

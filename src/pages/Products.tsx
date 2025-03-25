@@ -10,7 +10,7 @@ import {
 } from '../components/products';
 import { PRODUCTS } from '../config/products';
 import { useIsMobile } from '../hooks/use-mobile';
-import { Product } from '../types/product';
+import { Product, ProductCategory } from '../types/product';
 
 interface ProductsProps {
   selectedCategory?: string;
@@ -44,9 +44,16 @@ const Products = ({ selectedCategory, selectedSubcategory, selectedProductId }: 
     // Handle comma-separated categories
     if (selectedCategory.includes(',')) {
       const categoryArray = selectedCategory.split(',');
-      filteredProducts = products.filter(product => 
-        categoryArray.some(cat => product.category === cat)
-      );
+      // Use the order of categories in the array to sort the products
+      const orderedProducts: Product[] = [];
+      
+      categoryArray.forEach(category => {
+        const productsInCategory = products.filter(product => product.category === category);
+        orderedProducts.push(...productsInCategory);
+      });
+      
+      // Set the filtered products to our ordered list
+      filteredProducts = orderedProducts;
     } else {
       filteredProducts = products.filter(product => product.category === selectedCategory);
     }
