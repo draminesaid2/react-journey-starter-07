@@ -1,3 +1,4 @@
+
 <?php
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Http\Request;
@@ -149,7 +150,7 @@ Route::middleware('auth:sanctum')->prefix('responsable')->group( function (){
 
 Route::middleware('auth:sanctum')->prefix('agent')->group(function (){
     Route::prefix('/files')->group(function (){
-        /// http://127.0.0.1:8000/api/agent/files/creat (créer un nouveau file 
+        /// http://127.0.0.1:8000/api/agent/files/creat (créer un nouveau file)
         Route::post('/creat', [FilesController::class, 'creat']);
 
         /// 1* http://127.0.0.1:8000/api/agent/files/update_status/{id} (mise a jour status (teminé/ en attente) file d attent) (terminé)
@@ -168,7 +169,7 @@ Route::middleware('auth:sanctum')->prefix('agent')->group(function (){
         Route::post('/nunmber/{id}', [FilesController::class, 'countFile']);
 
         /// 6* http://127.0.0.1:8000/api/agent/files/agence (Récupérer un file par Agence)
-        /// Utilisons explicitement GET comme standard REST pour les opérations de lecture
+        /// API uses GET for retrieving resources (following REST standards)
         Route::get('/agence', [FilesController::class, 'showByAgency']);
     });  
 });

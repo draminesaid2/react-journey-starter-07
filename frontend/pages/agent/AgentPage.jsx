@@ -50,7 +50,8 @@ const AgentPage = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(`${API_BASE_URL}/agence`, {}, {
+      // Changed from POST to GET as per the API route configuration
+      const response = await axios.get(`${API_BASE_URL}/agence`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -87,7 +88,8 @@ const AgentPage = () => {
       return;
     }
     try {
-      const response = await axios.post(`${API_BASE_URL}/create`, { id_service: serviceId });
+      // Fixed the endpoint to match the backend route '/creat' instead of '/create'
+      const response = await axios.post(`${API_BASE_URL}/creat`, { id_service: serviceId });
       setServiceId("");
       setFileId(response.data.id);
       setShowCreateForm(false);
