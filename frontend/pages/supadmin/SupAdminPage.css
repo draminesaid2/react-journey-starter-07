@@ -1,0 +1,92 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Conteneur principal */
+  .container-fluid {
+    display: flex;
+    height: 100vh;
+    padding: 0;
+  }
+  
+  /* Barre latérale */
+  .sidebar {
+    height: 150vh;
+    background-color: #dde6ee;
+    color: rgba(51, 23, 194, 0.307);
+    padding-top: 160px;
+  }
+  
+  .sidebar h2 {
+    font-size: 20.5rem;
+    font-weight: bold;
+  }
+  
+  .sidebar .nav {
+    padding-left: -5px;
+  }
+  
+  .sidebar .nav-link {
+    color: rgb(81, 9, 188);
+    text-align: left;
+    font-size: 1.1rem;
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #d1dfee;
+    border-radius: 5px;
+  }
+  
+  /* Contenu principal */
+  main {
+    padding: 20px;
+    background-color: #ffffff;
+    min-height:0vh;
+    flex-grow: 1;
+  }
+  
+  main h1 {
+    font-size: 5rem;
+    color: #343a40;
+    margin-bottom: 85px;
+   
+  }
+  
+  /* Boutons */
+  .btn-link {
+    color: rgb(122, 10, 10);
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    font-weight: bold;
+  }
+  
+  .btn-link:hover {
+    background-color: #01070e;
+    border-radius: 5px;
+  }
+  
+  /* Responsivité */
+  @media (max-width: 768px) {
+    .sidebar {
+      height: auto;
+    }
+  
+    .container-fluid {
+      flex-direction: column;
+    }
+  
+    .sidebar .nav-link {
+      font-size: 1rem;
+    }
+  
+    main {
+      padding: 15px;
+    }
+  }
+  

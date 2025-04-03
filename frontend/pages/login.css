@@ -1,0 +1,98 @@
+/* Styles généraux */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f4; /* Gris clair */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  
+  /* Cadre principal */
+  .login-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Ombre douce */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid #333; /* Bordure noire */
+  }
+  
+  /* Titre */
+  .login-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #222; /* Noir */
+    margin-bottom: 20px;
+  }
+  
+  /* Champs de saisie */
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .input-group label {
+    font-size: 14px;
+    color: #222;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #666;
+    border-radius: 6px;
+    outline: none;
+    background: #f8f8f8;
+    transition: 0.3s;
+  }
+  
+  .input-group input:focus {
+    border-color: #28a745; /* Vert */
+    box-shadow: 0px 0px 8px rgba(40, 167, 69, 0.5);
+  }
+  
+  /* Bouton de connexion */
+  .login-btn {
+    background: #28a745; /* Vert */
+    color: #ffffff; /* Blanc */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .login-btn:hover {
+    background: #1f8a36; /* Vert foncé */
+  }
+  
+  /* Lien d'inscription */
+  .register-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #222;
+  }
+  
+  .register-link a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  
