@@ -20,6 +20,7 @@ import ProductDetail from './pages/ProductDetail';
 import Dashboard from './pages/Dashboard';
 import { trackVisitor } from './utils/visitorTracking';
 import DateFarcie from './pages/DateFarcie';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [clientType, setClientType] = useState<ClientType>(() => {
@@ -29,6 +30,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('tous');
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const location = useLocation();
 
   // Track page views when the current page changes
   useEffect(() => {
@@ -38,6 +40,18 @@ function App() {
       trackVisitor(pageName);
     }
   }, [currentPage]);
+
+  // Check if we're on a route that's handled outside of the main App component
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/dattes-farcies') {
+      setCurrentPage('dattes-farcies');
+    } else if (path === '/statistique') {
+      setCurrentPage('statistique');
+    } else if (path === '/') {
+      setCurrentPage('home');
+    }
+  }, [location.pathname]);
 
   // Map English page names to French
   const getFrenchPageName = (pageName: string): string => {
@@ -75,12 +89,21 @@ function App() {
       }
     };
 
+    const handleClientTypeChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ type: ClientType }>;
+      if (customEvent.detail && customEvent.detail.type) {
+        handleClientTypeChange(customEvent.detail.type);
+      }
+    };
+
     window.addEventListener('navigateTo', handleNavigateEvent);
     window.addEventListener('navigateToProduct', handleNavigateToProduct);
+    window.addEventListener('changeClientType', handleClientTypeChange);
     
     return () => {
       window.removeEventListener('navigateTo', handleNavigateEvent);
       window.removeEventListener('navigateToProduct', handleNavigateToProduct);
+      window.removeEventListener('changeClientType', handleClientTypeChange);
     };
   }, []);
 

@@ -7,10 +7,33 @@ import Navbar from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { useApp } from '../context/AppContext';
 import ScrollToTop from '../components/ScrollToTop';
+import { useNavigate } from 'react-router-dom';
 
 const DateFarcie = () => {
   const { t } = useTranslation();
   const { clientType } = useApp();
+  const navigate = useNavigate();
+  
+  // Function to handle page navigation
+  const handlePageChange = (page: string, category?: string, subcategory?: string, productId?: string) => {
+    // Dispatch custom navigation event to be caught by App.tsx
+    const navigateEvent = new CustomEvent('navigateTo', {
+      detail: { page }
+    });
+    window.dispatchEvent(navigateEvent);
+    
+    // Navigate to home page which will handle routing via the event
+    navigate('/');
+  };
+
+  // Function to handle client type changes
+  const handleClientTypeChange = (type: any) => {
+    // Dispatch event to update client type in the main App
+    const changeClientTypeEvent = new CustomEvent('changeClientType', {
+      detail: { type }
+    });
+    window.dispatchEvent(changeClientTypeEvent);
+  };
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -20,9 +43,9 @@ const DateFarcie = () => {
       
       <Navbar 
         clientType={clientType || 'B2C'} 
-        onPageChange={() => {}}
+        onPageChange={handlePageChange}
         currentPage="dattes-farcies"
-        onClientTypeChange={() => {}}
+        onClientTypeChange={handleClientTypeChange}
       />
       
       <motion.div
@@ -35,6 +58,7 @@ const DateFarcie = () => {
       </motion.div>
       
       <ScrollToTop />
+      <Footer />
     </div>
   );
 };
