@@ -29,6 +29,7 @@ function App() {
   });
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('tous');
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | undefined>(undefined);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const location = useLocation();
 
@@ -75,9 +76,33 @@ function App() {
 
   useEffect(() => {
     const handleNavigateEvent = (event: Event) => {
-      const customEvent = event as CustomEvent<{ page: string }>;
-      if (customEvent.detail && customEvent.detail.page) {
+      const customEvent = event as CustomEvent<{ 
+        page: string; 
+        category?: string; 
+        subcategory?: string; 
+        productId?: string 
+      }>;
+      
+      if (customEvent.detail) {
+        console.log('App received navigation event:', customEvent.detail);
         setCurrentPage(customEvent.detail.page);
+        
+        if (customEvent.detail.category) {
+          setSelectedCategory(customEvent.detail.category as ProductCategory);
+        }
+        
+        if (customEvent.detail.subcategory) {
+          setSelectedSubcategory(customEvent.detail.subcategory);
+        } else {
+          setSelectedSubcategory(undefined); // Reset if not provided
+        }
+        
+        if (customEvent.detail.productId) {
+          setSelectedProductId(customEvent.detail.productId);
+          setCurrentPage('product-detail');
+        } else if (customEvent.detail.page !== 'product-detail') {
+          setSelectedProductId(null); // Reset product ID when not going to product detail
+        }
       }
     };
 
@@ -131,14 +156,25 @@ function App() {
     Cookies.remove('clientType');
   };
 
-  const handlePageChange = (page: string, category?: ProductCategory) => {
-    console.log('Changing page to:', page);
+  const handlePageChange = (page: string, category?: ProductCategory, subcategory?: string, productId?: string) => {
+    console.log('App handlePageChange:', { page, category, subcategory, productId });
     setCurrentPage(page);
+    
     if (category) {
       setSelectedCategory(category);
     }
-    // Reset product ID when navigating away from product detail
-    if (page !== 'product-detail') {
+    
+    if (subcategory) {
+      setSelectedSubcategory(subcategory);
+    } else {
+      setSelectedSubcategory(undefined); // Reset if not provided
+    }
+    
+    // Set product ID for product detail page or reset it
+    if (productId) {
+      setSelectedProductId(productId);
+      setCurrentPage('product-detail');
+    } else if (page !== 'product-detail') {
       setSelectedProductId(null);
     }
 
@@ -146,10 +182,19 @@ function App() {
   };
 
   const renderPage = () => {
-    console.log('Current page:', currentPage);
+    console.log('Rendering page:', { 
+      currentPage, 
+      selectedCategory, 
+      selectedSubcategory, 
+      selectedProductId 
+    });
+    
     switch (currentPage) {
       case 'products':
-        return <Products selectedCategory={selectedCategory} />;
+        return <Products 
+          selectedCategory={selectedCategory} 
+          selectedSubcategory={selectedSubcategory}
+        />;
       case 'products-all':
         return <ProductsAllPage />;
       case 'product-detail':

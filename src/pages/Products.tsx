@@ -1,188 +1,122 @@
 
-import { useState, useEffect } from 'react';
-import ProductDetail from './ProductDetail';
-import {
-  ProductsHero,
-  ProductsGrid,
-  MadeInTunisia,
-  ProductTestimonials,
-  PartnersSection
-} from '../components/products';
-import { PRODUCTS } from '../config/products';
-import { useIsMobile } from '../hooks/use-mobile';
-import { Product, ProductCategory } from '../types/product';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
+import ProductsGrid from '../components/products/ProductsGrid';
+import ProductsHero from '../components/products/ProductsHero';
+import { products as allProducts } from '../config/products';
+import type { Product, ProductCategory } from '../types';
 
-interface ProductsProps {
-  selectedCategory?: string;
+interface ProductsPageProps {
+  selectedCategory: ProductCategory;
   selectedSubcategory?: string;
-  selectedProductId?: string;
 }
 
-const Products = ({ selectedCategory, selectedSubcategory, selectedProductId }: ProductsProps) => {
-  const [selectedProductIdState, setSelectedProductId] = useState<string | null>(selectedProductId || null);
-  const isMobile = useIsMobile();
-
-  // Use products from the config
-  const products = PRODUCTS;
-
-  useEffect(() => {
-    // Update the selected product ID when props change
-    if (selectedProductId) {
-      setSelectedProductId(selectedProductId);
-    }
-  }, [selectedProductId]);
-
-  // Hard-coded mappings for specific subcategories to product IDs
-  const subcategoryToProductIds: Record<string, string[]> = {
-    'coffret-cadeaux': ['3', '4'], // Coffret de Dattes products
-    'paquet': ['1', '2'], // Paquet de Dattes products
-    'barquette': ['5', '6', '7'] // Barquette de Dattes products
-  };
-
-  // Filter products based on multiple criteria
-  let filteredProducts = products;
+const Products: React.FC<ProductsPageProps> = ({ selectedCategory, selectedSubcategory }) => {
+  const { t } = useTranslation();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
   
-  // If a specific product ID is provided, filter to only that product
-  if (selectedProductId) {
-    filteredProducts = products.filter(product => product.id === selectedProductId);
-    // If no product found with this ID, don't filter
-    if (filteredProducts.length === 0) {
-      console.warn(`No product found with ID: ${selectedProductId}`);
-      filteredProducts = products;
-    }
-  }
-  // Otherwise, filter by category/subcategory
-  else if (selectedCategory && selectedCategory !== 'tous') {
-    console.log('Filtering by category:', selectedCategory, 'subcategory:', selectedSubcategory);
+  useEffect(() => {
+    let filteredProducts: Product[] = [];
     
-    // Special case for paquetdattes-fraiches (direct to product IDs 1 and 2)
-    if (selectedCategory === 'paquetdattes-fraiches') {
-      filteredProducts = products.filter(product => ['1', '2'].includes(product.id));
-      console.log('Filtered to Paquet de Dattes products:', filteredProducts.length);
-    }
-    // Special case for coffretdattes-fraiches (direct to product IDs 3 and 4)
-    else if (selectedCategory === 'coffretdattes-fraiches') {
-      filteredProducts = products.filter(product => ['3', '4'].includes(product.id));
-      console.log('Filtered to Coffret de Dattes products:', filteredProducts.length);
-    }
-    // Handle comma-separated categories
-    else if (selectedCategory.includes(',')) {
-      const categoryArray = selectedCategory.split(',');
-      
-      // If subcategory is specified, filter products within the categories that also match the subcategory
-      if (selectedSubcategory) {
-        const subcategoryProductIds = subcategoryToProductIds[selectedSubcategory] || [];
-        
-        if (subcategoryProductIds.length > 0) {
-          // Filter products that match the specific product IDs for this subcategory
-          filteredProducts = products.filter(product => 
-            subcategoryProductIds.includes(product.id)
-          );
-        } else {
-          // Fall back to standard subcategory filtering
-          filteredProducts = products.filter(product => 
-            categoryArray.includes(product.category) && product.subcategory === selectedSubcategory
-          );
-        }
-        console.log('Filtered products by subcategory:', filteredProducts.length);
-      } else {
-        // Use the order of categories in the array to sort the products
-        const orderedProducts: Product[] = [];
-        
-        categoryArray.forEach(category => {
-          const productsInCategory = products.filter(product => product.category === category);
-          orderedProducts.push(...productsInCategory);
-        });
-        
-        // Set the filtered products to our ordered list
-        filteredProducts = orderedProducts;
-      }
+    console.log('Products page filtering with:', { selectedCategory, selectedSubcategory });
+    
+    if (selectedCategory === 'tous') {
+      // Show all products when 'tous' is selected
+      filteredProducts = [...allProducts];
     } else {
-      // Single category
-      filteredProducts = products.filter(product => product.category === selectedCategory);
-
+      // Filter by categories - handle comma-separated categories
+      const categories = selectedCategory.split(',');
+      
+      filteredProducts = allProducts.filter(product => {
+        return categories.some(cat => product.category === cat);
+      });
+      
       // Further filter by subcategory if provided
       if (selectedSubcategory) {
-        const subcategoryProductIds = subcategoryToProductIds[selectedSubcategory] || [];
-        
-        if (subcategoryProductIds.length > 0) {
-          // Filter products that match the specific product IDs for this subcategory
-          filteredProducts = products.filter(product => 
-            subcategoryProductIds.includes(product.id) &&
-            product.category === selectedCategory
-          );
-        } else {
-          // Fall back to standard subcategory filtering
-          const beforeFilter = filteredProducts.length;
-          filteredProducts = filteredProducts.filter(product => 
-            product.subcategory === selectedSubcategory
-          );
-          console.log(`Filtered from ${beforeFilter} to ${filteredProducts.length} products by subcategory: ${selectedSubcategory}`);
-        }
+        filteredProducts = filteredProducts.filter(product => 
+          product.subcategory === selectedSubcategory
+        );
       }
     }
-  }
-
-  // Output some debug information to help troubleshoot
-  console.log('Products filtering info:', { 
-    selectedCategory,
-    selectedSubcategory,
-    selectedProductId,
-    subcategoryProductIds: selectedSubcategory ? subcategoryToProductIds[selectedSubcategory] || [] : [],
-    filteredCount: filteredProducts.length,
-    isMobile,
-    allProducts: products.length,
-    firstProduct: filteredProducts.length > 0 ? {
-      id: filteredProducts[0].id,
-      category: filteredProducts[0].category,
-      subcategory: filteredProducts[0].subcategory
-    } : 'none'
-  });
-
-  // Handle navigation to the Revendeurs page
-  const handleNavigateToRevendeurs = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (window.dispatchEvent) {
-      const customEvent = new CustomEvent('navigateTo', { detail: { page: 'resellers' } });
-      window.dispatchEvent(customEvent);
-    }
-  };
-
-  if (selectedProductIdState) {
-    // Find the product by ID
-    const selectedProduct = products.find(p => p.id === selectedProductIdState);
     
-    // If product exists, show its details, otherwise show the product grid
-    if (selectedProduct) {
-      return (
-        <ProductDetail 
-          productId={selectedProductIdState}
-          onBack={() => setSelectedProductId(null)}
-        />
-      );
-    } else {
-      console.error(`Product with ID ${selectedProductIdState} not found`);
-      // Reset the selected product ID
-      setSelectedProductId(null);
+    console.log(`Filtered to ${filteredProducts.length} products`);
+    
+    setProducts(filteredProducts);
+  }, [selectedCategory, selectedSubcategory]);
+  
+  const handleSelectProduct = (id: string) => {
+    setSelectedProduct(id);
+    
+    // Dispatch event to navigate to the product detail page
+    const navigateToProductEvent = new CustomEvent('navigateToProduct', {
+      detail: { productId: id }
+    });
+    window.dispatchEvent(navigateToProductEvent);
+  };
+  
+  // Get a descriptive category title based on selected category
+  const getCategoryTitle = (): string => {
+    // Handle multi-categories cases
+    if (selectedCategory === 'tous') {
+      return t('products.all_products');
+    } else if (selectedCategory.includes('dattes-fraiches')) {
+      if (selectedSubcategory === 'coffret-cadeaux') {
+        return t('products.gift_boxes');
+      } else if (selectedSubcategory === 'paquet') {
+        return t('products.date_packages');
+      } else {
+        return t('products.fresh_dates');
+      }
+    } else if (selectedCategory.includes('dattes-transformees')) {
+      return t('products.processed_dates');
+    } else if (selectedCategory.includes('dattes-farcies')) {
+      return t('products.stuffed_dates');
+    } else if (selectedCategory.includes('figues-sechees')) {
+      return t('products.dried_figs');
+    } else if (selectedCategory.includes('cafe-dattes')) {
+      return t('products.date_coffee');
+    } else if (selectedCategory.includes('sucre-dattes')) {
+      return t('products.date_sugar');
+    } else if (selectedCategory.includes('sirop-dattes')) {
+      return t('products.date_syrup');
+    } else if (selectedCategory.includes('technical-products')) {
+      return t('products.technical_products');
     }
-  }
-
+    
+    return selectedCategory;
+  };
+  
   return (
-    <div className="min-h-screen">
-      <ProductsHero />
+    <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>{getCategoryTitle()} | Tazart</title>
+        <meta name="description" content={`${getCategoryTitle()} - Tazart`} />
+      </Helmet>
       
-      <div className="container mx-auto px-4">
+      <ProductsHero 
+        title={getCategoryTitle()}
+        description={t('products.browse_our_selection')}
+        image="/hero-products.jpg"
+      />
+      
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-playfair text-[#700100] font-bold">
+            {getCategoryTitle()}
+          </h1>
+          <p className="mt-2 text-gray-600 max-w-3xl">
+            {t('products.quality_description')}
+          </p>
+        </div>
+        
         <ProductsGrid 
-          products={filteredProducts as Product[]} 
-          onSelectProduct={setSelectedProductId}
+          products={products} 
+          onSelectProduct={handleSelectProduct}
           subcategory={selectedSubcategory}
         />
-        
-        <MadeInTunisia />
-        
-        <ProductTestimonials />
-        
-        <PartnersSection onNavigateToRevendeurs={handleNavigateToRevendeurs} />
       </div>
     </div>
   );

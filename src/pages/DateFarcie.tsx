@@ -16,13 +16,15 @@ const DateFarcie = () => {
   
   // Function to handle page navigation
   const handlePageChange = (page: string, category?: string, subcategory?: string, productId?: string) => {
+    console.log(`DateFarcie: Navigation triggered to ${page} with category ${category || 'none'}`);
+    
     // Dispatch custom navigation event to be caught by App.tsx
     const navigateEvent = new CustomEvent('navigateTo', {
-      detail: { page }
+      detail: { page, category, subcategory, productId }
     });
     window.dispatchEvent(navigateEvent);
     
-    // Navigate to home page which will handle routing via the event
+    // Navigate back to the root which will handle routing via the custom event
     navigate('/');
   };
 
