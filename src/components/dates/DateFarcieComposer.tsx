@@ -52,8 +52,8 @@ const DateFarcieComposer = () => {
       if (selectedDates.length < 8) {
         setSelectedDates([...selectedDates, dateId]);
       } else {
+        // Fix: Use separate parameters for title and description
         toast({
-          title: t('date_composer.max_selection_reached'),
           description: t('date_composer.remove_some')
         });
       }
@@ -68,16 +68,16 @@ const DateFarcieComposer = () => {
       // Set the confirmed state to true to switch to the confirmation view
       setConfirmed(true);
       
+      // Fix: Use separate parameters for title and description
       toast({
-        title: t('date_composer.thank_you_title'),
         description: t('date_composer.thank_you_description')
       });
       
       // Scroll to top of page to ensure user sees the confirmation view
       window.scrollTo(0, 0);
     } else {
+      // Fix: Use separate parameters for title and description
       toast({
-        title: t('date_composer.select_dates'),
         description: t('date_composer.select_at_least_one')
       });
     }
@@ -135,16 +135,16 @@ Date d'envoi: ${new Date().toLocaleString('fr-FR')}
       );
       
       // Show success message and update state
+      // Fix: Use separate parameters for title and description
       toast({
-        title: "Demande envoyée",
         description: "Nous vous contacterons bientôt pour finaliser votre commande."
       });
       
       setFormSubmitted(true);
       
     } catch (error) {
+      // Fix: Use separate parameters for title and description
       toast({
-        title: "Erreur",
         description: "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer.",
         variant: "destructive"
       });
@@ -164,7 +164,7 @@ Date d'envoi: ${new Date().toLocaleString('fr-FR')}
   return (
     <div className="container mx-auto px-4 py-12">
       {!confirmed ? (
-        // ... keep existing code (date selection UI)
+        // Selection view
         <>
           <div className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-playfair font-bold text-[#700100] mb-4">

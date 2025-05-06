@@ -1,14 +1,13 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import ProductsGrid from '../components/products/ProductsGrid';
 import ProductsHero from '../components/products/ProductsHero';
-import type { Product, ProductCategory } from '../types';
+import type { Product } from '../types';
 
 interface ProductsPageProps {
-  selectedCategory: ProductCategory;
+  selectedCategory: string;
   selectedSubcategory?: string;
 }
 

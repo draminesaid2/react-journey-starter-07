@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ClientTypeModal } from './components/ClientTypeModal';
 import Navbar from './components/Navbar';
@@ -13,7 +12,7 @@ import Products from './pages/Products';
 import ProductsAllPage from './pages/ProductsAllPage';
 import ScrollToTop from './components/ScrollToTop';
 import CookieConsent from './components/CookieConsent';
-import type { ClientType, ProductCategory } from './types';
+import type { ClientType } from './types';
 import Cookies from 'js-cookie';
 import { AppProvider } from './context/AppContext';
 import ProductDetail from './pages/ProductDetail';
@@ -28,7 +27,7 @@ function App() {
     return savedType || null;
   });
   const [currentPage, setCurrentPage] = useState('home');
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('tous');
+  const [selectedCategory, setSelectedCategory] = useState<string>('tous');
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | undefined>(undefined);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const location = useLocation();
@@ -88,7 +87,7 @@ function App() {
         setCurrentPage(customEvent.detail.page);
         
         if (customEvent.detail.category) {
-          setSelectedCategory(customEvent.detail.category as ProductCategory);
+          setSelectedCategory(customEvent.detail.category);
         }
         
         if (customEvent.detail.subcategory) {
@@ -161,7 +160,7 @@ function App() {
     setCurrentPage(page);
     
     if (category) {
-      setSelectedCategory(category as ProductCategory);
+      setSelectedCategory(category);
     }
     
     if (subcategory) {
