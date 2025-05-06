@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -6,7 +5,7 @@ import { COMPOSITION_DATES } from '../../config/dates-composition';
 import { Button } from '../ui/button';
 import { AspectRatio } from '../ui/aspect-ratio';
 import { Check, Phone, User, Mail } from 'lucide-react';
-import { toast } from '../ui/use-toast';
+import { toast } from 'sonner';
 import { useApp } from '../../context/AppContext';
 import { EMAIL_RECIPIENTS, formatSelectedDatesForEmail, sendEmail } from '../../services/emailService';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '../ui/form';
@@ -52,10 +51,8 @@ const DateFarcieComposer = () => {
       if (selectedDates.length < 8) {
         setSelectedDates([...selectedDates, dateId]);
       } else {
-        // Fix: Use separate parameters for title and description
-        toast({
-          description: t('date_composer.remove_some')
-        });
+        // Fix: Use correct toast syntax
+        toast.error(t('date_composer.remove_some'));
       }
     }
   };
@@ -68,18 +65,14 @@ const DateFarcieComposer = () => {
       // Set the confirmed state to true to switch to the confirmation view
       setConfirmed(true);
       
-      // Fix: Use separate parameters for title and description
-      toast({
-        description: t('date_composer.thank_you_description')
-      });
+      // Fix: Use correct toast syntax
+      toast.success(t('date_composer.thank_you_description'));
       
       // Scroll to top of page to ensure user sees the confirmation view
       window.scrollTo(0, 0);
     } else {
-      // Fix: Use separate parameters for title and description
-      toast({
-        description: t('date_composer.select_at_least_one')
-      });
+      // Fix: Use correct toast syntax
+      toast.error(t('date_composer.select_at_least_one'));
     }
   };
   
@@ -135,19 +128,14 @@ Date d'envoi: ${new Date().toLocaleString('fr-FR')}
       );
       
       // Show success message and update state
-      // Fix: Use separate parameters for title and description
-      toast({
-        description: "Nous vous contacterons bientôt pour finaliser votre commande."
-      });
+      // Fix: Use correct toast syntax
+      toast.success("Nous vous contacterons bientôt pour finaliser votre commande.");
       
       setFormSubmitted(true);
       
     } catch (error) {
-      // Fix: Use separate parameters for title and description
-      toast({
-        description: "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer.",
-        variant: "destructive"
-      });
+      // Fix: Use correct toast syntax
+      toast.error("Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer.");
       console.error('Error sending email:', error);
     } finally {
       setIsSubmitting(false);
