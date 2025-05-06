@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { COMPOSITION_DATES } from '../../config/dates-composition';
@@ -60,12 +61,20 @@ const DateFarcieComposer = () => {
   };
   
   const handleConfirm = () => {
+    // Added more detailed console logging for debugging
+    console.log('Confirm button clicked, selected dates:', selectedDates);
+    
     if (selectedDates.length > 0) {
+      // Set the confirmed state to true to switch to the confirmation view
       setConfirmed(true);
+      
       toast({
         title: t('date_composer.thank_you_title'),
         description: t('date_composer.thank_you_description')
       });
+      
+      // Scroll to top of page to ensure user sees the confirmation view
+      window.scrollTo(0, 0);
     } else {
       toast({
         title: t('date_composer.select_dates'),
@@ -145,6 +154,13 @@ Date d'envoi: ${new Date().toLocaleString('fr-FR')}
     }
   };
   
+  // Debug output for component state
+  console.log('DateFarcieComposer state:', { 
+    confirmed, 
+    selectedDates: selectedDates.length,
+    formSubmitted
+  });
+  
   return (
     <div className="container mx-auto px-4 py-12">
       {!confirmed ? (
@@ -211,6 +227,7 @@ Date d'envoi: ${new Date().toLocaleString('fr-FR')}
           </div>
         </>
       ) : (
+        // Confirmation view
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

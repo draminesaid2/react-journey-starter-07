@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import ProductsGrid from '../components/products/ProductsGrid';
 import ProductsHero from '../components/products/ProductsHero';
-import { products as allProducts } from '../config/products';
 import type { Product, ProductCategory } from '../types';
 
 interface ProductsPageProps {
@@ -21,30 +20,38 @@ const Products: React.FC<ProductsPageProps> = ({ selectedCategory, selectedSubca
   useEffect(() => {
     let filteredProducts: Product[] = [];
     
-    console.log('Products page filtering with:', { selectedCategory, selectedSubcategory });
-    
-    if (selectedCategory === 'tous') {
-      // Show all products when 'tous' is selected
-      filteredProducts = [...allProducts];
-    } else {
-      // Filter by categories - handle comma-separated categories
-      const categories = selectedCategory.split(',');
+    // Import products dynamically to avoid the build error
+    import('../config/products').then(({ default: productsConfig }) => {
+      const allProducts = productsConfig.products || [];
       
-      filteredProducts = allProducts.filter(product => {
-        return categories.some(cat => product.category === cat);
-      });
+      console.log('Products page filtering with:', { selectedCategory, selectedSubcategory });
       
-      // Further filter by subcategory if provided
-      if (selectedSubcategory) {
-        filteredProducts = filteredProducts.filter(product => 
-          product.subcategory === selectedSubcategory
-        );
+      if (selectedCategory === 'tous') {
+        // Show all products when 'tous' is selected
+        filteredProducts = [...allProducts];
+      } else {
+        // Filter by categories - handle comma-separated categories
+        const categories = selectedCategory.split(',');
+        
+        filteredProducts = allProducts.filter(product => {
+          return categories.some(cat => product.category === cat);
+        });
+        
+        // Further filter by subcategory if provided
+        if (selectedSubcategory) {
+          filteredProducts = filteredProducts.filter(product => 
+            product.subcategory === selectedSubcategory
+          );
+        }
       }
-    }
-    
-    console.log(`Filtered to ${filteredProducts.length} products`);
-    
-    setProducts(filteredProducts);
+      
+      console.log(`Filtered to ${filteredProducts.length} products`);
+      
+      setProducts(filteredProducts);
+    }).catch(error => {
+      console.error("Error loading products:", error);
+      setProducts([]);
+    });
   }, [selectedCategory, selectedSubcategory]);
   
   const handleSelectProduct = (id: string) => {

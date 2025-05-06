@@ -18,6 +18,9 @@ const DateFarcie = () => {
   const handlePageChange = (page: string, category?: string, subcategory?: string, productId?: string) => {
     console.log(`DateFarcie: Navigation triggered to ${page} with category ${category || 'none'}`);
     
+    // Add extra debugging
+    console.log('Navigation details:', { page, category, subcategory, productId });
+    
     // Dispatch custom navigation event to be caught by App.tsx
     const navigateEvent = new CustomEvent('navigateTo', {
       detail: { page, category, subcategory, productId }
@@ -30,6 +33,8 @@ const DateFarcie = () => {
 
   // Function to handle client type changes
   const handleClientTypeChange = (type: any) => {
+    console.log('Changing client type to:', type);
+    
     // Dispatch event to update client type in the main App
     const changeClientTypeEvent = new CustomEvent('changeClientType', {
       detail: { type }

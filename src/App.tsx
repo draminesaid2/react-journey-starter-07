@@ -117,7 +117,7 @@ function App() {
     const handleClientTypeChange = (event: Event) => {
       const customEvent = event as CustomEvent<{ type: ClientType }>;
       if (customEvent.detail && customEvent.detail.type) {
-        handleClientTypeChange(customEvent.detail.type);
+        handleClientTypeChangeFunc(customEvent.detail.type);
       }
     };
 
@@ -136,7 +136,7 @@ function App() {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  const handleClientTypeChange = (type: ClientType) => {
+  const handleClientTypeChangeFunc = (type: ClientType) => {
     setClientType(type);
     if (type) {
       const hasConsent = Cookies.get('cookieConsent');
@@ -156,12 +156,12 @@ function App() {
     Cookies.remove('clientType');
   };
 
-  const handlePageChange = (page: string, category?: ProductCategory, subcategory?: string, productId?: string) => {
+  const handlePageChange = (page: string, category?: string, subcategory?: string, productId?: string) => {
     console.log('App handlePageChange:', { page, category, subcategory, productId });
     setCurrentPage(page);
     
     if (category) {
-      setSelectedCategory(category);
+      setSelectedCategory(category as ProductCategory);
     }
     
     if (subcategory) {
@@ -240,11 +240,11 @@ function App() {
               clientType="B2C" 
               onPageChange={handlePageChange}
               currentPage={currentPage}
-              onClientTypeChange={handleClientTypeChange}
+              onClientTypeChange={handleClientTypeChangeFunc}
             />
             {renderPage()}
             <Footer />
-            <ClientTypeModal onSelect={handleClientTypeChange} />
+            <ClientTypeModal onSelect={handleClientTypeChangeFunc} />
           </>
         ) : (
           <>
@@ -253,7 +253,7 @@ function App() {
                 clientType={clientType} 
                 onPageChange={handlePageChange}
                 currentPage={currentPage}
-                onClientTypeChange={handleClientTypeChange}
+                onClientTypeChange={handleClientTypeChangeFunc}
               />
             )}
             {renderPage()}
