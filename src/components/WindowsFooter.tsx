@@ -1,15 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
-import { Home, Sun, Moon, Settings, Terminal } from 'lucide-react';
+import { Home, Sun, Moon, Settings, Terminal, ListTodo } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
 
 interface WindowsFooterProps {
   onTerminalClick?: () => void;
+  onTodoClick?: () => void;
 }
 
-const WindowsFooter = ({ onTerminalClick }: WindowsFooterProps) => {
+const WindowsFooter = ({ onTerminalClick, onTodoClick }: WindowsFooterProps) => {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -42,6 +43,16 @@ const WindowsFooter = ({ onTerminalClick }: WindowsFooterProps) => {
     }
   };
 
+  const openTodo = () => {
+    toast({
+      title: "Todo List",
+      description: "Opening Todo List..."
+    });
+    if (onTodoClick) {
+      onTodoClick();
+    }
+  };
+
   return (
     <>
       {/* Windows-style taskbar */}
@@ -63,7 +74,12 @@ const WindowsFooter = ({ onTerminalClick }: WindowsFooterProps) => {
               <Terminal size={20} className="text-white" />
             </button>
             
-            {/* You can add more app buttons here */}
+            <button 
+              onClick={openTodo}
+              className="p-2 rounded-md hover:bg-white/10 transition-colors"
+            >
+              <ListTodo size={20} className="text-white" />
+            </button>
           </div>
           
           {/* Right side controls */}

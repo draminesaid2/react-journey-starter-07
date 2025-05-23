@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import FakeTerminal from './FakeTerminal';
 import CustomMouse from './CustomMouse';
 import WindowsFooter from './WindowsFooter';
-import { Folder, Terminal } from 'lucide-react';
+import { Folder, Terminal, ListTodo, Calendar } from 'lucide-react';
 import DesktopIcon from './DesktopIcon';
+import TodoApp from './TodoApp';
 
 interface DesktopProps {
   children: React.ReactNode;
@@ -14,6 +15,8 @@ const Desktop = ({ children }: DesktopProps) => {
   const [showTerminal, setShowTerminal] = useState<boolean>(true);
   const [showHackingAnimation, setShowHackingAnimation] = useState<boolean>(false);
   const [activeTerminalIndex, setActiveTerminalIndex] = useState<number>(0);
+  const [showTodoApp, setShowTodoApp] = useState<boolean>(false);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
   // Auto-close the initial terminal after some time
   useEffect(() => {
@@ -64,6 +67,24 @@ const Desktop = ({ children }: DesktopProps) => {
           label="My Files"
           className="hover:bg-white/10"
         />
+        <DesktopIcon 
+          icon={<ListTodo size={24} />} 
+          label="Todo List"
+          onClick={() => setShowTodoApp(true)}
+          className="hover:bg-white/10"
+        />
+        <DesktopIcon 
+          icon={<Calendar size={24} />} 
+          label="Calendar"
+          onClick={() => {
+            setShowTodoApp(true);
+            setTimeout(() => {
+              const calendarTab = document.querySelector('[value="calendar"]') as HTMLButtonElement;
+              if (calendarTab) calendarTab.click();
+            }, 100);
+          }}
+          className="hover:bg-white/10"
+        />
       </div>
       
       {/* Main content */}
@@ -105,11 +126,24 @@ const Desktop = ({ children }: DesktopProps) => {
         </>
       )}
 
+      {/* Todo App Window */}
+      {showTodoApp && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-6">
+          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm" onClick={() => setShowTodoApp(false)}></div>
+          <div className="relative w-full max-w-4xl h-[80vh] z-10">
+            <TodoApp onClose={() => setShowTodoApp(false)} />
+          </div>
+        </div>
+      )}
+
       {/* Custom mouse effect */}
       <CustomMouse />
       
       {/* Windows-like footer */}
-      <WindowsFooter onTerminalClick={handleOpenTerminal} />
+      <WindowsFooter 
+        onTerminalClick={handleOpenTerminal} 
+        onTodoClick={() => setShowTodoApp(true)}
+      />
     </div>
   );
 };
