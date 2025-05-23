@@ -4,10 +4,19 @@ import { Terminal, X } from 'lucide-react';
 
 interface FakeTerminalProps {
   onClose: () => void;
-  autoCloseAfter?: number; // in milliseconds
+  autoCloseAfter?: number | null; // in milliseconds, null for no auto-close
+  isHacking?: boolean;
+  terminalTitle?: string;
+  finalMessage?: string;
 }
 
-const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
+const FakeTerminal = ({ 
+  onClose, 
+  autoCloseAfter = null, 
+  isHacking = false,
+  terminalTitle = "Terminal",
+  finalMessage = ""
+}: FakeTerminalProps) => {
   const [visible, setVisible] = useState<boolean>(true);
   const [text, setText] = useState<string>('');
   const [textIndex, setTextIndex] = useState<number>(0);
@@ -15,7 +24,7 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
   const [progress, setProgress] = useState<number>(0);
   
   // More impressive hacking texts with technical jargon
-  const hackingTexts = [
+  const standardTexts = [
     "> Initializing secure shell protocol...",
     "> Establishing SSH connection to server: ssh://root@45.33.32.156:22",
     "> Bypassing firewall protocols... [SUCCESS]",
@@ -30,6 +39,53 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
     "> System access granted. Terminal ready..."
   ];
 
+  // Different hacking texts for each terminal in the sequence
+  const hackingTexts = [
+    [
+      "> Initiating system breach protocol...",
+      "> Scanning network vulnerabilities...",
+      "> Identified weak points in firewall...",
+      "> Executing buffer overflow attack...",
+      "> Creating memory dump...",
+      "> Bypassing authentication layer 1/3..."
+    ],
+    [
+      "> Loading kernel modules...",
+      "> Searching for open ports...",
+      `> Discovered services: SSH(22), HTTP(80), HTTPS(443)`,
+      "> Attempting SQL injection on admin portal...",
+      "> Brute-forcing admin credentials...",
+      "> Gained access to user authentication database..."
+    ],
+    [
+      "> Decompiling system binaries...",
+      "> Analyzing network traffic patterns...",
+      "> Injecting malicious payload...",
+      "> Creating backdoor access...",
+      "> Elevating user privileges...",
+      "> Achieved root access to main server..."
+    ],
+    [
+      "> Running final security checks...",
+      "> Cleaning up digital footprints...",
+      "> Removing access logs...",
+      "> Finalizing system breach...",
+      "> Operation completed successfully..."
+    ]
+  ];
+  
+  // Select text array based on props
+  const textToShow = isHacking ? 
+    (hackingTexts[Math.min(activeTerminalIndex(), 3)]) : 
+    (finalMessage ? [`> ${finalMessage}`] : standardTexts);
+
+  function activeTerminalIndex() {
+    if (terminalTitle?.includes("1/4")) return 0;
+    if (terminalTitle?.includes("2/4")) return 1;
+    if (terminalTitle?.includes("3/4")) return 2;
+    return 3;
+  }
+
   // Generate random IP address
   useEffect(() => {
     const generateIP = () => {
@@ -41,21 +97,21 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
 
   // Text typing effect with variable speed
   useEffect(() => {
-    if (textIndex < hackingTexts.length) {
-      const typingSpeed = Math.random() * 150 + 250; // Variable typing speed for more realism
+    if (textIndex < textToShow.length) {
+      const typingSpeed = Math.random() * 100 + (isHacking ? 100 : 250); // Faster typing for hacking terminals
       const typingTimer = setTimeout(() => {
-        setText((prev) => prev + hackingTexts[textIndex] + '\n');
+        setText((prev) => prev + textToShow[textIndex] + '\n');
         setTextIndex(textIndex + 1);
-        setProgress((textIndex + 1) / hackingTexts.length * 100);
+        setProgress((textIndex + 1) / textToShow.length * 100);
       }, typingSpeed);
       
       return () => clearTimeout(typingTimer);
     }
-  }, [textIndex, hackingTexts.length]);
+  }, [textIndex, textToShow.length, isHacking]);
 
   // Auto-close terminal after specified time
   useEffect(() => {
-    if (autoCloseAfter && textIndex >= hackingTexts.length) {
+    if (autoCloseAfter && textIndex >= textToShow.length) {
       const timer = setTimeout(() => {
         setVisible(false);
         setTimeout(onClose, 500); // Give time for animation to complete
@@ -63,7 +119,7 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
       
       return () => clearTimeout(timer);
     }
-  }, [autoCloseAfter, onClose, textIndex, hackingTexts.length]);
+  }, [autoCloseAfter, onClose, textIndex, textToShow.length]);
 
   const handleClose = () => {
     setVisible(false);
@@ -71,7 +127,7 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
   };
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm transition-opacity ${visible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity ${visible ? 'opacity-100' : 'opacity-0'}`}>
       <div className={`w-full max-w-3xl h-[80vh] md:h-[60vh] bg-black border border-green-500/50 rounded-md shadow-lg shadow-green-500/20 transform transition-transform ${visible ? 'scale-100' : 'scale-95'} relative`}>
         <div className="flex items-center justify-between p-2 bg-gray-900/80 border-b border-green-500/30">
           <div className="flex space-x-2">
@@ -81,7 +137,7 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
           </div>
           <div className="text-green-300 text-sm font-mono flex items-center gap-2">
             <Terminal size={14} className="text-green-400" /> 
-            <span>Terminal</span>
+            <span>{terminalTitle}</span>
             <span className="px-1.5 py-0.5 text-xs bg-green-900/40 rounded-md">root@system</span>
           </div>
           <button 
@@ -97,7 +153,7 @@ const FakeTerminal = ({ onClose, autoCloseAfter }: FakeTerminalProps) => {
           
           {/* Matrix-like background effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10 z-[-1]">
-            {Array.from({ length: 15 }).map((_, index) => (
+            {Array.from({ length: 25 }).map((_, index) => (
               <div 
                 key={index}
                 className="absolute text-xs text-green-500 animate-fade-in"

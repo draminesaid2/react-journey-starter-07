@@ -5,7 +5,11 @@ import { useTheme } from 'next-themes';
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
 
-const WindowsFooter = () => {
+interface WindowsFooterProps {
+  onTerminalClick?: () => void;
+}
+
+const WindowsFooter = ({ onTerminalClick }: WindowsFooterProps) => {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -24,15 +28,18 @@ const WindowsFooter = () => {
     setTheme(newTheme);
     toast({
       title: "Theme Changed",
-      description: `Switched to ${newTheme} mode`,
+      description: `Switched to ${newTheme} mode`
     });
   };
 
   const openTerminal = () => {
     toast({
-      description: "Opening Terminal...",
+      title: "Terminal",
+      description: "Opening Terminal..."
     });
-    // You could implement opening a new terminal instance here
+    if (onTerminalClick) {
+      onTerminalClick();
+    }
   };
 
   return (
