@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import FakeTerminal from './FakeTerminal';
 import CustomMouse from './CustomMouse';
@@ -98,7 +99,7 @@ const Desktop = ({ children }: DesktopProps) => {
               isHacking={false}
               autoCloseAfter={null}
               terminalTitle="Terminal - Final Result"
-              finalMessage="yes i am very good at developing cool features"
+              finalMessage="yes i am very good ad cool features and says that i am a good react js node js fullstack developer with experience with laravel, php, react native mangodb and sql"
             />
           )}
         </>
