@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using LMobile.MiniForms;
 using LMobile.Gen3LicenseManagement.Dao.BusinessObjects;
+using LMobile.Gen3LicenseManagement.Portal.BusinessObjects;
 using LMobile.MiniForms.Classic;
 using System.Drawing;
 
 namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 	class ModulesDirectView : ApplicationView<BaseView, ModulesDirectApplication> {
-		public readonly BindingSource<Module> AllModules;
+		public readonly BindingSource<TreeWrapper<Module, ModuleProperty>> Modules;
+		public readonly BindingSource<ModuleProperty> Properties;
 		
 		public ModulesDirectView() {
-			this.AllModules = this.CreateCollectionBindingSource(Application, app => app.AllModules);
+			this.Modules = this.CreateCollectionBindingSource(Application, app => app.Modules);
+			this.Properties = CreateCollectionBindingSource(Modules, module => module.Children);
 		}
 
 		protected override void Render(BaseView master) {
@@ -73,7 +76,7 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 					.BindAction(Application, app => app.ResetCurrentModule());
 			#endregion
 
-			#region Modules List
+			#region Modules List with Packages
 			var scroll = main.AddScrollPanel(Scrolling.Vertical).SetStyle(ClassicStyleSheet.W100 + ClassicStyleSheet.HRemainder +
 				new Style { RightPadding = new Length(25, In.Pixels) });
 
@@ -83,6 +86,7 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 			// Header row
 			modulesTable.AddRow(row => {
 				row.SetChildStyle(ClassicStyleSheet.Bold);
+				row.AddLabel().SetStyle(new Style { Width = new Length(25, In.Pixels) }); // Space for expand/collapse button
 				row.AddLabel().SetCaption("ID").SetStyle(new Style { Width = new Length(50, In.Pixels) });
 				row.AddLabel().SetCaption(Resources.ProjectType()).SetStyle(new Style { Width = new Length(120, In.Pixels) });
 				row.AddLabel().SetCaption(Resources.Name()).SetStyle(new Style { Width = new Length(150, In.Pixels) });
@@ -90,23 +94,30 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 				row.AddLabel().SetCaption("Actions").SetStyle(new Style { Width = new Length(120, In.Pixels) });
 			});
 
-			// Module rows
-			this.AddIteration(AllModules, () => {
+			// Module rows with expandable packages
+			this.AddIteration(Modules, () => {
 				modulesTable.AddRow(row => {
+					row.AddToggleButton().SetStyle(ClassicStyleSheet.ExpandCollapseSmall)
+						.BindChecked(Modules, module => module.Expanded, true, (module, value) => module.Expanded = value);
+
 					row.AddLabel()
-						.BindCaption(AllModules, module => module.ID.ToString())
+						.BindCaption(Modules, module => module.Node.ID.ToString())
 						.SetStyle(new Style { Width = new Length(50, In.Pixels) });
 
-					row.AddLabel()
-						.BindCaption(AllModules, module => module.ProjectType ?? "")
-						.SetStyle(new Style { Width = new Length(120, In.Pixels) });
+					// Combined ProjectType with package count
+					var typeCell = row.AddColumnsLayout().SetStyle(new Style { Width = new Length(120, In.Pixels) });
+					typeCell.AddLabel()
+						.BindCaption(Modules, module => module.Node.ProjectType ?? "");
+					typeCell.AddLabel()
+						.BindCaption(Modules, module => string.Format(" ({0})", module.Children.Count))
+						.SetStyle(new Style { FontSize = new Length(9, In.Points), FontStyle = System.Drawing.FontStyle.Italic });
 
 					row.AddLabel()
-						.BindCaption(AllModules, module => module.ModuleName ?? "")
+						.BindCaption(Modules, module => module.Node.ModuleName ?? "")
 						.SetStyle(new Style { Width = new Length(150, In.Pixels) });
 
 					row.AddLabel()
-						.BindCaption(AllModules, module => module.Description ?? "")
+						.BindCaption(Modules, module => module.Node.Description ?? "")
 						.SetStyle(ClassicStyleSheet.WRemainder);
 
 					// Action buttons
@@ -118,7 +129,7 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 								Width = new Length(35, In.Pixels),
 								RightMargin = new Length(5, In.Pixels)
 							})
-						.BindAction(Application, AllModules, (app, module) => app.NavigateEditModule(module.ID));
+						.BindAction(Application, Modules, (app, module) => app.NavigateEditModule(module.Node.ID));
 
 					actionLayout.AddActionButton()
 						.SetStyle(ClassicStyleSheet.ContentIconButton(MonoIcon.Bin) +
@@ -127,9 +138,44 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 								RightMargin = new Length(5, In.Pixels)
 							})
 						.BindDisplayed(Application, app => app.CanUserDeleteModule)
-						.BindAction(Application, AllModules, (app, module) => app.DeleteModule(module.ID));
+						.BindAction(Application, Modules, (app, module) => app.DeleteModule(module.Node.ID));
 
 				}).SetStyle(new Style { Border = new Length(1, In.Pixels), BorderColor = Color.LightGray });
+
+				// Expandable packages section
+				modulesTable.AddRow(row => {
+					row.BindDisplayed(Modules, module => module.Expanded);
+					row.AddLabel(); // Empty cell for expand button column
+					
+					var packageTable = row.AddTableLayout().Span(5, 1).SetStyle(new Style {
+						LeftMargin = new Length(20, In.Pixels),
+						BackgroundColor = Color.LightGray,
+						RightMargin = new Length(25, In.Pixels)
+					});
+
+					packageTable.AddRow(propRow => {
+						propRow.SetChildStyle(ClassicStyleSheet.Bold);
+						propRow.AddLabel().SetCaption("Package ID").SetStyle(new Style { Width = new Length(80, In.Pixels) });
+						propRow.AddLabel().SetCaption("Package Name").SetStyle(new Style { Width = new Length(120, In.Pixels) });
+						propRow.AddLabel().SetCaption("Package Description").SetStyle(ClassicStyleSheet.WRemainder);
+					});
+
+					packageTable.AddIteration(Properties, i => {
+						packageTable.AddRow(propRow => {
+							propRow.AddLabel()
+								 .BindCaption(Properties, prop => prop.ID.ToString())
+								 .SetStyle(new Style { Width = new Length(80, In.Pixels) });
+
+							propRow.AddLabel()
+								 .BindCaption(Properties, prop => prop.PropertyName ?? "")
+								 .SetStyle(new Style { Width = new Length(120, In.Pixels) });
+
+							propRow.AddLabel()
+								 .BindCaption(Properties, prop => prop.Description ?? "")
+								 .SetStyle(ClassicStyleSheet.WRemainder);
+						});
+					});
+				});
 			});
 			#endregion
 

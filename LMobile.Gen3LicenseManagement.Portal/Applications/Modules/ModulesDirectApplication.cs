@@ -5,6 +5,7 @@ using System.Linq;
 using LMobile.MiniForms;
 using LMobile.Gen3LicenseManagement.Dao.Contracts;
 using LMobile.Gen3LicenseManagement.Dao.BusinessObjects;
+using LMobile.Gen3LicenseManagement.Portal.BusinessObjects;
 
 namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 	[AllowRole("Gen3Modules")]
@@ -13,8 +14,9 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 		protected ILicenseDao LicenseDao { get { return this.Session.GetService<ILicenseDao>(); } }
 		protected IModuleDao ModuleDao { get { return this.Session.GetService<IModuleDao>(); } }
 		
-		public List<Module> AllModules;
+		public List<TreeWrapper<Module, ModuleProperty>> Modules;
 		public List<StoredProjectType> ProjectTypes;
+		public List<ModuleProperty> AllModuleProperties;
 		public Module CurrentModule;
 		
 		public void Start() {
@@ -84,7 +86,14 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 		}
 
 		private void LoadModules() {
-			this.AllModules = this.ModuleDao.GetModules();
+			var modules = this.ModuleDao.GetModules();
+			this.AllModuleProperties = this.ModuleDao.GetModuleProperties();
+			var allModulePropertiesInModules = this.ModuleDao.GetModulePropertiesInModules();
+			this.Modules = modules.Select(module => new TreeWrapper<Module, ModuleProperty> {
+				Node = module,
+				Expanded = false,
+				Children = this.AllModuleProperties.Where(prop => allModulePropertiesInModules.Any(x => x.ModuleID == module.ID && x.ModulePropertyID == prop.ID)).ToList()
+			}).ToList();
 		}
 	}
 }
