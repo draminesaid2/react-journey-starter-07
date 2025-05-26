@@ -1,5 +1,5 @@
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LMobile.MiniForms;
@@ -14,86 +14,74 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 		protected ILicenseDao LicenseDao { get { return this.Session.GetService<ILicenseDao>(); } }
 		protected IModuleDao ModuleDao { get { return this.Session.GetService<IModuleDao>(); } }
 		
-		public List<TreeWrapper<Module, ModuleProperty>> Modules;
-		public List<StoredProjectType> ProjectTypes;
-		public List<ModuleProperty> AllModuleProperties;
-		public Module CurrentModule;
+		public List<ModuleProperty> AllPackages;
+		public ModuleProperty CurrentPackage;
 		
 		public void Start() {
-			this.ProjectTypes = LicenseDao.GetProjectTypes();
-			LoadModules();
+			LoadPackages();
 			this.DisplayView<ModulesDirectView>();
 		}
 
-		public void NavigateEditModule(int moduleID) {
-			if (moduleID == 0) {
-				this.CurrentModule = new Module() {
-					ModuleGuid = System.Guid.NewGuid(),
-				};
+		public void NavigateEditPackage(int packageID) {
+			if (packageID == 0) {
+				this.CurrentPackage = new ModuleProperty();
 			} else {
-				this.CurrentModule = this.ModuleDao.GetModule(moduleID);
-				if (this.CurrentModule == null) {
-					this.LoadModules();
+				this.CurrentPackage = this.ModuleDao.GetModuleProperty(packageID);
+				if (this.CurrentPackage == null) {
+					this.LoadPackages();
 					throw new Error(Resources.SomebodyElseDeletedTheRecord());
 				}
 			}
 			DisplayView<ModulesDirectView>();
 		}
 		
-		public bool CanUserEditModule {
+		public bool CanUserEditPackage {
 			get { return this.Client.CurrentPrincipal.IsInRole("Gen3EditModule"); }
 		}
 		
-		public void ResetCurrentModule() {
-			this.CurrentModule = null;
-			this.LoadModules();
+		public void ResetCurrentPackage() {
+			this.CurrentPackage = null;
+			this.LoadPackages();
 		}
 		
-		public void SaveCurrentModule() {
-			if (CurrentModule.ID == 0) {
-				if (string.IsNullOrEmpty(this.CurrentModule.ProjectType)) { throw new Error(Resources.ProjectTypeEmpty()); }
-				if (string.IsNullOrEmpty(this.CurrentModule.Description)) { throw new Error(Resources.DescriptionEmpty()); }
-				Session.Insert(CurrentModule);
-				LicenseDao.LogEntry(null, null, MessageTypes.ModuleCreated, "Module '" + CurrentModule.Description + "' created by '" + Client.CurrentPrincipal.Identity.Name + "'.");
+		public void SaveCurrentPackage() {
+			if (CurrentPackage.ID == 0) {
+				if (string.IsNullOrEmpty(this.CurrentPackage.PropertyName)) { throw new Error("Package name cannot be empty."); }
+				if (string.IsNullOrEmpty(this.CurrentPackage.Description)) { throw new Error("Package description cannot be empty."); }
+				Session.Insert(CurrentPackage);
+				LicenseDao.LogEntry(null, null, MessageTypes.ModulePropertyCreated, "Package '" + CurrentPackage.PropertyName + "' created by '" + Client.CurrentPrincipal.Identity.Name + "'.");
 			} else {
-				if (!Session.Update(CurrentModule)) throw new Error(Resources.SomebodyElseModifiedTheRecord());
-				LicenseDao.LogEntry(null, null, MessageTypes.ModuleModified, "Module '" + CurrentModule.Description + "' modified by '" + Client.CurrentPrincipal.Identity.Name + "'.");
+				if (!Session.Update(CurrentPackage)) throw new Error(Resources.SomebodyElseModifiedTheRecord());
+				LicenseDao.LogEntry(null, null, MessageTypes.ModulePropertyModified, "Package '" + CurrentPackage.PropertyName + "' modified by '" + Client.CurrentPrincipal.Identity.Name + "'.");
 			}
-			this.CurrentModule = null;
-			this.LoadModules();
+			this.CurrentPackage = null;
+			this.LoadPackages();
 		}
 
-		public bool CanUserDeleteModule {
+		public bool CanUserDeletePackage {
 			get { return this.Client.CurrentPrincipal.IsInRole("Gen3EditModule"); }
 		}
 
-		public bool DeleteModule(int moduleID) {
-			if (!CanUserDeleteModule)
+		public bool DeletePackage(int packageID) {
+			if (!CanUserDeletePackage)
 				return false;
 			
-			var moduleToDelete = this.ModuleDao.GetModule(moduleID);
-			if (moduleToDelete == null) {
+			var packageToDelete = this.ModuleDao.GetModuleProperty(packageID);
+			if (packageToDelete == null) {
 				throw new Error(Resources.SomebodyElseDeletedTheRecord());
 			}
 			
-			string moduleName = moduleToDelete.Description;
-			if (this.ModuleDao.DeleteModule(moduleID)) {
-				LicenseDao.LogEntry(null, null, MessageTypes.ModuleModified, "Module '" + moduleName + "' deleted by '" + Client.CurrentPrincipal.Identity.Name + "'.");
-				this.LoadModules();
+			string packageName = packageToDelete.PropertyName;
+			if (this.ModuleDao.DeleteModuleProperty(packageID)) {
+				LicenseDao.LogEntry(null, null, MessageTypes.ModulePropertyModified, "Package '" + packageName + "' deleted by '" + Client.CurrentPrincipal.Identity.Name + "'.");
+				this.LoadPackages();
 				return true;
 			}
 			return false;
 		}
 
-		private void LoadModules() {
-			var modules = this.ModuleDao.GetModules();
-			this.AllModuleProperties = this.ModuleDao.GetModuleProperties();
-			var allModulePropertiesInModules = this.ModuleDao.GetModulePropertiesInModules();
-			this.Modules = modules.Select(module => new TreeWrapper<Module, ModuleProperty> {
-				Node = module,
-				Expanded = false,
-				Children = this.AllModuleProperties.Where(prop => allModulePropertiesInModules.Any(x => x.ModuleID == module.ID && x.ModulePropertyID == prop.ID)).ToList()
-			}).ToList();
+		private void LoadPackages() {
+			this.AllPackages = this.ModuleDao.GetModuleProperties();
 		}
 	}
 }
