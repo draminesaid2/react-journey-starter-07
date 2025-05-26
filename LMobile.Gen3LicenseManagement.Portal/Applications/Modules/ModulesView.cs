@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -254,6 +255,9 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 			master.Navigation.AddActionButton()
 						.SetCaption(Resources.NewModuleProperty())
 						.BindAction(Application, app => app.NavigateEditModuleProperty(0, 0));
+			master.Navigation.AddActionButton()
+						.SetCaption("All Modules")
+						.BindAction(Application, app => app.NavigateToDirectModules());
 		}
 	}
 }

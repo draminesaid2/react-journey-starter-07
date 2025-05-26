@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar } from 'react-day-picker';
-import { cn } from "@/lib/utils";
+import { DayPicker } from 'react-day-picker';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Calendar, CheckCircle2, Circle, Plus, Trash2, Clock } from 'lucide-react';
 
 interface Task {
   id: string;
@@ -195,7 +201,7 @@ const TodoApp = ({ onClose }: TodoAppProps) => {
           {activeTab === 'calendar' && (
             <div className="flex gap-6">
               <div className="flex-1">
-                <Calendar
+                <DayPicker
                   mode="single"
                   selected={selectedDate}
                   onSelect={handleDateSelect}

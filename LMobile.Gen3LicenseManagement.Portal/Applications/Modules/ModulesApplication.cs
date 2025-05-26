@@ -1,4 +1,3 @@
-
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -137,6 +136,10 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 				return true;
 			}
 			return false;
+		}
+
+		public void NavigateToDirectModules() {
+			this.RunApplication(new ModulesDirectApplication(), app => app.Start());
 		}
 
 		private void LoadModules() {
