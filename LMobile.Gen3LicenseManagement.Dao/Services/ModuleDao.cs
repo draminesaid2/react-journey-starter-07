@@ -133,5 +133,37 @@ namespace LMobile.Gen3LicenseManagement.Dao.Services
       // Delete the module itself
       return Session.Delete(module);
     }
+
+    public bool DeleteModuleProperty(int modulePropertyID)
+    {
+      if (modulePropertyID == 0) return false;
+      
+      // First, get the module property to ensure it exists
+      var moduleProperty = GetModuleProperty(modulePropertyID);
+      if (moduleProperty == null) return false;
+      
+      // Delete all associated module properties in modules entries
+      var modulePropertiesInModules = Session.Query<ModulePropertiesInModules, ModulePropertiesInModulesMapping>()
+        .Where(x => x.Main.ModulePropertyID == modulePropertyID)
+        .ReadList();
+      
+      foreach (var item in modulePropertiesInModules)
+      {
+        Session.Delete(item);
+      }
+      
+      // Delete all associated project module properties
+      var projectModuleProperties = Session.Query<ProjectModuleProperty, ProjectModulePropertyMapping>()
+        .Where(x => x.Main.ModulePropertyID == modulePropertyID)
+        .ReadList();
+      
+      foreach (var item in projectModuleProperties)
+      {
+        Session.Delete(item);
+      }
+      
+      // Delete the module property itself
+      return Session.Delete(moduleProperty);
+    }
   }
 }

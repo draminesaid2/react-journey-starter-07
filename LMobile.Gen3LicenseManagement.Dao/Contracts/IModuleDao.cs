@@ -18,5 +18,6 @@ namespace LMobile.Gen3LicenseManagement.Dao.Contracts
     List<ModuleProperty> GetModulePropertiesByName(string p_Name, int p_ProjecID);
     List<ModulePropertiesInModules> GetModulePropertiesInModules();
     ModuleProperty GetModuleProperty(int modulePropertyID);
+    bool DeleteModuleProperty(int modulePropertyID); // Added new method
   }
 }
