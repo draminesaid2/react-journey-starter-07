@@ -16,9 +16,6 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 		
 		public List<ModuleProperty> AllPackages;
 		public ModuleProperty CurrentPackage;
-		public string SearchText;
-		
-		private List<ModuleProperty> _allPackagesOriginal;
 		
 		public void Start() {
 			LoadPackages();
@@ -83,25 +80,8 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 			return false;
 		}
 
-		public void FilterPackages() {
-			if (string.IsNullOrEmpty(this.SearchText)) {
-				this.AllPackages = _allPackagesOriginal;
-			} else {
-				this.AllPackages = _allPackagesOriginal.Where(p => 
-					(p.PropertyName != null && p.PropertyName.ToLower().Contains(this.SearchText.ToLower())) ||
-					(p.Description != null && p.Description.ToLower().Contains(this.SearchText.ToLower()))
-				).ToList();
-			}
-		}
-
-		public void ClearSearch() {
-			this.SearchText = "";
-			this.AllPackages = _allPackagesOriginal;
-		}
-
 		private void LoadPackages() {
-			_allPackagesOriginal = this.ModuleDao.GetModuleProperties();
-			this.AllPackages = _allPackagesOriginal;
+			this.AllPackages = this.ModuleDao.GetModuleProperties();
 		}
 	}
 }
