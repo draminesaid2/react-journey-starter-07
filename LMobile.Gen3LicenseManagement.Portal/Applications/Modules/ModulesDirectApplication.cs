@@ -1,5 +1,4 @@
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +80,7 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 				}
 			}, QButtons.YES_NO);
 			
-			this.Session.StartApplication(questionApp);
+			this.StartApplication(questionApp);
 			questionApp.ShowDialog();
 		}
 
