@@ -1,4 +1,5 @@
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,7 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 								RightMargin = new Length(5, In.Points)
 							})
 						.BindDisplayed(Application, app => app.CanUserDeletePackage)
-						.BindAction(Application, Packages, (app, package) => app.DeletePackage(package.ID));
+						.BindAction(Application, Packages, (app, package) => app.ConfirmDeletePackage(package.ID));
 
 				}).SetStyle(new Style { Border = new Length(1, In.Pixels), BorderColor = Color.Black });
 			});

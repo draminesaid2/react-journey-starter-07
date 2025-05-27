@@ -38,7 +38,7 @@ namespace LMobile.Gen3LicenseManagement.Dao.Services
 
     public List<ModuleProperty> GetModuleProperties()
     {
-      var query = Session.Query<ModuleProperty, ModulePropertyMapping>().OrderBy(s => s.Main.PropertyName).OrderBy(s => s.Main.Description);
+      var query = Session.Query<ModuleProperty, ModulePropertyMapping>().OrderBy(s => s.Main.ID);
       return query.ReadList();
     }
     public List<ModuleProperty> GetModuleProperties(int moduleID)
@@ -55,7 +55,7 @@ namespace LMobile.Gen3LicenseManagement.Dao.Services
       query.OrderBy(s => s.Main.Description);
       return query.ReadList();
     }
-    //MLI 2017-11-30: Module search
+
     public List<ModuleProperty> GetModulePropertiesByName(string p_Name)
     {
       if (string.IsNullOrEmpty(p_Name)) return null;
@@ -70,31 +70,17 @@ namespace LMobile.Gen3LicenseManagement.Dao.Services
       query.OrderBy(s => s.Main.Description);
       return query.ReadList();
     }
-  public List<ModuleProperty> GetModulePropertiesByName(string p_Name, int p_ProjectID)
+
+    public List<ModuleProperty> GetModulePropertiesByName(string p_Name, int p_ProjectID)
     {
       if (string.IsNullOrEmpty(p_Name)) return null;
 
       string name = string.Format("%{0}%", p_Name.ToUpper());
 
-//select* from[ModuleProperty]  mp
-//where 1 = 1
-// AND(UPPER(mp.[PropertyName]) LIKE '%20%'      OR UPPER(mp.[Desription]) LIKE '%20%')
-//AND Not Exists(select * from[ProjectModuleProperty] pmp where 1 = 1 AND pmp.projectID = 146 and pmp.ModulePropertyID = mp.ID)
-
       var query = Session.Query<ModuleProperty, ModulePropertyMapping>();
       query.Where(mp => (mp.Main.PropertyName.ToUpper().Like(name) | mp.Main.Description.ToUpper().Like(name))
        & Gql.NotExists(Session.Query().From<ProjectModulePropertyMapping>().Where((pmp) => pmp.Main.ProjectID == p_ProjectID & pmp.Main.ModulePropertyID == mp.Main.ID)));
       
-
-      //query.Where(x => Gql.NotExists(Session.Query()
-      //                            .From<ModulePropertyMapping>()
-      //                            .InnerJoin<ProjectModulePropertyMapping>((mp, pmp) => pmp.Main.ModulePropertyID == mp.Main.ID 
-      //                                                                                  & pmp.Main .ProjectID == p_ProjectID)
-      //                            .Where((mp, pmp) => mp.Main.PropertyName.ToUpper().Like(name)
-      //                                                                                      | mp.Main.Description.ToUpper().Like(name))
-                                  
-      //                            )
-      //            );
       query.OrderBy(s => s.Main.Description);
       return query.ReadList();
     }

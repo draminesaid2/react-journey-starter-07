@@ -1,4 +1,5 @@
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using LMobile.MiniForms;
 using LMobile.Gen3LicenseManagement.Dao.Contracts;
 using LMobile.Gen3LicenseManagement.Dao.BusinessObjects;
 using LMobile.Gen3LicenseManagement.Portal.BusinessObjects;
+using LMobile.Gen3LicenseManagement.Portal.Applications.QuestionDialog;
 
 namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 	[AllowRole("Gen3Modules")]
@@ -62,10 +64,28 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 			get { return this.Client.CurrentPrincipal.IsInRole("Gen3EditModule"); }
 		}
 
-		public bool DeletePackage(int packageID) {
+		public void ConfirmDeletePackage(int packageID) {
 			if (!CanUserDeletePackage)
-				return false;
+				return;
 			
+			var packageToDelete = this.ModuleDao.GetModuleProperty(packageID);
+			if (packageToDelete == null) {
+				throw new Error(Resources.SomebodyElseDeletedTheRecord());
+			}
+			
+			string confirmationMessage = "Wirklich löschen: " + packageToDelete.PropertyName + "?";
+			
+			var questionApp = new QuestionApplication(confirmationMessage, (response) => {
+				if (response == Responses.YES) {
+					DeletePackage(packageID);
+				}
+			}, QButtons.YES_NO);
+			
+			this.Session.StartApplication(questionApp);
+			questionApp.ShowDialog();
+		}
+
+		private bool DeletePackage(int packageID) {
 			var packageToDelete = this.ModuleDao.GetModuleProperty(packageID);
 			if (packageToDelete == null) {
 				throw new Error(Resources.SomebodyElseDeletedTheRecord());
