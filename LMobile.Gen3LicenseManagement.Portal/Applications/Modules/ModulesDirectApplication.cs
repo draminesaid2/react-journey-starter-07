@@ -80,7 +80,6 @@ namespace LMobile.Gen3LicenseManagement.Portal.Applications.Modules {
 				}
 			}, QButtons.YES_NO);
 			
-			this.StartApplication(questionApp);
 			questionApp.ShowDialog();
 		}
 
