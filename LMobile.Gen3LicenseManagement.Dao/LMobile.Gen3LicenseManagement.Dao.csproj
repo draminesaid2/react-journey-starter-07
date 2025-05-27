@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73F9989D-A317-438D-AD9A-A617ECB0424F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LMobile.Gen3LicenseManagement.Dao</RootNamespace>
+    <AssemblyName>LMobile.Gen3LicenseManagement.Dao</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LMobile.Gen3LicenseManagement">
+      <HintPath>..\..\lib\LMobile.Gen3LicenseManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="LMobile.Gida">
+      <HintPath>..\..\lib\LMobile.Gida.dll</HintPath>
+    </Reference>
+    <Reference Include="LMobile.Gida.SqlServer">
+      <HintPath>..\..\lib\LMobile.Gida.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LMobile.Toolbox">
+      <HintPath>..\..\lib\LMobile.Toolbox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\_AssemblyInfo.cs">
+      <Link>_AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="BusinessObjects\ModulePropertiesInModules.cs" />
+    <Compile Include="BusinessObjects\ProjectModuleProperty.cs" />
+    <Compile Include="BusinessObjects\StoredDeveloper.cs" />
+    <Compile Include="BusinessObjects\StoredModulePropertiesInModules.cs" />
+    <Compile Include="BusinessObjects\StoredProjectModuleProperty.cs" />
+    <Compile Include="BusinessObjects\ModuleProperty.cs" />
+    <Compile Include="BusinessObjects\Module.cs" />
+    <Compile Include="BusinessObjects\StoredModuleProperty.cs" />
+    <Compile Include="BusinessObjects\StoredModule.cs" />
+    <Compile Include="BusinessObjects\ProjectLog.cs" />
+    <Compile Include="BusinessObjects\StoredProjectLog.cs" />
+    <Compile Include="BusinessObjects\StoredInstallationType.cs" />
+    <Compile Include="BusinessObjects\StoredObject.cs" />
+    <Compile Include="BusinessObjects\StoredCustomer.cs" />
+    <Compile Include="BusinessObjects\StoredInstallation.cs" />
+    <Compile Include="BusinessObjects\Project.cs" />
+    <Compile Include="BusinessObjects\Customer.cs" />
+    <Compile Include="BusinessObjects\Installation.cs" />
+    <Compile Include="BusinessObjects\StoredProjectType.cs" />
+    <Compile Include="BusinessObjects\StoredProject.cs" />
+    <Compile Include="Contracts\IDeveloperDao.cs" />
+    <Compile Include="Contracts\IModuleDao.cs" />
+    <Compile Include="Contracts\ILicenseDao.cs" />
+    <Compile Include="Contracts\LicenseRequestException.cs" />
+    <Compile Include="Contracts\LicenseRequestResults.cs" />
+    <Compile Include="Gen3LicenseManagementFactory.cs" />
+    <Compile Include="Gen3LicenseSchemaCreator.cs" />
+    <Compile Include="Mapping\ModulePropertiesInModulesMapping.cs" />
+    <Compile Include="Mapping\StoredDeveloperMapping.cs" />
+    <Compile Include="Mapping\ProjectModulePropertyMapping.cs" />
+    <Compile Include="Mapping\StoredModulePropertiesInModulesMapping.cs" />
+    <Compile Include="Mapping\StoredProjectModulePropertyMapping.cs" />
+    <Compile Include="Mapping\ModulePropertyMapping.cs" />
+    <Compile Include="Mapping\ModuleMapping.cs" />
+    <Compile Include="Mapping\StoredModulePropertyMapping.cs" />
+    <Compile Include="Mapping\StoredModuleMapping.cs" />
+    <Compile Include="Mapping\ProjectLogMapping.cs" />
+    <Compile Include="Mapping\StoredProjectLogMapping.cs" />
+    <Compile Include="Mapping\StoredInstallationTypeMapping.cs" />
+    <Compile Include="Mapping\StoredObjectMapping.cs" />
+    <Compile Include="Mapping\StoredCustomerMapping.cs" />
+    <Compile Include="Mapping\StoredInstallationMapping.cs" />
+    <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\InstallationMapping.cs" />
+    <Compile Include="Mapping\ProjectMapping.cs" />
+    <Compile Include="Mapping\StoredProjectTypeMapping.cs" />
+    <Compile Include="Mapping\StoredProjectMapping.cs" />
+    <Compile Include="Services\BaseDao.cs" />
+    <Compile Include="Services\DeveloperDao.cs" />
+    <Compile Include="Services\ModuleDao.cs" />
+    <Compile Include="Services\LicenseDao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LMobile.Gen3LicenseManagement.BackEnd\LMobile.Gen3LicenseManagement.BackEnd.csproj">
+      <Project>{D0BD547D-52E1-4DC2-825E-48C50604DAB1}</Project>
+      <Name>LMobile.Gen3LicenseManagement.BackEnd</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
