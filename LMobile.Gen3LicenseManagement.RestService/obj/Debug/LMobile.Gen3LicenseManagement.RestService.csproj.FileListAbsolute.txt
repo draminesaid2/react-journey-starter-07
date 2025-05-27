@@ -1,0 +1,66 @@
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.xml
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\ServiceInstaller.exe
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\uninstall-LicenseRest-service.xml
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-dependencies.cmd
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.cmd
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe.config
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.pdb
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.SqlServer.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Toolbox.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.WebServer.dll
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.pdb
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.pdb
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.AssemblyReference.cache
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.CoreCompileInputs.cache
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.CopyComplete
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\_Source\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.pdb
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.xml
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\ServiceInstaller.exe
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\uninstall-LicenseRest-service.xml
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-dependencies.cmd
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.cmd
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe.config
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.pdb
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.SqlServer.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Toolbox.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.WebServer.dll
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.pdb
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.pdb
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.AssemblyReference.cache
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.CoreCompileInputs.cache
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.CopyComplete
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\Users\iheb.chebbi\Desktop\newvergen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.pdb
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.xml
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\ServiceInstaller.exe
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\uninstall-LicenseRest-service.xml
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-dependencies.cmd
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\installer\install-LicenseRest-service.cmd
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe.config
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.RestService.pdb
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gida.SqlServer.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Toolbox.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.WebServer.dll
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.BackEnd.pdb
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\bin\Debug\LMobile.Gen3LicenseManagement.Dao.pdb
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.AssemblyReference.cache
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.csproj.CoreCompileInputs.cache
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile..7D80C580.Up2Date
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.exe
+C:\Users\iheb.chebbi\Desktop\working gen3\LMobile.Gen3LicenseManager.Portal\src\LMobile.Gen3LicenseManagement.RestService\obj\Debug\LMobile.Gen3LicenseManagement.RestService.pdb

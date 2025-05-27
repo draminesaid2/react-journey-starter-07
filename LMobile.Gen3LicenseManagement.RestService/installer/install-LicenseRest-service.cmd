@@ -1,0 +1,1 @@
+ServiceInstaller.exe install-LicenseRest-service.xml
