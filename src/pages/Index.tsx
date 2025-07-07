@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CustomScrollbar } from '@/components/ui/custom-scrollbar';
@@ -300,7 +299,7 @@ const Index = () => {
               <div className="hidden md:block">
                 <div ref={desktopAutoScroll.scrollRef} className="flex gap-8 overflow-x-auto scrollbar-hide" {...desktopAutoScroll.scrollProps}>
                   {/* Card 1 */}
-                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-64">
+                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-80">
                     <div className="flex-1 p-8 flex flex-col justify-center">
                       <div className="flex items-start gap-3 mb-4">
                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -320,12 +319,12 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="w-1/2 h-full">
-                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" src="/lovable-uploads/32b8d1c7-0558-4f96-8b64-2be0e76f0092.jpg" />
+                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-r-2xl" src="/lovable-uploads/32b8d1c7-0558-4f96-8b64-2be0e76f0092.jpg" />
                     </div>
                   </div>
 
                   {/* Card 2 */}
-                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-64">
+                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-80">
                     <div className="flex-1 p-8 flex flex-col justify-center">
                       <div className="flex items-start gap-3 mb-4">
                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -345,12 +344,12 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="w-1/2 h-full">
-                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" src="/lovable-uploads/4ddb4322-1d5e-459a-baaf-b62ef46ed5c3.png" />
+                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-r-2xl" src="/lovable-uploads/4ddb4322-1d5e-459a-baaf-b62ef46ed5c3.png" />
                     </div>
                   </div>
 
                   {/* Card 3 */}
-                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-64">
+                  <div className="min-w-[650px] bg-white rounded-2xl shadow-lg overflow-hidden flex h-80">
                     <div className="flex-1 p-8 flex flex-col justify-center">
                       <div className="flex items-start gap-3 mb-4">
                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -370,9 +369,16 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="w-1/2 h-full">
-                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" src="/lovable-uploads/37edb384-8f65-47c6-a599-0845eac26805.png" />
+                      <img alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-r-2xl" src="/lovable-uploads/37edb384-8f65-47c6-a599-0845eac26805.png" />
                     </div>
                   </div>
+                </div>
+                
+                {/* Desktop Carousel Dots */}
+                <div className="flex justify-center mt-6 gap-2">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 </div>
               </div>
 
@@ -380,11 +386,11 @@ const Index = () => {
               <div className="md:hidden">
                 <div ref={mobileAutoScroll.scrollRef} className="flex gap-4 overflow-x-auto scrollbar-hide px-4" {...mobileAutoScroll.scrollProps}>
                   {/* Card 1 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div className="w-full h-40">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
+                    <div className="w-full h-48">
+                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
-                    <div className="h-40 p-6 flex flex-col justify-center space-y-3">
+                    <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-white text-xs">✓</span>
@@ -405,11 +411,11 @@ const Index = () => {
                   </div>
 
                   {/* Card 2 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div className="w-full h-40">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
+                    <div className="w-full h-48">
+                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
-                    <div className="h-40 p-6 flex flex-col justify-center space-y-3">
+                    <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-white text-xs">✓</span>
@@ -430,11 +436,11 @@ const Index = () => {
                   </div>
 
                   {/* Card 3 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <div className="w-full h-40">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
+                    <div className="w-full h-48">
+                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
-                    <div className="h-40 p-6 flex flex-col justify-center space-y-3">
+                    <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-white text-xs">✓</span>
@@ -453,6 +459,13 @@ const Index = () => {
                       </div>
                     </div>
                   </div>
+                </div>
+                
+                {/* Mobile Carousel Dots */}
+                <div className="flex justify-center mt-6 gap-2">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 </div>
               </div>
             </div>
