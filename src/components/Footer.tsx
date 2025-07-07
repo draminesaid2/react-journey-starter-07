@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Instagram } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 import NewsletterService from '@/services/newsletterService';
 import Logo from '@/components/ui/Logo';
 import AboutModal from './AboutModal';
@@ -102,10 +102,16 @@ const Footer = () => {
 
         {/* Main Footer Section */}
         <div className="bg-gradient-to-r from-blue-400 to-blue-500 text-white">
-          {/* Instagram Icon */}
+          {/* Social Media Icons */}
           <div className="py-8">
             <div className="container mx-auto px-4 flex justify-center">
-              <Instagram className="w-8 h-8 text-white hover:text-blue-200 transition-colors cursor-pointer" />
+              <div className="flex items-center space-x-6">
+                <Facebook className="w-8 h-8 text-white hover:text-blue-200 transition-colors cursor-pointer" />
+                <Instagram className="w-8 h-8 text-white hover:text-blue-200 transition-colors cursor-pointer" />
+                <svg className="w-8 h-8 text-white hover:text-blue-200 transition-colors cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-2.54v5.79a3.07 3.07 0 0 1-3.14 3.14 3.07 3.07 0 0 1-3.14-3.14V2H4.46v5.79a4.83 4.83 0 0 1-3.77 4.25A4.83 4.83 0 0 1 4.46 16.3V22H7v-5.79a3.07 3.07 0 0 1 3.14-3.14 3.07 3.07 0 0 1 3.14 3.14V22h2.54v-5.79a4.83 4.83 0 0 1 3.77-4.25 4.83 4.83 0 0 1-3.77-4.25z"/>
+                </svg>
+              </div>
             </div>
           </div>
 

@@ -1,3 +1,4 @@
+
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CustomScrollbar } from '@/components/ui/custom-scrollbar';
@@ -87,7 +88,9 @@ const Index = () => {
                   <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
                     Concevez un livre unique pour enfants avec l'IA, adapté spécifiquement à chaque enfant. Donnez vie à une histoire personnalisée et à des illustrations époustouflantes.
                   </p>
-                  <Button onClick={handlePersonalizeClick} className="bg-orange-500 hover:bg-orange-600 text-white px-8 text-lg rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 py-[4px] my-[-15px]">JE PERSONALISE MON HISTOIRE </Button>
+                  <Button onClick={handlePersonalizeClick} className="w-full h-12 bg-gradient-to-r from-[#a6428d] to-purple-400 hover:from-[#924077] hover:to-purple-300 text-white font-medium text-base rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 sm:w-auto sm:px-8">
+                    JE PERSONALISE MON HISTOIRE
+                  </Button>
                 </div>
 
                 {/* Right side - Book Grid (Desktop) */}
@@ -280,7 +283,7 @@ const Index = () => {
 
                 {/* CTA Button */}
                 <div className="text-center">
-                  <Button onClick={handlePersonalizeClick} className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 text-base rounded-full shadow-lg transform transition-all duration-200 hover:scale-105">
+                  <Button onClick={handlePersonalizeClick} className="w-full h-12 bg-gradient-to-r from-[#a6428d] to-purple-400 hover:from-[#924077] hover:to-purple-300 text-white font-medium text-base rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 sm:w-auto sm:px-6 sm:py-3">
                     Je personnalise mon histoire
                   </Button>
                 </div>
