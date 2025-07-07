@@ -1,1 +1,0 @@
-sc config LMobile.LicensePortal depend= MSSQLSERVER

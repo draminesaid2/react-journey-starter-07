@@ -1,1 +1,0 @@
-ServiceInstaller.exe install-LicensePortal-service.xml
