@@ -221,7 +221,7 @@ const Index = () => {
                   {/* Text - shows second on mobile, second on desktop */}
                   <div className="flex-1 text-left order-2 lg:order-2">
                     <div className="flex items-center justify-start mb-3">
-                      <div className="bg-orange-500 text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
+                      <div className="bg-[#a6428d] text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
                         1
                       </div>
                       <h3 className="text-xl font-bold text-gray-800 md:text-2xl">VOUS REMPLISSEZ UN PETIT FORMULAIRE</h3>
@@ -238,7 +238,7 @@ const Index = () => {
                   {/* Text - shows second on mobile, first on desktop */}
                   <div className="flex-1 text-left order-2 lg:order-1">
                     <div className="flex items-center justify-start mb-3">
-                      <div className="bg-orange-500 text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
+                      <div className="bg-[#a6428d] text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
                         2
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold text-gray-800">VOUS CHOISSEZ LE THEME DE HISTOIRE</h3>
@@ -268,7 +268,7 @@ const Index = () => {
                   {/* Text - shows second on mobile, second on desktop */}
                   <div className="flex-1 text-left order-2 lg:order-2">
                     <div className="flex items-center justify-start mb-3">
-                      <div className="bg-orange-500 text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
+                      <div className="bg-[#a6428d] text-white rounded-full w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center font-bold text-base mr-3 flex-shrink-0">
                         3
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold text-gray-800">ON VOUS CREE UNE HISTOIRE SUR MESURRE</h3>
@@ -389,9 +389,9 @@ const Index = () => {
               <div className="md:hidden">
                 <div ref={mobileAutoScroll.scrollRef} className="flex gap-4 overflow-x-auto scrollbar-hide px-4" {...mobileAutoScroll.scrollProps}>
                   {/* Card 1 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
-                    <div className="w-full h-48">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-[450px]">
+                    <div className="w-full h-56">
+                      <img src="/lovable-uploads/32b8d1c7-0558-4f96-8b64-2be0e76f0092.jpg" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
                     <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
@@ -414,9 +414,9 @@ const Index = () => {
                   </div>
 
                   {/* Card 2 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
-                    <div className="w-full h-48">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-[450px]">
+                    <div className="w-full h-56">
+                      <img src="/lovable-uploads/4ddb4322-1d5e-459a-baaf-b62ef46ed5c3.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
                     <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
@@ -439,9 +439,9 @@ const Index = () => {
                   </div>
 
                   {/* Card 3 Mobile */}
-                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-96">
-                    <div className="w-full h-48">
-                      <img src="/lovable-uploads/1bdc8626-3a20-4e5b-ba67-86a2e4265fc4.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
+                  <div className="min-w-[75vw] max-w-[75vw] bg-white rounded-2xl shadow-lg overflow-hidden h-[450px]">
+                    <div className="w-full h-56">
+                      <img src="/lovable-uploads/37edb384-8f65-47c6-a599-0845eac26805.png" alt="Enfant avec livre personnalisé" className="w-full h-full object-cover rounded-t-2xl" />
                     </div>
                     <div className="h-48 p-6 flex flex-col justify-center space-y-3">
                       <div className="flex items-start gap-3">
