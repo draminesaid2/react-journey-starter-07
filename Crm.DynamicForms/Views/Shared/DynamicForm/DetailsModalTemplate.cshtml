@@ -1,0 +1,51 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModelItem<Type>>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.ViewModels
+@using Crm.Offline.Extensions
+@using Crm.Extensions
+@using Crm.Library.Extensions
+
+<div class="modal-header card-header ch-alt hide-print">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<div class="row">
+		<h4 class="modal-title col-md-8 col-xs-11">
+			@(Html.Localize("Preview"))
+		</h4>
+		<div class="col-md-3 col-xs-11">
+			<div class="fg-line select">
+				<select class="form-control" data-bind="options: DynamicForm().Languages, value: selectedLanguage, optionsValue: 'LanguageKey', optionsText: function (x) { return Helper.Lookup.getLookupValue($root.languages(), x.LanguageKey); }, visible: DynamicForm().Languages().length > 1"></select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-body card-body card-padding">
+    @(Html.CssResource("Crm.DynamicForms", "dynamicFormsCss"))
+	 @await Html.PartialAsync("Report/Header") 
+	<h1 class="text-right" data-bind="text: Helper.DynamicForm.getTitle($data.DynamicForm(), $data.localizations(), $data.selectedLanguage())"></h1>
+	<h4 class="text-right c-gray" data-bind="text: Helper.DynamicForm.getDescription($data.DynamicForm(), $data.localizations(), $data.selectedLanguage())"></h4>
+	@Html.PluginRenderActions(String.Format("{0}DynamicFormDetailsModalBody", Model.Item.Name))
+	<!-- ko foreach: groupedElements -->
+	<div class="section" data-bind="foreach: $data">
+		<div class="row elementgroup" data-bind="foreach: $data">
+			<div data-bind="css: 'form-element col-xs-' + 12 / $data.Size(), visible: $root.showInResponse($data)">
+				@Html.RenderAction("ResponseTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	@using (Html.TemplateContext("$data.DynamicForm()")) { 
+		<div data-bind="visible: $root.elements().indexOf(window.ko.utils.arrayFirst($root.elements(), function (element) { return ko.unwrap(element.FormElementType) === 'SignaturePadWithPrivacyPolicy'; })) > -1">
+			 @await Html.PartialAsync("DataPrivacyPolicy") 
+		</div>
+	 } 
+	 @await Html.PartialAsync("Report/Footer") 
+</div>
+<div class="modal-footer card-header ch-alt p-15 hide-print">
+	<button class="btn btn-float bgm-blue m-btn" data-action="print" data-bind="click: function () { window.print(); }">
+		<i class="zmdi zmdi-print"></i>
+	</button>
+</div>
+

@@ -1,0 +1,11 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<!-- ko if: $root.toggleRetired -->
+<li>
+	<a href="#" data-bind="click: () => $root.toggleRetired($data)">
+		<span data-bind="visible: !IsRetired()">@(Html.Localize("SetEntityInactive", Html.Localize("Person")))</span>
+		<span data-bind="visible: IsRetired()">@(Html.Localize("SetEntityActive", Html.Localize("Person")))</span>
+	</a>
+</li>
+<!-- /ko -->

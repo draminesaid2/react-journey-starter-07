@@ -1,0 +1,14 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Offline.Extensions
+
+@using (Html.TemplateForEach("Helper.DynamicForm.getChoicesArray($data)")) { 
+	@using (Html.TemplateCondition("window.ko.unwrap($parent.Response) == $data")) { 
+			<!-- ko if: $root.getLocalizationText -->
+			<span data-bind="text: $root.getLocalizationText($parent, $data)"></span>
+			<!-- /ko -->
+			<!-- ko if: $parents[3] && $parents[3].getLocalizationText && !$root.getLocalizationText -->
+			<span data-bind="text: $parents[3].getLocalizationText($parent, $data)"></span>
+			<!-- /ko -->
+	 } 
+ } 
+<span class="c-gray" data-bind="translatedText: 'Unspecified', if: Response() == null"></span>

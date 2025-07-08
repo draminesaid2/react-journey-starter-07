@@ -1,0 +1,11 @@
+import "../Content/js/DiscountType.js";
+import "../Content/js/jaydata.custom.functions.js";
+import "../Content/js/validation-rules.js";
+import "../Content/js/Helper/Helper.ProductFamily.js";
+import "../Content/js/ArticleListIndexViewModel.js";
+import "../Content/js/ArticleCreateViewModel.js";
+import "../Content/js/ProductFamilyListIndexViewModel.js";
+import "../Content/js/OfflineModel.js";
+import "../Content/js/CompanyDetailsRelationshipsTabViewModelExtension.js";
+import "../Content/js/CompanyDetailsViewModelLookupsExtension.js";
+import "../Content/js/ArticleCompanyRelationshipEditModalViewModel.js";

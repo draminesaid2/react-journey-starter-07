@@ -1,0 +1,67 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage<LoginViewModel>
+
+@using System.Net
+@using Crm.Model;
+@using Crm.ViewModels
+@using Crm.Extensions
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<div class="app-suggestion">
+	<div class="row card m-t-10">
+		<div class="m-r-20 m-l-20 suggestion-container">
+
+			<div>
+				<h2>
+					@(Model.Site.DisplayName)
+				</h2>
+				<p class="f-14">
+					@(Html.Localize("AppSuggestion"))
+				</p>
+			</div>
+
+			<hr />
+
+			@foreach (MobileAppInstallSourceDescriptor descriptor in Model.AppInstallUrlDescriptors)
+			{
+				<div class="d-flex app-block">
+					<div class="d-flex">
+						<a href="@(descriptor.Url)">
+							<img src="@Url.Content(@descriptor.LogoPath)" />
+						</a>
+						<span class="m-l-20 m-t-0 f-20 c-black">@descriptor.Caption</span>
+					</div>
+					<div class="text-right d-flex install-block">
+						<a href="@(descriptor.Url)" class="btn btn-link f-15 w-100 p-0 m-0">
+							@(Html.Localize("Install"))
+							<i class="zmdi zmdi-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+				<hr />
+			}
+
+			<div class="bottom-actions w-100">
+				<div class="m-r-20 m-l-20">
+					@if (Model.ShowCordovaDeepLink)
+					{
+						<hr class="m-b-0" />
+
+						<a href="@(Model.CordovaDeepLink)" class="btn btn-link f-15 w-100 m-0 p-t-20 p-b-20 p-l-0 p-r-0">
+							@(Html.Localize("ConfigureApp"))
+							<i class="zmdi zmdi-arrow-right pull-right"></i>
+						</a>
+					}
+
+					<hr class="m-t-0 m-b-0" />
+
+					<a id="goto-website" href="#" class="btn btn-link f-15 w-100 m-0 p-t-20 p-b-20 p-l-0 p-r-0">
+						@(Html.Localize("ToMobileWebsite"))
+						<i class="zmdi zmdi-arrow-right pull-right"></i>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,58 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Offline.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Rest.Model
+@using Sms.Checklists.ViewModels
+@using (Html.TemplateContext("$root")) {
+    @using (Html.TemplateCondition("formReference().ReferenceType() == 'ServiceOrderChecklist'")) {
+        <div class="row">
+            <div class="col-xs-6 p-l-0">
+                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder))
+                {
+                    <div class="row">
+                        <div class="col-xs-12 p-l-0">
+                            <span class="f-700">@Html.Localize("Customer")</span>:
+                            <span data-bind="text: Helper.Company.getDisplayName($root.CustomerContact())"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 p-l-0">
+                            <span class="f-700">@Html.Localize("Address")</span>:
+                            <span data-bind="text: Street"></span>,
+                            <span data-bind="text: ZipCode"></span>
+                            <span data-bind="text: City"></span>
+                        </div>
+                    </div>
+                    <!-- ko if: $parent.ServiceOrderResponsibleUser() -->
+                    <div class="row">
+                        <div class="col-xs-12 p-l-0">
+                            <span class="f-700">@Html.Localize("ResponsibleUser")</span>:
+                            <span data-bind="text: Helper.User.getDisplayName($parent.ServiceOrderResponsibleUser())"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                }
+                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.Installation))
+                {
+                    <div class="row">
+                        <div class="col-xs-12 p-l-0">
+                            <!-- ko if: $root.MaintenanceOrderGenerationMode === 'OrderPerInstallation' -->
+                            <span class="f-700">@Html.Localize("Installation")</span>:
+                            <!-- /ko -->
+                            <!-- ko if: $root.MaintenanceOrderGenerationMode === 'JobPerInstallation' -->
+                            <span class="f-700">@Html.Localize("ServiceOrderTime")</span>:
+                            <!-- /ko -->
+                            <span data-bind="text: Helper.Installation.getDisplayName($data)"></span>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-6 p-r-0">
+                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder)) {
+                    <h2 class="text-right">@(Html.Localize("OrderNo"))</h2>
+                    <h4 class="text-right c-gray" data-bind="text: OrderNo"></h4>
+                } 
+            </div>
+        </div>
+     } 
+ } 

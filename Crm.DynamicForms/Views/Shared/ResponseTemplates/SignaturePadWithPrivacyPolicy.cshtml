@@ -1,0 +1,31 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response">
+	<div class="row">
+		<div class="col-md-8">
+            <!-- ko if: !!window.ko.utils.unwrapObservable(Response) && window.ko.utils.unwrapObservable(Response).Signature() -->
+                <input type="hidden" data-bind="signaturePad: !!window.ko.utils.unwrapObservable(Response) ? window.ko.utils.unwrapObservable(Response).Signature : null" data-sigpencolour="#000000" data-sigbgcolour="#FFFFFF" data-sigbordercolour="#FFFFFF" data-sign-width="150" />
+            <!-- /ko -->
+            <!-- ko if: !window.ko.utils.unwrapObservable(Response) || !window.ko.utils.unwrapObservable(Response).Signature() -->
+                <div class="dummy-pad"></div>
+            <!-- /ko -->
+            <label class="form-element-layout p-l-0" style="margin-left: 0">
+                <p>
+                    <!-- ko if: !!window.ko.utils.unwrapObservable(Response) && window.ko.utils.unwrapObservable(window.ko.utils.unwrapObservable(Response).AcceptedPrivacyPolicy()) -->					
+                        <i class="fa fa-check-square-o"></i>
+                    <!-- /ko -->
+                    <!-- ko if: !window.ko.utils.unwrapObservable(Response) || !window.ko.utils.unwrapObservable(window.ko.utils.unwrapObservable(Response).AcceptedPrivacyPolicy()) -->
+                        <i class="fa fa-square-o"></i>
+                    <!-- /ko -->
+                    @(Html.Localize("AcceptPrivacyPolicy"))
+                </p>
+            </label>
+        </div>
+	</div>
+</div>

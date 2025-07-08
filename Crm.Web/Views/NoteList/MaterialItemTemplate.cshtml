@@ -1,0 +1,57 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div id="{{Id}}" class="lv-item media p-t-15 p-b-15" data-bind="infiniteScrollItem: { index: $index(), array: $parent.items }">
+	<!-- ko if: IsSystemGenerated() -->
+	<div class="lv-img-sm pull-left lv-avatar" data-bind="style: {background: $parent.getColor(NoteType())}">
+		<i class="zmdi" data-bind="css: 'zmdi-' + $parent.getIcon(NoteType())"></i>
+	</div>
+	<!-- /ko -->
+	<!-- ko ifnot: IsSystemGenerated() -->
+		<img class="lv-img-sm bgm-white pull-left lv-avatar" data-bind="userAvatar: User" style="display: none;" />
+	<!-- /ko -->
+	<div class="media-body">
+		<div class="row">
+			<div class="col-sm-11 lv-title">
+				<small class="c-gray">
+					<span data-bind="text: Helper.Note.getTitle($data)"></span>
+					<!-- ko if: !$parent.contactId || (ContactId() && $parent.contactId() !== ContactId()) || (EntityId() && EntityName() && $parent.contactId() !== EntityId())  -->
+						<!-- ko if: !NoteType().includes("Create") -->
+							<span>@(Html.Localize("at"))</span>
+						<!-- /ko -->
+						<a data-bind="attr: { href: Helper.Note.getContactLink($data) }, text: Helper.Note.getContactName($data)"></a>
+					<!-- /ko -->
+					<!-- ko ifnot: window.moment().isBefore(window.moment(CreateDate()).add(1, "days")) -->
+						<span>@(Html.Localize("OnDate"))</span>
+					<!-- /ko -->
+					<span data-bind="dateText: { value: CreateDate, pattern: { datetime: 'medium' }, useTimeAgo: 'Day'}"></span>
+					<span>@(Html.Localize("By"))</span>
+					<span data-bind="text: User() ? Helper.User.getDisplayName(User) : ''"></span>
+					@Html.PluginRenderActions("MaterialNoteItemHeaderExtensions")
+				</small>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-11">
+				<div data-bind="component: 'note'"></div>
+			</div>
+		</div>
+		<!-- ko if: IsSystemGenerated() == false && $root.isEditable && $root.isEditable() && (window.AuthorizationManager.isAuthorizedForAction('Note', 'Edit') || window.AuthorizationManager.isAuthorizedForAction('Note', 'Delete')) -->
+		<lv-actions>
+				<!-- ko requiredPermission: { name: 'Edit', group: 'Note' } -->
+					<li>
+						<a href="#" data-bind="attr: { 'data-route': 'Main/Note/EditTemplate/' + Id() }" data-toggle="modal" data-target="#modal">@(Html.Localize("Edit"))</a>
+					</li>
+				<!-- /ko -->
+				<!-- ko requiredPermission: { name: 'Delete', group: 'Note' } -->
+					<!-- ko with: $parentContext.$parentContext.$parent -->
+						<li>
+							<a href="#" data-bind="click: () => $data.remove.call($data, $parent)">@(Html.Localize("Delete"))</a>
+						</li>
+					<!-- /ko -->
+				<!-- /ko -->
+			</lv-actions>
+		<!-- /ko -->
+	</div>
+</div>

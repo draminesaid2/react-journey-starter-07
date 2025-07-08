@@ -1,0 +1,15 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Offline.Extensions
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response">
+	@using (Html.TemplateForEach("Helper.DynamicForm.getChoicesArray($data)")) { 
+				@using (Html.TemplateCondition("window.ko.unwrap($parent.Response) == $data")) { 
+					<div class="row" data-bind="text: $root.getLocalizationText($parent, $data)"></div>
+				 } 
+	 } 
+</div>

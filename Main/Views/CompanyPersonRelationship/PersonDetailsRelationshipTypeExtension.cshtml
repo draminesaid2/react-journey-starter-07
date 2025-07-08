@@ -1,0 +1,27 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: companyPersonRelationships().length -->
+<div class="card generic-list">
+    <div class="card-header ch-alt">
+        <h2>@(Html.Localize("CompanyPersonRelationships"))</h2>
+    </div>
+    <!-- ko with: companyPersonRelationships.index.RelationshipTypeKey -->
+    <div id="generic-list-company-person-relationships" class="generic-list listview lv-bordered">
+        <div class="lv-body" data-bind="foreach: { data: Object.keys($data).sort(), as: 'typeKey' }">
+            <div class="lv-header" data-bind="lookupValue: typeKey, lookups: $root.tabs()['tab-relationships']().lookups.companyPersonRelationshipTypes"></div>
+            <!-- ko foreach: $parent[typeKey] -->
+            <!-- ko with: { company: Parent, lookups: $root.tabs()['tab-relationships']().lookups } -->
+            <!-- ko with: company -->
+            @await Html.PartialAsync("../CompanyList/MaterialItemTemplate")
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko with: genericCompanyPersonRelationships-->
+    @await Html.PartialAsync("MaterialPaging")
+    <!-- /ko -->
+</div>
+<!-- /ko -->

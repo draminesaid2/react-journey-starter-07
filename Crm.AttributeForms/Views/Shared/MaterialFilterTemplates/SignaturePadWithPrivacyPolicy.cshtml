@@ -1,0 +1,29 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialDisplayTemplates/Hint") 
+	<div class="col-xs-11" data-bind="validationElement: Response">
+		<label class="control-label" data-bind="text: $root.getLocalizationText($data)">
+		</label>
+		<div class="signatur" data-bind="validationOptions: { insertMessages: false }">
+			<input type="hidden" data-bind="attr: { 'data-signature-clear-text': window.Helper.String.getTranslatedString('DeleteSignatur') }, signaturePad: window.ko.utils.unwrapObservable(Response).Signature" />
+			<button class="clearButton btn btn-lg btn-default f-13 waves-effect waves-block m-b-10"></button>
+		</div>
+		<button id="toggleDataProtectionInfo" data-bind="click: $root.toogleDataProtectionInfo" class="btn btn-lg btn-default f-13 waves-effect m-t-10" type="button" data-toggle="collapse" data-target="#dataPrivacyPolicy" aria-expanded="false" aria-controls="dataPrivacyPolicy"><i class="zmdi zmdi-info-outline"></i>
+			@(Html.Localize("DataProtectionInfo"))
+		</button>
+		<div id="dataPrivacyPolicy" class="m-t-10 collapse" aria-expanded="false">
+			 @await Html.PartialAsync("DataPrivacyPolicy") 		
+		</div>
+		<div class="checkbox m-b-15">
+			<label>
+				<input type="checkbox" data-bind="checked: window.ko.utils.unwrapObservable(Response).AcceptedPrivacyPolicy, attr: { name: 'AcceptedPrivacyPolicy' }">
+				<i class="input-helper"></i>
+				<span data-bind="text: window.Helper.String.getTranslatedString('AcceptPrivacyPolicy')"></span>
+				<span class="required" data-bind="visible: Required">*</span>
+			</label>
+		</div>
+		<small class="help-block" data-bind="validationMessage: Response"></small>
+	</div>
+</div>

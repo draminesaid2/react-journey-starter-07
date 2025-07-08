@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Invoicing" xml:space="preserve">
+    <value>Számlázási</value>
+  </data>
+  <data name="InvoicingType" xml:space="preserve">
+    <value>Számlázási mód</value>
+  </data>
+  <data name="FieldSales" xml:space="preserve">
+    <value>Üzletkötő</value>
+  </data>
+  <data name="InternalSales" xml:space="preserve">
+    <value>Belső értékesítő</value>
+  </data>
+  <data name="SalesBackOffice" xml:space="preserve">
+    <value>Kereskedelmi képviselet</value>
+  </data>
+  <data name="HeadOfSales" xml:space="preserve">
+    <value>Kereskedelmi vezető</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Lábléc</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Fejléc</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="PleaseStandbyIndexRecreating" xml:space="preserve">
+    <value>Az index jelenleg építés alatt áll. Kérem várjon pár percet mielőtt újratölti az oldalt.</value>
+  </data>
+  <data name="Abort" xml:space="preserve">
+    <value>Mégse</value>
+  </data>
+  <data name="RuleViolation.Name1Required" xml:space="preserve">
+    <value>Név kötelező</value>
+  </data>
+  <data name="EditVisibility" xml:space="preserve">
+    <value>Láthatóság szerkesztése</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Frissítés</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SelectAddress" xml:space="preserve">
+    <value>Cím választása</value>
+  </data>
+  <data name="AreaCode" xml:space="preserve">
+    <value>Terület kód</value>
+  </data>
+  <data name="AddressSelectCompany" xml:space="preserve">
+    <value>Cím információ hozzáadásához először választania kell egy céget.</value>
+  </data>
+  <data name="AddAddressToCompany" xml:space="preserve">
+    <value>Cím hozzáadása a céghez</value>
+  </data>
+  <data name="InitializeTaskTopMenuViewModel" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="Main_AddressType" xml:space="preserve">
+    <value>Cím típusok</value>
+  </data>
+  <data name="Main_CompanyType" xml:space="preserve">
+    <value>Cég típusok</value>
+  </data>
+  <data name="Main_Country" xml:space="preserve">
+    <value>Országok</value>
+  </data>
+  <data name="Main_EmailType" xml:space="preserve">
+    <value>E-mail típusok</value>
+  </data>
+  <data name="Main_FaxType" xml:space="preserve">
+    <value>Fax típusok</value>
+  </data>
+  <data name="Main_PhoneType" xml:space="preserve">
+    <value>Telefon típusok</value>
+  </data>
+  <data name="Main_Region" xml:space="preserve">
+    <value>Régiók</value>
+  </data>
+  <data name="Main_SourceType" xml:space="preserve">
+    <value>Kapcsolat források</value>
+  </data>
+  <data name="Main_Tag" xml:space="preserve">
+    <value>Címkék</value>
+  </data>
+  <data name="Main_TaskType" xml:space="preserve">
+    <value>Feladat típusok</value>
+  </data>
+  <data name="Main_WebsiteType" xml:space="preserve">
+    <value>Honlap típusok</value>
+  </data>
+  <data name="StaffTab" xml:space="preserve">
+    <value>Személyzet fül</value>
+  </data>
+  <data name="Main_BravoCategory" xml:space="preserve">
+    <value>Bravo kategóriák</value>
+  </data>
+  <data name="Main_InvoicingType" xml:space="preserve">
+    <value>Számlázási típusok</value>
+  </data>
+  <data name="Main_Language" xml:space="preserve">
+    <value>Nyelvek</value>
+  </data>
+  <data name="Main_LengthUnit" xml:space="preserve">
+    <value>Hosszúsági egységek</value>
+  </data>
+  <data name="Main_NumberOfEmployees" xml:space="preserve">
+    <value>Alkalmazottak száma kategóriák</value>
+  </data>
+  <data name="Main_PaymentCondition" xml:space="preserve">
+    <value>Fizetési feltételek</value>
+  </data>
+  <data name="Main_PaymentInterval" xml:space="preserve">
+    <value>Fizetési intervallumok</value>
+  </data>
+  <data name="Main_PaymentType" xml:space="preserve">
+    <value>Fizetési típusok</value>
+  </data>
+  <data name="Main_SalutationLetter" xml:space="preserve">
+    <value>Levél megszólítások</value>
+  </data>
+  <data name="Main_Skill" xml:space="preserve">
+    <value>Képességek</value>
+  </data>
+  <data name="Main_Turnover" xml:space="preserve">
+    <value>Látogatási gyakoriságok</value>
+  </data>
+  <data name="Main_UserStatus" xml:space="preserve">
+    <value>Felhasználó státuszok</value>
+  </data>
+  <data name="Main_ZipCodeFilterType" xml:space="preserve">
+    <value>Irányítószám szűrési típusok</value>
+  </data>
+  <data name="TasksTab" xml:space="preserve">
+    <value>Feladatok fül</value>
+  </data>
+  <data name="Main_BusinessRelationship" xml:space="preserve">
+    <value>Üzleti kapcsolatok</value>
+  </data>
+  <data name="Main_CompanyPersonRelationship" xml:space="preserve">
+    <value>Cég Személy kapcsolat</value>
+  </data>
+  <data name="Main_BusinessRelationshipType" xml:space="preserve">
+    <value>Üzleti kapcsolat típusok</value>
+  </data>
+  <data name="Main_CompanyPersonRelationshipType" xml:space="preserve">
+    <value>Cég Személy Kapcsolat típusa</value>
+  </data>
+  <data name="Main_Bravo" xml:space="preserve">
+    <value>Bravok</value>
+  </data>
+  <data name="Main_NoteType" xml:space="preserve">
+    <value>Jegyzet típusok</value>
+  </data>
+  <data name="Main_Salutation" xml:space="preserve">
+    <value>Üdvözlések</value>
+  </data>
+  <data name="Main_TimeUnit" xml:space="preserve">
+    <value>Időegységek</value>
+  </data>
+  <data name="Main_Title" xml:space="preserve">
+    <value>Fokozatok</value>
+  </data>
+  <data name="LoadingResults" xml:space="preserve">
+    <value>Találatok betöltése</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Válasz</value>
+  </data>
+  <data name="Release" xml:space="preserve">
+    <value>Kiadás</value>
+  </data>
+  <data name="BusinessRelationship" xml:space="preserve">
+    <value>Üzleti kapcsolat</value>
+  </data>
+  <data name="BusinessRelationshipType" xml:space="preserve">
+    <value>Üzleti kapcsolat típus</value>
+  </data>
+  <data name="CompanyPersonRelationship" xml:space="preserve">
+    <value>Cég Személy kapcsolat</value>
+  </data>
+  <data name="CompanyPersonRelationshipType" xml:space="preserve">
+    <value>Cég Személy Kapcsolat típusa</value>
+  </data>
+  <data name="DepartmentType" xml:space="preserve">
+    <value>Részleg típusa</value>
+  </data>
+  <data name="MaterialClient" xml:space="preserve">
+    <value>Mobil CRM</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Rendelés státusza</value>
+  </data>
+  <data name="SourceType" xml:space="preserve">
+    <value>Forrás típus</value>
+  </data>
+  <data name="UserTask" xml:space="preserve">
+    <value>Felhasználói feladat</value>
+  </data>
+  <data name="Main_Person" xml:space="preserve">
+    <value>Személyek</value>
+  </data>
+  <data name="Main_Fax" xml:space="preserve">
+    <value>Faxok</value>
+  </data>
+  <data name="Main_Address" xml:space="preserve">
+    <value>Címek</value>
+  </data>
+  <data name="Main_FileResource" xml:space="preserve">
+    <value>Fájlok</value>
+  </data>
+  <data name="Main_User" xml:space="preserve">
+    <value>Felhasználók</value>
+  </data>
+  <data name="Main_Company" xml:space="preserve">
+    <value>Cégek</value>
+  </data>
+  <data name="Main_DocumentAttribute" xml:space="preserve">
+    <value>Dokumentumok</value>
+  </data>
+  <data name="Main_Note" xml:space="preserve">
+    <value>Jegyzetek</value>
+  </data>
+  <data name="Main_Website" xml:space="preserve">
+    <value>Honlapok</value>
+  </data>
+  <data name="Main_RecentPage" xml:space="preserve">
+    <value>Előző oldalak</value>
+  </data>
+  <data name="Main_Phone" xml:space="preserve">
+    <value>Telefonok</value>
+  </data>
+  <data name="Main_Permission" xml:space="preserve">
+    <value>Jogosultságok</value>
+  </data>
+  <data name="Main_Email" xml:space="preserve">
+    <value>E-mailek</value>
+  </data>
+  <data name="Main_PermissionSchemaRole" xml:space="preserve">
+    <value>Szerepkörök</value>
+  </data>
+  <data name="Main_Usergroup" xml:space="preserve">
+    <value>Felhasználói csoportok</value>
+  </data>
+  <data name="Main_UserNote" xml:space="preserve">
+    <value>Jegyzetek</value>
+  </data>
+  <data name="Main_Currency" xml:space="preserve">
+    <value>Pénznemek</value>
+  </data>
+  <data name="Main_LinkResource" xml:space="preserve">
+    <value>Linkek</value>
+  </data>
+  <data name="Main_Task" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Értékesítés</value>
+  </data>
+  <data name="AbsenceType" xml:space="preserve">
+    <value>Távollét típusa</value>
+  </data>
+  <data name="AddressTypeKey" xml:space="preserve">
+    <value>Cím típus</value>
+  </data>
+  <data name="AppleDeviceToken" xml:space="preserve">
+    <value>Apple eszköz token</value>
+  </data>
+  <data name="ArticleGroup01Key" xml:space="preserve">
+    <value>Cikkcsoport 01</value>
+  </data>
+  <data name="ArticleGroup02Key" xml:space="preserve">
+    <value>Cikkcsoport 02</value>
+  </data>
+  <data name="ArticleGroup03Key" xml:space="preserve">
+    <value>Cikkcsoport 03</value>
+  </data>
+  <data name="ArticleGroup04Key" xml:space="preserve">
+    <value>Cikkcsoport 04</value>
+  </data>
+  <data name="ArticleGroup05Key" xml:space="preserve">
+    <value>Cikkcsoport 05</value>
+  </data>
+  <data name="ArticleTypeKey" xml:space="preserve">
+    <value>Cikk típus</value>
+  </data>
+  <data name="BugtrackerId" xml:space="preserve">
+    <value>Hibakövető ID</value>
+  </data>
+  <data name="BusinessRelationships" xml:space="preserve">
+    <value>Üzleti kapcsolatok</value>
+  </data>
+  <data name="CompanyPersonRelationships" xml:space="preserve">
+    <value>Cég Személyes kapcsolatok</value>
+  </data>
+  <data name="BusinessTitleKey" xml:space="preserve">
+    <value>Beosztás</value>
+  </data>
+  <data name="CalculationPositionTypeKey" xml:space="preserve">
+    <value>Számítási pozíció</value>
+  </data>
+  <data name="CauseOfFailureKey" xml:space="preserve">
+    <value>Hiba oka</value>
+  </data>
+  <data name="CausingItemNo" xml:space="preserve">
+    <value>Okozó cikkszám</value>
+  </data>
+  <data name="CausingItemPreviousSerialNo" xml:space="preserve">
+    <value>Okozó cikk előző szériaszáma</value>
+  </data>
+  <data name="CausingItemSerialNo" xml:space="preserve">
+    <value>Okozó cikk szériaszáma</value>
+  </data>
+  <data name="ChildId" xml:space="preserve">
+    <value>Gyerek ID</value>
+  </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Másolás</value>
+  </data>
+  <data name="CloneTemplate" xml:space="preserve">
+    <value>Másolási sablon</value>
+  </data>
+  <data name="ClosedBy" xml:space="preserve">
+    <value>általa lezárva</value>
+  </data>
+  <data name="CommissioningStatusKey" xml:space="preserve">
+    <value>Kommissió státusz</value>
+  </data>
+  <data name="CompanyGroupFlag1Key" xml:space="preserve">
+    <value>Cégcsoport jelzője 1</value>
+  </data>
+  <data name="CompanyGroupFlag2Key" xml:space="preserve">
+    <value>Cégcsoport jelzője 2</value>
+  </data>
+  <data name="CompanyGroupFlag3Key" xml:space="preserve">
+    <value>Cégcsoport jelzője 3</value>
+  </data>
+  <data name="CompanyGroupFlag4Key" xml:space="preserve">
+    <value>Cégcsoport jelzője 4</value>
+  </data>
+  <data name="CompanyGroupFlag5Key" xml:space="preserve">
+    <value>Cégcsoport jelzője 5</value>
+  </data>
+  <data name="CompanyOrPerson" xml:space="preserve">
+    <value>Cég vagy személy</value>
+  </data>
+  <data name="CompanyTypeKey" xml:space="preserve">
+    <value>Cég típusa</value>
+  </data>
+  <data name="ComponentKey" xml:space="preserve">
+    <value>Komponenes</value>
+  </data>
+  <data name="ConfigurationRule" xml:space="preserve">
+    <value>Konfigurációs szabály</value>
+  </data>
+  <data name="ContactPersonRelationship" xml:space="preserve">
+    <value>Kapcsolattartó személy kapcsolat</value>
+  </data>
+  <data name="ContactPersonRelationshipType" xml:space="preserve">
+    <value>Kapcsolattartó személy kapcsolat típus</value>
+  </data>
+  <data name="ContentType" xml:space="preserve">
+    <value>Tartalom típusa</value>
+  </data>
+  <data name="ContractTypeKey" xml:space="preserve">
+    <value>Szerződés típusa</value>
+  </data>
+  <data name="CostCenterKey" xml:space="preserve">
+    <value>Költség központ</value>
+  </data>
+  <data name="CostsCurrencyKey" xml:space="preserve">
+    <value>Költség pénzneme</value>
+  </data>
+  <data name="CssPath" xml:space="preserve">
+    <value>CSS-elérés</value>
+  </data>
+  <data name="CurrencyKey" xml:space="preserve">
+    <value>Pénznem</value>
+  </data>
+  <data name="CustomAim" xml:space="preserve">
+    <value>Egyedi cél</value>
+  </data>
+  <data name="CustomDescription" xml:space="preserve">
+    <value>Egyedi leírás</value>
+  </data>
+  <data name="CustomRole" xml:space="preserve">
+    <value>egyedi szerepkör</value>
+  </data>
+  <data name="DefaultLocale" xml:space="preserve">
+    <value>Alapértelmezett hely</value>
+  </data>
+  <data name="DepartmentTypeKey" xml:space="preserve">
+    <value>Részleg típus</value>
+  </data>
+  <data name="DispatchedUser" xml:space="preserve">
+    <value>Megbízott felhasználó</value>
+  </data>
+  <data name="DispatchedUsername" xml:space="preserve">
+    <value>Megbízott felhasználónév</value>
+  </data>
+  <data name="DropboxToken" xml:space="preserve">
+    <value>Dropbox token</value>
+  </data>
+  <data name="DynamicFormElementType" xml:space="preserve">
+    <value>Űrlap elem</value>
+  </data>
+  <data name="DynamicFormLanguage" xml:space="preserve">
+    <value>Űrlap nyelve</value>
+  </data>
+  <data name="DynamicFormLocalization" xml:space="preserve">
+    <value>Űrlap lokalizációi</value>
+  </data>
+  <data name="DynamicFormStatus" xml:space="preserve">
+    <value>Űrlap státusz</value>
+  </data>
+  <data name="EntityId" xml:space="preserve">
+    <value>Entitás ID</value>
+  </data>
+  <data name="EntityTypeName" xml:space="preserve">
+    <value>Entitás típus név</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Esemény</value>
+  </data>
+  <data name="ExpenseTypeKey" xml:space="preserve">
+    <value>Költség típus</value>
+  </data>
+  <data name="FavIconUrl" xml:space="preserve">
+    <value>Egyéni ikon URL</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Fájlnév</value>
+  </data>
+  <data name="FinishedByUser" xml:space="preserve">
+    <value>Felhasználó által befejezve</value>
+  </data>
+  <data name="FirstAnswerUnitKey" xml:space="preserve">
+    <value>Első válasz egység</value>
+  </data>
+  <data name="GeneralToken" xml:space="preserve">
+    <value>Általános token</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Csoportok</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Ikon</value>
+  </data>
+  <data name="IncreasedPriceCurrencyKey" xml:space="preserve">
+    <value>Megnövelt ár pénznem</value>
+  </data>
+  <data name="InstallationTypeKey" xml:space="preserve">
+    <value>Eszközakta típus</value>
+  </data>
+  <data name="InternalInformation" xml:space="preserve">
+    <value>Belső információ</value>
+  </data>
+  <data name="InverseRelationshipTypeKey" xml:space="preserve">
+    <value>Fordított kapcsolat típus</value>
+  </data>
+  <data name="InvoiceReasonKey" xml:space="preserve">
+    <value>Számlázás oka</value>
+  </data>
+  <data name="InvoicingTypeKey" xml:space="preserve">
+    <value>Számlázás típus</value>
+  </data>
+  <data name="Iso2Code" xml:space="preserve">
+    <value>Iso2Kód</value>
+  </data>
+  <data name="Iso3Code" xml:space="preserve">
+    <value>Iso3Kód</value>
+  </data>
+  <data name="LanguageKey" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="LimitTypeKey" xml:space="preserve">
+    <value>Határ típus</value>
+  </data>
+  <data name="LocationKey" xml:space="preserve">
+    <value>Elhelyezkedés</value>
+  </data>
+  <data name="LocationNo" xml:space="preserve">
+    <value>Elhelyezkedés száma</value>
+  </data>
+  <data name="LongText" xml:space="preserve">
+    <value>Hosszú szöveg</value>
+  </data>
+  <data name="ManufacturerKey" xml:space="preserve">
+    <value>Gyártó</value>
+  </data>
+  <data name="MaterialNo" xml:space="preserve">
+    <value>Anyag szám</value>
+  </data>
+  <data name="Meta" xml:space="preserve">
+    <value>Meta</value>
+  </data>
+  <data name="NoCausingItemPreviousSerialNoReasonKey" xml:space="preserve">
+    <value>Okozó cikk hiányzó előző szériaszám</value>
+  </data>
+  <data name="NoCausingItemSerialNoReasonKey" xml:space="preserve">
+    <value>Okozó cikk hiányzó szériaszám</value>
+  </data>
+  <data name="NoInvoiceReasonKey" xml:space="preserve">
+    <value>Hiányzó számla oka</value>
+  </data>
+  <data name="NoPreviousSerialNoReasonKey" xml:space="preserve">
+    <value>Hiányzó előző szériaszám</value>
+  </data>
+  <data name="NumberingSequence" xml:space="preserve">
+    <value>Számozási szekvencia</value>
+  </data>
+  <data name="NumberOfEmployeesKey" xml:space="preserve">
+    <value>Dolgozók száma</value>
+  </data>
+  <data name="OfferTab" xml:space="preserve">
+    <value>Ajánlat tab</value>
+  </data>
+  <data name="ParentArticleGroup" xml:space="preserve">
+    <value>Szülő cikkcsoport</value>
+  </data>
+  <data name="PaymentConditionKey" xml:space="preserve">
+    <value>Fizetési feltétel</value>
+  </data>
+  <data name="PaymentIntervalKey" xml:space="preserve">
+    <value>Fizetési intervallum</value>
+  </data>
+  <data name="PaymentTypeKey" xml:space="preserve">
+    <value>Fizetési típus</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Plugin</value>
+  </data>
+  <data name="PluginName" xml:space="preserve">
+    <value>Plugin név</value>
+  </data>
+  <data name="PreferredUserObj" xml:space="preserve">
+    <value>Preferált felhasználó objektum</value>
+  </data>
+  <data name="PriceCurrencyKey" xml:space="preserve">
+    <value>Pénznem</value>
+  </data>
+  <data name="PriorityKey" xml:space="preserve">
+    <value>Prioritás</value>
+  </data>
+  <data name="ReferenceType" xml:space="preserve">
+    <value>Hivatkozási typus</value>
+  </data>
+  <data name="RegionKey" xml:space="preserve">
+    <value>Régió</value>
+  </data>
+  <data name="RejectReasonKey" xml:space="preserve">
+    <value>Visszautasítás oka</value>
+  </data>
+  <data name="ReportRecipients" xml:space="preserve">
+    <value>Riport címzettek</value>
+  </data>
+  <data name="ResponsibleGroupKey" xml:space="preserve">
+    <value>Felelős csoport</value>
+  </data>
+  <data name="RhythmUnitKey" xml:space="preserve">
+    <value>Ütem egység</value>
+  </data>
+  <data name="RuleViolation.SourcePermissionSchemaRoleId" xml:space="preserve">
+    <value>Válasszon sablont</value>
+  </data>
+  <data name="SalutationKey" xml:space="preserve">
+    <value>Üdvözlés</value>
+  </data>
+  <data name="SalutationLetterKey" xml:space="preserve">
+    <value>Levél üdvözlés</value>
+  </data>
+  <data name="ServiceCompletedUnitKey" xml:space="preserve">
+    <value>Befejezett szerviz egység</value>
+  </data>
+  <data name="ServiceLocationEmail" xml:space="preserve">
+    <value>Munkaterület E-mail</value>
+  </data>
+  <data name="ServiceLocationFax" xml:space="preserve">
+    <value>Munkaterület fax</value>
+  </data>
+  <data name="ServiceLocationMobile" xml:space="preserve">
+    <value>Munkaterület mobil</value>
+  </data>
+  <data name="ServiceLocationPhone" xml:space="preserve">
+    <value>Munkaterület telefon</value>
+  </data>
+  <data name="ServiceOrderTypeKey" xml:space="preserve">
+    <value>Szervizrendelés típus</value>
+  </data>
+  <data name="ServiceProvisionPerTimeSpanUnitKey" xml:space="preserve">
+    <value>Szolgáltatási időtartam egység</value>
+  </data>
+  <data name="ServiceProvisionUnitKey" xml:space="preserve">
+    <value>Szolgáltatási időtartam</value>
+  </data>
+  <data name="SettableStatuses" xml:space="preserve">
+    <value>Elérhető státuszok</value>
+  </data>
+  <data name="ShortText" xml:space="preserve">
+    <value>Rövid szöveg</value>
+  </data>
+  <data name="SignatureOriginatorName" xml:space="preserve">
+    <value>Kezdeményező aláírás név</value>
+  </data>
+  <data name="SignatureTechnicianName" xml:space="preserve">
+    <value>Aláírás technikus neve</value>
+  </data>
+  <data name="SourcePermissionSchemaRoleId" xml:space="preserve">
+    <value>Szerepkör séma</value>
+  </data>
+  <data name="SparePartsBudgetInvoiceTypeKey" xml:space="preserve">
+    <value>Alkatrész költségvetési számla típus</value>
+  </data>
+  <data name="SparePartsPerTimeSpanUnitKey" xml:space="preserve">
+    <value>Alkatrész időegységenként</value>
+  </data>
+  <data name="SparePartsUnitKey" xml:space="preserve">
+    <value>Alkatrész egység</value>
+  </data>
+  <data name="StatusMessage" xml:space="preserve">
+    <value>Státusz üzenet</value>
+  </data>
+  <data name="StoreNo" xml:space="preserve">
+    <value>Tárhehy szám</value>
+  </data>
+  <data name="Terminal" xml:space="preserve">
+    <value>Terminál</value>
+  </data>
+  <data name="TitleKey" xml:space="preserve">
+    <value>Titulus</value>
+  </data>
+  <data name="Token" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="ToLocation" xml:space="preserve">
+    <value>To location</value>
+  </data>
+  <data name="TopicsTab" xml:space="preserve">
+    <value>Topics tab</value>
+  </data>
+  <data name="ToWarehouse" xml:space="preserve">
+    <value>Cél raktár</value>
+  </data>
+  <data name="TransactionCode" xml:space="preserve">
+    <value>Tranzakció kód</value>
+  </data>
+  <data name="TransactionId" xml:space="preserve">
+    <value>Tranzakció ID</value>
+  </data>
+  <data name="TurnoverKey" xml:space="preserve">
+    <value>Forgalom</value>
+  </data>
+  <data name="UserUsername" xml:space="preserve">
+    <value>Felhasználónév</value>
+  </data>
+  <data name="Validation" xml:space="preserve">
+    <value>Validáció</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Változó</value>
+  </data>
+  <data name="VATLevelKey" xml:space="preserve">
+    <value>ÁFA szint</value>
+  </data>
+  <data name="VisitAimKey" xml:space="preserve">
+    <value>Látogatás típus</value>
+  </data>
+  <data name="VisitEmptySlate" xml:space="preserve">
+    <value>Nincs elérhető látogatás.</value>
+  </data>
+  <data name="VisitReportsTab" xml:space="preserve">
+    <value>Látogatási riportok tab</value>
+  </data>
+  <data name="VisitsTab" xml:space="preserve">
+    <value>Látogatások tab</value>
+  </data>
+  <data name="VisitTopic" xml:space="preserve">
+    <value>Látogatási téme</value>
+  </data>
+  <data name="VolumeCurrencyKey" xml:space="preserve">
+    <value>Pénznem</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>Igen</value>
+  </data>
+  <data name="true" xml:space="preserve">
+    <value>Igen</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>Nem</value>
+  </data>
+  <data name="false" xml:space="preserve">
+    <value>Nem</value>
+  </data>
+  <data name="Main_CostCenter" xml:space="preserve">
+    <value>Költséghelyek</value>
+  </data>
+  <data name="UnassignFromRole" xml:space="preserve">
+    <value>Szerepkörből eltávolít</value>
+  </data>
+  <data name="UnassignUsers" xml:space="preserve">
+    <value>A következő felhasználók hozzá vannak rendelve ehhez a szerepkörhöz: {0}.
+    Távolítsa el őket majd törölje a szerepkört.</value>
+  </data>
+  <data name="UnassignUsersFromGroup" xml:space="preserve">
+    <value>A következő felhasználók hozzá vannak rendelve ehhez a csoporthoz: {0}.
+    Távolítsa el őket majd törölje a csoportot.</value>
+  </data>
+  <data name="DocumentAttributeEmptySlate" xml:space="preserve">
+    <value>Nincsenek elérhető dokumentumok</value>
+  </data>
+  <data name="EditDocument" xml:space="preserve">
+    <value>Dokumentum szerkesztése</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Adminisztrátor</value>
+  </data>
+  <data name="UserEmptySlate" xml:space="preserve">
+    <value>Nincsenek elérhető felhasználók</value>
+  </data>
+  <data name="Main_DocumentCategory" xml:space="preserve">
+    <value>Dokumentumok kategóriák</value>
+  </data>
+  <data name="UserStatus" xml:space="preserve">
+    <value>Felhasználói állapot</value>
+  </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Indexkép</value>
+  </data>
+  <data name="IsGreat" xml:space="preserve">
+    <value>Jó</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blokkolva</value>
+  </data>
+  <data name="Attempts" xml:space="preserve">
+    <value>Próbálkozások</value>
+  </data>
+  <data name="Main_Log" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="InvalidJson" xml:space="preserve">
+    <value>Érvénytelen JSON</value>
+  </data>
+  <data name="ContactDropboxAddressDescription" xml:space="preserve">
+    <value>Egy kontaktra vonatkozó dropbox E-mail cím lehetővé teszi a kimenő vagy bejövő e-mailek közvetlenül az adott a kontakthoz történő csatolását. Nyisson meg egy új e-mailt az adott kontakt egyik kapcsolattartó személyének linkjén keresztül, így a projekthez tartozó dropbox E-mail cím automatikusan a BCC mezőbe kerül és az E-mail a kontakt megjegyzés-listájának elküldéskor csatolásra kerül. Ha Ön ezzel szemben az e-mailt nem a kontakt megjegyzéslistájához, hanem a címzett, illetve a feladó megjegyzéslistájához akarja csatolni, ehhez használja az Ön személyes dropbox E-mail címét, amely az Ön "Saját beállítások" oldalán található.</value>
+  </data>
+  <data name="SendMailTo" xml:space="preserve">
+    <value>E-mail küldése a "{0}"</value>
+  </data>
+  <data name="CopyDropboxAddress" xml:space="preserve">
+    <value>Dropbox cím másolása</value>
+  </data>
+  <data name="NoDropboxAddress" xml:space="preserve">
+    <value>Az Ön személyes dropbox E-mail címének generálásával egyidejűleg minden kontakt számára a kontaktra vonatkozó E-mail cím generálásra kerül, amelyet ez a box is kijelez.</value>
+  </data>
+  <data name="TagsEmptySlate" xml:space="preserve">
+    <value>Nem található címke ehhez a névjegyhez</value>
+  </data>
+  <data name="BackgroundJobTriggered" xml:space="preserve">
+    <value>Munka elindítva</value>
+  </data>
+  <data name="ExceptionDetails" xml:space="preserve">
+    <value>Kivétel részletei</value>
+  </data>
+  <data name="JobTriggerPaused" xml:space="preserve">
+    <value>A ravasz szünetel!</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="DropboxAddressCopiedMessage" xml:space="preserve">
+    <value>Dropbox E-mail cím sikeresen másolva</value>
+  </data>
+  <data name="TriggerNextFireTime" xml:space="preserve">
+    <value>A következő aktiválási idő</value>
+  </data>
+  <data name="AddCompanyBranch" xml:space="preserve">
+    <value>Cég ágazat hozzádása</value>
+  </data>
+  <data name="AllTriggersPause" xml:space="preserve">
+    <value>Minden trigger szünetel</value>
+  </data>
+  <data name="BackgroundJobTriggeredFail" xml:space="preserve">
+    <value>Sikertelen a munka elindítása</value>
+   </data>
+  <data name="EditCompanyBranch" xml:space="preserve">
+   <value>Cég ágazat szerkesztése</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Csak olvasható</value>
+  </data>
+  <data name="FailPauseAllTriggers" xml:space="preserve">
+    <value>Triggerek szüneteltetése sikertelen</value>
+  </data>
+  <data name="RuleViolation.NotValidLanguageKey" xml:space="preserve">
+    <value>A megadott kulcs nem egy valós nyelvi kulcs</value>
+  </data>
+  <data name="PauseAll" xml:space="preserve">
+    <value>Mind szünetel</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Futtat</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Beállítás</value>
+  </data>
+  <data name="PlannedDate" xml:space="preserve">
+    <value>Tervezett dátum</value>
+  </data>
+  <data name="NoRecordFoundBackgroundServices" xml:space="preserve">
+    <value>Nem található az Ön keresési feltételei alapján háttérszolgáltatás</value>
+  </data>
+  <data name="EmailMessages" xml:space="preserve">
+    <value>Emailek</value>
+  </data>
+  <data name="MessageState" xml:space="preserve">
+    <value>Állapot</value>
+  </data>
+  <data name="Dispatched" xml:space="preserve">
+    <value>Elküldött</value>
+  </data>
+  <data name="NoMessages" xml:space="preserve">
+    <value>Nincs elérhető üzenet</value>
+  </data>
+  <data name="AssignedUsers" xml:space="preserve">
+    <value>Hozzárendelt felhasználók</value>
+  </data>
+  <data name="NoAssignedUsers" xml:space="preserve">
+    <value>Nem található hozzárendelt felhasználó</value>
+  </data>
+  <data name="RolesAndPermissionsTitle" xml:space="preserve">
+    <value>Szerepkörök &amp; jogosultságok</value>
+  </data>
+  <data name="Main_CompanyBranch" xml:space="preserve">
+    <value>Vállalati ágazatok</value>
+  </data>
+  <data name="ShowAllPeople" xml:space="preserve">
+    <value>Külső emberek megjelenítése</value>
+  </data>
+  <data name="DocumentGeneration" xml:space="preserve">
+    <value>Dokumentum generálás</value>
+  </data>
+  <data name="ResponsibleUser-Usergroup" xml:space="preserve">
+    <value>Felelős felhasználói csoport</value>
+  </data>
+  <data name="Branch2Key" xml:space="preserve">
+    <value>Branch2</value>
+  </data>
+  <data name="Branch3Key" xml:space="preserve">
+    <value>Branch3</value>
+  </data>
+  <data name="Branch4Key" xml:space="preserve">
+    <value>Branch4</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Üzenet</value>
+  </data>
+  <data name="PostingType" xml:space="preserve">
+    <value>A könyvelés módja</value>
+  </data>
+  <data name="CreateUser-Usergroup" xml:space="preserve">
+    <value>Létrehozó személy (Felhasználói csoport)</value>
+  </data>
+  <data name="AnErrorOccured" xml:space="preserve">
+    <value>Hiba történt</value>
+  </data>
+  <data name="CompanyNo" xml:space="preserve">
+    <value>Cég sorszáma</value>
+  </data>
+  <data name="PersonNo" xml:space="preserve">
+    <value>Személy nem.</value>
+  </data>
+  <data name="FailedToSave" xml:space="preserve">
+    <value>Sikertelen mentés</value>
+  </data>
+  <data name="GroupAlreadyExists" xml:space="preserve">
+    <value>A csoport már létezik</value>
+  </data>
+  <data name="GroupIsNotEmpty" xml:space="preserve">
+    <value>A csoport nem üres.</value>
+  </data>
+  <data name="DefaultValue" xml:space="preserve">
+    <value>Alapértelmezett érték</value>
+  </data>
+  <data name="HasParameter" xml:space="preserve">
+    <value>Van paramétere</value>
+  </data>
+  <data name="TableName" xml:space="preserve">
+    <value>Tábla neve</value>
+  </data>
+  <data name="SendEMailWithBCC" xml:space="preserve">
+    <value>E-mail küldése titkos másolattal a "{0}"</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="Company_Name1" xml:space="preserve">
+    <value>Cégnév 1</value>
+  </data>
+  <data name="Company_Name2" xml:space="preserve">
+    <value>Cégnév 2</value>
+  </data>
+  <data name="Company_Name3" xml:space="preserve">
+    <value>Cégnév 3</value>
+  </data>
+  <data name="CompanyId" xml:space="preserve">
+    <value>Cég ID</value>
+  </data>
+  <data name="RuleViolation.EditAllowed" xml:space="preserve">
+    <value>Nincs engedély a felhasználó szerkesztésére</value>
+  </data>
+  <data name="Main_Device" xml:space="preserve">
+    <value>Eszközök</value>
+  </data>
+  <data name="Main_UserSubscription" xml:space="preserve">
+    <value>Értesítés feliratkozások</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Megnyit</value>
+  </data>
+  <data name="MyDevices" xml:space="preserve">
+    <value>Saját eszközök</value>
+  </data>
+  <data name="Subscribed" xml:space="preserve">
+    <value>Feliratkozva</value>
+  </data>
+  <data name="SubscribedExplanation" xml:space="preserve">
+    <value>Értesítéseket fog kapni az oldal módosulásairól.</value>
+  </data>
+  <data name="ContactModifiedNotificationTitle" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="EntityModifiedNotificationBody" xml:space="preserve">
+    <value>{0} módosítva {1} által</value>
+  </data>
+  <data name="EntityCreatedNotificationBody" xml:space="preserve">
+    <value>{0} létrehozva {1} által</value>
+  </data>
+  <data name="Platform" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Értesítések</value>
+  </data>
+  <data name="ShowAttachments" xml:space="preserve">
+    <value>Mellékletek megjelenítése</value>
+  </data>
+  <data name="Main_EntityType" xml:space="preserve">
+    <value>Entitás típus</value>
+  </data>
+  <data name="ToggleMenu" xml:space="preserve">
+    <value>Menü elrejtése</value>
+  </data>
+  <data name="RetryTransactionConfirmationQuestion" xml:space="preserve">
+    <value>Biztos, hogy meg akarja ismételni a tranzakció feldolgozását?</value>
+  </data>
+  <data name="MissingTranslations" xml:space="preserve">
+    <value>Hiányzó fordítások</value>
+  </data>
+  <data name="RetryTransactionsConfirmationQuestion" xml:space="preserve">
+    <value>Biztos, hogy meg akarja ismételni a tranzakciók feldolgozását?</value>
+  </data>
+  <data name="CompanyPhone" xml:space="preserve">
+    <value>Cég telefonszáma</value>
+  </data>
+</root>

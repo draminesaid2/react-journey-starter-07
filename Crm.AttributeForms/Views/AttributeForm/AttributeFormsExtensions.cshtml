@@ -1,0 +1,10 @@
+﻿@using Crm.Library.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+
+<!-- ko if: $root.attributeForms().length > 0 -->
+	@Html.RenderAction("MaterialResponseTemplates")
+	@Html.RenderAction("MaterialEditTemplates")
+<!-- /ko -->
+<!-- ko foreach: { data: $root.attributeForms, as: '$root' } -->
+	 @await Html.PartialAsync("AttributeFormEntry") 
+<!-- /ko -->

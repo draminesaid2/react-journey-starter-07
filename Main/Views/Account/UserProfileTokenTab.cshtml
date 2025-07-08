@@ -1,0 +1,30 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-token" data-bind="with: tabs()['tab-token']">
+	<!-- ko requiredPermission: { name: 'UserResetGeneralToken', group: 'UserAdmin' } -->
+	<ul class="top-menu">
+		<li>
+			<a href="#" data-bind="click: resetGeneralToken">
+				@(Html.Localize("Reset"))
+			</a>
+		</li>
+	</ul>
+	<!-- /ko -->
+	<div class=" card-body card-padding">
+		<p>
+			@(Html.Localize("TokenDesc"))
+		</p>
+		<!-- ko if: userGeneralToken -->
+		<p>
+			@(Html.Localize("YourToken")):
+			<strong data-bind="text: userGeneralToken"></strong>
+		</p>
+		<p>
+			<a href="#" data-bind="attr: { 'data-route' : 'Main/Barcode/Preview/' + $data.userGeneralToken() }" data-toggle="modal" data-target="#modal">
+				<img data-bind="attr: { src: barcode }"/>
+			</a>
+		</p>
+		<!-- /ko -->
+	</div>
+</div>

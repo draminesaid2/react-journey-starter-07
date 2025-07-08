@@ -1,0 +1,41 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+<div class="lv-item media">
+	@await Html.PartialAsync("GenericListBulkControl")
+	<div class="lv-avatar pull-left" data-bind="text: Helper.ProductFamily.getProductFamilyStatusAbbrevation($data.StatusKey()), style: {backgroundColor: Helper.Lookup.getLookupColor($parent.lookups.ProductFamilyDescription, $data.StatusKey)}"></div>
+	<div class="media-body">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="lv-title">
+					<a data-bind="attr: { href: '#/Crm.Article/ProductFamily/DetailsTemplate/' + Id() }">
+						<span data-bind="text: Helper.ProductFamily.getProductFamilyAutocompleteDisplay($data)"></span>
+					</a>
+				</div>
+				<!-- ko with: ParentProductFamily -->
+				<span>
+					@(Html.Localize("ParentName"))
+					<a href="#" data-bind="attr: { href: '#/Crm.Article/ProductFamily/DetailsTemplate/' + Id() }">
+						<span data-bind="text: Helper.ProductFamily.getProductFamilyAutocompleteDisplay($data, $root.currentUser().DefaultLanguageKey)"></span>
+					</a>
+				</span>
+				<!-- /ko -->
+				<div data-bind="text: BackgroundInfo"></div>
+			</div>
+		</div>
+		<div>
+			<ul class="lv-attrs">
+				<li>
+					<span data-bind="translatedText: 'Status'"></span>:
+					<span data-bind="lookupValue: StatusKey, lookups: $root.lookups.productFamilyStatuses"></span>
+				</li>
+				<li>
+					<i class="zmdi zmdi-account-o"></i>
+					<span data-bind="text: Helper.User.getDisplayName(ResponsibleUserUser)"></span>
+				</li>
+			</ul>
+			@Html.PluginRenderActions("MaterialContactItemExtensions")
+		</div>
+		<lv-actions>@Html.PluginRenderActions("ProductFamilyItemTemplateActions")</lv-actions>
+	</div>
+</div>

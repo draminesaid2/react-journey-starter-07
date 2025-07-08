@@ -1,0 +1,49 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div id="branches-modal" class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" data-bind="visible: companyBranches().innerInstance.entityState === 20">@(Html.Localize("AddCompanyBranch"))</h4>
+	<h4 class="modal-title" data-bind="visible: companyBranches().innerInstance.entityState !== 20">@(Html.Localize("EditCompanyBranch"))</h4>
+</div>
+<div class="modal-body">
+	<div class="panel-body">
+		<form role="form" action="#" class="form-horizontal" data-bind="with: companyBranches">
+			<div id="Branch1Key" class="form-group fg-line select" data-bind="validationElement: Branch1Key">
+				<label class="control-label fg-label">@(Html.Localize("Branch1"))</label>
+				<select  class="form-control" data-bind="select2autocompleter: { data: Branch1Key, autocompleteOptions: { customFilter: Helper.Lookup.queryLookup, table: 'Main_Branch1', mapDisplayObject: Helper.Lookup.mapLookupForSelect2Display,getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery }}">
+				</select>
+			</div>
+			<div id="Branch2Key" class="form-group fg-line select" data-bind="visible: !!Branch1Key()">
+				<label class="control-label fg-label">@(Html.Localize("Branch2"))</label>
+				<select class="form-control" data-bind="select2autocompleter: { data: Branch2Key, autocompleteOptions: { customFilter: function(query, term) { return Helper.CompanyBranch.filterBranch(query, term, $data.Branch1Key()) }, table: 'Main_Branch2', mapDisplayObject: Helper.Lookup.mapLookupForSelect2Display,getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery }} ">
+				</select>
+			</div>
+			<div id="Branch3Key" class="form-group fg-line select" data-bind="visible: !!Branch2Key()">
+				<label class="control-label fg-label">@(Html.Localize("Branch3"))</label>
+				<select  class="form-control" data-bind="select2autocompleter: { data: Branch3Key, autocompleteOptions: { customFilter: function(query, term) { return Helper.CompanyBranch.filterBranch(query, term, $data.Branch2Key()) }, table: 'Main_Branch3', mapDisplayObject: Helper.Lookup.mapLookupForSelect2Display,getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery }} ">
+				</select>
+			</div>
+			<div id="Branch4Key" class="form-group fg-line select" data-bind="visible: !!Branch3Key()">
+				<label class="control-label fg-label">@(Html.Localize("Branch4"))</label>
+				<select  class="form-control" data-bind="select2autocompleter: { data: Branch4Key, autocompleteOptions: { customFilter: function(query, term) { return Helper.CompanyBranch.filterBranch(query, term, $data.Branch3Key()) }, table: 'Main_Branch4', mapDisplayObject: Helper.Lookup.mapLookupForSelect2Display,getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery }} ">
+				</select>
+			</div>
+			<hr class="m-t-0 m-b-1 visible-xs">
+		</form>
+	</div>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<ul class="list-unstyled clearfix wpb-actions">
+		<li class="pull-right">
+			<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+				@(Html.Localize("Cancel"))
+			</button>
+			<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save">
+				@(Html.Localize("Save"))
+			</button>
+		</li>
+	</ul>
+</div>

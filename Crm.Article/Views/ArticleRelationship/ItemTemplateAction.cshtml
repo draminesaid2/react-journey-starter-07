@@ -1,0 +1,24 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: $root.currentTabId && $parent instanceof window.$data.KoObservableEntity 
+&& $parent.innerInstance instanceof database.CrmArticle_ArticleRelationship.CrmArticle_ArticleRelationship -->
+<li class="divider"></li>
+<!-- ko requiredPermission: { name: 'Edit', group: 'ArticleRelationship' } -->
+<li>
+	<a href="#" data-bind="attr: {'data-route':'Crm.Article/ArticleRelationship/EditTemplate/'+$parent.Id()}" data-toggle="modal" data-target="#modal">
+		@(Html.Localize("Edit"))
+	</a>
+</li>
+<!-- /ko -->
+
+<!-- ko requiredPermission: { name: 'Delete', group: 'ArticleRelationship' } -->
+<li>
+	<!-- ko with: $parentContext-->
+	<a class="article-delete" href="#" data-bind="click: $parent.deleteRelationship.bind($parent,$data)">
+		@(Html.Localize("Remove"))
+	</a>
+	<!-- /ko -->
+</li>
+<!-- /ko -->
+<!-- /ko -->

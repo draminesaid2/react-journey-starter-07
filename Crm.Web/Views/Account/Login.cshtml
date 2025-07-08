@@ -1,0 +1,144 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage<LoginViewModel>
+@{Layout = "~/Views/Shared/Layout/LoginLayout.cshtml";}
+@using System.Net
+@using Crm.ViewModels
+@using Crm.Extensions
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+
+@section TitleContent {
+
+	<title>@(Html.Localize("Login"))</title>
+
+}
+
+@section MainContent {
+
+	@await Html.PartialAsync("Master/CordovaJs")
+	@if (Model.NewPasswordSent)
+	{
+		<div class="alert alert-success p-relative" role="alert">@(Html.Localize("NewPasswordSent"))</div>
+	}
+	@if (Model.NoTenantAvailable)
+	{
+		<div class="alert alert-danger p-relative" role="alert">@(Html.Localize("NoTenantAvailable"))</div>
+	}
+	<div class="lc-block toggled @("hidden".If(Model.UseOpenIdAuthentication)) @("lcb-alt p-t-30".If(Model.LoginCookie != null)) @("p-t-15".If(Model.Avatar == null)) @(" hide".If(Model.SuggestApp))" id="l-login">
+		@if (Model.Avatar == null)
+		{
+			<h4 id="logo-or-title" class="m-t-30">
+				@(Html.LogoOrTitleString())
+			</h4>
+			<small id="version-number" style="display: none;">@(Model.Site.ApplicationVersion)</small>
+		}
+		@using (Html.BeginForm())
+		{
+			@if (Model.LoginCookie == null)
+			{
+				<div class="input-group m-b-20">
+					<span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+					<div class="fg-line">
+						<input type="@(Model.LoginType == "Email" ? "email" : "text")" id="email" name="email" autocomplete="username" class="form-control" placeholder="@(Html.Localize(Model.LoginType))" />
+					</div>
+				</div>
+				<div class="input-group m-b-20">
+					<span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+					<div class="fg-line">
+						<input type="password" id="password" name="password" autocomplete="current-password" class="form-control" placeholder="@(Html.Localize("Password"))" />
+					</div>
+				</div>
+				<div class="has-error">
+					<small class="help-block">
+						@(Html.RuleViolationMessage())
+					</small>
+				</div>
+				<div class="clearfix"></div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="rememberMe" value="true" />
+						<i class="input-helper"></i>
+						@(Html.Localize("RememberMe"))
+					</label>
+				</div>
+				<button id="btn-login" class="btn btn-login btn-primary btn-float" type="submit">
+					<i class="zmdi zmdi-arrow-forward"></i>
+				</button>
+				@(Html.Hidden("needRedirect"))
+			}
+			else
+			{
+				<img id="pre-populated-avatar" class="lcb-user bgm-white" src="" style="display: none;" alt=""/>
+				<h3 id="pre-populated-display-name"></h3>
+				<p>
+					<strong id="pre-populated-email"></strong>
+				</p>
+				<div class="fg-line">
+					<input type="password" id="password" name="password" class="form-control text-center" placeholder="@(Html.Localize("Password"))" />
+				</div>
+				<div class="has-error">
+					<small class="help-block">
+						@(Html.RuleViolationMessage())
+					</small>
+				</div>
+				@(Html.Hidden("email", WebUtility.UrlDecode(Model.LoginCookie)))
+				@(Html.Hidden("rememberMe", true))
+				<button id="btn-login" class="btn btn-login btn-primary btn-float" type="submit">
+					<i class="zmdi zmdi-arrow-forward"></i>
+				</button>
+			}
+		}
+		<ul class="login-navigation">
+			@if (Model.CanResetPassword)
+			{
+				<li>
+					@(Html.ActionLink(Html.Localize("ForgotPassword"), "ResetPassword", "Account", new { plugin = "Main" }, new { @class = "btn btn-xs btn-default returntoremember" }))
+				</li>
+			}
+			@if (Model.LoginCookie != null)
+			{
+				<li>
+					<a href="#" class="btn btn-xs btn-default remove-login">@(Html.Localize("LoginAsDifferentUser"))</a>
+				</li>
+			}
+			else
+			{
+				<li>
+					<button id="barcodeScanner" class="btn btn-xs btn-default hidden" data-toggle="modal" data-target="#modal" data-wml-speech-command="barcode">
+						@(Html.Localize("BarcodeLogin"))
+					</button>
+				</li>
+			}
+		</ul>
+	</div>
+
+	<div class="lc-block lcb-alt p-t-30 toggled @("hidden".If(!Model.UseOpenIdAuthentication)) @(" hide".If(Model.SuggestApp))" id="openidlogin">
+		<h4 id="logo-or-title">
+			@(Html.Localize("OpenIdLogin"))
+		</h4>
+		<a class="btn btn-primary btn-login btn-float waves-effect waves-circle waves-float" id="openidloginbutton" href="@(Url.Action("OpenIdLogin", "Account"))">
+			<i class="zmdi zmdi-arrow-forward"></i>
+		</a>
+	</div>
+
+	@if (Model.SuggestApp)
+	{
+		@Html.Partial("AppSuggestion", Model)
+	}
+
+		<div class="modal animated fadeIn" id="modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog card">
+				<div class="modal-content">
+					<div class="modal-header card-header ch-alt">
+						<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">@(Html.Localize("BarcodeLogin"))</h4>
+					</div>
+					<div class="modal-body card-body card-padding">
+						<video id="barcodeScannerVideo" src="" class="w-100" autoplay playsinline></video>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	}

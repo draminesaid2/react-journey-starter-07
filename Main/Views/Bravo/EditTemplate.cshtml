@@ -1,0 +1,30 @@
+@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt" data-bind="with: bravo">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState === 20">@(Html.Localize("AddBravo"))</h4>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState !== 20">@(Html.Localize("EditBravo"))</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<form role="form" action="#" data-bind="with: bravo">
+		<form-element id="CategoryKey" params="value: CategoryKey, caption: 'Category', type: 'select'">
+			<select class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Bravo.getAutocompleteOptions($root.bravoContactType), placeholder: placeholder}"></select>
+		</form-element>
+		<form-element params="value: Issue, caption: 'Text', type: 'textarea', placeholder: 'AddBravo'"></form-element>
+	</form>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<ul class="list-unstyled clearfix wpb-actions">
+	  <li class="pull-right">
+			<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+			@(Html.Localize("Cancel"))
+			</button>
+			<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, disable: loading">
+			@(Html.Localize("Save"))
+			</button>
+	  </li>
+	</ul>
+</div>

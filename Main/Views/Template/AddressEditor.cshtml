@@ -1,0 +1,310 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.ViewModels
+
+<!-- ko if: loading -->
+<div class="text-center">
+	<div>
+		<div class="preloader pls-blue">
+			<svg class="pl-circular" viewBox="25 25 50 50">
+				<circle class="plc-path" cx="50" cy="50" r="20"></circle>
+			</svg>
+
+		</div>
+	</div>
+	<span>@(Html.Localize("Loading"))</span>
+</div>
+<!-- /ko -->
+<!-- ko ifnot: loading -->
+<fieldset class="fieldset">
+	<form role="form" action="#">
+		<!-- ko if: ko.unwrap(addresses).length -->
+		<div class="form-group row">
+			<div class="col-sm-2 col-xs-12">
+				<label class="control-label m-b-5">@(Html.Localize("SelectAddress"))</label>
+			</div>
+			<div class="col-sm-10 col-xs-12">
+				<div class="fg-line select">
+					<address-selector params="addressId: addressId, lookups: lookups, addresses: addresses, onAddressSelect: onAddressSelect.bind($data), allowAddNewAddress: true" />
+				</div>
+			</div>
+		</div>
+		<hr />
+		<!-- /ko -->
+		<!-- ko if: isAddressEditable -->
+		<!-- ko with: address -->
+		<form-element id="AddressTypeKey" params="value: AddressTypeKey, type: 'select', caption: 'AddressType'">
+			<select name="TypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_AddressType'), placeholder: placeholder}"></select>
+		</form-element>
+		<div class="d-flex row">
+			<div class="col-sm">
+				<form-element params="value: Name1, name: 'Name1', type: 'text', caption:'Name', placeholder:'Name1'"></form-element>
+			</div>
+			<div class="col-sm hidden-xs">
+				<form-element params="value: Street, name: 'Street', type: 'text', caption:'Street'"></form-element>
+			</div>
+		</div>
+		<!-- ko if: !!Name1() || !!Name2() || !!Name3() -->
+		<div class="d-flex row">
+			<div class="col-sm">
+				<form-element params="value: Name2, name: 'Name2', type: 'text', caption:'Name2'"></form-element>
+			</div>
+			<!-- ko if: !!Name2() || !!Name3() -->
+			<div class="col-sm">
+				<form-element params="value: Name3, name: 'Name3', type: 'text', caption:'Name3'"></form-element>
+			</div>
+			<!-- /ko -->
+		</div>
+		<!-- /ko -->
+		<div class="d-flex row">
+			<div class="col-sm hidden-sm hidden-md hidden-lg">
+				<form-element params="value: Street, name: 'Street', type: 'text', caption:'Street'"></form-element>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<form-element params="value: ZipCode, name: 'ZipCode', type: 'text', caption:'ZipCode'"></form-element>
+			</div>
+			<div class="col-sm-8">
+				<form-element params="value: City, name: 'City', type: 'text', caption:'City'"></form-element>
+			</div>
+		</div>
+		<!-- ko if: !$parent.showPoBox()-->
+		<div class="m-b-15">
+			<a href="#" data-bind="click: $parent.togglePoBox">
+				<span>@(Html.Localize("AddPOBox"))</span>
+			</a>
+		</div>
+		<!-- /ko -->
+		<!-- ko if: $parent.showPoBox()-->
+		<div class="row">
+			<div class="col-sm-6">
+				<form-element params="value: ZipCodePOBox, name: 'ZipCodePOBox', type: 'text', caption:'ZipCodePOBox'"></form-element>
+			</div>
+			<div class="col-sm-6">
+				<form-element params="value: POBox, name: 'POBox', type: 'text', caption:'POBox'"></form-element>
+			</div>
+		</div>
+		<!-- /ko -->
+		<div class="row">
+			<div class="col-sm-6">
+				<form-element id="RegionKey" params="value: RegionKey, type: 'select', caption: 'Region'">
+					<select name="RegionKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Region'), placeholder: placeholder}"></select>
+				</form-element>
+			</div>
+			<div class="col-sm-6">
+				<form-element id="addressCountryKey" params="value: CountryKey, type: 'select', caption: 'Country'">
+					<select name="CountryKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Country'), placeholder: placeholder}"></select>
+				</form-element>
+			</div>
+		</div>
+		<!-- /ko -->
+		<!-- /ko -->
+	</form>
+</fieldset>
+<!-- ko if: address() && !hideContactInformation -->
+<fieldset>
+	<legend class="p-t-25 m-b-10 c-black b-0 f-500 f-14">@(Html.Localize("ContactInformation"))</legend>
+	<div id="phones">
+		<div class="row m-t-15 m-b-25">
+			<div class="col-sm-11 col-xs-10">
+				<strong>@(Html.Localize("Phones"))</strong>
+			</div>
+			<div class="col-sm-1 col-xs-2 text-center">
+				<!-- ko if: $root.lookups.phoneTypes.$array.length !== 0 -->
+				<a href="#" class="btn btn-sm btn-success waves-effect" data-bind="click: addPhone.bind($data), tooltip: true" title="@(Html.Localize("Add"))">
+					<i class="zmdi zmdi-plus"></i>
+				</a>
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- ko foreach: phones-->
+		<form name="phone-editor" role="form" action="#">
+			<div class="row">
+				<div class="col-sm-11 col-xs-10">
+					<div class="row">
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="phoneCountryKey" params="value: CountryKey, type: 'select', caption: 'Country'">
+								<select name="CountryKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: { customFilter: Helper.Lookup.queryLookup, table: 'Main_Country', mapDisplayObject: Helper.Company.mapPhoneCountriesForSelect2, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, placeholder: placeholder }}"></select>
+							</form-element>
+						</div>
+						<div class="col-sm-2 col-xs-4">
+							<form-element params="value: AreaCode, name: 'AreaCode', type: 'number', caption: 'AreaCode'"></form-element>
+						</div>
+						<div class="col-sm-4 col-xs-8">
+							<form-element params="value: Data, name: 'Data', type: 'number', caption: 'Phone'"></form-element>
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="phoneTypeKey" params="value: TypeKey, type: 'select', caption: 'Type'">
+								<select name="TypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_PhoneType'), placeholder: placeholder}"></select>
+							</form-element>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1 col-xs-2">
+					<div class="text-center">
+						<a href="#" class="btn btn-sm btn-danger waves-effect" data-bind="click: $parent.removePhone.bind($parent), tooltip: true" title="@(Html.Localize("Remove"))">
+							<i class="zmdi zmdi-minus"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<hr class="m-t-0 m-b-1 visible-xs">
+		</form>
+		<!-- /ko -->
+		<!-- ko if: $root.lookups.phoneTypes.$array.length === 0 -->
+		<div id="missing-phonetype-lookup-hint" class="alert alert-danger" role="alert">
+			<p data-bind="text: window.Helper.Lookup.getMissingLookupText('PhoneType')"></p>
+		</div>
+		<!-- /ko -->
+	</div>
+	<div id="emails">
+		<div class="row m-t-15 m-b-25">
+			<div class="col-sm-11 col-xs-10">
+				<strong>@(Html.Localize("Emails"))</strong>
+			</div>
+			<div class="col-sm-1 col-xs-2 text-center">
+				<!-- ko if: $root.lookups.emailTypes.$array.length !== 0 -->
+				<div class="text-center">
+					<a href="#" class="btn btn-sm btn-success waves-effect" data-bind="click: addEmail.bind($data), tooltip: true" title="@(Html.Localize("Add"))">
+						<i class="zmdi zmdi-plus"></i>
+					</a>
+				</div>
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- ko foreach: emails-->
+		<form name="email-editor" role="form" action="#">
+			<div class="row">
+				<div class="col-sm-11 col-xs-10">
+					<div class="row">
+						<div class="col-sm-9 col-xs-12">
+							<form-element params="value: Data, name: 'Data', type: 'email', caption: 'Email'"></form-element>
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="mailTypeKey" params="value: TypeKey, type: 'select', caption: 'Type'">
+								<select name="TypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_EmailType'), placeholder: placeholder}"></select>
+							</form-element>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1 col-xs-2">
+					<div class="text-center">
+						<a href="#" class="btn btn-sm btn-danger waves-effect" data-bind="click: $parent.removeEmail.bind($parent), tooltip: true" title="@(Html.Localize("Remove"))">
+							<i class="zmdi zmdi-minus"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<hr class="m-t-0 m-b-1 visible-xs">
+		</form>
+		<!-- /ko -->
+		<!-- ko if: $root.lookups.emailTypes.$array.length === 0 -->
+		<div id="missing-emailtype-lookup-hint" class="alert alert-danger" role="alert">
+			<p data-bind="text: window.Helper.Lookup.getMissingLookupText('EmailType')"></p>
+		</div>
+		<!-- /ko -->
+	</div>
+	<div id="faxes">
+		<div class="row m-t-15 m-b-25">
+			<div class="col-sm-11 col-xs-10">
+				<strong>@(Html.Localize("Faxes"))</strong>
+			</div>
+			<div class="col-sm-1 col-xs-2 text-center">
+				<!-- ko if: $root.lookups.faxTypes.$array.length !== 0 -->
+				<div class="text-center">
+					<a href="#" class="btn btn-sm btn-success waves-effect" data-bind="click: addFax.bind($data), tooltip: true" title="@(Html.Localize("Add"))">
+						<i class="zmdi zmdi-plus"></i>
+					</a>
+				</div>
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- ko foreach: faxes -->
+		<form name="fax-editor" role="form" action="#">
+			<div class="row">
+				<div class="col-sm-11 col-xs-10">
+					<div class="row">
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="faxCountryKey" params="value: CountryKey, type: 'select', caption: 'Country'">
+								<select name="CountryKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: { customFilter: Helper.Lookup.queryLookup,table: 'Main_Country', mapDisplayObject: Helper.Company.mapPhoneCountriesForSelect2, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery, placeholder: placeholder }}"></select>
+							</form-element>
+						</div>
+						<div class="col-sm-2 col-xs-4">
+							<form-element params="value: AreaCode, name: 'AreaCode', type: 'number', caption: 'AreaCode'"></form-element>
+						</div>
+						<div class="col-sm-4 col-xs-8">
+							<form-element params="value: Data, name: 'Data', type: 'number', caption: 'Fax'"></form-element>
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="faxTypeKey" params="value: TypeKey, type: 'select', caption: 'Type'">
+								<select name="TypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_FaxType'), placeholder: placeholder}"></select>
+							</form-element>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1 col-xs-2">
+					<div class="text-center">
+						<a href="#" class="btn btn-sm btn-danger waves-effect" data-bind="click: $parent.removeFax.bind($parent), tooltip: true" title="@(Html.Localize("Remove"))">
+							<i class="zmdi zmdi-minus"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<hr class="m-t-0 m-b-1 visible-xs">
+		</form>
+		<!-- /ko -->
+		<!-- ko if: $root.lookups.faxTypes.$array.length === 0 -->
+		<div id="missing-faxtype-lookup-hint" class="alert alert-danger" role="alert">
+			<p data-bind="text: window.Helper.Lookup.getMissingLookupText('FaxType')"></p>
+		</div>
+		<!-- /ko -->
+	</div>
+	<div id="websites">
+		<div class="row m-t-15 m-b-25">
+			<div class="col-sm-11 col-xs-10">
+				<strong>@(Html.Localize("Websites"))</strong>
+			</div>
+			<div class="col-sm-1 col-xs-2 text-center">
+				<!-- ko if: $root.lookups.websiteTypes.$array.length !== 0 -->
+				<a href="#" class="btn btn-sm btn-success waves-effect" data-bind="click: addWebsite.bind($data), tooltip: true" title="@(Html.Localize("Add"))">
+					<i class="zmdi zmdi-plus"></i>
+				</a>
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- ko foreach: websites -->
+		<form name="website-editor" role="form" action="#" class="m-t-10">
+			<div class="row">
+				<div class="col-sm-11 col-xs-10">
+					<div class="row">
+						<div class="col-sm-9 col-xs-12">
+							<form-element params="value: Data, name: 'Data', type: 'text', caption: 'Website'"></form-element>
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<form-element id="websiteTypeKey" params="value: TypeKey, type: 'select', caption: 'Type'">
+								<select name="TypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_WebsiteType'), placeholder: placeholder}"></select>
+							</form-element>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1 col-xs-2">
+					<div class="text-center">
+						<a href="#" class="btn btn-sm btn-danger waves-effect" data-bind="click: $parent.removeWebsite.bind($parent), tooltip: true" title="@(Html.Localize("Remove"))">
+							<i class="zmdi zmdi-minus"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<hr class="m-t-0 m-b-1 visible-xs">
+		</form>
+		<!-- /ko -->
+		<!-- ko if: $root.lookups.websiteTypes.$array.length === 0 -->
+		<div id="missing-websitetype-lookup-hint" class="alert alert-danger" role="alert">
+			<p data-bind="text: window.Helper.Lookup.getMissingLookupText('WebsiteType')"></p>
+		</div>
+		<!-- /ko -->
+	</div>
+</fieldset>
+<!-- /ko -->
+<!-- /ko -->

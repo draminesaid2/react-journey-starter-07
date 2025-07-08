@@ -1,0 +1,44 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-devices" data-bind="with: tabs()['tab-devices']">
+	<div data-bind="if: currentFingerprint()">
+		<div class="card-body card-padding table-responsive">
+			<table class="table">
+				<thead>
+				<tr>
+					<th class="col-xs-8">@Html.Localize("Platform")</th>
+					<th class="col-xs-2 text-center">@Html.Localize("Notifications")</th>
+					<th class="col-xs-2"></th>
+				</tr>
+				</thead>
+				<tbody data-bind="foreach: devices">
+				<tr data-bind="style: { 'font-weight': Fingerprint == $parent.currentFingerprint() ? 'bold' : ''}">
+					<td class="col-xs-8">
+						<span data-bind="text: DeviceInfo"></span>
+						<em data-bind="if: Fingerprint == $parent.currentFingerprint()">(@Html.Localize("Current"))</em>
+						<br/>
+						<small class="c-gray">
+							<span data-bind="translatedText: 'CreateDate'">: </span>
+							<span data-bind="text: CreateDate.toLocaleString()"></span>
+						</small>
+					</td>
+					<td class="col-xs-2 text-center">
+						<div class="toggle-switch">
+							<input type="checkbox" hidden="hidden" data-bind="checked: IsTrusted, click: $parent.toggleTrustDevice.bind($parent, $data), disable: $parent.loading, attr: {id: 'ts' + $index() }">
+							<label class="ts-helper" data-bind="attr: {for: 'ts' + $index() }"></label>
+						</div>
+					</td>
+					<td class="col-xs-2 text-center">
+						<!-- ko if: Fingerprint != $parent.currentFingerprint() -->
+						<a href="#" data-bind="click: $parent.removeDevice.bind($parent, $data), tooltip: true" title="@(Html.Localize("Remove"))" class="c-red f-20">
+							<i class="zmdi zmdi-delete"></i>
+						</a>
+						<!-- /ko -->
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

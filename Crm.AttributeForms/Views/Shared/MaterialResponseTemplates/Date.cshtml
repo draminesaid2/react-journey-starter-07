@@ -1,0 +1,6 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.DynamicForms.Model
+@using Crm.Offline.Extensions
+
+@(Html.TemplateText<Date>(x => x.Response).Tag("span"))
+<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Response()"></span>

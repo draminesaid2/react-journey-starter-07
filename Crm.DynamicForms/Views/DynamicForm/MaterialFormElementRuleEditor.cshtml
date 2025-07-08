@@ -1,0 +1,127 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="modal fade" id="dynamic-form-element-rule-editor" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg card">
+		<div class="modal-content">
+			<div class="modal-header card-header ch-alt">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" data-bind="translatedText: 'FormElementRules'"></h4>
+			</div>
+			<div class="modal-body p-t-20">
+				<form>
+					<div data-bind="foreach: { data: rules, afterAdd: window.ko.effects.slideIn, beforeRemove: window.ko.effects.slideOut }">
+						<div class="rule">
+							<div class="row">
+								<div class="col-md-3">
+									<form-element params="value: $parent.ruleType, type: 'select'">
+										<select name="Type" class="form-control" data-bind="value: value">
+											<option value="Show" data-bind="translatedText: 'DynamicFormElementRuleTypeShow'"></option>
+											<option value="Hide" data-bind="translatedText: 'DynamicFormElementRuleTypeHide'"></option>
+										</select>
+									</form-element>
+								</div>
+								<div class="col-md-6 col-md-push-1">
+									<form-element params="value: MatchType, type: 'select'" data-bind="visible: Conditions().length > 1">
+										<select name="Type" class="form-control" data-bind="value: value">
+											<option value="Any" data-bind="translatedText: 'DynamicFormElementRuleMatchTypeAny'"></option>
+											<option value="All" data-bind="translatedText: 'DynamicFormElementRuleMatchTypeAll'"></option>
+										</select>
+									</form-element>
+								</div>
+								<div class="col-md-push-1 col-md-2 text-center">
+									<div class="btn-group">
+										<a class="btn btn-danger btn-sm waves-effect" href="#" data-bind="click: $parent.removeFormElementRule.bind($parent, $data), tooltip: true" title="@(Html.Localize("Remove"))">
+											<i class="zmdi zmdi-hc-lg zmdi-delete"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div data-bind="foreach: { data: Conditions, afterAdd: window.ko.effects.slideIn, beforeRemove: window.ko.effects.slideOut }">
+								<div class="condition">
+									<div class="row">
+										<div class="col-md-4">
+
+											<form-element params="value: DynamicFormElementId, type: 'select'">
+												<select name="DynamicFormElementId" class="form-control" data-bind="value: value, options: $parentContext.$parentContext.$parent.selectableFormElements, optionsCaption: Helper.String.getTranslatedString('PleaseSelect'), optionsText: $parentContext.$parentContext.$parent.getLocalizationText, optionsValue: 'Id'" required="required"></select>
+											</form-element>
+										</div>
+										<div class="col-md-3">
+											<form-element params="value: Filter, type: 'select'">
+												<select name="Filter" class="form-control" data-bind="value: value, options: $parentContext.$parentContext.$parent.getSelectableConditionFilters($parent), optionsCaption: Helper.String.getTranslatedString('PleaseSelect'), optionsText: 'Text', optionsValue: 'Value'" required="required"></select>
+											</form-element>
+										</div>
+										<div class="col-md-3">
+											<!-- ko ifnot: Filter() === 'Empty' || Filter() === 'NotEmpty' || !Filter() -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'CheckBoxList' -->
+											<form-element params="value: Value, type: 'select'">
+												<select name="Value" class="form-control" data-bind="selectedOptions: $parentContext.$parentContext.$parent.getSelectedConditionFilterValues($parent), select2autocompleter: { data: $parentContext.$parentContext.$parent.getSelectableConditionValues($parent), optionsText: 'Text', optionsValue: 'Value' }" multiple="multiple"></select>
+											</form-element>
+											<!-- /ko -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'DropDown' || $parentContext.$parent.getConditionFormElementType($data) === 'RadioButtonList' -->
+											<form-element params="value: Value, type: 'select'">
+												<select name="Value" class="form-control" data-bind="value: value, options: $parentContext.$parentContext.$parent.getSelectableConditionValues($parent), optionsText: 'Text', optionsValue: 'Value'"></select>
+											</form-element>
+											<!-- /ko -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'Date' -->
+											<form-element params="value: Value, type: 'datePicker'" style="margin-top: -13px;"></form-element>
+											<!-- /ko -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'Time' -->
+											<form-element params="value: Value, type: 'timePicker'" style="margin-top: -13px;"></form-element>
+											<!-- /ko -->
+											<!-- ko if:  $parentContext.$parent.getConditionFormElementType($data) === 'Number' || $parentContext.$parent.getConditionFormElementType($data) === 'FileAttachmentDynamicFormElement' -->
+											<form-element params="value: Value, type: 'number'"></form-element>
+											<!-- /ko -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'SignaturePad' || $parentContext.$parent.getConditionFormElementType($data) === 'SignaturePadWithPrivacyPolicy' -->
+											<!-- no value required -->
+											<!-- /ko -->
+											<!-- ko if: $parentContext.$parent.getConditionFormElementType($data) === 'MultiLineText' || $parentContext.$parent.getConditionFormElementType($data) === 'SingleLineText' -->
+											<form-element params="value: Value, type: 'text'"></form-element>
+											<!-- /ko -->
+											<!-- /ko -->
+											<!-- ko if: Filter() === 'Empty' || Filter() === 'NotEmpty' || !Filter() -->
+											<input name="Value" class="form-control" type="hidden" data-bind="value: Value(null)"/>
+											<!-- /ko -->
+										</div>
+										<div class="col-md-2">
+											<div class="input-group">
+												<label class="input-group-addon">
+													<!-- ko if: $parent.Conditions().length > 1 -->
+													<button class="btn btn-default btn-danger waves-effect waves-float" data-bind="click: $parentContext.$parent.removeFormElementRuleCondition.bind($parentContext.$parent, $parent, $data), tooltip: true" title="@(Html.Localize("Remove"))">
+														<i class="zmdi zmdi-minus-circle-outline"></i>
+													</button>
+													<!-- /ko -->
+													<button class="btn btn-default btn-success waves-effect waves-float" data-bind="click: $parentContext.$parent.createFormElementRuleCondition.bind($parentContext.$parent, $parent, $index), tooltip: true" title="@(Html.Localize("Add"))">
+														<i class="zmdi zmdi-plus-circle-o"></i>
+													</button>
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr/>
+						</div>
+					</div>
+				</form>
+				<div data-bind="if: rules().length === 0">
+					<empty-state-box params="mood: 'excited', text: 'NoFormElementRule'"></empty-state-box>
+					<p class="text-center">
+						<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: createFormElementRule, translatedText: 'CreateFormElementRule'"></button>
+					</p>
+				</div>
+				<div data-bind="if: rules().length > 0">
+					<br/>
+					<p class="text-center">
+						<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: createFormElementRule, translatedText: 'CreateAnotherFormElementRule'"></button>
+					</p>
+				</div>
+			</div>
+			<div class="modal-footer card-header ch-alt p-15">
+				<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="translatedText: 'Cancel'" data-dismiss="modal"></button>
+				<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, translatedText: 'Apply'"></button>
+			</div>
+		</div>
+	</div>
+</div>

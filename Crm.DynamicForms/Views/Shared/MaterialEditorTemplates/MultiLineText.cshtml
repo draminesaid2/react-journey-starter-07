@@ -1,0 +1,23 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+@await Html.PartialAsync("MaterialEditorTemplates/Title")
+<div class="row">
+	<div class="col-md-6">
+		<form-element params="value: Required, caption: 'Required', type: 'checkbox'"></form-element>
+	</div>
+	<div class="col-md-6">
+		@Html.PluginRenderActions("MaterialFormDesignerElementExtension")
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<form-element params="value: MinLength, caption: 'MinLength', type: 'number', min : 0"></form-element>
+	</div>
+	<div class="col-md-6">
+		<form-element params="value: MaxLength, caption: 'MaxLength', type: 'number', min : 0"></form-element>
+	</div>
+</div>
+@await Html.PartialAsync("MaterialEditorTemplates/SizeDropdown")
+@await Html.PartialAsync("MaterialEditorTemplates/RowSizeDropdown")
+@await Html.PartialAsync("MaterialEditorTemplates/CssExtra")
+@await Html.PartialAsync("MaterialEditorTemplates/Hint")

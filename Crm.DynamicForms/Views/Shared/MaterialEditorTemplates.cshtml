@@ -1,0 +1,10 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModelList<string>>
+
+@foreach (var elementType in Model.List)
+{
+	<script type="text/html" id="dynamicform-element-editor-template-@(elementType)">
+		@await Html.PartialAsync(string.Format("MaterialEditorTemplates/{0}", elementType))
+		@Html.PluginRenderActions(string.Format("{0}MaterialEditorTemplate", elementType))
+	</script>
+}

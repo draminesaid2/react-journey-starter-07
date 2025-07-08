@@ -1,0 +1,45 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Model.Authorization.PermissionIntegration
+@using Crm.Model
+
+<!-- ko requiredPermission: {name: '@(PermissionName.Index)', group: '@MainPlugin.PermissionGroup.Bravo'} -->
+<div class="pmb-block bravos">
+	<div class="pmbb-header">
+		<h2>
+			<i class="zmdi zmdi-thumb-up m-r-5"></i>
+			<span>@(Html.Localize("Bravo"))</span>
+			(<span data-bind="translatedText:  $root.displayActiveBravos() ? 'Active' : 'Inactive'"></span>)
+		</h2>
+		<ul class="actions">
+			<li class="dropdown">
+				<a data-toggle="dropdown" href="#"><i class="zmdi zmdi-more-vert"></i></a>
+				<ul class="dropdown-menu dropdown-menu-right">
+					<li class="add-bravo" data-bind="requiredPermission: { name: '@(PermissionName.Create)', group: '@(nameof(Bravo))' }">
+						<a href="#" data-bind="attr: { 'data-route': 'Main/Bravo/EditTemplate/' + '?ContactType=' + $root.contactType().split('.').pop(-1) }" data-toggle="modal" data-target="#modal" >@(Html.Localize("Add"))</a>
+					</li>
+					<li class="toggle-bravo-history">
+						<a href="#" data-bind="click: updateDisplayableBravos.bind($data, true, true)">
+							<span data-bind="text: Helper.String.getTranslatedString(displayActiveBravos() ? 'Inactive' : 'Active')"></span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="pmbb-body p-l-30">
+		<!-- ko with: contact -->
+			<!-- ko foreach: $root.displayableBravos -->
+				 @await Html.PartialAsync("Bravo/BravoEntry") 
+			<!-- /ko -->
+			<!-- ko if: $root.displayActiveBravos() -->
+				<span data-bind="translatedText: 'NoActiveBravos', ifnot: $root.displayableBravos().length > 0"></span>
+			<!-- /ko -->
+			<!-- ko ifnot: $root.displayActiveBravos() -->
+				<span data-bind="translatedText: 'NoInactiveBravos', ifnot: $root.displayableBravos().length > 0"></span>
+			<!-- /ko -->
+		<!-- /ko -->
+	</div>
+</div>
+<!-- /ko -->

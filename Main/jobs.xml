@@ -1,0 +1,170 @@
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+										 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+										 version="2.0">
+
+	<processing-directives>
+		<overwrite-existing-data>true</overwrite-existing-data>
+	</processing-directives>
+
+	<schedule>
+		<job>
+			<name>EmailAgent</name>
+			<group>Core</group>
+			<description>Sends out messages queued in the CRM.Message service using the default (web.config) SMTP configuration</description>
+			<job-type>Crm.BackgroundServices.EmailAgent, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<simple>
+				<name>ApplicationStartEmailAgentTrigger</name>
+				<group>Core</group>
+				<description>Executes the Email sending service once after the application starts</description>
+				<job-name>EmailAgent</job-name>
+				<job-group>Core</job-group>
+				<misfire-instruction>SmartPolicy</misfire-instruction>
+				<repeat-count>0</repeat-count>
+				<repeat-interval>0</repeat-interval>
+			</simple>
+		</trigger>
+
+		<job>
+			<name>DropboxAgent</name>
+			<group>Core</group>
+			<description>Watches a POP3 inbox for new messages and generates notes.</description>
+			<job-type>Crm.BackgroundServices.Dropbox.DropboxAgent, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+			<job-data-map>
+				<entry>
+					<key>host</key>
+					<value>pop3.example.com</value>
+				</entry>
+				<entry>
+					<key>port</key>
+					<value>110</value>
+				</entry>
+				<entry>
+					<key>username</key>
+					<value>dummy@example.com</value>
+				</entry>
+				<entry>
+					<key>password</key>
+					<value>dummy</value>
+				</entry>
+				<entry>
+					<key>useSsl</key>
+					<value>false</value>
+				</entry>
+			</job-data-map>
+		</job>
+
+		<job>
+			<name>TaskNotifier</name>
+			<group>Core</group>
+			<description>Generates messages for upcoming tasks which will be sent out to the users to remind them of the upcoming and overdue tasks</description>
+			<job-type>Crm.BackgroundServices.UpcomingTaskNotifier, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>TaskNotifierTrigger</name>
+				<group>Core</group>
+				<description>Executes every morning, monday to friday</description>
+				<job-name>TaskNotifier</job-name>
+				<job-group>Core</job-group>
+				<cron-expression>0 30 8 ? * MON-FRI</cron-expression>
+			</cron>
+		</trigger>
+
+		<job>
+			<name>AddressGeocodingAgent</name>
+			<group>Core</group>
+			<description>Tries to reverse geocode all addresses stored inside the system to Lat/Lon</description>
+			<job-type>Crm.BackgroundServices.AddressGeocodingAgent, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>AddressGeocodingAgentTrigger</name>
+				<group>Core</group>
+				<description>Runs periodically to check for new address locations</description>
+				<job-name>AddressGeocodingAgent</job-name>
+				<job-group>Core</job-group>
+				<cron-expression>0 0 5-22 ? * MON-FRI</cron-expression>
+			</cron>
+		</trigger>
+
+		<job>
+			<name>PostingService</name>
+			<group>Core</group>
+			<description>Posts pending postings</description>
+			<job-type>Crm.BackgroundServices.PostingService, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<simple>
+				<name>ApplicationStartPostingServiceTrigger</name>
+				<group>Core</group>
+				<description>Executes the posting service once after the application starts</description>
+				<job-name>PostingService</job-name>
+				<job-group>Core</job-group>
+				<misfire-instruction>SmartPolicy</misfire-instruction>
+				<repeat-count>0</repeat-count>
+				<repeat-interval>0</repeat-interval>
+			</simple>
+		</trigger>
+
+
+
+		<job>
+			<name>UserDischargeAgent</name>
+			<group>Core</group>
+			<description>Discharges users with expired DischargeDate (Active To)</description>
+			<job-type>Crm.BackgroundServices.UserDischargeAgent, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>UserDischargeAgentTrigger</name>
+				<group>Core</group>
+				<description>Periodically triggers UserDischargeAgent to discharge users with expired DischargeDate</description>
+				<job-name>UserDischargeAgent</job-name>
+				<job-group>Core</job-group>
+				<cron-expression>0 0 1 ? * MON-FRI</cron-expression>
+			</cron>
+		</trigger>
+
+		<job>
+			<name>DatabaseCleanUpAgent</name>
+			<group>Core</group>
+			<description>Cleans up Postings, Messages and Logs according to the deprecation in appsettings, rebuild indices</description>
+			<job-type>Crm.BackgroundServices.DatabaseCleanUpAgent, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>DatabaseCleanUpAgentTrigger</name>
+				<group>Core</group>
+				<description>Periodically triggers DatabaseClearUpAgent</description>
+				<job-name>DatabaseCleanUpAgent</job-name>
+				<job-group>Core</job-group>
+				<cron-expression>0 0 1 ? * *</cron-expression>
+			</cron>
+		</trigger>
+		<job>
+			<name>PushNotificationQueueDispatcher</name>
+			<group>PushNotificationQueueDispatcher</group>
+			<description>Pushes the notifications in the queue to the firebase endpoint.</description>
+			<job-type>Crm.BackgroundServices.PushNotificationQueueDispatcher, Main</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+	</schedule>
+</job-scheduling-data>
+

@@ -1,0 +1,6 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="fg-line">
+	<label class="fg-label control-label" data-bind="text: $root.getLocalizationText($data)"></label>
+	<input type="number" class="form-control" data-bind="value: Response, attr: { min: MinValue(), max: MaxValue() }">
+</div>

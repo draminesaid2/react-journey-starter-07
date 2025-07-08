@@ -1,0 +1,13 @@
+﻿@using Crm.Library.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<!-- ko if: $root.attributeFormFilters -->
+<!-- ko if: $root.attributeFormFilters().length > 0 -->
+	@Html.RenderAction("MaterialFilterTemplates", "AttributeForm", new { Plugin = "Crm.AttributeForms" })
+	<!-- ko foreach: $root.attributeFormFilters -->
+	<div class="filter-element form-group attributeform-filter">
+		<div data-bind="template: { name: 'attributeform-filter-template-' + $data.FormElementType(), data: $data }"> </div>
+	</div>
+	<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->

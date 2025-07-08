@@ -1,0 +1,111 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<div class="lv-item media">
+	@await Html.PartialAsync("GenericListBulkControl")
+	<div data-bind="visible: !$parent.selectedItems || $parent.selectedItems().length === 0">
+		<!-- ko if: DocumentAttributes().length > 0 -->
+		<div class="lv-avatar pull-left" data-bind="fileResource: DocumentAttributes()[0].FileResource"></div>
+		<!-- /ko -->
+		<!-- ko if: DocumentAttributes().length === 0 -->
+		<div class="lv-avatar bgm-gray pull-left" data-bind="text: Helper.Article.getArticleTypeAbbreviation($data, $root.lookups.articleTypes)"></div>
+		<!-- /ko -->
+	</div>
+	<div class="media-body">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="lv-title">
+					<a data-bind="attr: { href: '#/Crm.Article/Article/DetailsTemplate/' + Id() }">
+						<span data-bind="text: Helper.Article.getArticleAutocompleteDisplay($data, window.Helper.String.defaultLanguage)"></span>
+						<small class="c-gray" data-bind="lookupValue: ArticleTypeKey, lookups: $root.lookups.articleTypes"></small>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row media-body">
+			<div class="col-xs-6">
+				<!-- ko if: ManufacturerItemNo -->
+				<div>
+					<span>@(Html.Localize("ManufacturerItemNo")): </span>
+					<span data-bind="text: ManufacturerItemNo"></span>
+				</div>
+				<!-- /ko -->
+				<ul class="lv-attrs">
+					<li>
+						<span data-bind="lookupValue: ArticleTypeKey, lookups: $root.lookups.articleTypes"></span>
+					</li>
+					<!-- ko if: ProductFamily -->
+					<li>
+						<span data-bind="text: ProductFamily().Name()"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: Price -->
+					<li>
+						<span data-bind="lookupValue: CurrencyKey, lookups: $root.lookups.currencies"></span>
+						<span data-bind="money: Price"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ArticleGroup01Key -->
+					<li>
+						<i class="zmdi zmdi-collection-item-1"></i>
+						<span data-bind="lookupValue: ArticleGroup01Key, lookups: $root.lookups.articleGroups01"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ArticleGroup02Key -->
+					<li>
+						<i class="zmdi zmdi-collection-item-2"></i>
+						<span data-bind="lookupValue: ArticleGroup02Key, lookups: $root.lookups.articleGroups02"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ArticleGroup03Key -->
+					<li>
+						<i class="zmdi zmdi-collection-item-3"></i>
+						<span data-bind="lookupValue: ArticleGroup03Key, lookups: $root.lookups.articleGroups03"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ArticleGroup04Key -->
+					<li>
+						<i class="zmdi zmdi-collection-item-4"></i>
+						<span data-bind="lookupValue: ArticleGroup04Key, lookups: $root.lookups.articleGroups04"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ArticleGroup05Key -->
+					<li>
+						<i class="zmdi zmdi-collection-item-5"></i>
+						<span data-bind="lookupValue: ArticleGroup05Key, lookups: $root.lookups.articleGroups05"></span>
+					</li>
+					<!-- /ko -->
+				</ul>
+				@Html.PluginRenderActions("MaterialArticleItemExtensions")
+				@Html.PluginRenderActions("MaterialContactItemExtensions")
+			</div>
+			<div class="col-xs-5">
+				<div>
+					<span class="f-500" data-bind="text: window.Helper.String.getTranslatedString('IsEnabled') + ': '"></span>
+					<span data-bind="translatedText: IsEnabled"></span>
+				</div>
+				<div>
+					<span class="f-500" data-bind="text: window.Helper.String.getTranslatedString('IsSparePart') + ': '"></span>
+					<span data-bind="translatedText: IsSparePart"></span>
+				</div>
+				<div>
+					<span class="f-500" data-bind="text: window.Helper.String.getTranslatedString('DangerousGoodsFlag') + ': '"></span>
+					<span data-bind="translatedText: DangerousGoodsFlag"></span>
+				</div>
+				<div>
+					<span class="f-500" data-bind="text: window.Helper.String.getTranslatedString('IsBatch') + ': '"></span>
+					<span data-bind="translatedText: IsBatch"></span>
+				</div>
+				<div>
+					<span class="f-500" data-bind="text: window.Helper.String.getTranslatedString('IsSerial') + ': '"></span>
+					<span data-bind="translatedText: IsSerial"></span>
+				</div>
+				<ul class="lv-attrs" data-bind="foreach: Tags">
+					<li data-bind="text: Name"></li>
+				</ul>
+			</div>
+			@await Html.PartialAsync("MaterialArticleContextMenu")
+		</div>
+	</div>
+</div>

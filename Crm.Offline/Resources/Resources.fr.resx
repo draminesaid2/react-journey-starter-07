@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="OfflineButtonAccess" xml:space="preserve">
+    <value>Offline button access</value>
+  </data>
+  <data name="OfflineContacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="SwitchToOfflineMode" xml:space="preserve">
+    <value>Mettre hors-ligne</value>
+  </data>
+  <data name="SwitchToOnlineMode" xml:space="preserve">
+    <value>Mettre en-ligne</value>
+  </data>
+  <data name="DatabaseMigration" xml:space="preserve">
+    <value>Migration de base de données</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="OfflineAvailable" xml:space="preserve">
+    <value>Hors ligne disponible</value>
+  </data>
+  <data name="OfflineNotAvailable" xml:space="preserve">
+    <value>Hors ligne indisponible</value>
+  </data>
+	<data name="OfflineRelevant" xml:space="preserve">
+    <value>Hors ligne disponible</value>
+  </data>
+  <data name="RegisterNumberingService" xml:space="preserve">
+    <value>Séquences de numérotation</value>
+  </data>
+	<data name="FileDownloadStatusDownloading" xml:space="preserve">
+    <value>Téléchargement {0} de {1} fichiers</value>
+  </data>
+  <data name="FetchingSynchronizationInformation" xml:space="preserve">
+    <value>Récupération des informations de synchronisation</value>
+  </data>
+	<data name="FileDownloadStatusSuccess" xml:space="preserve">
+    <value>{0} fichiers téléchargés</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+	<data name="FileDownloadFailed" xml:space="preserve">
+    <value>{0} fichiers échoués à télécharger</value>
+  </data>
+	<data name="OfflineFiles" xml:space="preserve">
+    <value>Disponible hors connexion</value>
+  </data>
+	<data name="UsedSpace" xml:space="preserve">
+    <value>espace utilisé</value>
+  </data>
+	<data name="RemainingFreeSpace" xml:space="preserve">
+    <value>Espace libre</value>
+  </data>
+	<data name="DeleteFiles" xml:space="preserve">
+    <value>Supprimer des fichiers</value>
+  </data>
+	<data name="SyncFiles" xml:space="preserve">
+    <value>synchroniser les fichiers</value>
+  </data>
+	<data name="InitializeSyncTopMenuViewModel" xml:space="preserve">
+    <value>Synchronisation</value>
+  </data>
+  <data name="IncompleteNoteHistoryHint" xml:space="preserve">
+    <value>Cette liste est peut-être incomplète. Votre client est configuré de manière à synchroniser l'historique des notes des {0} derniers jours. Ceci peut être changé en suivant ce lien &lt;a class="alert-link" href="#/Main/Account/UserProfile?tab=tab-replication-groups"&gt;synchronization settings&lt;/a&gt;.</value>
+  </data>
+  <data name="ReplicationChangesAppliesAfterSync" xml:space="preserve">
+    <value>Les modifications apportées à ces paramètres seront appliquées après la prochaine synchronisation réussie.</value>
+  </data>
+  <data name="NoReplicationSettingsOnlineMsg" xml:space="preserve">
+    <value>La modification des paramètres de réplication n'est pas disponible en mode en ligne.</value>
+  </data>
+  <data name="MultipleTabsErrorMessage" xml:space="preserve">
+    <value>Le client hors ligne L-mobile est déjà ouvert dans un autre onglet. Le client hors ligne L-mobile ne peut pas être utilisé dans plusieurs onglets. Veuillez fermer cet onglet et revenir à l'onglet déjà ouvert.</value>
+  </data>
+</root>

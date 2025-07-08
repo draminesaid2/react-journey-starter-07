@@ -1,0 +1,221 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: article">
+			<h2 class="modal-title" data-bind="visible: $data.getEntity().entityState === window.$data.EntityState.Added">@(Html.Localize("CreateArticle"))</h2>
+			<h2 class="modal-title" data-bind="visible: $data.getEntity().entityState !== window.$data.EntityState.Added">@(Html.Localize("EditArticle"))
+				<small data-bind="text: Helper.Lookup.getLookupValue($root.lookups.articleTypes, $data.ArticleTypeKey)"></small>
+			</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: article">
+				<fieldset>
+					<legend class="m-b-25 c-black b-0 f-500 f-14">
+						@(Html.Localize("BasicInformation"))
+					</legend>
+					<form-element id="ArticleTypeKey" data-bind="visible:  $data.getEntity().entityState === window.$data.EntityState.Added" params="value: ArticleTypeKey, caption: 'ArticleType', type: 'select'">
+						<select name="ArticleTypeKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleTypes, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleType'), placeholder: placeholder }"></select>
+					</form-element>
+					<div class="row">
+						<div class="col-md-6">
+							<form-element params="value: ItemNo, name: 'ItemNo', caption: 'ItemNo', type: 'text'"></form-element>
+						</div>
+						<div class="col-md-6">
+							<form-element params="value: Description, name: 'Description', caption: 'Description', type: 'text'"></form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<form-element params="value: ManufacturerItemNo, name: 'ManufacturerItemNo', caption: 'ManufacturerItemNo', type: 'text'"></form-element>
+						</div>
+						<div class="col-md-6">
+							<form-element params="value: BarCode, name: 'BarCode', caption: 'Barcode', type: 'text'"></form-element>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-md-6">
+
+						<form-element id="ProductFamilyKey" params="value: ProductFamilyKey, caption: 'ProductFamily'">
+							@await Html.PartialAsync("NestedAutocompleterTemplate")
+							<select name="ProductFamilyKey" class="form-control" data-bind="select2autocompleter: { data: $parent.ProductFamilyKey, autocompleteOptions: { nestedProperty: 'ParentId', nested: true,templateResultId: 'nested-autocompleter-options', table: 'CrmArticle_ProductFamily', orderBy: ['Name'], mapDisplayObject: function (c) { return { id: c.Id, text: c.Name, item: c }; }, placeholder: placeholder} }">
+							</select>
+						</form-element>
+					</div>
+				</div>
+					<div id="btnTranslations" class="animated fadeIn" data-bind="visible: !$root.translation()">
+						<a href="#" data-bind="click: $root.toggleTranslations">
+							@(Html.Localize("AddTranslations"))
+						</a>
+					</div>
+					<div id="blockTranslation" class="animated fadeIn" data-bind="visible: $root.translation">
+						<!-- ko foreach: $root.descriptions -->
+						<div class="row">
+							<div class="col-md-12">
+								<form-element params="value: Value, name: Name, caption: Name, type: 'text'"></form-element>
+							</div>
+						</div>
+						<!-- /ko -->
+					</div>
+					@Html.PluginRenderActions("MaterialArticleEditorBody")
+				</fieldset>
+				<fieldset>
+					<legend class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+						@(Html.Localize("ExtendedInformation"))
+					</legend>
+					<div class="row">
+						<div class="col-md-4">
+							<!-- ko ifnot: ArticleTypeKey() == "Tool" -->
+							<form-element params="value: Price, name: 'Price', caption: ArticleTypeKey() == 'Service' ? 'PriceService' : 'Price', type: 'number'"></form-element>
+							<!-- /ko -->
+						</div>
+						<div class="col-md-4">
+							<!-- ko ifnot: ArticleTypeKey() == "Tool" -->
+							<form-element params="value: PurchasePrice, name: 'PurchasePrice', caption: 'PurchasePrice', type: 'number'"></form-element>
+							<!-- /ko -->
+						</div>
+						<div class="col-md-4">
+							<form-element id="CurrencyKey" params="value: CurrencyKey, caption: 'Currency', type: 'select'">
+								<select name="CurrencyKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.currencies, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Currency'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<!-- ko if: ArticleTypeKey() == "Material" || ArticleTypeKey() == "Cost" -->
+							<form-element id="QuantityUnitKey" params="value: QuantityUnitKey, caption: 'QuantityUnit', type: 'select'">
+								<select name="QuantityUnitKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.quantityUnits, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_QuantityUnit'), placeholder: placeholder }">
+								</select>
+							</form-element>
+							<!-- /ko -->
+						</div>
+						<div class="col-md-4">
+							<!-- ko ifnot: ArticleTypeKey() == "Material" || ArticleTypeKey() == "Cost" -->
+							<input type="hidden" data-bind="value: QuantityUnitKey" id="QuantityUnitKey" name="QuantityUnitKey"/>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<form-element params="value: IsEnabled, name: 'IsEnabled', caption: 'IsEnabled', type: 'checkbox'"></form-element>
+						</div>
+						<div class="col-md-4">
+							<form-element params="value: ValidFrom, caption: 'ValidFrom', type: 'datePicker'"></form-element>
+						</div>
+						<div class="col-md-4">
+							<form-element params="value: ValidTo, caption: 'ValidTo', type: 'datePicker'"></form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<form-element params="value: QuantityStep, name: 'QuantityStep', caption: 'QuantityStep', type: 'number'"></form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element id="ArticleGroup01Key" params="value: ArticleGroup01Key, caption: 'ArticleGroup01', type: 'select'">
+								<select name="ArticleGroup01Key" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleGroups01, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleGroup01'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element id="ArticleGroup02Key" params="value: ArticleGroup02Key, caption: 'ArticleGroup02', type: 'select'">
+								<select name="ArticleGroup02Key" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleGroups02, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleGroup02'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element id="ArticleGroup03Key" params="value: ArticleGroup03Key, caption: 'ArticleGroup03', type: 'select'">
+								<select name="ArticleGroup03Key" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleGroups03, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleGroup03'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element id="ArticleGroup04Key" params="value: ArticleGroup04Key, caption: 'ArticleGroup04', type: 'select'">
+								<select name="ArticleGroup04Key" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleGroups04, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleGroup04'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element id="ArticleGroup05Key" params="value: ArticleGroup05Key, caption: 'ArticleGroup05', type: 'select'">
+								<select name="ArticleGroup05Key" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.articleGroups05, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ArticleGroup05'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<form-element params="value: WarrantyInMonths, name: 'WarrantyInMonths', caption: 'WarrantyInMonths', type: 'number'"></form-element>
+						</div>
+						<div class="col-md-6">
+							<form-element params="value: GuaranteeInMonths, name: 'GuaranteeInMonths', caption: 'GuaranteeInMonths', type: 'number'"></form-element>
+						</div>
+					</div>
+				</fieldset>
+				<!-- ko if: ArticleTypeKey() == "Material" -->
+				<fieldset>
+					<legend class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+						@(Html.Localize("MaterialAndStockInformation"))
+					</legend>
+					<div class="row">
+						<div class="col-md-2">
+							<form-element params="value: IsSerial, name: 'IsSerial', caption: 'IsSerial', type: 'checkbox'"></form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element params="value: IsBatch, caption: 'IsBatch', type: 'checkbox'"></form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element params="value: DangerousGoodsFlag, name: 'DangerousGoodsFlag', caption: 'DangerousGoodsFlag', type: 'checkbox'"></form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element params="value: IsSparePart, caption: 'IsSparePart', type: 'checkbox'"></form-element>
+						</div>
+						<div class="col-md-2">
+							<form-element params="value: IsWarehouseManaged, caption: 'IsWarehouseManaged', type: 'checkbox'"></form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<form-element params="value: LeadTimeInDays, name: 'LeadTimeInDays', caption: 'LeadTimeInDays', type: 'number'"></form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<form-element params="value: Weight, name: 'Weight', caption: 'WeightWithUnitKG', type: 'number'"></form-element>
+						</div>
+						<div class="col-md-6">
+							<form-element params="value: WeightNet, name: 'WeightNet', caption: 'WeightNetWithUnitKG', type: 'number'"></form-element>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<form-element params="value: Length, name: 'Length', caption: 'LengthWithUnitCM', type: 'number'"></form-element>
+						</div>
+						<div class="col-md-4">
+							<form-element params="value: Width, name: 'Width', caption: 'WidthWithUnitCM', type: 'number'"></form-element>
+						</div>
+						<div class="col-md-4">
+							<form-element params="value: Height, name: 'Height', caption: 'HeightWithUnitCM', type: 'number'"></form-element>
+						</div>
+					</div>
+				</fieldset>
+				<!-- /ko -->
+				<fieldset>
+					<legend class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+						@(Html.Localize("OtherInformation"))
+					</legend>
+					<div class="row">
+						<div class="col-md-4">
+							<form-element id="VATLevelKey" params="value: VATLevelKey, caption: 'VATLevel', type: 'select'">
+								<select name="VATLevelKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.vatLevels, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_VATLevel'), placeholder: placeholder }">
+								</select>
+							</form-element>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		 @await Html.PartialAsync("CreateFormFooter") 
+	</div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: dynamicForm">
+			<h2>@(Html.Localize("CreateDynamicFormTitle"))</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form">
+				<div data-bind="visible: $root.dynamicForm().CategoryKey() !== 'PDF-Checklist'">
+					<form-element params="value: file, caption: 'ImportFile', type: 'fileResource', accept: 'application/json'"></form-element>
+				</div>
+				<!-- ko with: dynamicFormLocalization -->
+				<form-element params="value: Value, name: 'Title', caption: 'Title', type: 'text'"></form-element>
+				<form-element params="value: Hint, name: 'Description', caption: 'Description', type: 'textarea'"></form-element>
+				<!-- /ko -->
+				<!-- ko with: dynamicForm -->
+				<form-element id="CategoryKey" params="value: CategoryKey, caption: 'Category', type: 'select'">
+					<select name="CategoryKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmDynamicForms_DynamicFormCategory'), placeholder: placeholder}">
+					</select>
+				</form-element>
+				<!-- /ko -->
+				@Html.PluginRenderActions("CreateDynamicForm")
+			</form>
+		</div>
+		 @await Html.PartialAsync("CreateFormFooter") 
+	</div>
+</div>

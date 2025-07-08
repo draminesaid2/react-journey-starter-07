@@ -1,0 +1,41 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage
+@{Layout = "~/Views/Shared/Layout/HtmlTemplateLayout.cshtml";}
+@using Crm.Extensions
+@using Crm.Library.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.Offline.Extensions
+
+@section TemplateMainContent {
+
+	@(Html.JsResource("jayDataJs"))
+	@await Html.PartialAsync("Report/Header")
+	@using (Html.TemplateContext("$root.DynamicForm")){
+		<h1 class="text-right" data-bind="text: $root.getLocalizationText(null)"></h1>
+		<h4 class="text-right c-gray" data-bind="text: window.Helper.DynamicForm.getDescription($root.DynamicForm(), $root.localizations(), $root.selectedLanguage())"></h4>
+		<div class="dynamic-form-response-header">
+			@Html.PluginRenderActions("DynamicFormResponseHeader")
+		</div>
+		@using (Html.TemplateForEach("$root.groupedElements()")){
+			<div class="section">
+				@using (Html.TemplateForEach("$data")){
+					<div class="row elementgroup">
+						@using (Html.TemplateForEach("$data")){
+							<div data-bind="css: 'form-element col-xs-' + 12 / $data.Size() + ' form-element-' + $data.FormElementType().toLowerCase(), visible: $root.showInResponse($data)">
+								@Html.RenderAction("ResponseTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+							</div>
+						}
+					</div>
+				}
+			</div>
+		}
+	 }
+	<div class="dynamic-form-response-footer">
+		@Html.PluginRenderActions("DynamicFormResponseFooter")
+	</div>
+	@using (Html.TemplateContext("$root.DynamicForm")){
+		<div data-bind="visible: $root.elements().indexOf(window.ko.utils.arrayFirst($root.elements(), function (element) { return element.FormElementType() === 'SignaturePadWithPrivacyPolicy' && (!!element.Required && element.Required() == true || $root.DynamicForm().HideEmptyOptional() == false || $root.DynamicForm().HideEmptyOptional() == true && !!element.Required && element.Required() == false && (element.Response() != null && element.Response() != '' && ko.toJSON(element.Response) != element.DefaultResponseValue())); })) > -1">
+			 @await Html.PartialAsync("DataPrivacyPolicy")
+		</div>
+	}
+	@await Html.PartialAsync("Report/Footer")
+}

@@ -1,0 +1,9 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<li data-bind="tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+	<a href="#" data-trigger="#right-nav">
+		<i class="tm-icon zmdi zmdi-search-in-page"></i>
+	</a>
+</li>
+@await Html.PartialAsync("FilterTemplate")

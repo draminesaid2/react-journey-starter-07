@@ -1,0 +1,17 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: station">
+			<h2>@(Html.Localize("CreateStation"))</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: station">
+				<form-element params="value: Name, caption: 'Name', type: 'text'"></form-element>
+				<form-element params="value: LegacyId, caption: 'LegacyId', type: 'text'"></form-element>
+			</form>
+		</div>
+		 @await Html.PartialAsync("CreateFormFooter") 
+	</div>
+</div>

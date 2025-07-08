@@ -1,0 +1,36 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<li id="tasks-top-menu" class="dropdown" style="display: none" data-bind="visible: true, tooltip: true" data-placement="bottom" title="@(Html.Localize("Tasks"))">
+	<a data-toggle="dropdown" class="tm-task" href="#" aria-expanded="false">
+		<i class="tm-icon zmdi zmdi-assignment-check"></i>
+		<i class="tmn-counts" data-bind="text: taskCount, visible: taskCount() > 0"></i>
+	</a>
+	<div class="dropdown-menu pull-right dropdown-menu-lg">
+		<div class="listview">
+			<!-- ko if: overDueTasks().length -->
+			<div class="lv-header lv-header-alt c-red">
+				@(Html.Localize("T_DueTasks")) @(Html.Localize("Tasks"))
+			</div>
+			<div class="o-hidden" data-bind="foreach: overDueTasks">
+				 @await Html.PartialAsync("MaterialTask") 
+			</div>
+			<!-- /ko -->
+			<!-- ko if: dueTasks().length || !items().length -->
+			<div class="lv-header lv-header-alt">
+				@(Html.Localize("T_Tasks"))
+			</div>
+			<!-- /ko -->
+			<!-- ko if: dueTasks().length -->
+			<div class="o-hidden" data-bind="foreach: dueTasks">
+				 @await Html.PartialAsync("MaterialTask") 
+			</div>
+			<!-- /ko -->
+			<!-- ko ifnot: items().length -->
+			<div class="animated tada">
+				<empty-state-box params="mood: 'happy', text: '@(Html.Localize("No upcoming Tasks"))'"></empty-state-box>	
+			</div>
+			<!-- /ko -->
+			<a class="lv-footer" href="#/Main/TaskList/IndexTemplate">@(Html.Localize("AllTasks"))</a>
+		</div>
+	</div>
+</li>

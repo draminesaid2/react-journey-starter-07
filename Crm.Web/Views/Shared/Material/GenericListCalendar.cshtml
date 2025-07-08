@@ -1,0 +1,34 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<GenericListViewModel>
+@using Crm.ViewModels
+@using Crm.Library.Globalization.Extensions
+
+<full-calendar params="items: items, getEvent: getTimelineEvent.bind($data), start: timelineStart, end: timelineEnd, defaultView: calendarDefaultView, eventClick: getEventClick">
+	<ul class="actions actions-alt">
+		<li class="dropdown">
+			<a href="#" data-toggle="dropdown" data-bind="tooltip: true" title="@(Html.Localize("Show"))">
+				<i class="zmdi zmdi-eye"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: $parent.timelineProperties">
+				<li data-bind="css: { 'active' : $parentContext.$parent.timelineProperty() == $data }">
+					<a data-bind="click: $parentContext.$parent.setTimelineProperty, text: $data.Caption" href="#"></a>
+				</li>
+			</ul>
+		</li>
+		<li class="dropdown">
+			<a href="#" data-toggle="dropdown">
+				<i class="zmdi zmdi-more-vert"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right">
+				<li data-bind="attr: { class: $parent.calendarDefaultView() == 'month' ? 'active' : '' }">
+					<a data-view="month" href="#">@(Html.Localize("CalendarViewMonth"))</a>
+				</li>
+				<li data-bind="attr: { class: ['agendaWeek', 'basicWeek'].indexOf($parent.calendarDefaultView()) > -1 ? 'active' : '' }">
+					<a data-view="agendaWeek" href="#">@(Html.Localize("CalendarViewAgendaWeek"))</a>
+				</li>
+				<li data-bind="attr: { class: ['agendaDay', 'basicDay'].indexOf($parent.calendarDefaultView()) > -1 ? 'active' : '' }">
+					<a data-view="agendaDay" href="#">@(Html.Localize("CalendarViewAgendaDay"))</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</full-calendar>

@@ -1,0 +1,17 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="form-group" data-bind="validationElement: $root.getLocalization($data).Hint, validationOptions: { insertMessages: false }">
+	<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+		<div class="fg-line">
+			<label class="fg-label control-label">
+				<span class="description" data-bind="translatedText: 'Hint'"></span>
+			</label>
+			<textarea class="form-control" data-bind="value: $root.getLocalization($data).Hint, autosize: true" id="Hint" name="Hint"></textarea>
+		</div>
+		<span class="input-group-addon" data-bind="visible: $root.form().Languages().length > 1">
+			<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: () => $root.editLocalizations($data, null, true, true), tooltip: true" title="@(Html.Localize("Translations"))">
+				<i class="zmdi zmdi-globe"></i>
+			</a>
+		</span>
+	</div>
+</div>

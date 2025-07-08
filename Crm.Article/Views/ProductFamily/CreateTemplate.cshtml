@@ -1,0 +1,30 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: productfamily">
+			<!-- ko if: ParentName() == null-->
+			<h2>@(Html.Localize("CreateProductFamily"))</h2>
+			<!-- /ko -->
+			<!-- ko if: ParentName() !== null -->
+			<h2>@(Html.Localize("CreateChildProductFamily"))</h2>
+			<div class="m-t-5">
+				@(Html.Localize("ParentName")):
+				<span data-bind="text: ParentName"></span>
+			</div>
+			<!-- /ko -->
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: productfamily">
+				<form-element params="value: Name, caption: 'Name', type: 'text'"></form-element>
+				<form-element params="value: BackgroundInfo, caption: 'BackgroundInfo', type: 'textarea'"></form-element>
+				<form-element id="StatusKey" params="value: StatusKey, caption: 'Status', type: 'select'">
+					<select name="StatusKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.productFamilyStatuses, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('CrmArticle_ProductFamilyStatus'), placeholder: placeholder}">
+					</select>
+				</form-element>
+			</form>
+		</div>
+		 @await Html.PartialAsync("CreateFormFooter") 
+	</div>
+</div>

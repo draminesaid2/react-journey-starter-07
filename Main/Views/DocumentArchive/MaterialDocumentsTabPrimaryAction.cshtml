@@ -1,0 +1,10 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko requiredPermission: { name: 'Create', group: 'DocumentAttribute' } -->
+<li data-bind="with: $parent, visible: $parent.canAddDocument">
+	<a href="#" data-mfb-label="@(Html.Localize("NewDocument"))" data-route="Main/DocumentArchive/EditTemplate/?referenceKey={{contactId}}" data-toggle="modal" data-target="#modal">
+		<i class="zmdi zmdi-plus"></i>
+	</a>
+</li>
+<!-- /ko -->

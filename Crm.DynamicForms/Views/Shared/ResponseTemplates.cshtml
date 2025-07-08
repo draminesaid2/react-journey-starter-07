@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModelList<string>>
+@using Crm.Offline.Extensions
+@foreach (var elementType in Model.List)
+   {
+       using (Html.TemplateCondition(String.Format("$data.FormElementType() == '{0}'", elementType)))
+       {
+        <div data-bind="css: CssExtra(), attr: { id: 'formelement-' + Id() }, visible: $data.isVisible">
+            @await Html.PartialAsync(String.Format("ResponseTemplates/{0}", elementType))
+        </div>
+     }
+   } 

@@ -1,0 +1,8 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: $root.form().CategoryKey() === "AttributeForm" -->
+<div class="alert alert-warning text-center" style="display: none;" data-bind="visible: !$root.form().ExtensionValues.ContactType()">
+	@(Html.Localize("PleaseSelectAContactType", Html.Localize("AttributeFormContactRelationship")))
+</div>
+<!-- /ko -->

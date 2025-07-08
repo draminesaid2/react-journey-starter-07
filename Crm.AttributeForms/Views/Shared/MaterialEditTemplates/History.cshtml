@@ -1,0 +1,8 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="col-xs-1 pull-right text-center" data-bind="requiredPermission: { name: 'Read', group: 'AttributeForm' }">
+	<a href="#" data-bind="attr: { 'data-route': 'Crm.AttributeForms/AttributeForm/HistoryTemplate/?contactKey=' + $root.formReference().ReferenceKey() + '&dynamicFormKey=' + $root.DynamicForm().Id() + '&elementKey=' + $data.Id() + '&formElementType=' + $data.FormElementType() + '&propertyName=' + $root.getLocalizationText($data) }, tooltip: true" title="@(Html.Localize("History"))" data-toggle="modal" data-target="#modal" >
+		<i class="f-20 zmdi zmdi-time-restore p-t-10"></i>
+	</a>
+</div>

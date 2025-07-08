@@ -1,0 +1,80 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage<ClientSelectionViewModel>
+@{Layout = "~/Views/Shared/Layout/LoginLayout.cshtml";}
+@using Crm.ViewModels
+@using Crm.Library.Globalization.Extensions
+
+@section TitleContent {
+
+	<title>@(Html.Localize("Login"))</title>
+
+}
+
+@section MainContent {
+
+	@await Html.PartialAsync("Master/CordovaJs")
+
+	<div class="suggestion-header">
+		<h1>
+			@(Model.Site.DisplayName)
+		</h1>
+		<p>
+			@(Html.Localize("Welcome")) @(Model.User.DisplayName)
+		</p>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div id="client-selection" class="row lcb-alt m-t-25 flex-centering">
+		@{ var colWidth = Model.RedirectProviderResults.Count > 0 ? 12 / Model.RedirectProviderResults.Count : 0; }
+		@foreach (var redirectProviderResult in Model.RedirectProviderResults) {
+			<div class="col-xs-12 col-sm-@(colWidth) p-b-30 p-t-30">
+				<div class="card pt-inner h-80">
+					<div class="pti-header p-b-30 bgm-blue">
+						<a href="@(Url.Content(redirectProviderResult.LoginUrl))" class="lcb-user bgm-white">
+							<i class="zmdi zmdi-@(redirectProviderResult.Icon) zmdi-hc-3x c-bluegray"></i>
+						</a>
+						<br/>
+						<div id="@($"{redirectProviderResult.Name}LoginTitle")" class="ptih-title">@(Html.Localize($"{redirectProviderResult.Name}LoginTitle"))
+						</div>
+					</div>
+		
+					<div class="pti-body">
+						<div class="ptib-item">
+							@(Html.Localize($"{redirectProviderResult.Name}LoginDescription"))
+						</div>
+					</div>
+					<a href="@(Url.Content(redirectProviderResult.LoginUrl))"
+						class="btn btn-login btn-primary btn-float waves-effect waves-circle waves-float"
+						data-wml-speech-command="@($"{redirectProviderResult.Name}LoginTitle")">
+						<i class="zmdi zmdi-arrow-forward"></i>
+					</a>
+					<div class="pti-footer">
+					</div>
+				</div>
+			</div>
+		}
+		@if (Model.RedirectProviderResults.Count == 0)
+		{
+			<div class="col-xs-12 col-sm-@(colWidth) p-b-30 p-t-30">
+				<div class="card pt-inner h-80">
+					<div class="pti-header p-b-30 bgm-blue">
+						<div class="ptih-title">@(Html.Localize("Warning"))</div>
+					</div>
+					<div class="pti-body">
+						<div class="ptib-item">
+							@(Html.Localize("NoClientAvailable"))
+						</div>
+					</div>
+					<div class="pti-footer">
+					</div>
+				</div>
+			</div>
+		}
+		<div class="col-xs-12">
+			<a id="logout" href="@(Url.Action("Logout", "Account"))" class="btn btn-xs btn-default waves-effect logout-client-selection">
+				@(Html.Localize("LoginAsDifferentUser", searchStrategy: Search.OnlyMain))
+			</a>
+		</div>
+	</div>
+
+}

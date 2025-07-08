@@ -1,0 +1,41 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<string>
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<li id="online-indicator" class="dropdown" style="display: none" data-bind="visible: true, tooltip: { title: '@(Html.Localize("DataSynchronization"))' }" data-placement="bottom">
+	<a data-toggle="dropdown" href="#" aria-expanded="false" data-bind="visible: status() === 'offline'">
+		<i class="tm-icon zmdi" data-bind="css: { 'zmdi-refresh-sync-alert': fileSyncError(), 'zmdi-refresh-sync': !fileSyncError(), 'zmdi-hc-spin-reverse': fileSyncActive }"></i>
+		<i class="tmn-counts" data-bind="css: { 'bgm-green': online() && transientItemCount() === 0, 'bgm-amber': online() && transientItemCount() > 0, 'bgm-red': online() === false, 'zmdi zmdi-check': transientItemCount() === 0 }">
+			<span data-bind="visible: transientItemCount() > 0, text: transientItemCount"></span>
+		</i>
+	</a>
+	<ul class="dropdown-menu dm-icon pull-right">
+		<li>
+			<a href="#" data-bind="click: sync">
+				<i class="zmdi zmdi-time-restore"></i> <span data-bind="text: { value: !!lastSyncAgo() ? lastSyncAgo() : '@(Html.Localize("DataSynchronization"))', whiteSpace: 'none' }"></span>
+			</a>
+		</li>
+		<li>
+			<a href="#" data-route="Crm.Offline/Offline/Files" data-toggle="modal" data-target="#modal">
+				<i class="zmdi zmdi-file" data-bind="visible: fileSyncActive() === false"></i>
+				<div class="preloader pl-xs" data-bind="visible: fileSyncActive">
+					<svg class="pl-circular" viewBox="25 25 50 50">
+						<circle class="plc-path" cx="50" cy="50" r="20"></circle>
+					</svg>
+				</div>
+				<span data-bind="css: { 'p-l-10' : fileSyncActive }">@(Html.Localize("Files"))</span>
+			</a>
+		</li>
+	</ul>
+</li>
+
+@(Html.HiddenTranslation("SynchronizationNotCompleteWarning"))
+@(Html.HiddenTranslation("Hour"))
+@(Html.HiddenTranslation("Hours"))
+@(Html.HiddenTranslation("Minute"))
+@(Html.HiddenTranslation("Minutes"))
+@(Html.HiddenTranslation("JustSynchronized"))
+@(Html.HiddenTranslation("LastSyncAgo"))
+@(Html.HiddenTranslation("LastSyncOnAt"))
+@(Html.HiddenTranslation("SwitchToOfflineMode"))
+@(Html.HiddenTranslation("SwitchToOnlineMode"))

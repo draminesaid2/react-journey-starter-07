@@ -1,0 +1,22 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-postings" data-bind="with: tabs()['tab-postings']">
+	<ul class="top-menu">
+		@Html.PluginRenderActions("PostingsTabTopMenu")
+		<li data-bind="visible: true, tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+			<a id="open-generic-list-filter" data-trigger="#right-nav" href="#" data-route="@("Main/PostingList/FilterTemplate")">
+				<i class="tm-icon zmdi zmdi-search-in-page"></i>
+			</a>
+		</li>
+	</ul>
+	<empty-state-box params="mood: 'happy', title: 'PostingsEmptyStateTitle', text: 'PostingsEmptyState'" data-bind="visible: items().length === 0">
+	</empty-state-box>
+	<div class="generic-list listview lv-bordered">
+		<div class="lv-body" data-bind="foreach: items">
+			 @await Html.PartialAsync("MaterialPosting") 
+		</div>
+	</div>
+</div>
+

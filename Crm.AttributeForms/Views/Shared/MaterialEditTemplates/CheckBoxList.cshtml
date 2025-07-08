@@ -1,0 +1,19 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialEditTemplates/Hint") 
+	 @await Html.PartialAsync("MaterialEditTemplates/History") 
+	<div data-bind="css: 'col-xs-10'">
+		<pmbb-edit-entry params="caption: $root.getLocalizationText($data), validationElement: Response">
+			<!-- ko foreach: Helper.DynamicForm.getChoicesArray($data) -->
+			<div class="checkbox m-b-15 p-l-0" data-bind="css: Helper.DynamicForm.getCssFromLayout($parent.Layout())">
+				<label>
+					<input type="checkbox" data-bind="checked: $parent.Response, value: $data">
+					<i class="input-helper"></i>
+					<span data-bind="text: $root.getLocalizationText($parent, $data)"></span>
+				</label>
+			</div>
+			<!-- /ko -->
+		</pmbb-edit-entry>
+	</div>
+</div>

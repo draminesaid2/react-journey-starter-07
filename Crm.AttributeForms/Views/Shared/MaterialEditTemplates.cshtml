@@ -1,0 +1,9 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModelList<string>>
+
+@foreach (var elementType in Model.List) { 
+	<script type="text/html" id="attributeform-edit-template-@(elementType)">
+		<div data-bind="css: CssExtra(), attr:{id:'formelement-' + Id()}">
+			 @await Html.PartialAsync(String.Format("MaterialEditTemplates/{0}", elementType)) 
+		</div>
+	</script>
+ } 

@@ -1,0 +1,150 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Extensions
+
+<div class="modal fade" id="dynamic-form-element-rule-editor" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">@(Html.Localize("FormElementRules"))</h4>
+			</div>
+			<div class="modal-body">
+				@(Html.HiddenTranslations("PleaseSelect",
+					    "DynamicFormElementConditionAfter",
+					    "DynamicFormElementConditionBefore",
+					    "DynamicFormElementConditionBeginsWith",
+					    "DynamicFormElementConditionContains",
+					    "DynamicFormElementConditionDoesNotContain",
+					    "DynamicFormElementConditionEmpty",
+					    "DynamicFormElementConditionEndsWith",
+					    "DynamicFormElementConditionEquals",
+					    "DynamicFormElementConditionFilesEqualTo",
+					    "DynamicFormElementConditionFilesLessThan",
+					    "DynamicFormElementConditionFilesMoreThan",
+					    "DynamicFormElementConditionGreater",
+					    "DynamicFormElementConditionLess",
+					    "DynamicFormElementConditionNotEmpty",
+					    "DynamicFormElementConditionNotEquals",
+					    "DynamicFormElementConditionNotSigned",
+					    "DynamicFormElementConditionSigned",
+					    "DynamicFormElement",
+					    "Filter",
+					    "RuleViolation.Required",
+					    "Value"
+					    ))
+				<form>
+					<div data-bind="foreach: { data: rules, afterAdd: window.ko.effects.slideIn, beforeRemove: window.ko.effects.slideOut }">
+						<div class="rule">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<select class="form-control" data-bind="value: $root.ruleType" name="Type">
+											<option value="Show">@(Html.Localize("DynamicFormElementRuleTypeShow"))</option>
+											<option value="Hide">@(Html.Localize("DynamicFormElementRuleTypeHide"))</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 col-md-push-1">
+									<div class="form-group" data-bind="visible: Conditions().length > 1">
+										<select class="form-control" data-bind="value: MatchType" name="MatchType">
+											<option value="Any">@(Html.Localize("DynamicFormElementRuleMatchTypeAny"))</option>
+											<option value="All">@(Html.Localize("DynamicFormElementRuleMatchTypeAll"))</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-push-1 col-md-2 text-right">
+									<div class="form-group">
+										<div class="btn-group" role="group">
+											<a class="btn btn-default btn-danger" href="#" data-bind="click: $root.removeFormElementRule.bind($root, $data)"><i class="fa fa-trash-o"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div data-bind="foreach: { data: Conditions, afterAdd: window.ko.effects.slideIn, beforeRemove: window.ko.effects.slideOut }">
+								<div class="condition">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group" data-bind="validationElement: DynamicFormElementId">
+												<select name="DynamicFormElementId" class="form-control" data-bind="options: $root.selectableFormElements, optionsCaption: Helper.String.getTranslatedString('PleaseSelect'), optionsText: $root.getLocalizationText, optionsValue: 'Id', value: DynamicFormElementId" required="required"></select>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group" data-bind="validationElement: Filter">
+												<select name="Filter" class="form-control" data-bind="options: $root.getSelectableConditionFilters($data), optionsCaption: Helper.String.getTranslatedString('PleaseSelect'), optionsText: 'Text', optionsValue: 'Value', value: Filter" required="required"></select>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group" data-bind="validationElement: Value">
+												<!-- ko ifnot: Filter() === 'Empty' || Filter() === 'NotEmpty' || !Filter() -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'CheckBoxList' -->
+												<select name="Value" class="form-control" data-bind="selectedOptions: $root.getSelectedConditionFilterValues($data), options: $root.getSelectableConditionValues($data), optionsText: 'Text', optionsValue: 'Value'" multiple="multiple"></select>
+												<!-- /ko -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'DropDown' || $root.getConditionFormElementType($data) === 'RadioButtonList' -->
+												<select name="Value" class="form-control" data-bind="value: Value, options: $root.getSelectableConditionValues($data), optionsText: 'Text', optionsValue: 'Value'"></select>
+												<!-- /ko -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'Date' -->
+												<input name="Value" class="form-control" type="date" data-bind="value: Value" />
+												<!-- /ko -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'Time' -->
+												<input name="Value" class="form-control" type="time" data-bind="value: Value" />
+												<!-- /ko -->
+												<!-- ko if:  $root.getConditionFormElementType($data) === 'Number' || $root.getConditionFormElementType($data) === 'FileAttachmentDynamicFormElement' -->
+												<input name="Value" class="form-control" type="number" data-bind="value: Value" />
+												<!-- /ko -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'SignaturePad' || $root.getConditionFormElementType($data) === 'SignaturePadWithPrivacyPolicy' -->
+												<!-- no value required -->
+												<!-- /ko -->
+												<!-- ko if: $root.getConditionFormElementType($data) === 'MultiLineText' || $root.getConditionFormElementType($data) === 'SingleLineText' -->
+												<input name="Value" class="form-control" type="text" data-bind="value: Value" />
+												<!-- /ko -->
+												<!-- /ko -->
+												<!-- ko if: Filter() === 'Empty' || Filter() === 'NotEmpty' || !Filter() -->
+												<input name="Value" class="form-control" type="hidden" data-bind="value: Value(null)" />
+												<!-- /ko -->
+											</div>
+										</div>
+										<div class="col-md-2 text-right">
+											<div class="btn-group" role="group">
+												<!-- ko if: $parent.Conditions().length > 1 -->
+												<a class="btn btn-default btn-sm" href="#" data-bind="click: $root.removeFormElementRuleCondition.bind($root, $parent, $data)"><i class="fa fa-minus-circle text-danger"></i></a>
+												<!-- /ko -->
+												<a class="btn btn-default btn-sm" href="#" data-bind="click: $root.createFormElementRuleCondition.bind($root, $parent, $index)"><i class="fa fa-plus-circle text-success"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr />
+						</div>
+					</div>
+				</form>
+				<div data-bind="if: rules().length === 0">
+					<h2>
+						@(Html.Localize("NoFormElementRule"))
+					</h2>
+					<br/>
+					<p>
+						<a class="btn btn-primary" href="#" data-bind="click: $root.createFormElementRule">
+							@(Html.Localize("CreateFormElementRule"))
+						</a>
+					</p>
+				</div>
+				<div data-bind="if: rules().length > 0">
+					<br/>
+					<p>
+						<a class="btn btn-primary" href="#" data-bind="click: $root.createFormElementRule">
+							@(Html.Localize("CreateAnotherFormElementRule"))
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@(Html.Localize("Cancel"))</button>
+				<button type="button" class="btn btn-primary" data-bind="click: save">@(Html.Localize("Apply"))</button>
+			</div>
+		</div>
+	</div>
+</div>

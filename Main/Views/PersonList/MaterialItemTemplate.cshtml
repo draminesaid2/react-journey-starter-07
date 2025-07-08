@@ -1,0 +1,105 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div id="{{Id}}" class="lv-item media">
+	 @await Html.PartialAsync("GenericListBulkControl") 
+	<div class="lv-avatar bgm-bluegray pull-left" data-bind="text: Helper.Person.getInitials($data), visible: !$parent.selectedItems || $parent.selectedItems().length === 0"></div>
+	<div class="media-body">
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="lv-title">
+					<!-- ko requiredPermission: { name: 'Read', group: 'Person' } --> 
+					<a href="#/Main/Person/DetailsTemplate/{{Id}}">
+						<span data-bind="visible: IsRetired()">[@(Html.Localize("Inactive"))]&nbsp;</span><span data-bind="text: Helper.Person.getDisplayName($data)"></span>
+					</a>
+					<!-- /ko -->
+					<!-- ko noRequiredPermission: { name: 'Read', group: 'Person' } -->
+					<span data-bind="visible: IsRetired()">[@(Html.Localize("Inactive"))]&nbsp;</span><span data-bind="text: Helper.Person.getDisplayName($data) "></span>
+					<!-- /ko -->
+				</div>
+				<!-- ko if: !$root.company || $root.company() && $root.company().Id() !== ParentId() -->
+				<small class="small">
+					@(Html.Localize("PersonParentName"))
+					<!-- ko if: Helper.Person.getContactLink($data) -->
+					<a data-bind="attr: { href: Helper.Person.getContactLink($data) }, text: Helper.Person.getParentDisplayName($data)"></a>
+					<!-- /ko -->
+					<!-- ko ifnot: Helper.Person.getContactLink($data) -->
+					<span data-bind="text: Helper.Person.getParentDisplayName($data)"></span>
+					<!-- /ko -->
+				</small>
+				<!-- /ko -->
+				<small class="lv-small" data-bind="if: Address">
+					<address-block params="address: Address, lookups: $root.lookups, showNames: false, showLink: false"></address-block>
+				</small>
+				<ul class="lv-attrs">
+					<!-- ko if: BusinessTitleKey -->
+					<!-- ko ifnot: window.Main.Settings.Person.BusinessTitleIsLookup -->
+					<li data-bind="text: BusinessTitleKey"></li>
+					<!-- /ko -->
+					<!-- ko if: window.Main.Settings.Person.BusinessTitleIsLookup -->
+					<li data-bind="lookupValue: BusinessTitleKey, lookups: $root.lookups.businessTitles"></li>
+					<!-- /ko -->
+					<!-- /ko -->
+					<!-- ko if: ResponsibleUserUser -->
+					<li>
+						<i class="zmdi zmdi-account-o"></i>
+						<span data-bind="text: Helper.User.getDisplayName(ResponsibleUserUser)"></span>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: ['CreateDate', 'ModifyDate'].indexOf(ko.unwrap($root.orderBy)) > -1 -->
+					<li>
+						@(Html.Localize("CreateDate")):
+						<span data-bind="dateText: { value: CreateDate, pattern: { datetime: 'medium' } }"></span>
+					</li>
+					<li>
+						@(Html.Localize("ModifyDate")):
+						<span data-bind="dateText: { value: ModifyDate, pattern: { datetime: 'medium' } }"></span>
+					</li>
+					<!-- /ko -->
+					@Html.PluginRenderActions("PersonItemTemplateAttributes")
+				</ul>
+				@Html.PluginRenderActions("MaterialPersonItemExtensions")
+				@Html.PluginRenderActions("MaterialContactItemExtensions")
+			</div>
+			<hr class="visible-xs" />
+			<div class="col-sm-6">
+				<div data-bind="with: window.Helper.Address.getPrimaryCommunication(Emails)">
+					<strong class="col-xs-4 p-l-0">
+						@(Html.Localize("Email"))
+					</strong>
+					<span class="col-xs-8">
+						<!-- ko if: $root instanceof Main.ViewModels.PersonListIndexViewModel -->
+						<a data-bind="attr: { href: 'mailto:' + $data.Data() + $root.currentUserDropboxAddress($parent) }, text: $data.Data"></a>
+						<!-- /ko -->
+						<!-- ko ifnot: $root instanceof Main.ViewModels.PersonListIndexViewModel -->
+						<a data-bind="attr: { href: 'mailto:' + $data.Data() + $root.currentUserDropboxAddress() }, text: $data.Data"></a>
+						<!-- /ko -->
+					</span>
+				</div>
+				<div data-bind="with: window.Helper.Address.getPrimaryCommunication(Phones)">
+					<strong class="col-xs-4 p-l-0">
+						@(Html.Localize("Phone"))
+					</strong>
+					<span class="col-xs-8">
+						<a data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $root.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $root.lookups.countries)"></a>
+					</span>
+				</div>
+			  <!-- ko if: Phones().length >= 2 -->
+				<div data-bind="with: window.Helper.Address.getSecondaryPhone(Phones)">
+					<strong class="col-xs-4 p-l-0">
+						<span data-bind="lookupValue: TypeKey, lookups: $root.lookups.phoneTypes"></span>
+					</strong>
+					<span class="col-xs-8">
+						<a data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $root.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $root.lookups.countries)"></a>
+					</span>
+				</div>
+				<!-- /ko -->
+				<ul class="lv-attrs" data-bind="foreach: Tags">
+					<li data-bind="text: Name"></li>
+				</ul>
+			</div>
+		</div>
+		<lv-actions>@Html.PluginRenderActions("PersonItemTemplateActions")</lv-actions>
+	</div>
+</div>

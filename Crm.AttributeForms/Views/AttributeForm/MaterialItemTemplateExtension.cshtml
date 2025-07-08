@@ -1,0 +1,17 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<!-- ko if: $data.AttributeFormProperties -->
+		<!-- ko if: $data.AttributeFormProperties().length > 0 -->
+			<ul class="lv-attrs attributeform-properties">
+				<!-- ko foreach: AttributeFormProperties -->
+					<li>
+						<div class="pull-left">
+							<strong data-bind="text: $parentContext.$parent.getLocalizationText($data)"></strong>
+							<strong>:</strong>
+						</div>
+						<div data-bind="template: { name: 'attributeform-response-template-' + $data.FormElementType(), data: $data }, css: 'pull-left m-l-5'"></div>
+					</li>
+				<!-- /ko -->
+			</ul>
+		<!-- /ko -->
+<!-- /ko -->

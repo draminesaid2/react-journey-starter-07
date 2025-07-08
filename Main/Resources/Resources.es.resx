@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Invoicing" xml:space="preserve">
+    <value>Facturando</value>
+  </data>
+  <data name="InvoicingType" xml:space="preserve">
+    <value>Tipo de facturación</value>
+  </data>
+  <data name="FieldSales" xml:space="preserve">
+    <value>Ventas sobre el terreno</value>
+  </data>
+  <data name="InternalSales" xml:space="preserve">
+    <value>Ventas internas</value>
+  </data>
+  <data name="SalesBackOffice" xml:space="preserve">
+    <value>Ventas backoffice</value>
+  </data>
+  <data name="HeadOfSales" xml:space="preserve">
+    <value>Jefe de ventas</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Footer</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="PleaseStandbyIndexRecreating" xml:space="preserve">
+    <value>El índice se está recreando. Por favor, espere unos minutos antes de recargar la página.</value>
+  </data>
+  <data name="EditVisibility" xml:space="preserve">
+    <value>Editar visibilidad</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Carpeta</value>
+  </data>
+  <data name="AreaCode" xml:space="preserve">
+    <value>Código de área</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SelectAddress" xml:space="preserve">
+    <value>Seleccione la dirección</value>
+  </data>
+  <data name="AddressSelectCompany" xml:space="preserve">
+    <value>Para insertar la información de la dirección debe seleccionar primero una empresa.</value>
+  </data>
+  <data name="AddAddressToCompany" xml:space="preserve">
+    <value>Añadir una dirección a la empresa.</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="InitializeTaskTopMenuViewModel" xml:space="preserve">
+    <value>Tareas</value>
+  </data>
+  <data name="Main_AddressType" xml:space="preserve">
+    <value>Tipos de direcciones</value>
+  </data>
+  <data name="Main_CompanyType" xml:space="preserve">
+    <value>Tipo de empresa</value>
+  </data>
+  <data name="Main_Country" xml:space="preserve">
+    <value>Paises</value>
+  </data>
+  <data name="Main_EmailType" xml:space="preserve">
+    <value>Tipos de Emails</value>
+  </data>
+  <data name="Main_FaxType" xml:space="preserve">
+    <value>Tipo de fax</value>
+  </data>
+  <data name="Main_PhoneType" xml:space="preserve">
+    <value>Tipos de teléfonos</value>
+  </data>
+  <data name="Main_Region" xml:space="preserve">
+    <value>Regiones</value>
+  </data>
+  <data name="Main_SourceType" xml:space="preserve">
+    <value>Fuentes de contacto</value>
+  </data>
+  <data name="Main_Tag" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
+  <data name="Main_TaskType" xml:space="preserve">
+    <value>Tipo de tarea</value>
+  </data>
+  <data name="Main_Salutation" xml:space="preserve">
+    <value>Saludos</value>
+  </data>
+  <data name="Main_Title" xml:space="preserve">
+    <value>Titulos</value>
+  </data>
+  <data name="Main_WebsiteType" xml:space="preserve">
+    <value>Tipos de sitios web</value>
+  </data>
+  <data name="Main_BusinessRelationship" xml:space="preserve">
+    <value>Relaciones comerciales</value>
+  </data>
+  <data name="BusinessRelationships" xml:space="preserve">
+    <value>Relaciónes comerciales</value>
+  </data>
+  <data name="Main_BusinessRelationshipType" xml:space="preserve">
+    <value>Tipos de relaciones comerciales</value>
+  </data>
+  <data name="CompanyPersonRelationships" xml:space="preserve">
+   <value>Relaciónes empresa-persona</value>
+  </data>
+  <data name="Main_CompanyPersonRelationship" xml:space="preserve">
+    <value>Empresa Persona Relación</value>
+  </data>
+  <data name="Main_CompanyPersonRelationshipType" xml:space="preserve">
+    <value>Tipos de relaciones empresa-persona</value>
+  </data>
+  <data name="CompanyOrPerson" xml:space="preserve">
+    <value>Empresa o persona</value>
+  </data>
+  <data name="Main_BravoCategory" xml:space="preserve">
+    <value>Categorias bravo</value>
+  </data>
+  <data name="Main_InvoicingType" xml:space="preserve">
+    <value>Tipos de facturación</value>
+  </data>
+  <data name="Main_Language" xml:space="preserve">
+    <value>Idiomas</value>
+  </data>
+  <data name="Main_LengthUnit" xml:space="preserve">
+    <value>Unidades de longitud</value>
+  </data>
+  <data name="Main_NumberOfEmployees" xml:space="preserve">
+    <value>Número de categorías de empleados</value>
+  </data>
+  <data name="Main_PaymentCondition" xml:space="preserve">
+    <value>Condiciones de pago</value>
+  </data>
+  <data name="Main_PaymentInterval" xml:space="preserve">
+    <value>Intervalos de pago</value>
+  </data>
+  <data name="Main_PaymentType" xml:space="preserve">
+    <value>Tipos de pago</value>
+  </data>
+  <data name="Main_SalutationLetter" xml:space="preserve">
+    <value>Saludos por carta</value>
+  </data>
+  <data name="Main_Skill" xml:space="preserve">
+    <value>Competencias</value>
+  </data>
+  <data name="Main_Turnover" xml:space="preserve">
+    <value>Categorias de ventas</value>
+  </data>
+  <data name="Main_UserStatus" xml:space="preserve">
+    <value>Estados del usuarios</value>
+  </data>
+  <data name="Main_ZipCodeFilterType" xml:space="preserve">
+    <value>Tipos de filtro de código postal</value>
+  </data>
+  <data name="LanguageKey" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="OfferTab" xml:space="preserve">
+    <value>Pestaña de ofertas</value>
+  </data>
+  <data name="StaffTab" xml:space="preserve">
+    <value>Pestaña de personas</value>
+  </data>
+  <data name="TasksTab" xml:space="preserve">
+    <value>Pestaña de tareas</value>
+  </data>
+  <data name="VisitReportsTab" xml:space="preserve">
+    <value>Pestaña de informes de visita</value>
+  </data>
+  <data name="AbsenceType" xml:space="preserve">
+    <value>Tipo de ausencia</value>
+  </data>
+  <data name="AddressTypeKey" xml:space="preserve">
+    <value>Clave de tipo de dirección</value>
+  </data>
+  <data name="AppleDeviceToken" xml:space="preserve">
+    <value>Token del dispositivo Apple</value>
+  </data>
+  <data name="ArticleGroup01Key" xml:space="preserve">
+    <value>Clave del grupo de artículos 01</value>
+  </data>
+  <data name="ArticleGroup02Key" xml:space="preserve">
+    <value>Clave del grupo de artículos 02</value>
+  </data>
+  <data name="ArticleGroup03Key" xml:space="preserve">
+    <value>Clave del grupo de artículos 03</value>
+  </data>
+  <data name="ArticleGroup04Key" xml:space="preserve">
+    <value>Clave del grupo de artículos 04</value>
+  </data>
+  <data name="ArticleGroup05Key" xml:space="preserve">
+    <value>Clave del grupo de artículos 05</value>
+  </data>
+  <data name="ArticleTypeKey" xml:space="preserve">
+    <value>Clave del tipo de artículo</value>
+  </data>
+  <data name="BugtrackerId" xml:space="preserve">
+    <value>ID de Bugtracker</value>
+  </data>
+  <data name="BusinessRelationship" xml:space="preserve">
+    <value>Relación comercial</value>
+  </data>
+  <data name="CompanyPersonRelationship" xml:space="preserve">
+   <value>Relación empresa-persona</value>
+  </data>
+  <data name="BusinessRelationshipType" xml:space="preserve">
+    <value>Categoría de la relación comercial</value>
+  </data>
+  <data name="CompanyPersonRelationshipType" xml:space="preserve">
+    <value>Tipos de la relación empresa-persona</value>
+  </data>
+  <data name="BusinessTitleKey" xml:space="preserve">
+    <value>Clave del título de la empresa</value>
+  </data>
+  <data name="CalculationPositionTypeKey" xml:space="preserve">
+    <value>Clave del tipo de posición de cálculo</value>
+  </data>
+  <data name="CauseOfFailureKey" xml:space="preserve">
+    <value>Clave de la causa del fallo</value>
+  </data>
+  <data name="CausingItemNo" xml:space="preserve">
+    <value>Número de elemento causante</value>
+  </data>
+  <data name="CausingItemPreviousSerialNo" xml:space="preserve">
+    <value>Anterior artículo causante número de serie.</value>
+  </data>
+  <data name="CausingItemSerialNo" xml:space="preserve">
+    <value>Artículo causante número de serie.</value>
+  </data>
+  <data name="ChildId" xml:space="preserve">
+    <value>Child ID</value>
+  </data>
+  <data name="ClosedBy" xml:space="preserve">
+    <value>Cerrado por</value>
+  </data>
+  <data name="CommissioningStatusKey" xml:space="preserve">
+    <value>Clave del estado de la puesta en marcha</value>
+  </data>
+  <data name="CompanyGroupFlag1Key" xml:space="preserve">
+    <value>Clave de la etiqueta del grupo de empresas 1</value>
+  </data>
+  <data name="CompanyGroupFlag2Key" xml:space="preserve">
+    <value>Clave de la etiqueta del grupo de empresas 2</value>
+  </data>
+  <data name="CompanyGroupFlag3Key" xml:space="preserve">
+    <value>Clave de la etiqueta del grupo de empresas 3</value>
+  </data>
+  <data name="CompanyGroupFlag4Key" xml:space="preserve">
+    <value>Clave de la etiqueta del grupo de empresas 4</value>
+  </data>
+  <data name="CompanyGroupFlag5Key" xml:space="preserve">
+    <value>Clave de la etiqueta del grupo de empresas 5</value>
+  </data>
+  <data name="CompanyTypeKey" xml:space="preserve">
+    <value>Clave del tipo de empresa</value>
+  </data>
+  <data name="ComponentKey" xml:space="preserve">
+    <value>Clave del componentes</value>
+  </data>
+  <data name="ConfigurationRule" xml:space="preserve">
+    <value>Regla de configuración</value>
+  </data>
+  <data name="ContactPersonRelationship" xml:space="preserve">
+    <value>Relación con la persona de contacto</value>
+  </data>
+  <data name="ContactPersonRelationshipType" xml:space="preserve">
+    <value>Tipo de relación con la persona de contacto</value>
+  </data>
+  <data name="ContentType" xml:space="preserve">
+    <value>Tipo de contenido</value>
+  </data>
+  <data name="ContractTypeKey" xml:space="preserve">
+    <value>Clave del tipo de contrato</value>
+  </data>
+  <data name="CostCenterKey" xml:space="preserve">
+    <value>Clave del centro de costes</value>
+  </data>
+  <data name="CostsCurrencyKey" xml:space="preserve">
+    <value>Clave de la moneda de constes</value>
+  </data>
+  <data name="CssPath" xml:space="preserve">
+    <value>ruta-CSS</value>
+  </data>
+  <data name="CurrencyKey" xml:space="preserve">
+    <value>Clave de la moneda</value>
+  </data>
+  <data name="CustomAim" xml:space="preserve">
+    <value>Objetivo personalizado</value>
+  </data>
+  <data name="CustomDescription" xml:space="preserve">
+    <value>Descripción personalizado</value>
+  </data>
+  <data name="DefaultLocale" xml:space="preserve">
+    <value>Ubicación por defecto</value>
+  </data>
+  <data name="DepartmentType" xml:space="preserve">
+    <value>Tipo de departamento</value>
+  </data>
+  <data name="DepartmentTypeKey" xml:space="preserve">
+    <value>Clave de tipo de departamento</value>
+  </data>
+  <data name="DispatchedUser" xml:space="preserve">
+    <value>Usuario trabajando</value>
+  </data>
+  <data name="DispatchedUsername" xml:space="preserve">
+    <value>Username trabajando</value>
+  </data>
+  <data name="DropboxToken" xml:space="preserve">
+    <value>Dropbox token</value>
+  </data>
+  <data name="DynamicFormElementType" xml:space="preserve">
+    <value>Tipo de elemento de formulario dinámico</value>
+  </data>
+  <data name="DynamicFormLanguage" xml:space="preserve">
+    <value>Idioma de formulario dinámico</value>
+  </data>
+  <data name="DynamicFormLocalization" xml:space="preserve">
+    <value>Localización de formulario dinámico</value>
+  </data>
+  <data name="DynamicFormStatus" xml:space="preserve">
+    <value>Estado de formulario dinámico</value>
+  </data>
+  <data name="EntityId" xml:space="preserve">
+    <value>ID de la entidad</value>
+  </data>
+  <data name="EntityTypeName" xml:space="preserve">
+    <value>Nombre del tipo de entidad</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Evento</value>
+  </data>
+  <data name="ExpenseTypeKey" xml:space="preserve">
+    <value>Clave de tipo de gasto</value>
+  </data>
+  <data name="FavIconUrl" xml:space="preserve">
+    <value>Favicon URL</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Nombre del fichero</value>
+  </data>
+  <data name="FinishedByUser" xml:space="preserve">
+    <value>Finalizado por usuario</value>
+  </data>
+  <data name="FirstAnswerUnitKey" xml:space="preserve">
+    <value>Clave de la unidad de primera respuesta</value>
+  </data>
+  <data name="GeneralToken" xml:space="preserve">
+    <value>Token general</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Grupos</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icono</value>
+  </data>
+  <data name="IncreasedPriceCurrencyKey" xml:space="preserve">
+    <value>Clave de la moneda del precio aumentado</value>
+  </data>
+  <data name="InstallationTypeKey" xml:space="preserve">
+    <value>Clave de tipo de instalación</value>
+  </data>
+  <data name="InternalInformation" xml:space="preserve">
+    <value>Información interna</value>
+  </data>
+  <data name="InverseRelationshipTypeKey" xml:space="preserve">
+    <value>Clave de tipo de relación inversa</value>
+  </data>
+  <data name="InvoiceReasonKey" xml:space="preserve">
+    <value>Clave del motivo de la factura</value>
+  </data>
+  <data name="InvoicingTypeKey" xml:space="preserve">
+    <value>Clave de tipo de facturación</value>
+  </data>
+  <data name="Iso2Code" xml:space="preserve">
+    <value>Iso2Code</value>
+  </data>
+  <data name="Iso3Code" xml:space="preserve">
+    <value>Iso3Code</value>
+  </data>
+  <data name="LimitTypeKey" xml:space="preserve">
+    <value>Clave de tipo de límite</value>
+  </data>
+  <data name="LoadingResults" xml:space="preserve">
+    <value>Cargando resultados</value>
+  </data>
+  <data name="LocationKey" xml:space="preserve">
+    <value>Clave de ubicación</value>
+  </data>
+  <data name="LocationNo" xml:space="preserve">
+    <value>Numero de ubicación</value>
+  </data>
+  <data name="LongText" xml:space="preserve">
+    <value>Texto largo</value>
+  </data>
+  <data name="ManufacturerKey" xml:space="preserve">
+    <value>Clave del fabricante</value>
+  </data>
+  <data name="MaterialClient" xml:space="preserve">
+    <value>Material client</value>
+  </data>
+  <data name="MaterialNo" xml:space="preserve">
+    <value>Número de material</value>
+  </data>
+  <data name="Meta" xml:space="preserve">
+    <value>Meta</value>
+  </data>
+  <data name="NoCausingItemPreviousSerialNoReasonKey" xml:space="preserve">
+    <value>Clave de la razón que no hay número de serie del artículo causante anterior</value>
+  </data>
+  <data name="NoCausingItemSerialNoReasonKey" xml:space="preserve">
+    <value>Clave de la razón que no hay número de serie del artículo causante</value>
+  </data>
+  <data name="NoInvoiceReasonKey" xml:space="preserve">
+    <value>No hay clave del motivo para facturación</value>
+  </data>
+  <data name="NoPreviousSerialNoReasonKey" xml:space="preserve">
+    <value>Clave de la razón que no hay número de serie anterior</value>
+  </data>
+  <data name="NumberingSequence" xml:space="preserve">
+    <value>Secuencia de numeración</value>
+  </data>
+  <data name="NumberOfEmployeesKey" xml:space="preserve">
+    <value>Clave del número empleado</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Estado del pedido</value>
+  </data>
+  <data name="ParentArticleGroup" xml:space="preserve">
+    <value>Grupo de artículos master</value>
+  </data>
+  <data name="PaymentConditionKey" xml:space="preserve">
+    <value>Clave de la condición de pago</value>
+  </data>
+  <data name="PaymentIntervalKey" xml:space="preserve">
+    <value>Clave del intervalo de pago</value>
+  </data>
+  <data name="PaymentTypeKey" xml:space="preserve">
+    <value>Clave del tipo de pago</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Plugin</value>
+  </data>
+  <data name="PluginName" xml:space="preserve">
+    <value>Nombre del plugin</value>
+  </data>
+  <data name="PreferredUserObj" xml:space="preserve">
+    <value>Objeto de usuario preferido</value>
+  </data>
+  <data name="PriceCurrencyKey" xml:space="preserve">
+    <value>Clave de la moneda del precio</value>
+  </data>
+  <data name="PriorityKey" xml:space="preserve">
+    <value>Clave de prioridad</value>
+  </data>
+  <data name="ReferenceType" xml:space="preserve">
+    <value>Tipo de referencia</value>
+  </data>
+  <data name="RegionKey" xml:space="preserve">
+    <value>Clave de la región</value>
+  </data>
+  <data name="RejectReasonKey" xml:space="preserve">
+    <value>Clave del motivo de rechazo</value>
+  </data>
+  <data name="ReportRecipients" xml:space="preserve">
+    <value>Destinatarios del informe</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Respuesta</value>
+  </data>
+  <data name="ResponsibleGroupKey" xml:space="preserve">
+    <value>Usuario responsable del grupo</value>
+  </data>
+  <data name="RhythmUnitKey" xml:space="preserve">
+    <value>Clave de la unidad de ritmo</value>
+  </data>
+  <data name="SalutationKey" xml:space="preserve">
+    <value>Clave de saludo</value>
+  </data>
+  <data name="SalutationLetterKey" xml:space="preserve">
+    <value>Clave de la carta de saludo</value>
+  </data>
+  <data name="ServiceCompletedUnitKey" xml:space="preserve">
+    <value>Clave de la unidad del servicio finalizado</value>
+  </data>
+  <data name="ServiceLocationEmail" xml:space="preserve">
+    <value>E-mail de la ubicación del servicio</value>
+  </data>
+  <data name="ServiceLocationFax" xml:space="preserve">
+    <value>Fax de la ubicación del servicio</value>
+  </data>
+  <data name="ServiceLocationMobile" xml:space="preserve">
+    <value>Móvil de la ubicación del servicio</value>
+  </data>
+  <data name="ServiceLocationPhone" xml:space="preserve">
+    <value>Teléfono de la ubicación del servicio</value>
+  </data>
+  <data name="ServiceOrderTypeKey" xml:space="preserve">
+    <value>Clave del tipo del pedido de servicio</value>
+  </data>
+  <data name="ServiceProvisionPerTimeSpanUnitKey" xml:space="preserve">
+    <value>Clave de prestación de servicios por unidad de tiempo</value>
+  </data>
+  <data name="ServiceProvisionUnitKey" xml:space="preserve">
+    <value>Clave de la unidad de prestación de servicios</value>
+  </data>
+  <data name="SettableStatuses" xml:space="preserve">
+    <value>Estados ajustables</value>
+  </data>
+  <data name="ShortText" xml:space="preserve">
+    <value>Texto corto</value>
+  </data>
+  <data name="SignatureOriginatorName" xml:space="preserve">
+    <value>Nombre del emisor de la firma</value>
+  </data>
+  <data name="SignatureTechnicianName" xml:space="preserve">
+    <value>Nombre del técnico firmante</value>
+  </data>
+  <data name="SourceType" xml:space="preserve">
+    <value>Tipo de fuente</value>
+  </data>
+  <data name="SparePartsBudgetInvoiceTypeKey" xml:space="preserve">
+    <value>Clave del tipo de factura del presupuesto de recambios</value>
+  </data>
+  <data name="SparePartsPerTimeSpanUnitKey" xml:space="preserve">
+    <value>Clave de recambios por unidad de tiempo</value>
+  </data>
+  <data name="SparePartsUnitKey" xml:space="preserve">
+    <value>Clave de la unidad de recambios</value>
+  </data>
+  <data name="StatusMessage" xml:space="preserve">
+    <value>Estado del mensage</value>
+  </data>
+  <data name="StoreNo" xml:space="preserve">
+    <value>Numero de tienda</value>
+  </data>
+  <data name="Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="TitleKey" xml:space="preserve">
+    <value>Clave del titulo</value>
+  </data>
+  <data name="Token" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="ToLocation" xml:space="preserve">
+    <value>A la ubicación</value>
+  </data>
+  <data name="TopicsTab" xml:space="preserve">
+    <value>Pestaña de temas</value>
+  </data>
+  <data name="ToWarehouse" xml:space="preserve">
+    <value>Al almacén</value>
+  </data>
+  <data name="TransactionCode" xml:space="preserve">
+    <value>Codigó de la transacción</value>
+  </data>
+  <data name="TransactionId" xml:space="preserve">
+    <value>ID de la transacción</value>
+  </data>
+  <data name="TurnoverKey" xml:space="preserve">
+    <value>Clave de volumen de ventas</value>
+  </data>
+  <data name="UserTask" xml:space="preserve">
+    <value>Tarea del usuario</value>
+  </data>
+  <data name="UserUsername" xml:space="preserve">
+    <value>Usuario Username</value>
+  </data>
+  <data name="Validation" xml:space="preserve">
+    <value>Validación</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="VATLevelKey" xml:space="preserve">
+    <value>Clave de nivel de IVA</value>
+  </data>
+  <data name="VisitAimKey" xml:space="preserve">
+    <value>Clave del objetivo de visita</value>
+  </data>
+  <data name="VisitEmptySlate" xml:space="preserve">
+    <value>No hay visitas disponibles</value>
+  </data>
+  <data name="VisitsTab" xml:space="preserve">
+    <value>Pestaña de visitas</value>
+  </data>
+  <data name="VisitTopic" xml:space="preserve">
+    <value>Tema de la visita</value>
+  </data>
+  <data name="VolumeCurrencyKey" xml:space="preserve">
+    <value>Clave de moneda de volumen</value>
+  </data>
+  <data name="Release" xml:space="preserve">
+    <value>Publicar</value>
+  </data>
+  <data name="SourcePermissionSchemaRoleId" xml:space="preserve">
+    <value>Plantilla de rol</value>
+  </data>
+  <data name="CustomRole" xml:space="preserve">
+    <value>Rol personalizado</value>
+  </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Clonar</value>
+  </data>
+  <data name="CloneTemplate" xml:space="preserve">
+    <value>Clonar plantilla</value>
+  </data>
+  <data name="RuleViolation.SourcePermissionSchemaRoleId" xml:space="preserve">
+    <value>Seleccione una plantilla</value>
+  </data>
+  <data name="Main_Person" xml:space="preserve">
+    <value>Personas</value>
+  </data>
+  <data name="Main_Fax" xml:space="preserve">
+    <value>Faxes</value>
+  </data>
+  <data name="Main_Address" xml:space="preserve">
+    <value>Direciones</value>
+  </data>
+  <data name="Main_FileResource" xml:space="preserve">
+    <value>Recursos de archivo</value>
+  </data>
+  <data name="Main_User" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Main_Company" xml:space="preserve">
+    <value>Empresas</value>
+  </data>
+  <data name="Main_DocumentAttribute" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="Main_Note" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Main_Website" xml:space="preserve">
+    <value>Sitios web</value>
+  </data>
+  <data name="Main_RecentPage" xml:space="preserve">
+    <value>Páginas recientes</value>
+  </data>
+  <data name="Main_Phone" xml:space="preserve">
+    <value>Teléfonos</value>
+  </data>
+  <data name="Main_Permission" xml:space="preserve">
+    <value>Permisos</value>
+  </data>
+  <data name="Main_Email" xml:space="preserve">
+    <value>Emails</value>
+  </data>
+  <data name="Main_PermissionSchemaRole" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Main_Usergroup" xml:space="preserve">
+    <value>Grupos de usuarios</value>
+  </data>
+  <data name="Main_UserNote" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Main_Currency" xml:space="preserve">
+    <value>Monedas</value>
+  </data>
+  <data name="Main_LinkResource" xml:space="preserve">
+    <value>Enlaces</value>
+  </data>
+  <data name="Main_Task" xml:space="preserve">
+    <value>Tareas</value>
+  </data>
+  <data name="Main_NoteType" xml:space="preserve">
+    <value>Tipos de nota</value>
+  </data>
+  <data name="Main_Bravo" xml:space="preserve">
+    <value>BRAVOs</value>
+  </data>
+  <data name="Main_TimeUnit" xml:space="preserve">
+    <value>Unidades de tiempo</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Ventas</value>
+  </data>
+  <data name="Abort" xml:space="preserve">
+    <value>Abortar</value>
+  </data>
+  <data name="RuleViolation.Name1Required" xml:space="preserve">
+    <value>El nombre es obligatorio</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="true" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="false" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Main_CostCenter" xml:space="preserve">
+    <value>Centros de coste</value>
+  </data>
+  <data name="UnassignFromRole" xml:space="preserve">
+    <value>Desasignar del rol</value>
+  </data>
+  <data name="UnassignUsers" xml:space="preserve">
+    <value>Hay algunos usuarios asignados a este rol: {0}.
+    Por favor, desasígnelos primero y luego elimine el rol.</value>
+  </data>
+  <data name="DocumentAttributeEmptySlate" xml:space="preserve">
+    <value>No hay documentos disponibles</value>
+  </data>
+  <data name="EditDocument" xml:space="preserve">
+    <value>Editar documento</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="UserEmptySlate" xml:space="preserve">
+    <value>No hay usuarios disponibles</value>
+  </data>
+  <data name="Main_DocumentCategory" xml:space="preserve">
+    <value>Categoria de documentos</value>
+  </data>
+  <data name="UserStatus" xml:space="preserve">
+    <value>Estado del usuario</value>
+  </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Miniaturas</value>
+  </data>
+  <data name="IsGreat" xml:space="preserve">
+    <value>Is great</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Bloqueado</value>
+  </data>
+  <data name="Attempts" xml:space="preserve">
+    <value>Intentos</value>
+  </data>
+  <data name="Main_Log" xml:space="preserve">
+    <value>Registros</value>
+  </data>
+  <data name="InvalidJson" xml:space="preserve">
+    <value>JSON no valido</value>
+  </data>
+  <data name="ContactDropboxAddressDescription" xml:space="preserve">
+    <value>Una dirección de correo electrónico del buzón relacionada con el contacto le permite añadir directamente los correos electrónicos salientes o entrantes a la lista de notas de este contacto. Si abre el editor de su cliente de correo electrónico a través del enlace de contacto de una persona en esta página, la dirección de correo electrónico del buzón relacionada con el contacto se inserta automáticamente en el campo CCO para que el correo electrónico se añada a la lista de notas del contacto al enviar el correo electrónico. Si desea añadir el correo electrónico a la lista de notas del destinatario o del remitente, utilice su dirección de correo electrónico personal de Dropbox, que puede encontrar en su página "Mi información".</value>
+  </data>
+  <data name="SendMailTo" xml:space="preserve">
+    <value>Enviar correo a "{0}"</value>
+  </data>
+  <data name="CopyDropboxAddress" xml:space="preserve">
+    <value>Copiar la dirección del Dropbox</value>
+  </data>
+  <data name="NoDropboxAddress" xml:space="preserve">
+    <value>Con la generación de su dirección de correo electrónico personal de Dropbox, se generará una dirección de correo electrónico de Dropbox relacionada con el contacto que se mostrará en esta casilla.</value>
+  </data>
+  <data name="AllTriggersPause" xml:space="preserve">
+    <value>Todos los triggers estan pausados</value>
+  </data>
+  <data name="ExceptionDetails" xml:space="preserve">
+    <value>Detalles de la excepción</value>
+  </data>
+  <data name="BackgroundJobTriggeredFail" xml:space="preserve">
+    <value>Error al correr el job</value>
+  </data>
+	<data name="BackgroundJobTriggered" xml:space="preserve">
+    <value>Job executado correctamente</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="DropboxAddressCopiedMessage" xml:space="preserve">
+    <value>El E-mail de Dropbox se ha copiado correctamente</value>
+    </data>
+  <data name="FailPauseAllTriggers" xml:space="preserve">
+    <value>Error al pausar los triggers</value>
+  </data>
+  <data name="AddCompanyBranch" xml:space="preserve">
+    <value>Añadir rama</value>
+    </data>
+  <data name="PauseAll" xml:space="preserve">
+    <value>Pausar todos</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Activar</value>
+    </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="EditCompanyBranch" xml:space="preserve">
+    <value>Editar rama</value>
+  </data>
+  <data name="PlannedDate" xml:space="preserve">
+    <value>Fecha prevista</value>
+  </data>
+  <data name="NoRecordFoundBackgroundServices" xml:space="preserve">
+    <value>No se ha encontrado ningun servicio de background</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Solo lectura</value>
+  </data>
+  <data name="EmailMessages" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="MessageState" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Dispatched" xml:space="preserve">
+    <value>Enviado</value>
+  </data>
+  <data name="NoMessages" xml:space="preserve">
+    <value>No hay mensajes disponibles</value>
+  </data>
+  <data name="AssignedUsers" xml:space="preserve">
+    <value>Usuarios asignados</value>
+  </data>
+  <data name="NoAssignedUsers" xml:space="preserve">
+    <value>No hay usuarios asignados</value>
+  </data>
+  <data name="RolesAndPermissionsTitle" xml:space="preserve">
+    <value>Roles &amp; permisos</value>
+  </data>
+  <data name="RuleViolation.NotValidLanguageKey" xml:space="preserve">
+    <value>La clave no es una clave válida de lenguaje</value>
+  </data>
+  <data name="TagsEmptySlate" xml:space="preserve">
+    <value>No hay etiquetas para este contacto</value>
+  </data>
+  <data name="UnassignUsersFromGroup" xml:space="preserve">
+    <value>Existe algún usuario asignado a este grupo: {0}.
+    Por favor, desasigne los usuarios antes de eliminar el grupo.</value>
+  </data>
+  <data name="JobTriggerPaused" xml:space="preserve">
+    <value>Trigger pausado</value>
+  </data>
+  <data name="TriggerNextFireTime" xml:space="preserve">
+    <value>Próxima ejecución: </value>
+  </data>
+  <data name="Main_CompanyBranch" xml:space="preserve">
+    <value>Ramas</value>
+  </data>
+  <data name="ShowAllPeople" xml:space="preserve">
+    <value>Mostrar a personas de organizaciones externas</value>
+  </data>
+  <data name="DocumentGeneration" xml:space="preserve">
+    <value>Generación de documentos</value>
+  </data>
+  <data name="CompanyNo" xml:space="preserve">
+    <value>Número de empresa</value>
+  </data>
+  <data name="ResponsibleUser-Usergroup" xml:space="preserve">
+    <value>Grupo de usuarios responsable</value>
+  </data>
+  <data name="Branch2Key" xml:space="preserve">
+    <value>Clave de la rama2</value>
+  </data>
+  <data name="Branch3Key" xml:space="preserve">
+    <value>Clave de la rama3</value>
+  </data>
+  <data name="Branch4Key" xml:space="preserve">
+    <value>Clave de la rama4</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="PostingType" xml:space="preserve">
+    <value>Tipo de posting</value>
+  </data>
+  <data name="CreateUser-Usergroup" xml:space="preserve">
+    <value>Crear usuario (Grupo de usuario)</value>
+  </data>
+  <data name="FailedToSave" xml:space="preserve">
+    <value>No se ha podido guardar</value>
+  </data>
+  <data name="AnErrorOccured" xml:space="preserve">
+    <value>Se ha producido un error</value>
+  </data>
+  <data name="PersonNo" xml:space="preserve">
+    <value>Núm persona</value>
+  </data>
+  <data name="GroupAlreadyExists" xml:space="preserve">
+    <value>El grupo ya existe</value>
+  </data>
+  <data name="GroupIsNotEmpty" xml:space="preserve">
+    <value>El grupo no está vacío.</value>
+  </data>
+  <data name="DefaultValue" xml:space="preserve">
+    <value>Valor por defecto</value>
+  </data>
+  <data name="HasParameter" xml:space="preserve">
+    <value>Tiene parámetro</value>
+  </data>
+  <data name="TableName" xml:space="preserve">
+    <value>Nombre de la tabla</value>
+  </data>
+  <data name="SendEMailWithBCC" xml:space="preserve">
+    <value>Nuevo correo con BCC para "{0}</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="Company_Name1" xml:space="preserve">
+    <value>Nombre de empresa 1</value>
+  </data>
+  <data name="Company_Name2" xml:space="preserve">
+    <value>Nombre de empresa 2</value>
+  </data>
+  <data name="Company_Name3" xml:space="preserve">
+    <value>Nombre de empresa 3</value>
+  </data>
+  <data name="CompanyId" xml:space="preserve">
+    <value>ID de la compañía</value>
+  </data>
+  <data name="RuleViolation.EditAllowed" xml:space="preserve">
+    <value>No hay permiso para editar este usuario</value>
+  </data>
+  <data name="Main_Device" xml:space="preserve">
+    <value>Dispositivos</value>
+  </data>
+  <data name="Main_UserSubscription" xml:space="preserve">
+    <value>Suscripciones a notificaciones push</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Ir</value>
+  </data>
+  <data name="MyDevices" xml:space="preserve">
+    <value>Mis dispositivos</value>
+  </data>
+  <data name="Subscribed" xml:space="preserve">
+    <value>Suscrito</value>
+  </data>
+  <data name="SubscribedExplanation" xml:space="preserve">
+    <value>Se le notificará de cualquier cambio relacionado con esta entidad.</value>
+  </data>
+  <data name="ContactModifiedNotificationTitle" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="EntityModifiedNotificationBody" xml:space="preserve">
+    <value>{0} ha sido modificado por {1}</value>
+  </data>
+  <data name="EntityCreatedNotificationBody" xml:space="preserve">
+    <value>{0} ha sido creado por {1}</value>
+  </data>
+  <data name="Platform" xml:space="preserve">
+    <value>Plataforma</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notificaciones</value>
+  </data>
+  <data name="ShowAttachments" xml:space="preserve">
+    <value>Mostrar archivos adjuntos</value>
+  </data>
+  <data name="Main_EntityType" xml:space="preserve">
+    <value>Tipo de entidad</value>
+  </data>
+  <data name="ToggleMenu" xml:space="preserve">
+    <value>Alternar menú</value>
+  </data>
+  <data name="RetryTransactionConfirmationQuestion" xml:space="preserve">
+    <value>¿Está seguro de que desea volver a intentar procesar esta transacción?</value>
+  </data>
+  <data name="MissingTranslations" xml:space="preserve">
+    <value>Traducciones faltantes</value>
+  </data>
+  <data name="RetryTransactionsConfirmationQuestion" xml:space="preserve">
+    <value>¿Está seguro de que desea volver a intentar procesar estas transacciones?</value>
+  </data>
+  <data name="CompanyPhone" xml:space="preserve">
+    <value>Teléfono de la empresa</value>
+  </data>
+</root>

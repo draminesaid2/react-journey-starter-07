@@ -1,0 +1,52 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="address-block" data-bind="with: address">
+	<!-- ko if: $data -->
+	<!-- ko if: $parent.showLink -->
+	<a class="address-pin" href="#" data-bind="mapLink: $data">
+		<i class="zmdi zmdi-pin"></i>
+	</a>
+	<!-- /ko -->
+	@await Html.PartialAsync("Address") 
+	<!-- ko if: $parent.showCommunicationData -->
+	<!-- ko foreach: Phones -->
+	<div>
+		<a href="#" data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $parentContext.$parent.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $parentContext.$parent.lookups.countries)"></a>
+		<span data-bind="lookupValue: TypeKey, lookups: $parentContext.$parent.lookups.phoneTypes, prefix: '(', suffix: ')'"></span>
+	</div>
+	<!-- /ko -->
+	<!-- ko foreach: Faxes -->
+	<div>
+		<a href="#" data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $parentContext.$parent.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $parentContext.$parent.lookups.countries)"></a>
+		<span data-bind="lookupValue: TypeKey, lookups: $parentContext.$parent.lookups.faxTypes, prefix: '(', suffix: ')'"></span>
+	</div>
+	<!-- /ko -->
+	<!-- ko foreach: Emails -->
+	<div>
+		<!-- ko if: !!$parentContext.$parent.currentUserDropboxAddress -->
+		<a href="#" data-bind="attr: { href: 'mailto:' + Data() + $parentContext.$parent.currentUserDropboxAddress() }, text: Data"></a>
+		<!-- /ko -->
+		<!-- ko ifnot: !!$parentContext.$parent.currentUserDropboxAddress -->
+		<a href="#" data-bind="attr: { href: 'mailto:' + Data() + $root.currentUserDropboxAddress() }, text: Data"></a>
+		<!-- /ko -->
+		<span data-bind="lookupValue: TypeKey, lookups: $parentContext.$parent.lookups.emailTypes, prefix: '(', suffix: ')'"></span>
+	</div>
+	<!-- /ko -->
+	<!-- ko foreach: Websites -->
+	<div>
+		<!-- ko if: /^https?:\/\//i.test(Data()) -->
+		<a href="#" target="_system" data-bind="attr: { href: Data() }, text: Data"></a>
+		<!-- /ko -->
+		<!-- ko if: !/^https?:\/\//i.test(Data()) -->
+		<a href="#" target="_system" data-bind="attr: { href: 'http://' + Data() }, text: Data"></a>
+		<!-- /ko -->
+		<span data-bind="lookupValue: TypeKey, lookups: $parentContext.$parent.lookups.websiteTypes, prefix: '(', suffix: ')'"></span>
+	</div>
+	<!-- /ko -->
+	<!-- /ko -->
+	<!-- /ko -->
+	<!-- ko ifnot: $data -->
+	<span class="c-gray">@(Html.Localize("Unspecified"))</span>
+	<!-- /ko -->
+</div>

@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<label>@(Html.Localize("ContactType"))</label>
+<select data-bind="options: contactTypes,
+									optionsText: x => x.Value,
+									optionsValue: x => x.Key,
+									value: form().ExtensionValues.ContactType,
+									optionsCaption: '@(Html.Localize("PleaseSelect"))',
+									css: 'form-control'"></select>
+

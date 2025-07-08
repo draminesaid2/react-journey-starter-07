@@ -1,0 +1,154 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-details">
+	<pmb-block params="icon: 'equalizer', caption: 'BackgroundInfo', context: { person: person }, condition: window.AuthorizationManager.isAuthorizedForAction('Person', 'Edit')">
+		<pmbb-view>
+			<!-- ko with: person -->
+			<span data-bind="text: BackgroundInfo"></span>
+			<span data-bind="translatedText: 'BackgroundInformationEmptyState', ifnot: BackgroundInfo"></span>
+			<!-- /ko -->
+		</pmbb-view>
+		<pmbb-edit>
+			<!-- ko with: person -->
+			<div class="fg-line">
+				<textarea class="form-control" rows="5" placeholder="@(Html.Localize("BackgroundInfo"))..." data-bind="value: BackgroundInfo"></textarea>
+			</div>
+			<!-- /ko -->
+		</pmbb-edit>
+	</pmb-block>
+	<pmb-block params="icon: 'account', caption: 'General', context: { person: person }, condition: window.AuthorizationManager.isAuthorizedForAction('Person', 'Edit')">
+		<pmbb-view>
+			<!-- ko with: person -->
+			<!-- ko ifnot: window.Main.Settings.PersonNoIsEditable == false && window.Main.Settings.PersonNoIsGenerated == false && window.Main.Settings.PersonNoIsCreateable == false && PersonNo() == null -->
+			<pmbb-view-entry params="caption: 'PersonNo'">
+				<span data-bind="text: PersonNo"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: PersonNo"></span>
+			</pmbb-view-entry>
+			<!-- /ko -->
+			<pmbb-view-entry params="caption: 'Salutation'">
+				<span data-bind="if: SalutationKey, lookupValue: SalutationKey, lookups: $root.lookups.salutations"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: SalutationKey"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Title'">
+				<span data-bind="if: TitleKey, lookupValue: TitleKey, lookups: $root.lookups.titles"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: TitleKey"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Firstname'">
+				<span data-bind="text: Firstname"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Firstname"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Surname'">
+				<span data-bind="text: Surname"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Surname"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'BusinessTitle'">
+				<!-- ko if: !window.Main.Settings.Person.BusinessTitleIsLookup -->
+				<span data-bind="text: BusinessTitleKey"></span>
+				<!-- /ko -->
+				<!-- ko if: window.Main.Settings.Person.BusinessTitleIsLookup -->
+				<span data-bind="if: BusinessTitleKey, lookupValue: BusinessTitleKey, lookups: $root.lookups.businessTitles"></span>
+				<!-- /ko -->
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: BusinessTitleKey"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Station'">
+				<!-- ko with: Station -->
+					<span data-bind="text: Name"></span>
+				<!-- /ko -->
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Station"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Department'">
+				<!-- ko if: !window.Main.Settings.Person.DepartmentIsLookup -->
+				<span data-bind="text: DepartmentTypeKey"></span>
+				<!-- /ko -->
+				<!-- ko if: window.Main.Settings.Person.DepartmentIsLookup -->
+				<span data-bind="if: DepartmentTypeKey, lookupValue: DepartmentTypeKey, lookups: $root.lookups.departmentTypes"></span>
+				<!-- /ko -->
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: DepartmentTypeKey"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Language'">
+				<span data-bind="if: LanguageKey, lookupValue: LanguageKey, lookups: $root.lookups.languages"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: LanguageKey"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'ResponsibleUser'">
+				<!-- ko if: ResponsibleUserUser -->
+				<span data-bind="text: Helper.User.getDisplayName(ResponsibleUserUser)"></span>
+				<!-- /ko -->
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: ResponsibleUserUser"></span>
+			</pmbb-view-entry>
+			<pmbb-view-entry params="caption: 'Mima'">
+				<span data-bind="translatedText: Mima() ? 'Yes' : 'No'"></span>
+			</pmbb-view-entry>
+			<!-- /ko -->
+		</pmbb-view>
+		<pmbb-edit>
+			<!-- ko with: person -->
+			<!-- ko ifnot: (window.Main.Settings.PersonNoIsEditable == false && window.Main.Settings.PersonNoIsGenerated == false && window.Main.Settings.PersonNoIsCreateable == false && PersonNo() == null) || (window.Helper.Offline !== undefined ? window.Helper.Offline.status=='offline' : false) -->
+			<pmbb-edit-entry params="caption: 'PersonNo', validationElement: PersonNo">
+				<input type="text" id="PersonNo" class="form-control" data-bind="value: PersonNo, disable: window.Main.Settings.PersonNoIsEditable == false">
+			</pmbb-edit-entry>
+			<!-- /ko -->
+			<pmbb-edit-entry params="caption: 'Salutation', validationElement: SalutationKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: SalutationKey, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Salutation'), placeholder: $parent.placeholder}">
+				</select>
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'Title', validationElement: TitleKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: TitleKey, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Title'), placeholder: $parent.placeholder}">
+				</select>
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'Firstname', validationElement: Firstname">
+				<input type="text" class="form-control" data-bind="value: Firstname">
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'Surname', validationElement: Surname">
+				<input type="text" class="form-control" data-bind="value: Surname">
+			</pmbb-edit-entry>
+			<!-- ko if: window.Main.Settings.Person.BusinessTitleIsLookup -->
+			<pmbb-edit-entry params="caption: 'BusinessTitle', validationElement: BusinessTitleKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: BusinessTitleKey, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_BusinessTitle'), placeholder: $parent.placeholder}">
+				</select>
+			</pmbb-edit-entry>
+			<!-- /ko -->
+			<!-- ko if: !window.Main.Settings.Person.BusinessTitleIsLookup -->
+			<pmbb-edit-entry params="caption: 'BusinessTitle', validationElement: BusinessTitleKey">
+				<input type="text" class="form-control" data-bind="value: BusinessTitleKey">
+			</pmbb-edit-entry>
+			<!-- /ko -->	
+			<pmbb-edit-entry params="caption: 'Station', validationElement: StationKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: StationKey, autocompleteOptions: { orderBy: ['Name'], table: 'Main_Station', customFilter: Helper.Station.getSelect2Filter.bind($data), mapDisplayObject: Helper.Station.mapForSelect2Display, onSelect: Helper.Station.onSelect.bind($parent,$data), placeholder: $parent.placeholder } }">
+				</select>
+			</pmbb-edit-entry>
+			<!-- ko if: window.Main.Settings.Person.DepartmentIsLookup -->
+			<pmbb-edit-entry params="caption: 'Department', validationElement: DepartmentTypeKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: DepartmentTypeKey, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_DepartmentType'), placeholder: $parent.placeholder}">
+				</select>
+			</pmbb-edit-entry>
+			<!-- /ko -->
+			<!-- ko if: !window.Main.Settings.Person.DepartmentIsLookup -->
+			<pmbb-edit-entry params="caption: 'Department', validationElement: DepartmentTypeKey">
+				<input type="text" class="form-control" data-bind="value: DepartmentTypeKey">
+			</pmbb-edit-entry>
+			<!-- /ko -->	
+			<pmbb-edit-entry params="caption: 'Language', validationElement: LanguageKey">
+				<select class="form-control" data-bind="select2autocompleter: { data: LanguageKey, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Language'), placeholder: $parent.placeholder}">
+				</select>
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'ResponsibleUser', validationElement: ResponsibleUser">
+				<select class="form-control" data-bind="select2autocompleter: { data: ResponsibleUser, autocompleteOptions: { orderBy: ['LastName'], table: 'Main_User', mapDisplayObject: Helper.User.mapForSelect2Display, customFilter: Helper.User.filterUserQuery, onSelect: user => $data.ResponsibleUserUser(user), placeholder: $parent.placeholder } }">
+				</select>
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'Mima', validationElement: Mima">
+				<input type="checkbox" class="form-control" data-bind="checked: Mima">
+			</pmbb-edit-entry>
+			<!-- /ko -->
+		</pmbb-edit>
+	</pmb-block>
+	 @await Html.PartialAsync("Bravo/BravoList") 
+	@Html.PluginRenderActions("PersonMaterialDetailsTabExtensions")
+	<!-- ko if: $root.company -->
+	<!-- ko with: $root.standardAddress -->
+	<contact-data params="caption: window.Helper.String.getTranslatedString('ContactAddress'), address: $root.standardAddress, emails: $root.person().Emails, phones: $root.person().Phones, faxes: $root.person().Faxes, websites: $root.person().Websites, lookups: $root.lookups, editParameters: '&contactId=' + $root.person().Id() + '&editMode=person'"></contact-data>
+	<!-- /ko -->
+	<!-- /ko -->
+	@Html.PluginRenderActions("ContactMaterialDetailsTabExtensions")
+</div>

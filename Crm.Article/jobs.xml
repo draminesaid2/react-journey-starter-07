@@ -1,0 +1,29 @@
+﻿<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 version="2.0">
+
+	<processing-directives>
+		<overwrite-existing-data>true</overwrite-existing-data>
+	</processing-directives>
+
+	<schedule>
+		<job>
+			<name>ArticleExpirationCheckerAgent</name>
+			<group>Crm.Article</group>
+			<description>Marks articles as discontinued if the expiration date is exceeded</description>
+			<job-type>Crm.Article.BackgroundServices.ArticleExpirationCheckerAgent, Crm.Article</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>ArticleExpirationCheckerAgentTrigger</name>
+				<group>Crm.Article</group>
+				<description>Runs daily to check if an article is already expired</description>
+				<job-name>ArticleExpirationCheckerAgent</job-name>
+				<job-group>Crm.Article</job-group>
+				<cron-expression>0 0 3 * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>

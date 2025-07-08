@@ -1,0 +1,37 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title">@(Html.Localize("AddChild"))</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<form>
+		<div id="childId" class="form-group" data-bind="validationElement: childId">
+			<div class="fg-line">
+				<label class="fg-label control-label">@(Html.Localize("ProductFamily"))</label>
+				<select name="childId" class="form-control" data-bind="select2autocompleter: { data: childId, autocompleteOptions: { customFilter: Helper.ProductFamily.filterChild, table: 'CrmArticle_ProductFamily', mapDisplayObject: function (c) { return { id: c.Id, item: c, text: c.Name }; }, onSelect: child }} ">
+				</select>
+			</div>
+			<div data-bind="validationElement: $root.hierarchyValidation">
+				<div class="help-block" data-bind="validationMessage: $root.hierarchyValidation" style="display: none;"></div>
+			</div>
+			<small class="help-block" data-bind="validationMessage: childId"></small>
+		</div>
+	</form>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<ul class="list-unstyled clearfix wpb-actions">
+		<li class="pull-right">
+			<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+				@(Html.Localize("Cancel"))
+			</button>
+			<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, disable: loading">
+				@(Html.Localize("Save"))
+			</button>
+		</li>
+	</ul>
+</div>
+

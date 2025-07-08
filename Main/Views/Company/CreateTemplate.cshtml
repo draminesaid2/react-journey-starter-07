@@ -1,0 +1,111 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: company">
+			<h2>@(Html.Localize("AddNewCompany"))</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: company">
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: Name, name: 'Name', caption: 'T_CompanyName', type: 'text', autofocus: true"></form-element>
+					</div>
+					<div class="col-md-6">
+						<!-- ko if : window.Main.Settings.CompanyNoIsCreateable && (!window.Helper.Offline || window.Helper.Offline.status === 'online') -->
+						<div class="form-group" data-bind="validationElement: CompanyNo" title="">
+							<div class="fg-line">
+								<label class="fg-label control-label" data-bind="visible: 'CompanyNo'">
+									<span>@Html.Localize("CompanyNo")</span>
+								</label>
+								<input type="text" class="form-control fg-input" name="CompanyNo" data-bind="value: CompanyNo, attr: { maxlength: 20}" required>
+							</div>
+							<small class="help-block pre-line" data-bind="validationMessage: CompanyNo" style="display: none;"></small>
+						</div>
+						<!-- /ko -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element id="CompanyTypeKey" params="value: CompanyTypeKey, caption: 'CompanyType', type: 'select', disable: !$root.allowCompanyTypeSelection">
+							<select name="CompanyTypeKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.companyTypes, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_CompanyType'), placeholder: placeholder}, disable: disable">
+							</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element id="LanguageKey" params="value: LanguageKey, caption: 'Language', type: 'select'">
+							<select name="LanguageKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Language'), placeholder: placeholder}">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element id="SourceTypeKey" params="value: SourceTypeKey, caption: 'SourceTypeKey', type: 'select'">
+							<select name="SourceTypeKey" class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.sourceTypes, value), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_SourceType'), placeholder: placeholder}">
+							</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						@Html.PluginRenderActions("CreateContactCampaignSource")
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element id="ResponsibleUserKeyCompany" params="value: ResponsibleUser, caption: 'ResponsibleUser', type: 'select'">
+							<select name="ResponsibleUserKeyCompany" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: { orderBy: ['LastName'], table: 'Main_User', mapDisplayObject: Helper.User.mapForSelect2Display, customFilter: Helper.User.filterUserQuery, placeholder: placeholder }}">
+							</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element id="AreaSalesManager" params="value: AreaSalesManager, caption: 'AreaSalesManager', type: 'select'">
+							<select name="AreaSalesManager" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: { orderBy: ['LastName'], table: 'Main_User', mapDisplayObject: Helper.User.mapForSelect2Display, customFilter: Helper.User.filterUserQuery, placeholder: $parent.placeholder } }">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<form-element params="value: ShortText, name: 'ShortText', caption: 'ShortText', type: 'text', autofocus: true"></form-element>
+				<form-element params="value: BackgroundInfo, caption: 'BackgroundInfo', type: 'textarea'"></form-element>
+				<form-element params="value: ParentId, caption: 'ParentCompany'">
+					<select name="ParentCompany" class="form-control" data-bind="select2autocompleter: { data: $parent.ParentId, autocompleteOptions: { table: 'Main_Company', orderBy: ['Name'], joins: Helper.Company.getAutocompleteJoins(), customFilter: Helper.Company.getSelect2Filter, mapDisplayObject: Helper.Company.mapDisplayNameWithAddressForSelect2, key: 'Id', confirmChange: $root.onConfirmParentCompany.bind($root), placeholder: placeholder } }">
+					</select>
+				</form-element>
+				<form-element id="AddSubsidiary" params="value: $root.editSubsidiaries, caption: 'AddSubsidiary'">
+					<select name="AddSubsidiary" class="form-control" data-bind="select2autocompleter: { data: $root.subsidiary, autocompleteOptions: { table: 'Main_Company', orderBy: ['Name'], joins: Helper.Company.getAutocompleteJoins(), customFilter: $root.subsidiaryFilter.bind($root), mapDisplayObject: Helper.Company.mapDisplayNameWithAddressForSelect2, onSelect: $root.onSubsidiarySelect.bind($root), placeholder: placeholder } }">
+					</select>
+				</form-element>
+				<div class="subsidiaries" data-bind="if: $root.editSubsidiaries().length">
+					<label class="fg-label control-label">
+						<span>@(Html.Localize("Subsidiaries"))</span>
+					</label>
+					<div data-bind="foreach: $root.editSubsidiaries">
+						<div class="input-group">
+							<div class="form-control">
+								<div class="m-t-10" data-bind="text: Name"></div>
+							</div>
+							<span class="input-group-addon last">
+								<a href="#" class="btn btn-danger waves-effect" data-bind="click: $root.editSubsidiaries.remove.bind($root.editSubsidiaries), tooltip: true" title="@(Html.Localize("Remove"))">
+									<i class="zmdi zmdi-delete"></i>
+								</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="fg-line">
+					<label class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+						<span>@(Html.Localize("Addressinformation"))</span>
+					</label>
+				</div>
+				<address-editor params="contactId: Id(), onLoad: $parent.onLoadAddressEditor.bind($parent)"></address-editor>
+				<!-- ko with: $root.visibilityViewModel -->
+				@Html.RenderAction("Selection", "Visibility")
+				<!-- /ko -->
+			</form>
+		</div>
+		@await Html.PartialAsync("CreateFormFooter")
+	</div>
+</div>
+

@@ -1,0 +1,10 @@
+﻿@using Crm.Library.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn m-20" id="tab-edit-field" data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist'">
+	@Html.RenderAction("MaterialEditorTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+	<div data-bind="visible: !selectedFormElement(), translatedText: 'DynamicFormEditFieldEmptySlate'"></div>
+	<div data-bind="if: selectedFormElement">
+		<div data-bind="template: { name: 'dynamicform-element-editor-template-' + selectedFormElement().FormElementType(), data: selectedFormElement }">
+		</div>
+	</div>
+</div>

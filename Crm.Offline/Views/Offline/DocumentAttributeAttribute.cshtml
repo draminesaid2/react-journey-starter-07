@@ -1,0 +1,9 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<li class="c-green" data-bind="visible: !!FileResource() ? FileResource().IsSynced : false">
+  <i class="zmdi zmdi-refresh-sync"></i>
+  <span>
+	  @(Html.Localize("OfflineAvailable"))
+  </span>
+</li>

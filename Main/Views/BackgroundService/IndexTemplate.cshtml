@@ -1,0 +1,34 @@
+﻿@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<ul class="top-menu">
+	@Html.PluginRenderActions("BackgroundServiceTopMenu")
+</ul>
+
+<div class="container">
+	<div class="card generic-list">
+		<div class="card-header ch-alt">
+			<h2>@(Html.Localize("BackgroundServices"))</h2>
+		</div>
+		<div class="listview lv-bordered">
+			<div class="lv-body row map-container">
+				<div class="col-xs-12">
+					<div data-bind="foreach: allJobs">
+						<job-details params="data: $data"></job-details>
+					</div>
+					<div id="generic-list-empty-state" class="lv-item media">
+						<div class="row media-body">
+							<div class="col-xs-12">
+								<small class="lv-small" data-bind="visible: noMatchingRecords, translatedText: 'NoRecordsForSearchCriteria'"></small>	
+								<!-- ko if: $root.allJobs().length === 0  && $root.isFiltered() === false -->
+								<small class="lv-small" data-bind="translatedText: 'NoRecordFoundBackgroundServices'"></small>			
+								<!-- /ko -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

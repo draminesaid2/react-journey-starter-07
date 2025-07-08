@@ -1,0 +1,8 @@
+﻿@model dynamic
+
+<div class="form-group" data-bind="visible: $root.form().CategoryKey() === 'AttributeForm'">
+	<label class="field">
+		<input type="checkbox" data-bind="checked: ExtensionValues().DisplayOnItemTemplate" name="ExtensionValues.DisplayOnItemTemplate" />
+		<span class="description" data-bind="translatedText: 'DisplayOnItemTemplate'"></span>
+	</label>
+</div>

@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.DynamicForms.Model
+@using Crm.Offline.Extensions
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response">
+		@(Html.TemplateText<SingleLineText>(x => x.Response).Tag("div").AddClass("row"))
+</div>

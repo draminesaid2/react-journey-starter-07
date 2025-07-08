@@ -1,0 +1,91 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="pmb-block">
+	<div class="pmbb-header">
+		<h2>
+			<i class="zmdi zmdi-phone m-r-5"></i>
+			<span data-bind="text: caption"></span>
+			<span data-bind="lookupValue: address.AddressTypeKey, lookups: lookups.addressTypes, prefix: '(', suffix: ')'"></span>
+		</h2>
+		<lv-actions>
+			<!-- ko requiredPermission: { name: 'EditAddress', group: $root.contactType } -->
+			<!-- ko if: window.Main.Settings.AllowEditAddressWithLegacyId === true || ko.unwrap(address.LegacyId) === null -->
+			<li class="address-edit">
+				<a href="#" data-bind="attr: { 'data-route': getEditRoute }" data-toggle="modal" data-target="#lgModal" >@(Html.Localize("Edit"))</a>
+			</li>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko requiredPermission: { name: 'MakeStandardAddress', group: $root.contactType } -->
+			<li class="address-make-standard-address" data-bind="if: parentMakeStandardAddress">
+				<a href="#" data-bind="click: makeStandardAddress.bind($data)">@(Html.Localize("MakeStandardAddress"))</a>
+			</li>
+			<!-- /ko -->
+			<!-- ko requiredPermission: { name: 'DeleteAddress', group: $root.contactType } -->
+			<li class="address-delete" data-bind="if: canDelete">
+				<a href="#" data-bind="click: removeAddress.bind($data)">@(Html.Localize("Delete"))</a>
+			</li>
+			<!-- /ko -->
+		</lv-actions>
+	</div>
+	<div class="pmbb-body p-l-30">
+		<div class="pmbb-view">
+			<dl class="dl-horizontal address-name" data-bind="with: address">
+				<!-- ko if: Name1 || Name2 || Name3 -->
+				<dt>@(Html.Localize("Name"))</dt>
+				<!-- /ko -->
+				<dd>
+						<!-- ko if: window.AuthorizationManager.currentUserHasPermission("Company::Read") && $component.contactType == 'Company' -->
+						<a href="#" data-bind="attr: { href: '#/Main/Company/DetailsTemplate/' + ($root.company() ? $root.company().Id() : $root.contactId()) }">
+						<!-- ko if: Name1 --><span data-bind="text: Name1"></span><br/><!-- /ko -->
+						<!-- ko if: Name2 --><span data-bind="text: Name2"></span><br/><!-- /ko -->
+						<!-- ko if: Name3 --><span data-bind="text: Name3"></span><br/><!-- /ko -->
+						</a>
+					<!-- /ko -->
+					<!-- ko ifnot: window.AuthorizationManager.currentUserHasPermission("Company::Read") && $component.contactType == 'Company'  -->
+						<!-- ko if: Name1 --><span data-bind="text: Name1"></span><br/><!-- /ko -->
+						<!-- ko if: Name2 --><span data-bind="text: Name2"></span><br/><!-- /ko -->
+						<!-- ko if: Name3 --><span data-bind="text: Name3"></span><br/><!-- /ko -->
+					<!-- /ko -->
+				</dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>@(Html.Localize("CustomerAddress"))</dt>
+				<dd><address-block params="address: address, lookups: lookups"></address-block></dd>
+			</dl>
+			<dl class="dl-horizontal" data-bind="foreach: phones">
+				<dt data-bind="if: $index() === 0">@(Html.Localize("Phone"))</dt>
+				<dd>
+					<a href="#" data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $parent.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $parent.lookups.countries)"></a>
+					<span data-bind="lookupValue: TypeKey, lookups: $parent.lookups.phoneTypes, prefix: '(', suffix: ')'"></span>
+				</dd>
+			</dl>
+			<dl class="dl-horizontal" data-bind="foreach: faxes">
+				<dt data-bind="if: $index() === 0">@(Html.Localize("Fax"))</dt>
+				<dd>
+					<a href="#" data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString($data, false, $parent.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString($data, true, $parent.lookups.countries)"></a>
+					<span data-bind="lookupValue: TypeKey, lookups: $parent.lookups.faxTypes, prefix: '(', suffix: ')'"></span>
+				</dd>
+			</dl>
+			<dl class="dl-horizontal" data-bind="foreach: emails">
+				<dt data-bind="if: $index() === 0">@(Html.Localize("Email"))</dt>
+				<dd>
+					<a href="#" data-bind="attr: { href: 'mailto:' + Data() + $root.currentUserDropboxAddress() }, text: Data"></a>
+					<span data-bind="lookupValue: TypeKey, lookups: $parent.lookups.emailTypes, prefix: '(', suffix: ')'"></span>
+				</dd>
+			</dl>
+			<dl class="dl-horizontal" data-bind="foreach: websites">
+				<dt data-bind="if: $index() === 0">@(Html.Localize("Website"))</dt>
+				<dd>
+					<!-- ko if: /^https?:\/\//i.test(Data()) -->
+						<a href="#" target="_system" data-bind="attr: { href: Data() }, text: Data"></a>
+					<!-- /ko -->
+					<!-- ko if: !/^https?:\/\//i.test(Data()) -->
+						<a href="#" target="_system" data-bind="attr: { href: 'http://' + Data() }, text: Data"></a>
+					<!-- /ko -->
+					<span data-bind="lookupValue: TypeKey, lookups: $parent.lookups.websiteTypes, prefix: '(', suffix: ')'"></span>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>

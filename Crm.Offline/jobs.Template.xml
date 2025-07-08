@@ -1,0 +1,29 @@
+﻿<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+										xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+										version="2.0">
+
+	<processing-directives>
+		<overwrite-existing-data>true</overwrite-existing-data>
+	</processing-directives>
+
+	<schedule>
+		<job>
+			<name>SyncSegmentCleanupAgent</name>
+			<group>Core</group>
+			<description>Removes entities which were segmented and cached, but not queried from the client</description>
+			<job-type>Crm.Offline.BackgroundServices.SyncSegmentCleanupAgent, Crm.Offline</job-type>
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<trigger>
+			<cron>
+				<name>SyncSegmentCleanupAgentTrigger</name>
+				<group>Core</group>
+				<description>Periodically triggers SyncSegmentCleanupAgent to remove segmented cached data from memory if it's not requested from a client</description>
+				<job-name>SyncSegmentCleanupAgent</job-name>
+				<job-group>Core</job-group>
+				<cron-expression>0 0/30 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>

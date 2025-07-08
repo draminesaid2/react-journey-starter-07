@@ -1,0 +1,32 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm.Library.Globalization.Extensions
+@using Crm
+
+@{ var type = Model as Type; }
+<div class="pmb-block pmo-block tags" data-bind="requiredPermission: { name: 'Tag', group: 'WebAPI' }">
+	<div class="pmbb-header">
+		<h4>@(Html.Localize("Tags"))</h4>
+		<ul class="actions">
+			<lv-actions>
+				<li id="tag-add" data-bind="requiredPermission: { name: '@(MainPlugin.PermissionName.CreateTag)', group: window.Helper.Tag.getPermissionGroupName($root.contactType()) }">
+					<a href="#" data-toggle="modal" data-target="#smModal" data-bind="attr: { 'data-route': 'Main/Contact/AddTag/' + contact().Id() }">
+						@(Html.Localize("Add"))
+					</a>
+				</li>
+				<li id="tag-delete" data-bind="requiredPermission: { name: '@(MainPlugin.PermissionName.RemoveTag)', group: window.Helper.Tag.getPermissionGroupName($root.contactType()) }, visible: selectedTags().length > 0">
+					<a href="#" data-bind="click: removeSelectedTags">
+						@(Html.Localize("Delete"))
+					</a>
+				</li>
+			</lv-actions>
+		</ul>
+	</div>
+	<!-- ko foreach: contact().Tags -->
+	<button class="btn btn-xs m-5 waves-effect" data-bind="text: Name, click: AuthorizationManager.isAuthorizedForAction(window.Helper.Tag.getPermissionGroupName($root.contactType()), '@(MainPlugin.PermissionName.RemoveTag)') ? $parent.toggleTag : function() {}, css: $parent.getTagButtonClass($data)"></button>
+	<!-- /ko -->
+	<!-- ko if: contact().Tags().length === 0 -->
+	<div id="designer-empty-slate" class="info-message">
+		@(Html.Localize("TagsEmptySlate"))
+	</div>
+	<!-- /ko -->
+</div>

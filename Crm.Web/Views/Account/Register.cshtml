@@ -1,0 +1,44 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage<Crm.ViewModels.UserEditViewModel>
+@{Layout = "~/Views/Shared/Layout/LoginLayout.cshtml";}
+@using Crm.Extensions
+@using Crm.Library.Globalization.Extensions
+
+@section TitleContent {
+
+	<title>
+		@(Html.Localize("CreateNewAccount"))
+	</title>
+
+}
+
+@section MainContent {
+
+	@await Html.PartialAsync("Master/CordovaJs")
+	@{ var passwordResetSupported = Model.PasswordResetSupported; }
+
+	<div class="card lc-block lc-block-register toggled p-0 m-b-15">
+		<h4 class="p-b-15">
+			@(Html.LogoOrTitleString())
+		</h4>
+		@if (!passwordResetSupported)
+		{
+			<p class="alert alert-warning">
+				@(Html.Localize("AdAuthRegisterNotSupported"))
+			</p>
+		}
+		else
+		{
+			@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+			{
+				@await Html.PartialAsync("UserData")
+				<div class="card-header ch-alt text-right p-15">
+					@(Html.ActionLink(Html.Localize("Cancel"), "Login", new { plugin = "Main" }, new { @class = "btn btn-lg btn-default f-13" }))
+					<button id="register_create" class="submit btn btn-lg btn-primary f-13 waves-effect m-l-5">@(Html.Localize("Create"))</button>
+				</div>
+			}
+		}
+	</div>
+	@(Html.JsResource("registerJs"))
+	@(Html.JsResource("registerHelperTs"))
+	@(Html.JsResource("localeJs"))
+}

@@ -1,0 +1,109 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div class="lv-item media" data-bind="css: { 'p-l-10 p-r-10': $root.showCompactActions }">
+	@await Html.PartialAsync("GenericListBulkControl")
+	<div class="lv-avatar pull-left" data-bind="text: Helper.Task.getTaskTypeAbbreviation($data, $parent.lookups.taskTypes), style: { backgroundColor: Helper.Task.getTaskTypeColor($data, $parent.lookups.taskTypes) }, visible: !$parent.selectedItems || $parent.selectedItems().length === 0"></div>
+	<!-- ko requiredPermission: { name: 'Complete', group: 'Task' } -->
+	<div class="p-l-10 pull-right" data-bind="if: $root.showCompactActions && !IsCompleted()">
+		<button class="m-t-5 btn btn-success btn-sm waves-effect" data-bind="click: function(data, event) { $(event.currentTarget).closest('.lv-item').addClass('animated bounceOutRight').delay(500).queue($parent.complete.bind($parent, $data)); }, tooltip: true" title="@(Html.Localize("Complete"))"><i class="zmdi zmdi-check"></i></button>
+	</div>
+	<!-- /ko -->
+	<div class="media-body">
+		<div class="lv-title m-b-5">
+			<span data-bind="text: Text"></span>
+		</div>
+		<!-- ko with: $data.Company -->
+		<div class="small">
+			@(Html.Localize("Company")):
+			<!-- ko requiredPermission: { name: 'Read', group: 'Company' } --> 
+			<a data-bind="attr: { href: '#/Main/Company/DetailsTemplate/' + Id() }, text: Helper.Company.getDisplayName($data)"></a>
+			<!-- /ko -->
+			<!-- ko noRequiredPermission: { name: 'Read', group: 'Company' } --> 
+			<span data-bind="text: Helper.Company.getDisplayName($data)"></span>
+			<!-- /ko -->
+		</div>
+		<!-- /ko -->
+		<!-- ko if: ContactId -->
+		<div class="small">
+			@(Html.Localize("ParentName"))
+			<span class="task-contacttype" data-bind="text: !!ContactType() ? '(' + Helper.String.getTranslatedString(ContactType().split('.').slice(-1).pop()) + '): ' : null"></span>
+			<a data-bind="attr: { href: Helper.Task.getContactLink($data) }, text: ContactName"></a>
+		</div>
+		<!-- /ko -->
+		@Html.PluginRenderActions("TaskItemTemplateExtension")
+		<ul class="lv-attrs">
+			<li>
+				<i class="zmdi zmdi-calendar"></i>
+				<span data-bind="dateText: DueDate"></span>
+				<span data-bind="dateText: { value: DueTime, pattern: { time: 'short' } }"></span>
+			</li>
+			<li>
+				<span data-bind="if: TypeKey, lookupValue: TypeKey, lookups: $parent.lookups.taskTypes"></span>
+			</li>
+			<!-- ko if: ResponsibleUser() && ResponsibleUser() !== $parent.currentUserName -->
+			<li>
+				<i class="zmdi zmdi-account-o"></i>
+				<span data-bind="text: ResponsibleUserUser() ? Helper.User.getDisplayName(ResponsibleUserUser) : ResponsibleUser()"></span>
+			</li>
+			<!-- /ko -->
+			<!-- ko if: ResponsibleUserGroup() -->
+			<li>
+				<i class="zmdi zmdi-accounts"></i>
+				<span data-bind="text: ResponsibleUserGroup()"></span>
+			</li>
+			<!-- /ko -->
+			<!-- ko if: typeof CreateUserUser == 'function' && TaskCreateUser() !== $parent.currentUserName -->
+			<li>
+				@(Html.Localize("CreatedBy")):
+				<!-- ko if: CreateUserUser() -->
+				<span data-bind="text: Helper.User.getDisplayName(CreateUserUser)"></span>
+				<!-- /ko -->
+				<!-- ko if: !CreateUserUser() -->
+				<span data-bind="text: TaskCreateUser"></span>
+				<!-- /ko -->
+			</li>
+			<!-- /ko -->
+		</ul>
+		
+		<div class="lv-actions actions dropdown" data-bind="ifnot: IsCompleted() || $root.showCompactActions">
+			<a href="#" data-toggle="dropdown" aria-expanded="true">
+				<i class="zmdi zmdi-more-vert"></i>
+			</a>
+
+			<ul class="dropdown-menu dropdown-menu-right">
+				<!-- ko requiredPermission: { name: 'Complete', group: 'Task' } -->
+				<li>
+					<a href="#" data-bind="click: Helper.Task.completeTask.bind($parent, $data)">@(Html.Localize("Complete"))</a>
+				</li>
+				<!-- /ko -->
+				<!-- ko requiredPermission: { name: 'Edit', group: 'Task' } -->
+				<li>
+					<a href="#" data-bind="attr: { 'data-route': 'Main/Task/Edit/' + Id() }" data-toggle="modal" data-target="#modal">
+						@(Html.Localize("Edit"))
+					</a>
+				</li>
+				<li>
+					<a href="#" data-bind="click: Helper.Task.postponeDueDate.bind($parent, $data, 1)">
+						@(Html.Localize("Postpone")) +1d (@(Html.Localize("T_TomorrowTasks")))
+					</a>
+				</li>
+				<li>
+					<a href="#" data-bind="click: Helper.Task.postponeDueDate.bind($parent, $data, 7)">
+						@(Html.Localize("Postpone")) +7d (@(Html.Localize("T_NextWeekTasks")))
+					</a>
+				</li>
+				<li>
+					<a href="#" data-bind="click: Helper.Task.postponeDueDate.bind($parent, $data, 21)">
+						@(Html.Localize("Postpone")) +21d (@(Html.Localize("T_LaterTasks")))
+					</a>
+				</li>
+				<!-- /ko -->
+				@Html.PluginRenderActions("TaskItemTemplateAction")
+			</ul>
+		</div>
+	</div>
+	@Html.PluginRenderActions("MaterialTaskItemExtensions")
+</div>
+

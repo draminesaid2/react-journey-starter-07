@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ArticleSearch" xml:space="preserve">
+    <value>Cikk keresés</value>
+  </data>
+  <data name="ConfirmDeleteArticle" xml:space="preserve">
+    <value>Valóban törli ezt a cikket?</value>
+  </data>
+  <data name="CreateArticle" xml:space="preserve">
+    <value>Cikk létrehozása</value>
+  </data>
+  <data name="CreateMaterial" xml:space="preserve">
+    <value>Anyag létrehozása</value>
+  </data>
+  <data name="CreateService" xml:space="preserve">
+    <value>Szolgáltatás létrehozása</value>
+  </data>
+  <data name="CreateTool" xml:space="preserve">
+    <value>Szerszám létrehozása</value>
+  </data>
+  <data name="DeleteMaterial" xml:space="preserve">
+    <value>Anyag törlése</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Szolgáltatás törlése</value>
+  </data>
+  <data name="DeleteTool" xml:space="preserve">
+    <value>Szerszám törlése</value>
+  </data>
+  <data name="EditArticle" xml:space="preserve">
+    <value>Cikk szerkesztése</value>
+  </data>
+  <data name="EditArticleWithItemNo" xml:space="preserve">
+    <value>Cikk  {0} szerkesztése</value>
+  </data>
+  <data name="EditMaterial" xml:space="preserve">
+    <value>Anyag szerkésztése</value>
+  </data>
+  <data name="EditService" xml:space="preserve">
+    <value>Szolgáltatás szerkesztése</value>
+  </data>
+  <data name="EditTool" xml:space="preserve">
+    <value>Szerszám szerkesztése</value>
+  </data>
+  <data name="CrmArticle_QuantityUnit" xml:space="preserve">
+    <value>Mennyiségi egység</value>
+  </data>
+  <data name="CrmArticle_Article" xml:space="preserve">
+    <value>Cikk</value>
+  </data>
+  <data name="AdditionalCosts" xml:space="preserve">
+    <value>Egyéb költségek</value>
+  </data>
+  <data name="IsSerial" xml:space="preserve">
+    <value>Sorozatszám köteles</value>
+  </data>
+  <data name="SerialRequired" xml:space="preserve">
+    <value>Sorozatszám szükséges</value>
+  </data>
+  <data name="VATLevel" xml:space="preserve">
+    <value>ÁFA</value>
+  </data>
+  <data name="PercentageValue" xml:space="preserve">
+    <value>Százalékos érték</value>
+  </data>
+  <data name="OtherInformation" xml:space="preserve">
+    <value>Egyéb információ</value>
+  </data>
+  <data name="SaveArticleRelationship" xml:space="preserve">
+    <value>Cikk kapcsolat mentése</value>
+  </data>
+  <data name="ResolveSetArticle" xml:space="preserve">
+    <value>Cikk megoldva ?</value>
+  </data>
+  <data name="ShowAccessory" xml:space="preserve">
+    <value>Kellékek mutatása</value>
+  </data>
+  <data name="ArticleRelationshipType" xml:space="preserve">
+    <value>Cikk kapcsolat típus</value>
+  </data>
+  <data name="HasQuantity" xml:space="preserve">
+    <value>Van-e mennyiség</value>
+  </data>
+  <data name="InverseValue" xml:space="preserve">
+    <value>Inverz érték</value>
+  </data>
+  <data name="Description-hu" xml:space="preserve">
+    <value>Magyar leírás</value>
+  </data>
+  <data name="QuantityValue" xml:space="preserve">
+    <value>Mennyiség</value>
+  </data>
+  <data name="ArticleRelationship" xml:space="preserve">
+    <value>Cikk kapcsolat</value>
+  </data>
+  <data name="CreateUpdate" xml:space="preserve">
+    <value>Új Frissítés</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Olvas</value>
+  </data>
+  <data name="CrmArticle_ArticleRelationshipType" xml:space="preserve">
+    <value>Cikk kapcsolat típus</value>
+  </data>
+  <data name="CrmArticle_ArticleRelationship" xml:space="preserve">
+    <value>Cikk kapcsolat</value>
+  </data>
+  <data name="CrmArticle_ArticleDescription" xml:space="preserve">
+    <value>Cikk leírás</value>
+  </data>
+  <data name="Tool" xml:space="preserve">
+    <value>Eszköz</value>
+  </data>
+  <data name="CrmArticle_ArticleGroup01" xml:space="preserve">
+    <value>Cikkcsoport 1</value>
+  </data>
+  <data name="CrmArticle_ArticleGroup02" xml:space="preserve">
+    <value>Cikkcsoport 2</value>
+  </data>
+  <data name="CrmArticle_ArticleGroup03" xml:space="preserve">
+    <value>Cikkcsoport 3</value>
+  </data>
+  <data name="CrmArticle_ArticleGroup04" xml:space="preserve">
+    <value>Cikkcsoport 4</value>
+  </data>
+  <data name="CrmArticle_ArticleGroup05" xml:space="preserve">
+    <value>Cikkcsoport 5</value>
+  </data>
+  <data name="CrmArticle_ArticleType" xml:space="preserve">
+    <value>Cikk típus</value>
+  </data>
+  <data name="CrmArticle_VATLevel" xml:space="preserve">
+    <value>ÁFA szintek</value>
+  </data>
+  <data name="ArticleList" xml:space="preserve">
+    <value>Cikklista</value>
+  </data>
+  <data name="ArticleEmptySlate" xml:space="preserve">
+    <value>Nincsenek olyan cikkek, amelyek az adott kritérium alapján találhatók.</value>
+  </data>
+  <data name="SpareParts" xml:space="preserve">
+    <value>Alkatrészek</value>
+  </data>
+  <data name="DeleteArticle" xml:space="preserve">
+    <value>Cikk törlése</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Költség</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Kép</value>
+  </data>
+  <data name="Articles" xml:space="preserve">
+    <value>Cikkek</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>vázlat</value>
+  </data>
+  <data name="IsWarehouseManaged" xml:space="preserve">
+    <value>Raktár kezelt</value>
+  </data>
+  <data name="AddChild" xml:space="preserve">
+    <value>Adja hozzá a termékcsaládokhoz</value>
+  </data>
+  <data name="ChildProductFamilies" xml:space="preserve">
+    <value>alárendelt termékcsaládok</value>
+  </data>
+  <data name="CreateProductFamily" xml:space="preserve">
+    <value>termékcsalád befektet</value>
+  </data>
+  <data name="ProductFamilyIsChild" xml:space="preserve">
+    <value>A kiválasztott termékcsalád már e termékcsalád alcsoportja.</value>
+  </data>
+  <data name="RuleViolation.ProductFamilyIsCurrentProductFamily" xml:space="preserve">
+    <value>Ez a termékcsalád a jelenlegi termékcsalád.</value>
+  </data>
+  <data name="ProductFamilyAlreadyHasParent" xml:space="preserve">
+    <value>Ennek a termékcsaládnak már van szülő termékcsaládja.</value>
+  </data>
+  <data name="ProductFamilyIsCurrentParent" xml:space="preserve">
+    <value>A kiválasztott termékcsalád már e termékcsalád szülőtermék-családja.</value>
+  </data>
+  <data name="ProductFamilies" xml:space="preserve">
+    <value>Termékcsaládok</value>
+  </data>
+  <data name="ProductFamily" xml:space="preserve">
+    <value>termékcsalád</value>
+  </data>
+  <data name="ProductFamilyKey" xml:space="preserve">
+    <value>termékcsalád</value>
+  </data>
+  <data name="RetiredProducts" xml:space="preserve">
+    <value>kivezetett termékek</value>
+  </data>
+  <data name="ProductFamilyEmptySlate" xml:space="preserve">
+    <value>Az adott keresési feltétellel nem található termékcsalád.</value>
+  </data>
+  <data name="CrmArticle_ProductFamily" xml:space="preserve">
+    <value>Termékcsaládok</value>
+  </data>
+  <data name="CircularHierarchyReferenceDetected" xml:space="preserve">
+    <value>A termékcsalád hierarchiájában körkörös hivatkozás található</value>
+  </data>
+  <data name="NoProductFamilies" xml:space="preserve">
+    <value>Nem található termékcsalád.</value>
+  </data>
+  <data name="Descriptions" xml:space="preserve">
+    <value>leírások</value>
+  </data>
+  <data name="EditProductFamilyDescriptions" xml:space="preserve">
+    <value>A termékcsalád-leírások szerkesztése</value>
+  </data>
+  <data name="ChildProductFamilyCreated" xml:space="preserve">
+    <value>Altermék család létrehozva</value>
+  </data>
+  <data name="CreateChildProductFamily" xml:space="preserve">
+    <value>Altermék család létrehozása</value>
+  </data>
+  <data name="ProductFamilyCreated" xml:space="preserve">
+    <value>Termék család létrehozva</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>Vételár</value>
+  </data>
+  <data name="CrmArticle_ProductFamilyDescription" xml:space="preserve">
+    <value>Termékcsalád leírás</value>
+  </data>
+  <data name="CrmArticle_ProductFamilyStatus" xml:space="preserve">
+    <value>Termékcsalád státuszok</value>
+  </data>
+  <data name="ArticleNo" xml:space="preserve">
+    <value>Cikkszám</value>
+  </data>
+  <data name="CommercialInformation" xml:space="preserve">
+    <value>Eladási információk</value>
+  </data>
+  <data name="AccessoryOf" xml:space="preserve">
+    <value>Tartozék</value>
+  </data>
+  <data name="VariableValue" xml:space="preserve">
+    <value>Érték</value>
+  </data>
+  <data name="ArticleCompanyRelationships" xml:space="preserve">
+    <value>Cikk-Cég kapcsolatok</value>
+  </data>
+  <data name="AddCompanyRelationship" xml:space="preserve">
+    <value>Cég kapcsolat hozzáadása</value>
+  </data>
+  <data name="AddArticleRelationship" xml:space="preserve">
+    <value>Cikk kapcsoalt hozzáadása</value>
+  </data>
+  <data name="CrmArticle_ArticleCompanyRelationship" xml:space="preserve">
+    <value>Cikk-Cég kapcsolatok</value>
+  </data>
+  <data name="CrmArticle_ArticleCompanyRelationshipType" xml:space="preserve">
+    <value>Cikk-Cég kapcsolattípusok</value>
+  </data>
+  <data name="ArticleRelationships" xml:space="preserve">
+    <value>Cikk kapcsolat</value>
+  </data>
+  <data name="GuaranteeInMonths" xml:space="preserve">
+    <value>Grancia (hónapok)</value>
+  </data>
+  <data name="LeadTimeInDays" xml:space="preserve">
+    <value>Átfutási idő (napok)</value>
+  </data>
+  <data name="IsDiscontinued" xml:space="preserve">
+    <value>Megszűnt cikk</value>
+  </data>
+  <data name="ManufacturerItemNo" xml:space="preserve">
+    <value>Gyártói cikkszám</value>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Lejárati dátum</value>
+  </data>
+  <data name="WarrantyInMonths" xml:space="preserve">
+    <value> Jótállás (hónapok)</value>
+  </data>
+  <data name="Discontinued" xml:space="preserve">
+    <value>Megszűnt cikk</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>Közelgő termékek</value>
+  </data>
+  <data name="IsEnabled" xml:space="preserve">
+    <value>Aktiválva</value>
+  </data>
+  <data name="BarCode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="ScanBarcode" xml:space="preserve">
+    <value>Barcode beolvasása</value>
+  </data>
+  <data name="RuleViolation.RespectQuantityStep" xml:space="preserve">
+    <value>{0} tizedesjegyeinek száma nem haladhatja meg a megadott {1} formátumét</value>
+  </data>
+</root>

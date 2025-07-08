@@ -1,0 +1,14 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialEditTemplates/Hint") 
+	 @await Html.PartialAsync("MaterialEditTemplates/History") 
+	<div data-bind="css: 'col-xs-10'">
+		<pmbb-edit-entry params="caption: $root.getLocalizationText($data)">
+			<form-element params="value: Response, type: 'select'">
+				<select class="form-control" data-bind="options: window.ko.computed(function(){ var choicesArray = window.ko.utils.arrayMap(Helper.DynamicForm.getChoicesArray($parent), function(choice){ return { Value: choice.toString(), Text: $root.getLocalizationText($parent, choice) }; }); choicesArray.unshift({ Value: null, Text: window.Helper.String.getTranslatedString('SelectDropDownValue') }); return choicesArray; }), optionsText: 'Text', optionsValue: 'Value', value: value">
+				</select>
+			</form-element>
+		</pmbb-edit-entry>
+	</div>
+</div>

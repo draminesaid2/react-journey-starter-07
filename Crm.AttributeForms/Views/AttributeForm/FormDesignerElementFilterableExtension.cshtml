@@ -1,0 +1,10 @@
+﻿@model dynamic
+
+<!-- ko ifnot: $data.FormElementType() === "CheckBoxList" -->
+<div class="form-group" data-bind="visible: $root.form().CategoryKey() === 'AttributeForm'">
+	<label class="field">
+		<input type="checkbox" data-bind="checked: ExtensionValues().Filterable" name="ExtensionValues.Filterable" />
+		<span class="description" data-bind="translatedText: 'Filterable'"></span>
+	</label>
+</div>
+<!-- /ko -->

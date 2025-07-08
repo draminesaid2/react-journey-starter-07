@@ -1,0 +1,117 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt" data-bind="with: person">
+			<h2>@(Html.Localize("AddNewPerson"))</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: person">
+				<p class="m-b-25 c-black f-500">@(Html.Localize("General"))</p>
+				<div class="row">
+					<div class="col-md-6">
+						<!-- ko if: window.Main.Settings.PersonNoIsCreateable && (!window.Helper.Offline || window.Helper.Offline.status === 'online') -->
+						<div class="form-group" data-bind="validationElement: PersonNo" title="">
+							<div class="fg-line">
+								<label class="fg-label control-label text-muted" data-bind="visible: 'PersonNo'">
+									<span>@Html.Localize("PersonNo")</span>
+								</label>
+								<input type="text" class="form-control fg-input" name="PersonNo" data-bind="value: PersonNo, attr: { maxlength: 20}">
+							</div>
+							<small class="help-block pre-line" data-bind="validationMessage: PersonNo" style="display: none;"></small>
+						</div>
+						<!-- /ko -->
+						<form-element id="SalutationKey" params="value: SalutationKey, caption: 'Salutation', type: 'select'">
+							<select name="SalutationKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Salutation'), placeholder: placeholder}">
+							</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element id="TitleKey" params="value: TitleKey, caption: 'Title', type: 'select'">
+							<select name="TitleKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Title'), placeholder: placeholder}">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: Firstname, caption: 'Firstname', type: 'text'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: Surname, caption: 'Surname', type: 'text'"></form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<!-- ko if: $root.isThereAnyCompany -->
+						<form-element id="ParentId" params="value: ParentId, caption: 'ParentName'">
+							<select name="ParentId" class="form-control" data-bind="select2autocompleter: { data: $parent.ParentId, autocompleteOptions:  $root.getParentAutocompleteOptions.call($root), placeholder: placeholder}">
+							</select>
+						</form-element>
+						<!-- /ko -->
+						<!-- ko ifnot: $root.isThereAnyCompany -->
+						<p>
+							<a href="#" data-bind="attr: { href: '#/Main/Company/CreateTemplate' }">
+								<span data-bind="translatedText: 'AddCompany'"></span>
+							</a>
+						</p>
+						<!-- /ko -->
+					</div>
+					<div class="col-md-6">
+						<form-element id="LanguageKey" params="value: LanguageKey, caption: 'Language', type: 'select'">
+							<select name="LanguageKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Language'), placeholder: placeholder}">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<!-- ko if: !window.Main.Settings.Person.BusinessTitleIsLookup -->
+						<form-element params="value: BusinessTitleKey, caption: 'BusinessTitle', type: 'text'"></form-element>
+						<!-- /ko -->
+						<!-- ko if: window.Main.Settings.Person.BusinessTitleIsLookup -->
+						<form-element params="value: BusinessTitleKey, caption: 'BusinessTitle', type: 'select'">
+							<select name="BusinessTitleKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_BusinessTitle'), placeholder: placeholder}">
+							</select>
+						</form-element>
+						<!-- /ko -->
+					</div>
+					<div class="col-md-6">
+						<!-- ko if: !window.Main.Settings.Person.DepartmentIsLookup -->
+						<form-element params="value: DepartmentTypeKey, caption: 'Department', type: 'text'"></form-element>
+						<!-- /ko -->
+						<!-- ko if: window.Main.Settings.Person.DepartmentIsLookup -->
+						<form-element params="value: DepartmentTypeKey, caption: 'Department', type: 'select'">
+							<select name="DepartmentTypeKey" class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_DepartmentType'), placeholder: placeholder}">
+							</select>
+						</form-element>
+						<!-- /ko -->
+					</div>
+				</div>
+				<form-element params="value: Mima, caption: 'Mima', type: 'checkbox'"></form-element>
+				<br />
+				<div class="m-t-25 form-group" data-bind="css: { 'm-b-15': $root.parent(), 'm-b-5': !$root.parent() }, validationElement: StandardAddressKey">
+					<div class="fg-line">
+						<label class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+							<span>@(Html.Localize("Addressinformation"))</span>
+							<!-- ko with: StandardAddressKey.rules -->
+							<span data-bind="if: $data.some(function(x){ return x.rule.indexOf('required') >= 0; })">*</span>
+							<!-- /ko -->
+						</label>
+					</div>
+					<div data-bind="ifnot: $root.parent"><small class="help-block">@(Html.Localize("AddressSelectCompany"))</small></div>
+					<small class="help-block" data-bind="validationMessage: StandardAddressKey"></small>
+				</div>
+				<!-- ko with: $root.parent -->
+				<address-editor params="companyId: $data.Id(), contactId: $parent.Id(), onLoad: $root.onLoadAddressEditor.bind($root), editMode: 'person', person: $parent"></address-editor>
+				<!-- /ko -->
+				<!-- ko with: $root.visibilityViewModel -->
+				@Html.RenderAction("Selection", "Visibility")
+				<!-- /ko -->
+			</form>
+		</div>
+		@await Html.PartialAsync("CreateFormFooter")
+	</div>
+</div>

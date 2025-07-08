@@ -1,0 +1,34 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Model.Authorization.PermissionIntegration
+@using Crm.Model
+@using Crm
+
+<div class="bravo-entry">
+	<ul class="actions pull-right">
+		<lv-actions>
+			<li data-bind="requiredPermission: { name: '@(PermissionName.Edit)', group: '@(nameof(Bravo))' }">
+				<a class="add-bravo" href="#" data-bind="attr: { 'data-route': 'Main/Bravo/EditTemplate/' + Id() + '?ContactType=' + $root.contactType().split('.').pop(-1) }" data-toggle="modal" data-target="#modal" >@(Html.Localize("Edit"))</a>
+			</li>
+			<li data-bind="requiredPermission: { name: IsEnabled() ? '@(MainPlugin.PermissionName.Deactivate)' : '@(MainPlugin.PermissionName.Activate)', group: '@(nameof(Bravo))' }">
+				<a  class="toggle-bravo-activation" href="#" data-bind="click: $root.toggleBravoActivation">
+					<span data-bind="text: Helper.getTranslatedString(IsEnabled() ? 'Deactivate' : 'Activate' )"></span>
+				</a>
+			</li>
+			<li data-bind="requiredPermission: { name: '@(PermissionName.Delete)', group: '@(nameof(Bravo))' }">
+				<a  class="delete-bravo" href="#" data-bind="click: $root.deleteBravo">@(Html.Localize("Delete"))</a>
+			</li>
+		</lv-actions>
+	</ul>
+	<dt class="bold" data-bind="if: CategoryKey, lookupValue: CategoryKey, lookups: $root.lookups.bravoCategories"></dt>
+	<dt class="bold c-gray" data-bind="translatedText: 'Unspecified', ifnot: CategoryKey"></dt>
+	<div class="left">
+		<span data-bind="text: Issue()"></span>
+	</div>
+	<div class="c-gray">
+		<span data-bind="dateText: CreateDate"></span>
+		@(String.Format(", {0}: ", Html.Localize("CreatedBy")))
+		<span data-bind="userDisplayName: { UserName: CreateUser, Users: $root.bravoCreateUsers }"></span>
+	</div>
+	<hr/>
+</div>

@@ -1,0 +1,21 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialDisplayTemplates/Hint") 
+	<div class="col-xs-11" data-bind="validationElement: Response">
+		<p class="m-b-5 control-label">
+			<span data-bind="text: $root.getLocalizationText($data)"></span>
+			<span class="required" data-bind="visible: Required">*</span>
+		</p>
+		<!-- ko foreach: Helper.DynamicForm.getChoicesArray($data) -->
+		<div class="radio m-b-15 m-t-0 p-l-0" data-bind="css: Helper.DynamicForm.getCssFromLayout($parent.Layout())">
+			<label>
+				<input type="radio" data-bind="attr: { name: $parent.SortOrder }, checkedValue: $data, checked: $parent.Response">
+				<i class="input-helper"></i>
+				<span data-bind="text: $root.getLocalizationText($parent, $data)"></span>
+			</label>
+		</div>
+		<!-- /ko -->
+		<small class="help-block" data-bind="validationMessage: Response"></small>
+	</div>
+</div>

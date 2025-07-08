@@ -1,0 +1,180 @@
+﻿@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+
+<ul class="top-menu">
+	<li>
+		<a href="#" data-bind="click: submit">
+			@(Html.Localize("Save"))
+		</a>
+	</li>
+	<li data-bind="visible: $root.form().CategoryKey() =='PDF-Checklist', if: $root.currentFileResource() !== null">
+		<a data-bind="fileResource: $root.currentFileResource()" target="_blank">
+			@(Html.Localize("Preview"))
+		</a>
+	</li>
+	<li data-bind="visible: $root.form().CategoryKey() =='PDF-Checklist' && $root.currentFileResource() == null">
+		<a data-bind="click: displayAlert">
+			@(Html.Localize("Preview"))
+		</a>
+	</li>
+	<li data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist'">
+		<a href="#" data-bind="click: preview">
+			@(Html.Localize("Preview"))
+		</a>
+	</li>
+	<li data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist'">
+		<a href="#" data-bind="click: exportForm">
+			@(Html.Localize("Export"))
+		</a>
+	</li>
+</ul>
+
+<div class="container">
+
+	@Html.RenderAction("MaterialDisplayTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+
+	<div class="alert alert-warning text-center" data-bind="visible: Helper.DynamicFormDesigner.displayAboutToBeReleasedWarning($root.form(), $root.alreadySavedDynamicForm()) && !Helper.DynamicFormDesigner.displayAlreadyReleasedWarning($root.alreadySavedDynamicForm())">
+		@(Html.Localize("DynamicFormAboutToBeReleasedWarning"))
+	</div>
+	<div class="alert alert-danger text-center" data-bind="visible: Helper.DynamicFormDesigner.displayAlreadyReleasedWarning($root.alreadySavedDynamicForm())" style="display: none;">
+		@(Html.Localize("DynamicFormAlreadyReleasedWarning"))
+	</div>
+	<div class="alert alert-warning text-center" data-bind="visible: Helper.DynamicFormDesigner.reducedFunctionalityModeActive()" style="display: none">
+		@(Html.Localize("DynamicFormReducedFunctionalityWarning"))
+	</div>
+	@Html.PluginRenderActions("DynamicFormDesignerAlert")
+
+	<div class="row">
+		<div class="col-md-7 col-sm-12">
+			<div id="card-form-designer" class="card">
+				<div class="card-header ch-alt">
+					<div class="row">
+						<h2 class="col-xs-9">
+							<span data-bind="text: $root.getLocalizationText(null)"></span>
+							<small data-bind="text: $root.getLocalizationText(null, null, true)"></small>
+							<small data-bind="visible: !$root.getLocalizationText(null, null, true)">&nbsp;</small>
+						</h2>
+						<div class="actions col-xs-3">
+							<form-element params="value: $root.selectedLanguage, caption: 'Language', type: 'select'">
+								<select class="form-control" data-bind="options: $root.form().Languages, optionsValue: 'LanguageKey', optionsText: function (x) { return $root.languages()[x.LanguageKey()] ? $root.languages()[x.LanguageKey()].Value : x.LanguageKey(); }, value: value, event: {change: $root.languageChanged}">
+								</select>
+							</form-element>
+						</div>
+					</div>
+				</div>
+				<div id="dynamic-form-designer" class="card-body p-10">
+					<div data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist'">
+						<p class="alert alert-info text-center" data-bind="visible: !Helper.DynamicFormDesigner.reducedFunctionalityModeActive() && _.flattenDeep(groupedElements()).length == 0, translatedText: 'DynamicFormDesignerEmptySlate'"></p>
+						<!-- ko foreach: groupedElements -->
+						<!-- ko foreach: $data -->
+						<div class="row" data-bind="sortable: { data: $data, afterMove: $root.afterFormElementMove.bind($root), options: Helper.DynamicFormDesigner.getSortableOptions() }">
+							<div id="sortable-item-{{Id}}" data-bind="css: 'sortable-item col-xs-' + 12 / $data.Size(), attr: { 'data-form-element-type': FormElementType }">
+								<div class="panel" data-bind="css: { 'panel-primary': $data === $root.selectedFormElement(), 'panel-default': $data !== $root.selectedFormElement() }, click: $root.selectedFormElement">
+									<div class="panel-heading clearfix p-10">
+										<div class="btn-group pull-left">
+											<a href="#" class="btn btn-default btn-sm move">
+												<i class="zmdi zmdi-hc-lg zmdi-arrows"></i>
+											</a>
+										</div>
+										<div class="btn-group pull-right">
+											<!-- ko ifnot: $root.disableRules -->
+											<!-- ko if: FormElementType() !== 'PageSeparator' -->
+											<!-- ko if: $root.getReferencingElements($data).length > 0 -->
+											<button type="button" class="btn btn-default btn-sm waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="tooltip: true" title="@(Html.Localize("FormElementRules"))">
+												<i class="zmdi zmdi-hc-lg zmdi-hc-rotate-180 zmdi-arrow-merge"></i> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" data-bind="foreach: $root.getReferencingElements($data)">
+												<li>
+													<a href="#" data-bind="click: $root.editFormElementRules, text: $root.getLocalizationText($data)"></a>
+												</li>
+											</ul>
+											<!-- /ko -->
+											<a href="#" class="btn btn-default btn-sm waves-effect edit-form-element-rules" title="@(Html.Localize("FormElementRules"))" data-bind="click: $root.editFormElementRules, value: $data, css: { 'btn-success': $root.hasRules($data) }, tooltip: true">
+												<i class="zmdi zmdi-hc-lg zmdi-hc-rotate-180 zmdi-arrow-split"></i>
+											</a>
+											<!-- /ko -->
+											<!-- /ko -->
+											<a href="#" class="btn btn-danger btn-sm waves-effect remove-form-element" title="@(Html.Localize("Delete"))" data-bind="click: $root.removeFormElement, value: $data, tooltip: true">
+												<i class="zmdi zmdi-hc-lg zmdi-delete"></i>
+											</a>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div data-bind="template: { name: 'dynamicform-element-display-template-' + $data.FormElementType(), data: $data }"> </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /ko -->
+						<!-- /ko -->
+					</div>
+					<div data-bind="visible: $root.form().CategoryKey() =='PDF-Checklist'">
+						<p id="pdf-checklists-empty-slate" class="alert alert-info text-center" data-bind="visible: ($root.currentFileResource() == null), translatedText: 'PdfDynamicFormDesignerEmptySlate'"></p>
+						<!-- ko if: $root.currentFileResource() !== null -->
+						<div class="generic-list listview lv-bordered" data-bind="with: $root.currentFileResource()">
+							<div class="lv-body">
+								<div class="lv-item media">
+									<div class="pull-left lv-avatar bgm-blue">PDF</div>
+									<div class="media-body">
+										<div id="attached-pdf" class="lv-title" data-bind="text: Filename()"></div>
+										<ul class="lv-attrs">
+											<li data-bind="fileSize: Length()"></li>
+											<li>
+												@(Html.Localize("CreateDate")): <span data-bind="dateText: CreateDate()"></span>
+											</li>
+											<li data-bind="text: $root.selectedLanguage()"> </li>
+										</ul>
+										<div class="lv-actions actions dropdown">
+											<a href="#" data-toggle="dropdown" aria-expanded="false">
+												<i class="zmdi zmdi-more-vert"></i>
+											</a>
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li>
+													<a data-bind="fileResource: $data" target="_blank">Open</a>
+												</li>
+												<li>
+													<a href="#" data-bind="click: $root.removeCurrentFileResource">Delete</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /ko -->
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12">
+			<div id="card-form-designer-sidebar" class="card">
+				<div class="card-body ch-alt">
+					<div class="list-group">
+						<div class="lg-body">
+							<ul class="tab-nav tn-justified" role="tablist" tabindex="1">
+								@Html.PluginRenderActions("FormDesignerSidebarTabHeader")
+							</ul>
+							<div class="tab-content">
+								@Html.PluginRenderActions("FormDesignerSidebarTabContent")
+							</div>
+						</div>
+					</div>
+				</div>
+				@await Html.PartialAsync("CreateFormFooter")
+			</div>
+		</div>
+	</div>
+
+	<!-- ko with: localizationEditorViewModel -->
+	@await Html.PartialAsync("MaterialLocalizationEditor")
+	<!-- /ko -->
+	<!-- ko with: ruleEditorViewModel -->
+	@await Html.PartialAsync("MaterialFormElementRuleEditor")
+	<!-- /ko -->
+</div>

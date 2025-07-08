@@ -1,0 +1,38 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm.Library.Globalization.Extensions
+<div class="attributeform-entry" data-bind="requiredPermission: { name: 'Read', group: 'AttributeForm' }">
+	<pmb-block params="context: { formReference: formReference }, 
+		icon: 'collection-text',
+		caption: Helper.DynamicForm.getTitle(DynamicForm(), localizations(), selectedLanguage()),
+		buttons: [{ click: $parent.deleteAttributeForm.bind($root), text: '@(Html.Localize("Delete"))', requiredPermission: { name: 'Delete', group: 'AttributeForm' } }],
+		onInit: $parent.attributeFormReset.bind($root),
+		onCancel: $parent.attributeFormReset.bind($root),
+		onBeforeSave: $parent.attributeFormBeforeSave.bind($root),
+		onSave: $parent.attributeFormSave.bind($root),
+		condition: window.AuthorizationManager.isAuthorizedForAction($root.parentViewModel.contactType(), 'Edit')">
+			<pmbb-view>
+				<!-- ko with: $parent -->
+					<!-- ko foreach: elements -->
+						<div class="row m-l-0 m-r-0">
+							<div data-bind="css: 'form-element p-0 col-sm-' + (12 / Size())">
+								<pmbb-view-entry params="caption: $root.getLocalizationText($data)">
+									<div data-bind="template: { name: 'attributeform-response-template-' + $data.FormElementType(), data: $data }"> </div>
+								</pmbb-view-entry>
+							</div>
+						</div>
+					<!-- /ko -->
+				<!-- /ko -->
+			</pmbb-view>
+			<pmbb-edit>
+				<!-- ko with: $parent -->
+					<!-- ko foreach: elements -->
+						<div class="row m-l-0 m-r-0 p-r-30">
+							<div data-bind="css: 'form-element p-0 col-sm-' + (12 / Size())">
+								<div data-bind="template: { name: 'attributeform-edit-template-' + $data.FormElementType(), data: $data }"> </div>
+							</div>
+						</div>
+					<!-- /ko -->
+				<!-- /ko -->
+			</pmbb-edit>
+	</pmb-block>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="modal fade" id="dynamic-form-localization-editor" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg card">
+		<div class="modal-content">
+			<div class="modal-header card-header ch-alt">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" data-bind="translatedText: 'Translations'"></h4>
+			</div>
+			<div class="modal-body p-t-20">
+				<!-- ko foreach: localizations -->
+				<div class="form-group">
+					<label class="field">
+						<span class="description" data-bind="lookupValue: Language, lookups: $root.languages"></span>
+					</label>
+					<!-- ko if: $parent.multiline -->
+					<!-- ko if: $parent.isHint -->
+					<form-element params="value: Hint, type: 'textarea'"></form-element>
+					<!-- /ko-->
+					<!-- ko ifnot: $parent.isHint -->
+					<form-element params="value: Value, type: 'textarea'"></form-element>
+					<!-- /ko-->
+					<!-- /ko-->
+
+					<!-- ko ifnot: $parent.multiline -->
+					<!-- ko if: $parent.isHint -->
+					<form-element params="value: Hint, type: 'text'"></form-element>
+					<!-- /ko-->
+					<!-- ko ifnot: $parent.isHint -->
+					<form-element params="value: Value, type: 'text'"></form-element>
+					<!-- /ko-->
+					<!-- /ko -->
+				</div>
+				<!-- /ko -->
+			</div>
+			<div class="modal-footer card-header ch-alt p-15">
+				<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="translatedText: 'Cancel'" data-dismiss="modal"></button>
+				<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, translatedText: 'Save'"></button>
+			</div>
+		</div>
+	</div>
+</div>

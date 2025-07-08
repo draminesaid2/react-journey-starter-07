@@ -1,0 +1,8 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialDisplayTemplates/Hint") 
+	<div data-bind="css: 'col-md-' + Math.min(11, 12 / (4 / $data.Size()))">
+		<form-element params="value: Response, caption: $root.getLocalizationText($data), type: 'datePicker', required: Required"></form-element>
+	</div>
+</div>

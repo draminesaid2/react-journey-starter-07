@@ -1,0 +1,8 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<!-- this should be visible only in the mobile app -->
+<li id="reload-top-menu" style="display: none;" data-bind="visible: isVisible, tooltip: { title: '@(Html.Localize("Reload"))' }" data-placement="bottom">
+	<a href="#" data-bind="click: reload">
+		<i class="tm-icon zmdi zmdi-replay"></i>
+	</a>
+</li>

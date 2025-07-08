@@ -1,0 +1,14 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.DynamicForms.Model
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+
+<label class="control-label" data-bind="validationElement: Response">
+	<span data-bind="text: $root.getLocalizationText($data)"></span>
+	<span class="required-marker">@("*".TemplateCondition<SignaturePad>(x => x.Required))</span>
+	 @await Html.PartialAsync("DisplayTemplates/Hint") 
+</label>
+<div class="signatur" data-bind="validationOptions: { insertMessages: false }">
+	<input type="hidden" data-bind="signaturePad: Response" data-signature-clear-text="@(Html.Localize("DeleteSignatur"))"/>
+</div>
+<p data-bind="validationMessage: Response, validationElement: Response"></p>

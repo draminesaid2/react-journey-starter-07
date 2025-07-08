@@ -1,0 +1,46 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<ul class="top-menu">
+	<li data-bind="ifnot: window.Main.Settings.UseActiveDirectoryAuthenticationService || window.Main.Settings.UseOpenIdAuthentication">
+		<a href="#" data-toggle="modal" data-target="#smModal" data-route="Main/User/ResetPassword/{{user().Id}}" data-bind="translatedText: 'ResetPassword'">x</a>
+	</li>
+	<li>
+		<a href="#" data-bind="click: () => toggleActive(user()), translatedText: user().Discharged() ? 'ActivateUser' : 'DischargeUser'">x</a>
+	</li>
+	@Html.PluginRenderActions("UserDetailsTopMenu")
+</ul>
+
+<div class="container">
+	<div>
+		<div class="card" id="profile-main">
+			<div class="pm-overview c-overflow hide-print" tabindex="4">
+				<div class="pmo-pic">
+					<!-- ko with: user -->
+					<!-- ko if: Avatar -->
+					<div class="p-relative">
+						<img class="img-responsive" data-bind="attr: { src: 'data:image;base64,' + Avatar() }"/>
+					</div>
+					<!-- /ko -->
+					<div class="text-center bgm-white c-black p-20">
+						<h4>
+							<span id="user-title" data-bind="text: Helper.User.getDisplayName($data)"></span>
+							<br/>
+							<small data-bind="text: Id"></small>
+						</h4>
+					</div>
+					<!-- /ko -->
+				</div>
+				@Html.PluginRenderActions("MaterialUserSidebarExtensions")
+			</div>
+			<div class="pm-body clearfix">
+				<ul class="tab-nav tn-justified" role="tablist" tabindex="1">
+					@Html.PluginRenderActions("UserDetailsMaterialTabHeader")
+				</ul>
+				<div class="tab-content">
+					@Html.PluginRenderActions("UserDetailsMaterialTab")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

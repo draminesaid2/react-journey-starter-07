@@ -1,0 +1,24 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="pmo-pic">
+	<div class="p-relative">
+		<a href="#" data-toggle="modal" data-target="#modal" data-route="Main/Account/UserAvatar">
+			<!-- ko if: avatarUrl -->
+			<img class="img-responsive" data-bind="attr: { src: avatarUrl }"/>
+			<!-- /ko -->
+			<!-- ko ifnot: avatarUrl -->
+			<img class="img-responsive" src="@(Url.Content("~/Content/img/avatar.jpg"))"/>
+			<!-- /ko -->
+		</a>
+		<a href="#" class="pmop-edit" data-toggle="modal" data-target="#modal" data-route="Main/Account/UserAvatar">
+			<i class="zmdi zmdi-camera"></i> <span class="hidden-xs">@(Html.Localize("Edit"))</span>
+		</a>
+	</div>
+	<div class="text-center bgm-white c-black p-20">
+		<h4 data-bind="with: user">
+			<span id="user-title" data-bind="text: Helper.User.getDisplayName($data)"></span>
+			<br/>
+			<small data-bind="text: Id"></small>
+		</h4>
+	</div>
+</div>

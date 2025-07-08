@@ -1,0 +1,56 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+
+<div class="box ptpx15">
+	<div class="entry clearfix no-border" data-bind="visible: Helper.DynamicFormDesigner.displayAlreadyReleasedWarning($root.alreadySavedDynamicForm())">
+		<div class="alert alert-danger">@(Html.Localize("DynamicFormAlreadyReleasedWarning"))</div>
+	</div>
+	<div class="entry clearfix no-border">
+		<h1>
+			@(Html.Localize("DynamicForm"))
+		</h1>
+		@Html.HiddenTranslations("ThisFieldIsRequired")
+		@using (Html.TemplateContext("form")) { 
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group" data-bind="validationElement: $root.getLocalization().Value, validationOptions: { insertMessages: false }">
+						<label class="field" >
+							<span data-bind="translatedText: 'Title'"></span> <span class="required">*</span>
+						</label>
+						<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+							<span class="input-group-btn" data-bind="visible: $root.form().Languages().length > 1">
+								<a href="#" class="btn btn-default" data-bind="click: $root.editLocalizations.bind($root, null, null, false)"><i class="fa fa-globe"></i></a>
+							</span>
+							<input class="form-control" data-bind="textInput: $root.getLocalization().Value" id="Title" name="Title" type="text" value="" autocomplete="off">
+						</div>
+						<span class='field-validation-error' data-bind="visible: $root.errors().length > 0, validationMessage: $root.getLocalization().Value"></span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group" data-bind="validationElement: $root.getLocalization().Hint, validationOptions: { insertMessages: false }">
+						<label class="field">
+							<span class="description" data-bind="translatedText: 'Description'"></span>
+						</label>
+						<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+							<a href="#" class="input-group-addon btn btn-default" data-bind="click: $root.editLocalizations.bind($root, null, null, true), visible: $root.form().Languages().length > 1">
+								<i class="fa fa-globe"></i>
+							</a>
+							<textarea class="form-control" cols="20" rows="3" data-bind="textInput: $root.getLocalization().Hint, autosize: true" id="Hint" name="Hint"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="field">
+							<input type="checkbox" data-bind="checked: HideEmptyOptional" name="HideEmptyOptional" />
+							<span class="description" data-bind="translatedText: 'HideEmptyOptional'"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		 } 
+	</div>
+	<div class="entry clearfix no-border" id="dynamicform-languages"></div>
+</div>

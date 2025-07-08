@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<dl class="dl-horizontal">
+	<dt data-bind="text: $root.getLocalizationText($data)"></dt>
+	<dd>
+		<!-- ko if: Response() -->
+			<input type="hidden" data-bind="signaturePad: Response" data-sigpencolour="#000000" data-sigbgcolour="#FFFFFF" />
+		<!-- /ko -->
+		<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Response()"></span>
+	</dd>
+</dl>

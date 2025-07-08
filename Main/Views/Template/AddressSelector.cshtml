@@ -1,0 +1,7 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<select class="form-control" data-bind="options: addresses,
+	optionsText: getDisplayString.bind($data),
+	optionsValue: 'Id',
+	optionsCaption: window.Helper.String.getTranslatedString('PleaseSelect'),
+	value: selectedAddressId"></select>

@@ -1,0 +1,17 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response" data-bind="with: $root.ResponsesOutput()[$data.Id()]">
+	<figure>
+		<!-- ko if: (Content.$value ? Content.$value() : Content())  -->
+		<img class="img-responsive" data-bind="attr: { src: 'data:' + ContentType() + '\;base64,' + (Content.$value ? Content.$value() : Content()) }" />
+		<!-- /ko -->
+		<!-- ko ifnot: (Content.$value ? Content.$value() : Content()) -->
+		<img class="img-responsive" data-bind="fileResource: $parent.FileResource" />
+		<!-- /ko -->
+	</figure>
+</div>

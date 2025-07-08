@@ -1,0 +1,25 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+@await Html.PartialAsync("MaterialEditorTemplates/Title")
+@Html.PluginRenderActions("MaterialFormDesignerElementExtension")
+<div class="row">
+	<div class="col-md-6">
+		<form-element params="value: MinUploadCount, caption: 'MinUploadCount', type: 'number', min : 0"></form-element>
+	</div>
+	<div class="col-md-6">
+		<form-element params="value: MaxUploadCount, caption: 'MaxUploadCount', type: 'number', min : 0"></form-element>
+	</div>
+</div>
+<small data-bind="translatedText: 'ImageDimensionsInfo'"></small>
+<div class="row">
+	<div class="col-md-6">
+		<form-element params="value: MaxImageWidth, caption: Helper.String.getTranslatedString('MaxImageWidth') + ' (px)', type: 'number', min : 0"></form-element>
+	</div>
+	<div class="col-md-6">
+		<form-element params="value: MaxImageHeight, caption: Helper.String.getTranslatedString('MaxImageHeight') + ' (px)', type: 'number', min : 0"></form-element>
+	</div>
+</div>
+<form-element params="value: MaxFileSize, caption: Helper.String.getTranslatedString('MaxFileSize') + ' (bytes)', type: 'number', min : 0"></form-element>
+@await Html.PartialAsync("MaterialEditorTemplates/CssExtra")
+@await Html.PartialAsync("MaterialEditorTemplates/SizeDropdown")
+@await Html.PartialAsync("MaterialEditorTemplates/Hint")

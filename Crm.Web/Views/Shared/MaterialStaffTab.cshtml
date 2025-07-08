@@ -1,0 +1,15 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-staff" data-bind="with: tabs()['tab-staff']">
+	<empty-state-box params="mood: 'sad', title: 'PersonsEmptyStateTitle', text: 'PersonsEmptyState'" data-bind="visible: staff().length === 0">
+	</empty-state-box>
+	<div class="generic-list listview lv-bordered">
+		<div class="lv-body" data-bind="foreach: staff">
+			 @await Html.PartialAsync("../PersonList/MaterialItemTemplate") 
+		</div>
+	</div>
+	 @await Html.PartialAsync("MaterialPaging") 
+	<!-- ko requiredPermission: { name: 'Create', group: 'Person' } -->
+	<floating-action-button params="href: getCreatePersonLink(), icon: 'account-add', title: 'AddNewPerson'"></floating-action-button>
+	<!-- /ko -->
+</div>

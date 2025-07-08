@@ -1,0 +1,26 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Model.Authorization.PermissionIntegration
+@using Crm.Library.Extensions
+@using Crm
+
+<div id="attached-links" class="mtpx10">
+	
+	<strong>@(Html.Localize("AttachedLinks"))</strong>
+	@(Html.HiddenTranslation("ConfirmDeleteLink"))
+	
+	<div data-bind="foreach: Links()">
+		<div class="attached-link" data-bind="attr: { id: 'attached-link-' + Id() }">
+			<img data-bind="attr: { src: window.Helper.resolveUrl('~/Content/img/link.png') }" alt="Attached Link" src="" />
+			<a data-bind="text: (Description() != null ? Description() : Url()), attr: { href: Url() }"></a>
+
+			<!-- ko if: Boolean.parse('@(Model.AuthorizationManager.IsAuthorizedForAction(Model.User, MainPlugin.PermissionGroup.Note, PermissionName.Delete))') || (CreateUser() == '@(Model.User.Id.Replace("'", "\\'"))') -->
+				<a href="#" data-bind="click: $root.extraProperties.deleteLink" class="delete-link link-delete-link">
+					@(Html.Localize("Delete"))
+				</a>
+			<!-- /ko -->
+		</div>
+	</div>
+
+</div>
+

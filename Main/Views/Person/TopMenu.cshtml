@@ -1,0 +1,25 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<li data-bind="requiredPermission: { name: 'EditVisibility', group: 'UserAdmin' }">
+	<a href="#" data-route="Main/Visibility/Edit" data-toggle="modal" data-target="#modal">
+		<i class="zmdi zmdi-eye"></i>
+		@(Html.Localize("EditVisibility"))
+	</a>
+</li>
+
+<li data-bind="requiredPermission: { name: 'Merge', group: 'Person' }, visible: !Helper.Offline || Helper.Offline.status === 'online'">
+	<a href="#" data-route="Main/Person/Merge/{{person().Id}}" data-toggle="modal" data-target="#modal">
+		<i class="zmdi zmdi-arrow-merge"></i>
+		@(Html.Localize("MergeDuplicates"))
+	</a>
+</li>
+
+<li data-bind="requiredPermission: { name: 'Delete', group: 'Person' }">
+	<a href="#" data-bind="click: () => toggleRetired($root.person())">
+		<i class="zmdi zmdi-minus-circle" data-bind="visible: !$root.person().IsRetired()"></i>
+		<span data-bind="visible: !$root.person().IsRetired()">@(Html.Localize("SetEntityInactive", Html.Localize("Person")))</span>
+		<i class="zmdi zmdi-check-circle" data-bind="visible: $root.person().IsRetired()"></i>
+		<span data-bind="visible: $root.person().IsRetired()">@(Html.Localize("SetEntityActive", Html.Localize("Person")))</span>
+	</a>
+</li>

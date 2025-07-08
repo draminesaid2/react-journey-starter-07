@@ -1,0 +1,26 @@
+﻿<div role="tabpanel" class="tab-pane animated fadeIn m-20" id="tab-add-fields">
+    <div data-bind="visible: $root.form().CategoryKey() =='PDF-Checklist'">
+        <div class="form-group">
+            <div class="fileinput" data-provides="fileinput" data-bind="css: { 'fileinput-exists': $root.currentFileResource() !== null, 'fileinput-new': $root.currentFileResource() == null }">
+					<div>
+							<span class="btn btn-lg btn-primary f-13 btn-file waves-effect">
+							<span class="fileinput-new">Select File</span>
+							<span class="fileinput-exists">Change</span>
+							<input id="uploadPdf" type="file" accept=".pdf" data-bind="fileInput: { content: $root.currentFileResource() !== null ? $root.currentFileResource().Content() : '' }, event: {change: $root.uploadPdf.bind($root)}">
+						</span>
+			            <span data-bind="text: $root.currentFileResource() !== null ? $root.currentFileResource().Filename() : ''"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput">×</a>
+					</div>
+			</div>
+        </div>
+    </div>
+    <div class="row" data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist' ">
+        <!-- ko foreach: formElementTypes -->
+        <!-- ko if: ($data.FormElementType() && $data.FormElementType() !== 'SignaturePadWithPrivacyPolicy') || window.Crm.DynamicForms.Settings.DynamicFormElement.SignaturePad.Show.PrivacyPolicy -->
+        <span data-bind="draggable: { data: $data, helper: 'clone' }" class="col-md-6 p-10">
+            <a class="btn btn-default btn-lg btn-block f-13" data-bind="translatedText: FormElementType, click: $root.showHintToast"></a>
+        </span>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>

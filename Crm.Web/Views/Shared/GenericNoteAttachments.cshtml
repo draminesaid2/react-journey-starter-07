@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+
+<div class="attachments">
+	<!-- ko if: Links().length != 0 -->
+		 @await Html.PartialAsync("GenericNoteAttachedLinks") 
+	<!-- /ko -->
+
+	<!-- ko if: Files().length != 0 -->
+		 @await Html.PartialAsync("GenericNoteAttachedFiles") 
+	<!-- /ko -->
+</div>
+

@@ -1,0 +1,16 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.Model.Contact>
+@using Crm.Library.Extensions
+
+@{ var tagCount = Model.Tags.Count;
+	 var hasTags = tagCount > 0; }
+
+<div class="contact-tags col-md-3 col-sm-3 col-xs-3@(hasTags ? String.Empty : " hide")">
+	<span class="tag-image ptpx2">
+		<i class="@(hasTags ? tagCount == 1 ? "fa fa-tags" : "fa fa-tag" : " hide")"></i>
+	</span>
+	<span class="tags">
+		@(hasTags
+			                        	? Model.Tags.Select(x => x.Name).OrderBy(t => t).Take(10).ToString(", ")
+			                        	: String.Empty)@(Model.Tags.Count > 10 ? "..." : String.Empty)
+	</span>
+</div>

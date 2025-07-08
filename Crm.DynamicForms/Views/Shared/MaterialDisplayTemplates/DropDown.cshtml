@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialDisplayTemplates/Hint") 
+	<div data-bind="css: 'col-xs-11 col-md-' + Math.min(11, 12 / RowSize())">
+		<form-element params="value: Response, caption: $root.getLocalizationText($data), type: 'select', required: Required">
+			<select class="form-control" data-bind="options: window.ko.computed(function(){ var choicesArray = window.ko.utils.arrayMap(Helper.DynamicForm.getChoicesArray($parent), function(choice){ return { Value: choice.toString(), Text: $root.getLocalizationText($parent, choice) }; }); choicesArray.unshift({ Value: null, Text: window.Helper.String.getTranslatedString('SelectDropDownValue') }); return choicesArray; }), optionsText: 'Text', optionsValue: 'Value', value: value">
+			</select>
+		</form-element>
+	</div>
+</div>

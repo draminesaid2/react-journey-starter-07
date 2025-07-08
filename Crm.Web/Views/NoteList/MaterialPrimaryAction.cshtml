@@ -1,0 +1,6 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+<!-- ko requiredPermission: { name: 'Create', group: 'Note' } -->
+<!-- ko if: $data.contactId -->
+<floating-action-button data-route="Main/Note/EditTemplate/?contactId={{contactId}}&contactType={{contactType}}&plugin={{plugin}}" data-toggle="modal" data-target="#modal" params="title: 'AddNote'"></floating-action-button>
+<!-- /ko -->
+<!-- /ko -->

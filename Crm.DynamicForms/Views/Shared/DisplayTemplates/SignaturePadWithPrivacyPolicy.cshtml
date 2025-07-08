@@ -1,0 +1,35 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.DynamicForms.Model
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+
+<label class="control-label" data-bind="validationElement: Response">
+	<span data-bind="text: $root.getLocalizationText($data)"></span>
+	<span class="required-marker">@("*".TemplateCondition<SignaturePadWithPrivacyPolicy>(x => x.Required))</span>
+	 @await Html.PartialAsync("DisplayTemplates/Hint") 
+</label>
+
+<div class="signatur" data-bind="validationOptions: { insertMessages: false }, enabled: false">
+	<input type="hidden" data-bind="signaturePad: window.ko.utils.unwrapObservable(Response).Signature" data-signature-clear-text="@(Html.Localize("DeleteSignatur"))"/>
+</div>
+
+<p data-bind="validationMessage: Response, validationElement: Response"></p>
+
+<a class="toggleDataProtectionInfo ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-c" data-bind="click: $root.toogleDataProtectionInfo">
+	<span class="ui-btn-inner">
+		<span class="ui-btn-text">
+			@(Html.Localize("DataProtectionInfo"))
+		</span>
+		<span class="ui-icon ui-icon-info ui-icon-shadow">&nbsp;</span>
+	</span>
+</a>
+<ul data-role="listview" data-inset="true" data-bind="fadeVisible: $root.dataProtectionInfoVisibility" class="dataPrivacyPolicy ui-listview ui-listview-inset ui-corner-all ui-shadow">
+	<li data-theme="d" class="ui-li ui-li-static ui-btn-up-d">
+		 @await Html.PartialAsync("DataPrivacyPolicy") 
+	</li>
+</ul>
+
+<label>
+	@(Html.Localize("AcceptPrivacyPolicy"))
+	<input data-theme="d" data-role="none" type="checkbox" data-bind="checked: window.ko.utils.unwrapObservable(Response).AcceptedPrivacyPolicy, disable: true"/>
+</label>

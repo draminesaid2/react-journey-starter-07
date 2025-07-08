@@ -1,0 +1,126 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt" data-bind="with: note">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState === 20">@(Html.Localize("AddNote"))</h4>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState !== 20">@(Html.Localize("EditNote"))</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<form role="form" action="#" data-bind="with: note">
+		<form-element id="Text" params="value: Text, caption: 'Text', type: 'textarea', placeholder: Helper.String.getTranslatedString('AddNote')"></form-element>
+		<!--ko ifnot: window.Modernizr.touch-->
+		<div class="dropzone" data-bind="dropzone: { url: '#', files: $parent.fileResources, acceptFile: $parent.accept, maxFiles:null, loading: $root.loadingImage }">
+		</div>
+		<!-- /ko -->
+		<div class="tv-comments m-t-15">
+			<ul class="tvc-lists listview">
+				<!-- ko foreach: $parent.fileResources -->
+				<li class="media lv-item">
+					<span class="tvh-user pull-left">
+						<i class="zmdi zmdi-hc-2x zmdi-file"></i>
+					</span>
+					<div class="media-body">
+						<strong class="d-block">
+							<span data-bind="text: Filename"></span>
+						</strong>
+						<small class="c-gray" data-bind="fileSize: Length"></small>
+					</div>
+					<div class="lv-actions actions dropdown">
+						<a href="#" data-toggle="dropdown">
+							<i class="zmdi zmdi-more-vert"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li>
+								<a href="#" data-bind="click: $parentContext.$parent.removeFileResource.bind($parentContext.$parent)">
+									@(Html.Localize("Remove"))
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="has-error">
+						<small class="help-block" data-bind="validationMessage: Length"></small>
+					</div>
+				</li>
+				<!-- /ko -->
+				<div class="preloader pl-lg centered" data-bind="visible: $root.loadingImage()">
+					<svg class="pl-circular" viewBox="25 25 50 50">
+						<circle class="plc-path" cx="50" cy="50" r="20"></circle>
+					</svg>
+				</div>	
+
+				<!-- ko foreach: Links -->
+				<li class="media lv-item">
+					<a class="tvh-user pull-left" data-bind="attr: { href: window.Helper.Url.prependHttp(Url()) }" target="_blank" onclick="window.open(this.href, '_system', 'location=no,top=20,closebuttoncaption=' + window.Helper.String.getTranslatedString('Close'));return false;">
+						<i class="zmdi zmdi-hc-2x zmdi-link"></i>
+					</a>
+					<div class="media-body">
+						<strong class="d-block">
+							<a data-bind="attr: { href: window.Helper.Url.prependHttp(Url()) }, text: Description() || Url()" target="_blank" onclick="window.open(this.href, '_system', 'location=no,top=20,closebuttoncaption=' + window.Helper.String.getTranslatedString('Close'));return false;"></a>
+						</strong>
+					</div>
+					<div class="lv-actions actions dropdown">
+						<a href="#" data-toggle="dropdown">
+							<i class="zmdi zmdi-more-vert"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li>
+								<a href="#" data-bind="click: $parentContext.$parent.removeLinkResource.bind($parentContext.$parent)">
+									@(Html.Localize("Remove"))
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- /ko -->
+			</ul>
+		</div>
+		<div class="tab-content p-0">
+			<div class="wp-media tab-pane" id="note-link" data-bind="with: $parent.linkResource">
+				<div class="wcl-form">
+					<div class="wc-comment">
+						<div class="wcc-inner">
+							<input type="text" class="wcci-text" placeholder="@(Html.Localize("LinkPlaceholder"))" data-bind="value: Url">
+						</div>
+						<div class="m-t-15 text-right">
+							<button class="btn btn-lg btn-primary f-13 waves-effect waves-float" data-bind="click: $parentContext.$parent.addLinkResource.bind($parentContext.$parent)">
+								@(Html.Localize("Save"))
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<div class="hide" id="note-file" data-bind="with: fileResource">	
+		<input type="file" data-bind="fileInput: { name: Filename, contentType: ContentType, size: Length, content: Content }">
+	</div>
+	<ul class="list-unstyled clearfix wpb-actions p-0">
+		<li class="wpba-attrs">
+			<ul class="list-unstyled list-inline m-l-0 m-t-5">
+				<li>
+					<a href="#" data-bind="click: addFileResource, tooltip: true" title="@(Html.Localize("F_AddFile"))">
+						<i class="zmdi zmdi-file"></i>
+					</a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#" data-target="#note-link" data-bind="tooltip: true" title="@(Html.Localize("Link"))">
+						<i class="zmdi zmdi-link"></i>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="pull-right">
+			<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+				@(Html.Localize("Cancel"))
+			</button>
+			<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, disable: loading">
+				@(Html.Localize("Save"))
+			</button>
+		</li>
+	</ul>
+</div>

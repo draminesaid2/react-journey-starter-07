@@ -1,0 +1,20 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="container">
+	<div>
+		<div class="card" id="profile-main">
+			<div class="pm-overview c-overflow hide-print" tabindex="4">
+				@Html.PluginRenderActions("UserProfileSidebar")
+			</div>
+			<div class="pm-body clearfix">
+				<ul class="tab-nav tn-justified" role="tablist" tabindex="1">
+					@Html.PluginRenderActions("UserProfileTabHeader")
+				</ul>
+				<div class="tab-content">
+					@Html.PluginRenderActions("UserProfileTab")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

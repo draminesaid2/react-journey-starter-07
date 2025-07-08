@@ -1,0 +1,27 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="form-group">
+	<label data-bind="translatedText: 'Options'"></label>
+	<div data-bind="foreach: { data: new Array(Choices())}">
+		<div data-bind="validationElement: $root.getLocalization($data).Value, validationOptions: { insertMessages: false }">
+			<div class="input-group">
+				<div class="fg-line">
+					<input class="form-control" data-bind="value: $root.getLocalization($parent, $index()).Value, attr: { placeholder: Helper.String.getTranslatedString('DynamicFormElementOptionPlaceholder') }"/>
+				</div>
+				<label class="input-group-addon">
+					<button class="btn btn-default btn-danger waves-effect waves-float" data-bind="click: Helper.DynamicFormDesigner.removeChoice.bind($root, $parent, $index()), visible: $parent.Choices() > 1, tooltip: true" title="@(Html.Localize("Remove"))">
+						<i class="zmdi zmdi-minus-circle-outline"></i>
+					</button>
+					<button class="btn btn-default btn-success waves-effect waves-float" data-bind="click: Helper.DynamicFormDesigner.addChoice.bind($root, $parent, $index()), tooltip: true" title="@(Html.Localize("Add"))">
+						<i class="zmdi zmdi-plus-circle-o"></i>
+					</button>
+				</label>
+				<label class="input-group-addon" data-bind="visible: $root.form().Languages().length > 1">
+					<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: () => $root.editLocalizations($parent, $index()), tooltip: true" title="@(Html.Localize("Translations"))">
+						<i class="zmdi zmdi-globe"></i>
+					</a>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>

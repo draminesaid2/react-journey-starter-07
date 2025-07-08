@@ -1,0 +1,13 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<GenericListViewModel>
+@using Crm.ViewModels
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<ul class="top-menu">
+	@Html.PluginRenderActions($"{Model.ControllerName}TopMenu")
+	<li data-bind="visible: true, tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+		<a id="open-generic-list-filter" data-trigger="#right-nav" href="#" data-route="@($"{Model.PluginName}/{Model.ControllerName}/FilterTemplate")">
+			<i class="tm-icon zmdi zmdi-search-in-page"></i>
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,14 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.DynamicForms.Model
+@using Crm.Offline.Extensions
+
+<div class="row">
+	<div data-bind="css: 'col-md-' + (12 / (4 / $data.Size()))">
+		<label class="control-label" data-bind="validationElement: Response">
+			<span data-bind="text: $root.getLocalizationText($data)"></span>
+			<span class="required-marker">@("*".TemplateCondition<Time>(x => x.Required))</span>
+			 @await Html.PartialAsync("DisplayTemplates/Hint") 
+		</label>
+		@(Html.TemplateInput<Time>(x => x.Response, true).Caption(null))
+	</div>
+</div>

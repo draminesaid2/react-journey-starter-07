@@ -1,0 +1,28 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Model.Authorization.PermissionIntegration
+@using Crm.Library.Extensions
+@using Crm
+
+<div id="attached-files" class="mtpx10">
+	
+	<strong>@(Html.Localize("AttachedFiles"))</strong>
+	@(Html.HiddenTranslation("ConfirmDeleteFile"))
+	
+	<div data-bind="foreach: Files()">
+		<div class="attached-file" data-bind="attr: { id: 'file_' + Id() }">
+			<img data-bind="attr: { src: window.Helper.resolveUrl('~/Content/img/paperclip.png') }" alt="Attached File" src="" />
+			<a data-bind="attr: { href: '@Url.Action("OpenFile","File", new { plugin = "Main" })/'+ Id() }" target="_blank">
+				<span data-bind="text: Filename().trim()"></span>
+			</a>
+			<span data-bind="text: (Length() / 1024).toFixed(1) + ' kB'"></span>
+
+			<!-- ko if: Boolean.parse('@(Model.AuthorizationManager.IsAuthorizedForAction(Model.User, MainPlugin.PermissionGroup.Note, PermissionName.Delete))') || (CreateUser() == '@(Model.User.Id.Replace("'", "\\'"))') -->
+				<a href="#" data-bind="click: $root.extraProperties.deleteFile" class="delete-link file-delete-link">
+					@(Html.Localize("Delete"))
+				</a>
+			<!-- /ko -->
+		</div>
+	</div>
+
+</div>

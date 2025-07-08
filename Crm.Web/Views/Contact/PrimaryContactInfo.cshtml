@@ -1,0 +1,26 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.Model.Contact>
+@using Crm.Library.Extensions
+
+<div class="contact-info col-md-3 col-sm-3 col-xs-3">
+	@if (Model.PrimaryPhoneData.IsNotNullOrEmpty())
+		 {
+		<p>
+			<a href="#" class="contact-communication-link largetype">
+			    @(Model.PrimaryPhoneData)
+			</a>
+		</p>
+	 } 
+	@if (Model.PrimaryEmailData.IsNotNullOrEmpty())
+		 {
+		<p>
+			<a href="#" class="contact-communication-link largetype">
+				@(Model.PrimaryEmailData)
+			</a>
+		</p>
+	 }
+		 else
+		 { 
+		 @Html.Raw("&nbsp;")
+	 } 
+</div>
+

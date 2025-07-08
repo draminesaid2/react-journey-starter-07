@@ -1,0 +1,80 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.Model
+@using Crm.Rest.Model
+
+<ul class="top-menu">
+	@Html.PluginRenderActions("CompanyDetailsTopMenu")
+	@Html.PluginRenderActions("ContactDetailsTopMenu")
+</ul>
+
+<div class="container">
+	<div class="card" id="profile-main">
+		<div class="pm-overview c-overflow" tabindex="4">
+			<div class="pmo-pic">
+				<!-- ko with: company -->
+				 @await Html.PartialAsync("ContactVisibilityAlert")
+				<!-- /ko -->
+				<div class="p-relative">
+					<div class="p-25 bgm-white" data-bind="with: company">
+						<p class="f-500">
+							<span id="company-legacyname" data-bind="text: Helper.Company.getDisplayName($data)"></span>
+						</p>
+						<hr/>
+						<p data-bind="with: ResponsibleUserUser">
+							<i class="zmdi zmdi-account-o"></i> <span data-bind="text: Helper.User.getDisplayName($data)"></span>
+						</p>
+						<p>
+							<!-- ko with: ParentCompany -->
+							@(Html.Localize("ParentName"))
+							<a href="#" data-bind="attr: { href: '#/Main/Company/DetailsTemplate/' + Id() }">
+								<span data-bind="text: Helper.Company.getDisplayName($data)"></span>
+							</a>
+							<!-- /ko -->
+						</p>
+					</div>
+				</div>
+			</div>
+
+			 @await Html.PartialAsync("ContactDetailsTagBlock", typeof(Company))
+
+			<div class="pmo-block pmo-contact">
+				<h2>@(Html.Localize("Contact"))</h2>
+				<ul>
+					<!-- ko if: primaryPhone -->
+					<li>
+						<i class="zmdi zmdi-phone"></i>
+						<a href="#" data-bind="attr: { href: 'tel:' + window.Helper.Address.getPhoneNumberAsString(primaryPhone(), false, $root.lookups.countries) }, text: window.Helper.Address.getPhoneNumberAsString(primaryPhone(), true, $root.lookups.countries)"></a>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: primaryEmail -->
+					<li>
+						<i class="zmdi zmdi-email"></i>
+						<a href="#" data-bind="attr: { href: 'mailto:' + ko.unwrap(primaryEmail().Data) + $root.currentUserDropboxAddress() }, text: primaryEmail().Data"></a>
+					</li>
+					<!-- /ko -->
+					<!-- ko if: standardAddress -->
+					<li>
+						<i class="zmdi zmdi-pin"></i>
+						<address class="m-b-0"><address-block params="address: standardAddress, lookups: lookups, showNames: false"></address-block></address>
+					</li>
+					<!-- /ko -->
+				</ul>
+			</div>
+
+			@Html.PluginRenderActions("MaterialCompanySidebarExtensions")
+			@Html.PluginRenderActions("MaterialContactSidebarExtensions")
+		</div>
+
+		<div class="pm-body clearfix">
+			<ul class="tab-nav tn-justified" role="tablist" tabindex="1">
+				@Html.PluginRenderActions("CompanyDetailsMaterialTabHeader")
+			</ul>
+			<div class="tab-content">
+				@Html.PluginRenderActions("CompanyDetailsMaterialTab")
+			</div>
+		</div>
+	</div>
+
+</div>

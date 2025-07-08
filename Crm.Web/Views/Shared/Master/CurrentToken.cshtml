@@ -1,0 +1,5 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+
+@if (Model?.User != null) { 
+	<meta id="meta.CurrentToken" name="CurrentToken" content="@(Model.User.GeneralToken)"/>
+ } 

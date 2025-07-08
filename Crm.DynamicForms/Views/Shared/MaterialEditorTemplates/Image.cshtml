@@ -1,0 +1,20 @@
+﻿@await Html.PartialAsync("MaterialEditorTemplates/Title")
+<div class="form-group" data-bind="validationElement: FileResourceId">
+	<div class="fg-line">
+		<label class="fg-label control-label">
+			<span data-bind="translatedText: 'FileResource'"></span>
+		</label>
+	</div>
+	<div class="fileinput fileinput-new" data-provides="fileinput">
+		<span class="btn btn-primary btn-file m-r-10">
+			<span class="fileinput-new" data-bind="translatedText: 'SelectFile'"></span>
+			<span class="fileinput-exists" data-bind="translatedText: 'Change'"></span>
+			<input type="hidden">
+			<input type="file" data-bind="event: { change: $root.handleFileSelect.bind($root) }" accept="image/*"/>
+		</span>
+		<span class="fileinput-filename"></span>
+	</div>
+	<small class="help-block pre-line" data-bind="validationMessage: FileResourceId"></small>
+</div>
+@await Html.PartialAsync("MaterialEditorTemplates/CssExtra")
+@await Html.PartialAsync("MaterialEditorTemplates/SizeDropdown")

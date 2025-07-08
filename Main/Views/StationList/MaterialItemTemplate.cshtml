@@ -1,0 +1,24 @@
+﻿@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+
+<div class="lv-item media">
+	@await Html.PartialAsync("GenericListBulkControl")
+	<div class="lv-avatar bgm-gray pull-left" data-bind="text: Name()[0]"></div>
+	<div class="media-body">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="lv-title">
+					<a data-bind="attr: { href: '#/Main/Station/Details/' + Id() }">
+						<span data-bind="text: Name"></span>
+					</a>
+					<div data-bind="visible:LegacyId">
+						@(Html.Localize("LegacyId")):
+						<span data-bind="text: LegacyId"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<lv-actions>@Html.PluginRenderActions("StationItemTemplateActions")</lv-actions>
+</div>

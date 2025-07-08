@@ -1,0 +1,18 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt">
+			<h2 data-bind="translatedText: 'CreateUserGroup'"></h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: userGroup">
+				<div class="row">
+					<div class="col-md-6">
+						<form-element id="Name" params="value: Name, caption: 'Name', type: 'text'"></form-element>
+					</div>
+				</div>
+			</form>
+		</div>
+		@await Html.PartialAsync("CreateFormFooter")
+	</div>
+</div>

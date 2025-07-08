@@ -1,0 +1,22 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+					</td>
+				</tr>
+			</tbody>
+			<!-- ko if: (!$data.IsPdfViewModel || $data.IsPdfViewModel && !$data.IsPdfViewModel()) && $data.footerHeight && $data.footerHeight() -->
+			<tfoot class="repeating-footer-placeholder">
+				<tr>
+					<td>
+						<div class="visible-print" data-bind="style: { height: footerHeight() + 'cm' }"></div>
+					</td>
+				</tr>
+			</tfoot>
+			<!-- /ko -->
+		</table>
+		<!-- ko if: (!$data.IsPdfViewModel || $data.IsPdfViewModel && !$data.IsPdfViewModel()) && $data.footerHeight && $data.footerHeight() -->
+		<div class="repeating-footer report-footer-fixed" data-bind="style: { height: footerHeight() + 'cm' }">
+			 @await Html.PartialAsync("Report/FooterContent") 
+		</div>
+		<!-- /ko -->
+	</div>
+</div>

@@ -1,0 +1,18 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+<div class="box ptpx15">
+	<div class="entry clearfix no-border" data-bind="visible: Helper.DynamicFormDesigner.displayAlreadyReleasedWarning($root.alreadySavedDynamicForm())">
+		<div class="alert alert-danger">@(Html.Localize("DynamicFormAlreadyReleasedWarning"))</div>
+	</div>
+	<div id="editFieldBox" class=" entry clearfix entry no-border"  data-bind="visible: !selectedFormElement()">
+		@(Html.Localize("DynamicFormEditFieldEmptySlate"))
+	</div>
+	<div class="entry clearfix no-border"  data-bind="visible: selectedFormElement()">
+		<!-- ko if: selectedFormElement -->
+			<!-- ko with: selectedFormElement -->
+				@Html.RenderAction("EditorTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+			<!-- /ko -->
+		<!-- /ko -->
+	</div>
+</div>

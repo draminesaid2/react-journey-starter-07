@@ -1,0 +1,8 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="col-xs-1 pull-right">
+	<a href="#" tabindex="0" role="button" data-bind="visible: $root.getLocalizationText($data, null, true), popover: { title: $root.getLocalizationText($data), content: $root.getLocalizationText($data, null, true) }, css: 'icon', tooltip: true" title="@(Html.Localize("Hint"))">
+		<i class="f-20 zmdi zmdi-info-outline p-t-10"></i>
+	</a>
+</div>

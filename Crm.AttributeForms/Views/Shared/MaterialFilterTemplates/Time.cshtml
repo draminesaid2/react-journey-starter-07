@@ -1,0 +1,7 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="fg-line">
+	<label class="fg-label control-label" data-bind="text: $root.getLocalizationText($data)"></label>
+	<input type="text" class="form-control date-picker" data-bind="datePicker: Response, datePickerOptions: { pickDuration: true, pickTime: false }" placeholder="@(Html.Localize("ClickHere"))">
+</div>

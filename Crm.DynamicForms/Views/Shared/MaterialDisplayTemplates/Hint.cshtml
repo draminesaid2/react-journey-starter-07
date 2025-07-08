@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div class="col-xs-1 pull-right p-r-20" style="height: 0">
+	<a href="#" tabindex="0" role="button" data-bind="visible: $root.getLocalizationText($data, null, true), popover: { title: $root.getLocalizationText($data), content: $root.getLocalizationText($data, null, true) }, tooltip: true" title="@(Html.Localize("Hint"))">
+		<i class="f-20 zmdi zmdi-info-outline"></i>
+	</a>
+	<lv-actions>
+		@Html.PluginRenderActions("DynamicFormElementActions")
+	</lv-actions>
+</div>

@@ -1,0 +1,27 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-tasks" data-bind="with: tabs()['tab-tasks']">
+	<ul class="top-menu">
+		<li data-bind="visible: true, tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+			<a id="open-generic-list-filter" data-trigger="#right-nav" href="#" data-route="@("Main/TaskList/FilterTemplate")">
+				<i class="tm-icon zmdi zmdi-search-in-page"></i>
+			</a>
+		</li>
+	</ul>
+	@Html.RenderAction("GenericListHeader", "TaskList", new { plugin = "Main" })
+	<empty-state-box params="mood: 'happy', title: 'ContactTasksEmptyStateTitle', text: 'NoTasksLeftInfo'" data-bind="visible: items().length === 0">
+	</empty-state-box>
+	<div class="listview">
+		@Html.PluginRenderActions("MaterialTaskListExtensions")
+		<div class="lv-body" data-bind="foreach: items">
+			@await Html.PartialAsync("GenericListItemGroup")
+			@await Html.PartialAsync("MaterialTask")
+		</div>
+	</div>
+	<!-- ko requiredPermission: { name: 'Create', group: 'Task' } -->
+	<floating-action-button data-route="Main/Task/Edit/?contactId={{contactId}}&contactName={{encodeURIComponent(ko.unwrap(contactName))}}&contactType={{contactType}}" data-toggle="modal" data-target="#modal" params="title: 'AddATask'"></floating-action-button>
+	<!-- /ko -->
+</div>

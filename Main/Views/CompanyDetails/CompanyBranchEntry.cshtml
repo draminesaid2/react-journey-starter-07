@@ -1,0 +1,36 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+
+@using Crm.Library.Globalization.Extensions
+
+<div class="media">
+	<!-- ko requiredPermission: { name: 'Edit', group: 'Branch' } -->
+	<ul class="actions pull-right">
+		<li class="dropdown">
+			<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+			<ul class="dropdown-menu dropdown-menu-right">
+				<li class="company-branch-edit">
+					<a href="#" data-bind="attr: { 'data-route': 'Main/CompanyBranch/EditTemplate/' + Id() }" data-toggle="modal" data-target="#lgModal">@(Html.Localize("Edit"))</a>
+				</li>
+				<li class="company-branch-edit">
+					<a href="#" data-bind="click: $root.removeCompanyBranch">@(Html.Localize("Remove"))</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<!-- /ko -->
+	<div class="media-body">
+		<pmbb-view-entry params="caption: 'BranchLayer1'" data-bind="visible: !!$data.Branch1Key()">
+			<span data-bind="if: $data.Branch1Key(), lookupValue: $data.Branch1Key(), lookups: $root.lookups.branches1"></span>
+		</pmbb-view-entry>
+		<pmbb-view-entry params="caption: 'BranchLayer2'" data-bind="visible: !!$data.Branch2Key()">
+			<span data-bind="if: $data.Branch2Key(), lookupValue: $data.Branch2Key(), lookups: $root.lookups.branches2"></span>
+		</pmbb-view-entry>
+		<pmbb-view-entry params="caption: 'BranchLayer3'" data-bind="visible: !!$data.Branch3Key()">
+			<span data-bind="if: $data.Branch3Key(), lookupValue: $data.Branch3Key(), lookups: $root.lookups.branches3"></span>
+		</pmbb-view-entry>
+		<pmbb-view-entry params="caption: 'BranchLayer4'" data-bind="visible: !!$data.Branch4Key()">
+			<span id="layerbranch4" data-bind="if: $data.Branch4Key(), lookupValue: $data.Branch4Key(), lookups: $root.lookups.branches4"></span>
+		</pmbb-view-entry>
+	</div>
+</div>
+

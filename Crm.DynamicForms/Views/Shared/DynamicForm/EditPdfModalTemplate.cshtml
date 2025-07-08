@@ -1,0 +1,55 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModelItem<Type>>
+@using Crm.Library.Globalization.Extensions
+@using Crm.ViewModels
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" data-bind="click: Helper.Database.clearTrackedEntities" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<div class="row">
+		<h4 class="modal-title col-md-8 col-xs-11">
+			@(Html.Localize("Edit"))
+		</h4>
+		<div class="col-md-3 col-xs-11">
+			<div class="fg-line select">
+				<select class="form-control" data-bind="options: DynamicForm().Languages, value: selectedLanguage, optionsValue: 'LanguageKey', optionsText: function (x) { return Helper.Lookup.getLookupValue($root.languages(), x.LanguageKey); }, visible: DynamicForm().Languages().length > 1 && showSigning() ==false, event: {change: changeLanguage}"></select>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal-body card-body card-padding" data-bind="visible: showSigning() == false">
+	<iframe style="min-height: 95vh; width: 100%" id="pdfViewer" src='@Url.Action("Viewer","ServiceOrderChecklist", new { plugin = "Sms.Checklists" })' data-bind="storeElement: pdfFile" allowfullscreen="" webkitallowfullscreen=""></iframe>
+</div>
+<div class="modal-body card-body card-padding" data-bind="visible: showSigning() == true">
+	<div>
+		<p class="p-t-25 m-b-25 c-black b-0 f-500 f-14" data-bind="text: currentSignatureName"></p>
+		<div class="sigPads">
+			<input type="hidden" name="output" class="output" value="">
+			<canvas class="pad" width="409" height="136"></canvas>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer card-header ch-alt p-15" data-bind="visible: showSigning() == true">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect pull-left" data-bind="click: clearSignature">
+		@(Html.Localize("Delete Signature"))
+	</button>
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: hideSigning">
+		@(Html.Localize("Cancel"))
+	</button>
+	<button id="saveSignature" type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: saveSignature">
+		@(Html.Localize("Save Signature"))
+	</button>
+</div>
+<div class="modal-footer card-header ch-alt p-15" data-bind="visible: showSigning() == false">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+		@(Html.Localize("Cancel"))
+	</button>
+	<button id="save" type="button" class="btn btn-lg btn-default f-13 waves-effect pull-left" data-bind="click: saveOrComplete">
+		@(Html.Localize("Save"))
+	</button>
+	<button id="complete" type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: saveOrComplete">
+		@(Html.Localize("Complete"))
+	</button>
+</div>

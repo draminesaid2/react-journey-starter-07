@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewPage
+@{Layout = "~/Views/Shared/Layout/HtmlTemplateLayout.cshtml";}
+
+@section TemplateMainContent {
+
+	<div class="reportcontainer">
+		<div class="report">
+			 @await Html.PartialAsync("Report/FooterContent") 
+		</div>
+	</div>
+
+}

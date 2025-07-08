@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.GenericListViewModel>
+@using Crm.Library.Extensions
+@using Crm.Library.Modularization.Extensions
+@{ var routeValues = new { plugin = Model.PluginName }; }
+
+ @await Html.PartialAsync("Material/GenericListTopMenu") 
+<div class="generic-list">
+	@await Html.PartialAsync("Material/GenericListList")
+	@Html.PluginRenderActions("NoteListTimeline")
+</div>
+@Html.RenderAction("MaterialPrimaryAction", Model.ControllerName, routeValues)
+@await Html.PartialAsync("Material/GenericListItem") 

@@ -1,0 +1,33 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Globalization.Extensions
+<div class="lv-actions actions dropdown">
+	<a href="#" data-toggle="dropdown" aria-expanded="true">
+		<i class="zmdi zmdi-more-vert"></i>
+	</a>
+	<ul class="dropdown-menu dropdown-menu-right">
+	<li>
+		<a href="#" data-bind="attr: { href: '#/Crm.Article/Article/DetailsTemplate/' + Id() }">
+	  @(Html.Localize("Details"))	
+	  </a>
+	</li>
+	<!-- ko if: $root.deleteArticle !== undefined -->
+		<!-- ko requiredPermission: { name: 'Edit', group: 'Article' } -->
+		<li>
+			<a class="article-edit" data-bind="attr: { 'href': '#/Crm.Article/Article/CreateTemplate?id=' + Id() }">
+				@(Html.Localize("Edit"))
+			</a>
+		</li>
+		<!-- /ko -->
+		<!-- ko requiredPermission: { name: 'Delete', group: 'Article' } -->
+		<li>
+			<a class="article-delete" href="#" data-bind="click: $root.deleteArticle.bind($parent, $data)">
+				@(Html.Localize("remove"))
+			</a>
+		</li>
+		<!-- /ko -->
+	<!-- /ko -->
+		@Html.PluginRenderActions("ArticleItemTemplateActions")
+	</ul>
+</div>
+

@@ -1,0 +1,26 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Extensions
+
+<!-- ko if: loading -->
+<span class='note-preloader preloader pls-blue'>
+	<svg class='pl-circular' viewBox='25 25 50 50'>
+		<circle class='plc-path' cx='50' cy='50' r='20'></circle>
+	</svg>
+</span>
+<!-- /ko -->
+<!-- ko ifnot: loading -->
+<!-- ko if: subject() -->
+<div class='m-b-5'>
+	<strong class='pre-line word-break-word'>
+		<!-- ko text: subject --><!-- /ko -->
+	</strong>
+</div>
+<!-- /ko -->
+<!-- ko with: $parent -->
+<span class='pre-line word-break-word' data-bind='text: { value: $parent.text, expand: true }'></span>
+<!-- /ko -->
+<!-- /ko -->
+<div class="clearfix"></div>
+@Html.PluginRenderActions("MaterialNoteItemBodyExtensions")
+@Html.RenderAction("Attachments", "NoteList")

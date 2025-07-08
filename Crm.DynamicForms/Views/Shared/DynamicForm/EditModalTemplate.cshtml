@@ -1,0 +1,98 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModelItem<Type>>
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.ViewModels
+@using Crm.Library.Modularization.Extensions
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<div class="row">
+		<h4 class="modal-title col-md-8 col-xs-11">
+			<span class="c-gray" data-bind="visible: subPageVisible()">
+				<a href="#" class="c-gray" data-bind="click: toggleSubPage">
+					<span data-bind="text: Helper.DynamicForm.getTitle($data.DynamicForm(), $data.localizations(), $data.selectedLanguage())"></span>
+				</a>
+				<span data-bind="css: { 'animated': fadeInSubPage() || fadeOutSubPage(), 'fadeOutRight': fadeOutSubPage(), 'fadeInRight' : fadeInSubPage() }">
+					<i class="zmdi zmdi-chevron-right"></i>
+					<span data-bind="text: $root.getLocalizationText(subPageDynamicFormElement())"></span>
+					<i class="zmdi zmdi-chevron-right"></i>
+					<span class="c-black" data-bind="text: subPageTitle"></span>
+				</span>
+			</span>
+			<span data-bind="visible: !subPageVisible(), text: Helper.DynamicForm.getTitle($data.DynamicForm(), $data.localizations(), $data.selectedLanguage())"></span>
+		</h4>
+		<div class="col-md-3 col-xs-11" data-bind="visible: !subPageVisible()">
+			<div class="fg-line select">
+				<select class="form-control" data-bind="options: DynamicForm().Languages, value: selectedLanguage, optionsValue: 'LanguageKey', optionsText: function (x) { return Helper.Lookup.getLookupValue($root.languages(), x.LanguageKey); }, visible: DynamicForm().Languages().length > 1"></select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-body card-body card-padding" style="overflow-x: hidden;">
+	<div data-bind="if: loading" class="text-center">
+		<div class="preloader pls-blue pl-lg">
+			<svg class="pl-circular" viewBox="25 25 50 50">
+				<circle class="plc-path" cx="50" cy="50" r="20"></circle>
+			</svg>
+		</div>
+		<h5 data-bind="text: $root.loadingText ? $root.loadingText() : null"></h5>
+	</div>
+	<div data-bind="css: { 'animated': fadeInMainPage() || fadeOutMainPage(), 'fadeOutLeft': fadeOutMainPage(), 'fadeInLeft' : fadeInMainPage() }, visible: mainPageVisible()">
+	<!-- ko ifnot: loading -->
+	@Html.RenderAction("MaterialDisplayTemplates", "DynamicForm", new { plugin = "Crm.DynamicForms" })
+	<h5 data-bind="text: Helper.DynamicForm.getDescription($data.DynamicForm(), $data.localizations(), $data.selectedLanguage())"></h5>
+	@Html.PluginRenderActions(String.Format("{0}DynamicFormEditModalBody", Model.Item.Name))
+	<!-- ko foreach: groupedPageElements -->
+	<fieldset class="section">
+		<!-- ko foreach: $data -->
+	<div class="row" data-bind="foreach: $data, visible: $data.filter(element => element.isVisible()).length > 0">
+	<div data-bind="css: 'form-element col-sm-' + 12 / $data.Size(), visible: $data.isVisible">
+ 					<div data-bind="template: { name: $parentContext.$parentContext.$parent.formElementTemplateName($data), data: $data }"></div>
+				@Html.PluginRenderActions($"{Model.Item.Name}EditModalDynamicFormElement")
+			</div>
+		</div>
+		<!-- /ko -->
+	</fieldset>
+	<!-- /ko -->
+	<!-- ko with: pager -->
+	 @await Html.PartialAsync("MaterialPaging") 
+	<!-- /ko -->
+	<!-- /ko -->
+	</div>
+	<div id="modal-sub-page" data-bind="css: { 'animated': fadeInSubPage() || fadeOutSubPage(), 'fadeOutRight': fadeOutSubPage(), 'fadeInRight' : fadeInSubPage() }, visible: subPageVisible()">
+		<div class="text-center">
+			<div class="preloader pl-lg" data-bind="">
+				<svg class="pl-circular" viewBox="25 25 50 50">
+					<circle class="plc-path" cx="50" cy="50" r="20"></circle>
+				</svg>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer card-header ch-alt p-15" data-bind="ifnot: loading() || formReference() === null">
+	<div data-bind="ifnot: subPageVisible">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect pull-left" data-bind="visible: hasPendingChanges() === false && formReference().innerInstance.entityState !== window.$data.EntityState.Added" data-dismiss="modal">
+		@(Html.Localize("Close"))
+	</button>
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect pull-left" data-bind="click: save, visible: hasPendingChanges() || formReference().innerInstance.entityState === window.$data.EntityState.Added">
+		@(Html.Localize("Save"))
+		<span data-bind="visible: page() === pages()">&amp; @(Html.Localize("Close"))</span>
+	</button>
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal" >
+		@(Html.Localize("Cancel"))
+	</button>
+	<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: complete">
+		@(Html.Localize("Complete"))
+	</button>
+	</div>
+	<div data-bind="if: subPageVisible">
+		<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: subPageCancel">
+			@(Html.Localize("Cancel"))
+		</button>
+		<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: subPageSave">
+			@(Html.Localize("Save"))
+		</button>
+	</div>
+</div>

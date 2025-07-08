@@ -1,0 +1,47 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModel>
+@using Crm.ViewModels
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<div role="tabpanel" class="tab-pane" id="tab-relationships" data-bind="with: tabs()['tab-relationships']">
+	<!-- ko if: isEmptyStateVisible -->
+	<empty-state-box params="mood: 'sad', title: 'RelationshipsEmptyStateTitle', text: 'NoRelationshipInfo'"></empty-state-box>
+	<!-- /ko -->
+	<!-- ko ifnot: isEmptyStateVisible -->
+	<!-- ko if: businessRelationships().length -->
+		<div id="generic-list-business-relationships" class="card generic-list">
+			<div class="card-header ch-alt">
+				<h2>@(Html.Localize("BusinessRelationships"))</h2>
+			</div>
+			<!-- ko with: businessRelationships.index.RelationshipTypeKey -->
+			<div class="listview lv-bordered">
+				<div class="lv-body" data-bind="foreach: { data: Object.keys($data).sort(), as: 'typeKey' }">
+					<div class="lv-header" data-bind="lookupValue: typeKey, lookups: $root.tabs()['tab-relationships']().lookups.businessRelationshipTypes"></div>
+					<!-- ko foreach: $parent[typeKey] -->
+						<!-- ko with: { company: Child, lookups: $root.tabs()['tab-relationships']().lookups } -->
+							<!-- ko with: company -->
+							 @await Html.PartialAsync("../CompanyList/MaterialItemTemplate") 
+							<!-- /ko -->
+						<!-- /ko -->
+					<!-- /ko -->
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- ko with: genericBusinessRelationships -->
+				 @await Html.PartialAsync("MaterialPaging") 
+			<!-- /ko -->
+		</div>
+	<!-- /ko -->
+		@Html.PluginRenderActions("CompanyDetailsRelationshipTypeExtension")
+	<!-- /ko -->
+	<floating-action-button>
+		<!-- ko requiredPermission: { name: 'CreateBusinessRelationship', group: 'Company' } -->
+		<li data-bind="with: $root">
+			<a id="add-business-relationship" href="#" data-mfb-label="@(Html.Localize("AddBusinessRelationship"))" data-route="Main/BusinessRelationship/EditTemplate/" data-toggle="modal" data-target="#modal">
+				<i class="zmdi zmdi-accounts-alt"></i>
+			</a>
+		</li>
+		<!-- /ko -->
+		@Html.PluginRenderActions("CompanyDetailsRelationshipTypeActionExtension")
+	</floating-action-button>
+</div>

@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<IResponseViewModel>
+@using Crm.DynamicForms.ViewModels
+
+@{  var model = Model as IResponseViewModel;
+	if (model != null) { 
+	var restModel = RestTypeProvider.CreateRestModel(model);
+	var serializedModel = RestSerializer.SerializeAsJson(restModel).Replace(@"\", @"\\").Replace(@"'", @"\'");
+	<script type="text/javascript">
+		window.viewModelJson = '@(serializedModel)';
+	</script>
+ } }

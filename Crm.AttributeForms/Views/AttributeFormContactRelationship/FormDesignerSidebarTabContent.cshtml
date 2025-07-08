@@ -1,0 +1,10 @@
+﻿<div role="tabpanel" class="tab-pane animated fadeIn m-20" id="tab-attribute-form-contact-relationships" data-bind="if: $root.form().CategoryKey() === 'AttributeForm'">
+	<fieldset>
+		<legend class="m-b-25 c-black b-0 f-500 f-14" data-bind="translatedText: 'AttributeFormContactRelationship'"></legend>
+		<div data-bind="with: tabs()['tab-attribute-form-contact-relationships']">
+			<form-element params="value: $root.form().ExtensionValues().ContactType, caption: 'ContactType', type: 'select'">
+				<select class="form-control" data-bind="options: $parent.contactTypes, optionsValue: 'Key', optionsText: 'Value', value: value"></select>
+			</form-element>
+		</div>
+	</fieldset>
+</div>

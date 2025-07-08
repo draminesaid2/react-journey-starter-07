@@ -1,0 +1,15 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+
+<span data-bind="visible: $root.getLocalizationText($data, null, true)">
+	<a class="btn btn-link btn-xs ui-icon-alt ui-btn ui-btn-up-d ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-icon-notext pull-right hint-button" href="#" tabindex="0" role="button" data-rel="popup" data-bind="popover: { title: $root.getLocalizationText($data), content: $root.getLocalizationText($data, null, true) }" onclick="$(this.nextElementSibling).toggleClass('hide');">
+		<i class="fa fa-info-circle"></i>
+		<span class="ui-btn-inner hidden">
+			<span class="ui-icon ui-icon-question ui-icon-shadow">&nbsp;</span>
+		</span>
+	</a>
+	<span class="hide hidden hint-box">
+		<span class="ui-popup ui-corner-all ui-body-e ui-btn-block">
+			<span class="pre" data-bind="text: $root.getLocalizationText($data, null, true)"></span>
+		</span>
+	</span>
+</span>

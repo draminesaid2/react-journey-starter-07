@@ -1,0 +1,29 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.Library.Globalization.Extensions
+
+<!--ko if: isPdf() === false-->
+<div id="add-fields" class="box ptpx15">
+    <div class="entry clearfix elementTypes no-border">
+        <div class="alert alert-danger" style="display: none" data-bind="visible: Helper.DynamicFormDesigner.displayAlreadyReleasedWarning($root.alreadySavedDynamicForm())">@(Html.Localize("DynamicFormAlreadyReleasedWarning"))</div>
+        <!-- ko foreach: formElementTypes -->
+        <div class="pager " data-bind="draggable: { data: $data, helper: 'clone' }, visible: isVisible">
+            <a class="btn btn-default btn-sm" href="#" data-bind="translatedText: FormElementType"></a>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+
+
+<!--ko if: isPdf() === true-->
+<div class="box ptpx15">
+    <div class="entry clearfix elementTypes no-border">
+        <div class="alert alert-danger" style="display: none">@(Html.Localize("DynamicFormAlreadyReleasedWarning"))</div>
+        <p data-bind="visible: $root.pageCount() == 0">@(Html.Localize("PdfUploadRequired"))</p>
+        <div class="form-group">
+            <input id="uploadPdf" class="form-control" type="file" data-bind="event: {change: $root.handlePdfUpload.bind($root)}" accept=".pdf"/>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+

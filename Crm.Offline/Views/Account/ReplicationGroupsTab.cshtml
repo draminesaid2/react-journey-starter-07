@@ -1,0 +1,47 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-replication-groups" data-bind="with: tabs()['tab-replication-groups']">
+	<div class="card-body card-padding">
+		<p class="alert alert-info" data-bind="visible: window.Helper.Offline.status === 'online'">
+			@(Html.Localize("NoReplicationSettingsOnlineMsg"))
+		</p>
+		<p data-bind="visible: window.Helper.Offline.status === 'offline'">
+			@(Html.Localize("ReplicationChangesAppliesAfterSync"))
+		</p>
+		<form class="form-horizontal">
+			<div data-bind="foreach: replicationGroups">
+				<hr class="m-t-15" data-bind="visible: $index() > 0">
+				<div class="w-100 toggle-switch" data-ts-color="green">
+					<label for="replication-group-{{$index}}" class="ts-label f-15">{{Value}}</label>
+					<input id="replication-group-{{$index}}" type="checkbox" hidden="hidden" data-bind="checked: Setting.IsEnabled, visible: window.Helper.Offline.status === 'offline'">
+					<label for="replication-group-{{$index}}" class="ts-helper pull-right" data-bind="visible: window.Helper.Offline.status === 'offline'"></label>
+				</div>
+				<div data-bind="if: HasParameter">
+					<div class="form-group p-t-5" data-bind="validationElement: Setting.Parameter">
+						<!-- ko if: Setting.IsEnabled() && window.Helper.Offline.status === 'offline' -->
+						<div class="col-sm-2">
+							<div class="fg-line">
+								<input type="number" class="form-control" id="replication-group-setting-{{$index}}" data-bind="value: Setting.Parameter">
+							</div>
+							<small class="help-block pre-line" data-bind="validationMessage: Setting.Parameter"></small>
+						</div>
+						<!-- /ko -->
+						<!-- ko ifnot: Setting.IsEnabled() && window.Helper.Offline.status === 'offline' -->
+						<div class="col-sm-2">
+							<div class="fg-line">
+								<input type="text" class="form-control" id="replication-group-setting-{{$index}}" value="{{DefaultValue}}" disabled="disabled">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							(<span data-bind="translatedText: 'DefaultValue'"></span>)
+						</div>
+						<!-- /ko -->
+					</div>
+				</div>
+				<small>{{Description}}</small>
+			</div>
+			<button class="btn btn-lg btn-primary f-13 waves-effect pull-right" data-bind="click: saveReplicationGroupSettings, visible: window.Helper.Offline.status === 'offline'">@(Html.Localize("Save"))</button>
+		</form>
+	</div>
+</div>

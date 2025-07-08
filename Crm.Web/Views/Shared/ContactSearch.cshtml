@@ -1,0 +1,18 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Extensions
+
+<div id="contact-search" class="search visible-lg">
+	<label for="search">
+		@(Html.Localize("SearchForCompaniesAndPersons", searchStrategy: Search.OnlyMain))
+	</label>
+	<input class="form-control" id="search" />
+	<div class="hide">
+		<span id="Company-translation">@(Html.Localize("Company", searchStrategy: Search.OnlyMain))</span>
+		<span id="Person-translation">@(Html.Localize("Person", searchStrategy: Search.OnlyMain))</span>
+		<span id="SearchResults-translation">@(Html.Localize("DisplayingResults", searchStrategy: Search.OnlyMain))</span>
+	</div>
+    <div id="dialog" class="hide"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> @(Html.Localize("SelectContactType"))</div>
+    @(Html.HiddenTranslations("Company","Person"))
+</div>
+

@@ -1,0 +1,13 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+
+<li class="sync-step">
+	<p>
+		<span data-bind="text: description"></span>
+		<!-- ko if: !!$data.completedItems && !!$data.totalItems && status() == 'loading' -->
+		<small>(<span data-bind="text: completedItems"></span> / <span data-bind="text: totalItems"></span>)</small>
+		<!-- /ko -->
+	</p>
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1" preserveAspectRatio="none">
+    <rect data-bind="attr: { width: status() === 'success' || status() === 'error' ? 100 : !!$data.completion ? completion() : null, fill: status() === 'success' ? '#5cb85c' : status() === 'error' ? '#d9534f' : '#f0ad4e' }" x="0" y="0" width="0" height="1" />
+	</svg>
+</li>

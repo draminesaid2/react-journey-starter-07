@@ -1,0 +1,4 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<span data-bind=" attr: { id: Id() }, text: { value: Response, expand: true, limit: 100 }"></span>
+<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Response()"></span>

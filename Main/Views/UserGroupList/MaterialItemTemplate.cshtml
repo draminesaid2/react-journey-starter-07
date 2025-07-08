@@ -1,0 +1,34 @@
+@inherits Crm.Library.Modularization.CrmViewUserControl
+<div id="accordion" class="panel panel-collapse lv-item media">
+    <div class="panel-heading" role="tab">
+        <div class="lv-avatar pull-left m-r-10" style="background-color: #9E9E9E" data-bind="text: $data.Name()[0]"></div>
+        <div class="media-body">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="lv-title">
+                        <p data-bind="text: $data.Name"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- ko if: window.AuthorizationManager.isAuthorizedForAction('UserAdmin', 'EditUserGroup') || window.AuthorizationManager.isAuthorizedForAction('UserAdmin', 'RemoveUserGroup') -->
+            <div class="lv-actions actions dropdown">
+                <a href="#" data-toggle="dropdown" aria-expanded="false">
+                    <i class="zmdi zmdi-more-vert" style="float: none"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <!-- ko requiredPermission: { name: 'EditUserGroup', group: 'UserAdmin' } -->
+                    <li>
+                        <a href="#/Main/UserGroupList/Edit/{{Id}}" data-bind="translatedText: 'Edit'"></a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko requiredPermission: { name: 'RemoveUserGroup', group: 'UserAdmin' } -->
+                    <li>
+                        <a href="#" data-bind="translatedText: 'Remove', click: () => $root.deleteUserGroup($data)"></a>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

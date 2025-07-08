@@ -1,0 +1,79 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-details">
+	<pmb-block params="icon: 'equalizer', caption: 'BackgroundInfo', context: { productfamily: productfamily },  condition: window.AuthorizationManager.isAuthorizedForAction('ProductFamily', 'Edit')">
+		<pmbb-view>
+			<!-- ko with: productfamily -->
+			<span data-bind="text: BackgroundInfo"></span>
+			<span data-bind="translatedText: 'BackgroundInformationEmptyState', ifnot: BackgroundInfo"></span>
+			<!-- /ko -->
+		</pmbb-view>
+		<pmbb-edit>
+			<!-- ko with: productfamily -->
+			<div class="fg-line">
+				<textarea class="form-control" rows="5" placeholder="@(Html.Localize("BackgroundInfo"))..." data-bind="value: BackgroundInfo"></textarea>
+			</div>
+			<!-- /ko -->
+		</pmbb-edit>
+	</pmb-block>
+	<pmb-block  class="productfamilygeneral" params="icon: 'account', caption: 'General', context: {productfamily: productfamily }, condition: window.AuthorizationManager.isAuthorizedForAction('ProductFamily', 'Edit')">
+		<pmbb-view>
+			<!-- ko with: productfamily -->
+			<pmbb-view-entry params="caption: 'Name'">
+				<span data-bind="text: Name"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Name"></span>
+			</pmbb-view-entry>
+			
+			<pmbb-view-entry params="caption: 'Parent'">
+				<!-- ko if: ParentProductFamily() === null -->
+					<span data-bind="translatedText: 'Unspecified'"></span>
+				<!-- /ko -->
+				<!-- ko if: ParentProductFamily() !== null -->
+				<a href="#" data-bind="attr: { href: '#/Crm.Article/ProductFamily/DetailsTemplate/' + ParentProductFamily().Id() }">
+					<span data-bind="text: ParentProductFamily().Name"></span>
+				</a>
+				<!-- /ko -->
+			</pmbb-view-entry>
+
+			<pmbb-view-entry params="caption: 'ResponsibleUser'">
+				<!-- ko if: ResponsibleUserUser -->
+				<span data-bind="text: Helper.User.getDisplayName(ResponsibleUserUser)"></span>
+				<!-- /ko -->
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: ResponsibleUserUser"></span>
+			</pmbb-view-entry>
+			<!-- /ko -->
+		</pmbb-view>
+		<pmbb-edit>
+			<!-- ko with: productfamily -->
+			<pmbb-edit-entry params="caption: 'Name', validationElement: Name">
+				<input type="text" class="form-control" data-bind="value: Name">
+			</pmbb-edit-entry>
+			<pmbb-edit-entry params="caption: 'ResponsibleUser', validationElement: ResponsibleUser">
+				<select class="form-control" data-bind="select2autocompleter: { data: ResponsibleUser, autocompleteOptions: { orderBy: ['LastName'], table: 'Main_User', mapDisplayObject: Helper.User.mapForSelect2Display, customFilter: Helper.User.filterUserQuery, onSelect: user => $data.ResponsibleUserUser(user), placeholder: $parent.placeholder } }">
+				</select>
+			</pmbb-edit-entry>
+			<!-- /ko -->
+		</pmbb-edit>
+	</pmb-block>
+	@await Html.PartialAsync("ProductFamilyChildrenList") 
+	<pmb-block class="productfamilygeneral" params="onSave: $root.onSaveDescriptions.bind($root), onAfterSave: $root.onAfterSavePmbBlock.bind($root), onCancel: $root.onCancelPmbBlock.bind($root), icon: 'translate', caption: 'Descriptions', context: {productfamily: productfamily }, condition: window.AuthorizationManager.isAuthorizedForAction('ProductFamily', 'Edit')">
+		<pmbb-view>
+			<!-- ko foreach: $root.descriptions() -->
+			<pmbb-view-entry params="value: Value, name: Name, caption: Name, type: 'text'">
+				<span data-bind="text: Value"></span>
+				<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Value"></span>
+			</pmbb-view-entry>
+			<!-- /ko -->
+		</pmbb-view>
+		<pmbb-edit>
+			<!-- ko foreach: $root.descriptions() -->
+			<pmbb-edit-entry params="caption: Name, validationElement: Value">
+				<input type="text" class="form-control" data-bind="value: Value">
+			</pmbb-edit-entry>
+			<!-- /ko -->
+		</pmbb-edit>
+	</pmb-block>
+	@Html.PluginRenderActions("ContactMaterialDetailsTabExtensions")
+</div>

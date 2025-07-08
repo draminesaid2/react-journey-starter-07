@@ -1,0 +1,49 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+@using Crm.Library.Extensions
+@using Crm.Rest.Model
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response file-attachment" data-bind="with: $root.ResponsesOutput()[$data.Id()]">
+		<div class="file-list" data-bind="foreach: { data: $root.filterFiles.call($root, $data, true), as: 'file' }">
+			<div class="image">
+				<!-- ko if: (file.Content.$value ? file.Content.$value() : file.Content()) !== null -->
+				<img data-bind="attr: { src: 'data:' + file.ContentType() + '\;base64,' + (file.Content.$value ? file.Content.$value() : file.Content()) }"/>
+				<!-- /ko -->
+				<!-- ko if: (file.Content.$value ? file.Content.$value() : file.Content()) === null -->
+				<img data-bind="attr: { src: window.Helper.Url.resolveUrl('~/File/File/' + file.Id()) }"/>
+				<!-- /ko -->
+				<div>
+					<span class="index" data-bind="text: '@(Html.Localize("AttachedImage"))' + ' ' + ($index() + 1) + ': '"></span>
+					<span class="filename" data-bind="text: file.Filename()"></span>
+				</div>
+				<hr />
+			</div>
+		</div>
+		<!-- ko with: $root.filterFiles.bind($root, $data, false) -->
+			<div data-bind="if: $data.length">
+				<ol class="file-list" style="padding-left: 20px" data-bind="foreach: { data: $data, as: 'file' }">
+					@{ var fileSize = "<span data-bind=\"text: $root.getFileSize(Length())\"></span>"; }
+					<li>
+						<img src="@(Url.Content("~/Content/img/paperclip.png"))" />
+						<!-- ko if: $("div.dynamic-form-response-header").length == 0 -->
+							<a data-bind="attr: { href: '@(Url.Content("~/File/File/"))' + file.Id(), download: file.Filename() }" target="_blank">
+								<span class="filename" data-bind="text: file.Filename()"></span>
+							</a>
+						<!-- /ko -->
+						<!-- ko if: $("div.dynamic-form-response-header").length > 0 -->
+							<span class="filename" data-bind="text: file.Filename()"></span>
+						<!-- /ko -->
+						<small class="file-size">
+							@Html.Raw($"({Html.TemplateText<FileResourceRest>(m => m.ContentType)}), {fileSize}")
+						</small>
+					</li>
+				</ol>
+			</div>
+		<!-- /ko -->
+</div>

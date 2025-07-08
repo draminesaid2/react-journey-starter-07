@@ -1,0 +1,35 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.DynamicForms.Model
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+
+<div>
+	<label class="control-label" data-bind="validationElement: $data.Response">
+		<span data-bind="text: $root.getLocalizationText($data)"></span>
+		<span class="required-marker">@("*".TemplateCondition<FileAttachmentDynamicFormElement>(x => x.MinUploadCount))</span>
+		 @await Html.PartialAsync("DisplayTemplates/Hint") 
+	</label>
+</div>
+<input class="fileAttachment" multiple type="file" data-bind="attr: { 'name': $data.Id() }, disable: !$root.DynamicForm || MaxUploadCount() && Files().length >= MaxUploadCount()"/>
+<br/>
+<div data-bind="if: MaxFileSize">
+	<small>
+		@(Html.Localize("MaxUploadFileSize")): <span data-bind="fileSize: MaxFileSize"></span>
+	</small>
+</div>
+<div data-bind="if: MinUploadCount">
+	<span data-bind="validationElement: $data.Response">
+		<small data-bind="text: '@($"{Html.Localize("MinUploadCount")}: ")' + MinUploadCount()"></small>
+	</span>
+</div>
+<div data-bind="if: MaxUploadCount">
+			<small data-bind="text: '@($"{Html.Localize("FileCount")}: ")' + (ko.unwrap($data.Files) || []).length + ' von ' + MaxUploadCount()"></small>
+</div>
+<p data-bind="validationElement: Response, validationMessage: Response"></p>
+@(Html.HiddenTranslation("ConfirmDeleteFile"))
+		<!-- ko if: $data.Files -->
+<div class="attached-file-list" data-bind="foreach: Files()">
+	 @await Html.PartialAsync("AttachedFileTemplate") 
+</div>
+		<!-- /ko -->

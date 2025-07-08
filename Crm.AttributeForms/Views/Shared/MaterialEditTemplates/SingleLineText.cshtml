@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialEditTemplates/Hint") 
+	 @await Html.PartialAsync("MaterialEditTemplates/History") 
+	<div data-bind="css: 'col-xs-10'">
+		<pmbb-edit-entry params="caption: $root.getLocalizationText($data)">
+			<form-element params="value: Response, type: 'text'"></form-element>
+		</pmbb-edit-entry>
+	</div>
+</div>

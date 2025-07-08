@@ -1,0 +1,78 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div role="tabpanel" class="tab-pane animated fadeIn m-20" id="tab-edit-form">
+	<fieldset>
+		<legend class="m-b-25 c-black b-0 f-500 f-14" data-bind="translatedText: 'DynamicForm'"></legend>
+		<div class="form-group" data-bind="validationElement: $root.getLocalization().Value, validationOptions: { insertMessages: false }">
+			<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+				<div class="fg-line">
+					<label class="fg-label control-label">
+						<span class="description" data-bind="translatedText: 'Title'"></span>
+					</label>
+					<input class="form-control" data-bind="textInput: $root.getLocalization().Value" id="Title" name="Title" type="text"/>
+				</div>
+				<span class="input-group-addon" data-bind="visible: $root.form().Languages().length > 1">
+					<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: () => $root.editLocalizations(null, null, false), tooltip: true" title="@(Html.Localize("Translations"))">
+						<i class="zmdi zmdi-globe"></i>
+					</a>
+				</span>
+			</div>
+		</div>
+		<div class="form-group" data-bind="validationElement: $root.getLocalization().Hint, validationOptions: { insertMessages: false }">
+			<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+				<div class="fg-line">
+					<label class="fg-label control-label">
+						<span class="description" data-bind="translatedText: 'Description'"></span>
+					</label>
+					<textarea class="form-control" data-bind="value: $root.getLocalization().Hint, autosize: true" id="Hint" name="Hint"></textarea>
+				</div>
+				<span class="input-group-addon" data-bind="visible: $root.form().Languages().length > 1">
+					<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: () => $root.editLocalizations(null, null, true), tooltip: true" title="@(Html.Localize("Translations"))">
+						<i class="zmdi zmdi-globe"></i>
+					</a>
+				</span>
+			</div>
+		</div>
+		<form-element params="value: $root.form().HideEmptyOptional, caption:'HideEmptyOptional', type: 'checkbox'"></form-element>
+	</fieldset>
+	<fieldset>
+		<legend class="p-t-25 m-b-25 c-black b-0 f-500 f-14" data-bind="translatedText: 'Translations'"></legend>
+		<form-element params="value: newLanguageKey, caption: 'Language', type: 'select'">
+			<select class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_Language'), placeholder: placeholder }">
+			</select>
+		</form-element>
+		<button class="btn btn-primary waves-effect" data-bind="translatedText: 'Add', click: addLanguage"></button>
+		<hr />
+		<table class="table">
+			<thead>
+			<tr>
+				<th data-bind="translatedText: 'Language'"></th>
+				<th data-bind="translatedText: 'Status'"></th>
+				<th data-bind="translatedText: 'IsDefault'"></th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody data-bind="foreach: $root.form().Languages">
+			<tr>
+				<td data-bind="text: $root.languages()[$data.LanguageKey()].Value"></td>
+				<td>
+					<form-element params="value: StatusKey, type: 'select'">
+						<select class="form-control status-key" data-bind="options: $root.statuses, optionsValue: 'Key', optionsText: 'Value', value: value"></select>
+					</form-element>
+				</td>
+				<td>
+					<label class="radio">
+						<input type="radio" name="DefaultLanguageKey" data-bind="checked: $root.form().DefaultLanguageKey, checkedValue: LanguageKey, enable: StatusKey() === 'Released'"/>
+						<i class="input-helper"></i>
+					</label>
+				</td>
+				<td>
+					<button class="btn btn-danger btn-sm waves-effect" data-bind="click: $root.removeLanguage, tooltip: true" title="@Html.Localize("Remove")">
+						<i class="zmdi zmdi-hc-lg zmdi-delete"></i>
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</fieldset>
+</div>

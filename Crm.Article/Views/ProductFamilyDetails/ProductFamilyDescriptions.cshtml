@@ -1,0 +1,31 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm.Library.Globalization.Extensions
+
+<div class="pmb-block productfamilydescriptions">
+	<div class="pmbb-header">
+		<h2>
+			<i class="zmdi zmdi-translate"></i>
+			<span>@(Html.Localize("Descriptions"))</span>
+		</h2>
+		
+		<ul class="actions">
+			<li class="dropdown">
+				<a class="add-productfamilychild" href="#" data-bind="attr: { 'data-route': 'Crm.Article/ProductFamilyDescription/EditTemplate/' + $root.productfamily().Id() }, tooltip: true" data-toggle="modal" data-target="#modal" title="@(Html.Localize("Edit"))"><i class="zmdi zmdi-edit"></i></a>
+			</li>
+		</ul>
+
+	</div>
+	<div class="pmbb-body p-l-30">
+		<!-- ko foreach: descriptions() -->	
+		<div class="media">
+			<div class="media-body">
+				<pmbb-view-entry params="value: Value, name: Name, caption: Name, type: 'text'">
+					<span data-bind="text: Value"></span>
+					<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Value"></span>
+				</pmbb-view-entry>
+			</div>
+		</div>
+		<!-- /ko -->
+	</div>
+</div>
+

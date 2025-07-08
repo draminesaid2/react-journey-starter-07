@@ -1,0 +1,29 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.Globalization.Extensions
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-staff" data-bind="with: tabs()['tab-staff']">
+	@Html.RenderAction("GenericListHeader", "PersonList", new { plugin = "Main" })
+	<empty-state-box params="mood: 'sad', title: 'PersonsEmptyStateTitle', text: 'PersonsEmptyState'" data-bind="visible: items().length === 0">
+	</empty-state-box>
+	<ul class="top-menu">
+		@Html.PluginRenderActions("PersonTabTopMenu")
+		<li data-bind="visible: true, tooltip: true" data-placement="bottom" title="@Html.Localize("Filter")">
+			<a id="open-generic-list-filter" data-trigger="#right-nav" href="#" data-route="Main/PersonList/FilterTemplate">
+				<i class="tm-icon zmdi zmdi-search-in-page"></i>
+			</a>
+		</li>
+	</ul>
+	@Html.PluginRenderActions("MaterialGenericListResourceExtensions")
+	<div class="generic-list listview lv-bordered">
+		<div class="lv-body" data-bind="foreach: items">
+			 @await Html.PartialAsync("../PersonList/MaterialItemTemplate")
+		</div>
+	</div>
+	 @await Html.PartialAsync("MaterialPaging") 
+	<!-- ko requiredPermission: { name: 'Create', group: 'Person' } -->
+	<floating-action-button params="href: '#/Main/Person/CreateTemplate?companyId=' + $root.company().Id() + '&stationKey=' + $root.company().StationKey(), icon: 'account-add', title: 'AddNewPerson'"></floating-action-button>
+	<!-- /ko -->
+</div>
+

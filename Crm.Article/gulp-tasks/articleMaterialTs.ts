@@ -1,0 +1,9 @@
+import "../Content/ts/helper/Helper.Article";
+import "../Content/ts/ArticleDetailsViewModel";
+import "../Content/ts/ArticleCompanyRelationshipListViewModel";
+import "../Content/ts/ArticleRelationshipListViewModel";
+import "../Content/ts/ArticleDetailsRelationshipsTabViewModel";
+import "../Content/ts/ArticleDetailsDocumentsTabViewModel";
+import "../Content/ts/ArticleRelationshipEditModalViewModel";
+import "../Content/ts/ProductFamilyCreateViewModel";
+import "../Content/ts/ProductFamilyDetailsViewModel";

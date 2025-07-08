@@ -1,0 +1,18 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="pull-right">
+	@await Html.PartialAsync("MaterialItemContextMenu")
+</div>
+<div class="caption">
+	<h5 class="text-center break-word" data-bind="text: Helper.Article.getArticleAutocompleteDisplay($data, $root.currentUser().DefaultLanguageKey)"/>
+</div>
+<!-- ko if: DocumentAttributes().length > 0 -->
+<div class="pv-main" data-bind="fileResource: DocumentAttributes()[0].FileResource" data-toggle="modal" data-target="#{{Id}}">
+</div>
+@await Html.PartialAsync("ArticleImageModal")
+<!-- /ko -->
+<!-- ko if: DocumentAttributes().length === 0 -->
+<div class="lv-avatar bgm-gray pv-main">
+	<div class="vertical-align" data-bind="text: Helper.Article.getArticleTypeAbbreviation($data, $parent.lookups.articleTypes)"></div>
+</div>
+<!-- /ko -->

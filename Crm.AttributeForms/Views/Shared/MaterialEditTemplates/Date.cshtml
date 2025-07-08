@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="row">
+	 @await Html.PartialAsync("MaterialEditTemplates/Hint") 
+	 @await Html.PartialAsync("MaterialEditTemplates/History") 
+	<div data-bind="css: 'col-xs-10'">
+		<pmbb-edit-entry params="caption: $root.getLocalizationText($data), validationElement: Response">
+			<input type="text" class="form-control date-picker" data-bind="datePicker: Response" placeholder="@(Html.Localize("ClickHere"))">
+		</pmbb-edit-entry>
+	</div>
+</div>

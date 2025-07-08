@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row">
+	<div data-bind="css: 'col-xs-12'">
+		<pmbb-edit-entry params="caption: $root.getLocalizationText($data), validationElement: Response">
+			<div class="signatur" data-bind="validationOptions: { insertMessages: false }">
+				<input type="hidden" data-bind="attr: { 'data-signature-clear-text': window.Helper.String.getTranslatedString('DeleteSignatur') }, signaturePad: Response" />
+				<button class="clearButton btn btn-lg btn-default f-13 waves-effect waves-block m-b-10"></button>
+			</div>
+		</pmbb-edit-entry>
+	</div>
+</div>

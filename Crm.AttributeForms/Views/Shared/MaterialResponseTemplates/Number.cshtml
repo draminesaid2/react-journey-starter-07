@@ -1,0 +1,4 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<span data-bind="visible: Response, text: window.Globalize.formatNumber(parseFloat(Response()))"></span>
+<span class="c-gray" data-bind="translatedText: 'Unspecified', ifnot: Response()"></span>

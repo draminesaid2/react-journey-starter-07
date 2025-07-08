@@ -1,0 +1,8 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="filter-element form-group" id="communications-filter">
+	<div class="fg-line">
+		<label class="fg-label control-label">@(Html.Localize("Communications"))</label>
+		<input name="Communications" type="text" class="form-control" data-bind="value: getFilter('Communications')">
+	</div>
+</div>

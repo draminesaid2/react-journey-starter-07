@@ -1,0 +1,17 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<table style="width: 100%;">
+    <tr>
+        <td style="padding-left: 0;">
+            <!-- ko with: site -->
+            <!-- ko with: ExtensionValues -->
+            <!-- ko if: ReportLogoBase64 -->
+            <img data-bind="attr: { src: 'data:' + ko.unwrap(ReportLogoContentType) + ';base64,' + ko.unwrap(ReportLogoBase64) }"
+                 style="max-height: 90px; max-width: 110px; height: auto; width: auto; padding: 0; margin: 0; object-fit: contain;"
+                 alt="logo" />
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </td>
+    </tr>
+</table>

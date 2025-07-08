@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="pmb-block pmo-block" data-bind="if: window.Main.Settings.PushNotification.Enabled">
+	<div class="pmbb-header">
+		<h4 data-bind="translatedText: 'Subscribed'"></h4>
+		<div class="actions toggle-switch m-t-5">
+			<input id="ts1" type="checkbox" hidden="hidden" data-bind="checked: $root.userSubscription()?.IsSubscribed(), click: $root.toggleSubscription, disable: $root.loading" />
+			<label for="ts1" class="ts-helper"></label>
+		</div>
+		<p data-bind="translatedText: 'SubscribedExplanation'"></p>
+	</div>
+</div>

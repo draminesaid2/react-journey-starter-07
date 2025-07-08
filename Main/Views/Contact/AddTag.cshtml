@@ -1,0 +1,26 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title">
+		@(Html.Localize("CreateTag"))
+	</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<form data-bind="submit: save">
+		<form-element params="value: tagName, caption: 'Tag'">
+			<input type="text" class="typeahead form-control" data-bind="autocomplete: value, autocompleteOptions: { allowUnique: true, source: 'Main_Tag', display: function(x) { return x; }, customFilter: function(query, value) { return query.GetUniqueTagNames('', value || '') } }">
+		</form-element>
+	</form>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-dismiss="modal" data-bind="click: cancel">
+		@(Html.Localize("Cancel"))
+	</button>
+	<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: bulk() ? bulkSave : save, disable: loading">
+		@(Html.Localize("Add"))
+	</button>
+</div>

@@ -1,0 +1,12 @@
+﻿<li role="presentation" data-bind="visible: $root.form().CategoryKey() !=='PDF-Checklist'">
+	<a class="col-xs-4 p-b-0" href="#tab-add-fields" aria-controls="tab-add-fields" role="tab" data-toggle="tab" aria-expanded="false">
+		<i class="zmdi zmdi-collection-plus zmdi-hc-2x"></i>
+		<h6 data-bind="translatedText: 'AddFields'"></h6>
+	</a>
+</li>
+<li role="presentation" data-bind="visible: $root.form().CategoryKey() =='PDF-Checklist'">
+	<a class="col-xs-4 p-b-0" href="#tab-add-fields" aria-controls="tab-add-fields" role="tab" data-toggle="tab" aria-expanded="false">
+		<i class="zmdi zmdi-collection-plus zmdi-hc-2x"></i>
+		<h6 data-bind="translatedText: 'AddPDFChecklist'"></h6>
+	</a>
+</li>

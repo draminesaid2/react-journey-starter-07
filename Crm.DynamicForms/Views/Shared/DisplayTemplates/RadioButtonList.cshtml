@@ -1,0 +1,19 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.Offline.Extensions
+
+<div class="row">
+	<div class="col-md-12">
+		<label class="control-label" data-bind="validationElement: Response">
+			<span data-bind="text: $root.getLocalizationText($data)"></span>
+			<span class="required-marker">@("*".TemplateCondition<Crm.DynamicForms.Model.RadioButtonList>(x => x.Required))</span>
+			 @await Html.PartialAsync("DisplayTemplates/Hint") 
+		</label>
+	</div>
+</div>
+<div class="row" data-role="controlgroup" data-bind="foreach: Helper.DynamicForm.getChoicesArray($data)">
+	<label class="form-element-layout" data-bind="css: Helper.DynamicForm.getCssFromLayout($parent.Layout())">
+		<input data-bind="attr: { name: $parent.SortOrder, value: $data }, checked: $parent.Response" data-theme="d" type="radio"/>
+		<span data-bind="text: $root.getLocalizationText($parent, $data)"></span>
+	</label>
+</div>
+<p data-bind="validationMessage: Response, validationElement: Response"></p>

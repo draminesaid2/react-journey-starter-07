@@ -1,0 +1,80 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModel>
+@using Crm.ViewModels
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+
+<div role="tabpanel" class="tab-pane" id="tab-relationships" data-bind="with: tabs()['tab-relationships']">
+	<!-- ko if: isEmptyStateVisible -->
+	<empty-state-box params="mood: 'sad', title: 'RelationshipsEmptyStateTitle', text: 'NoRelationshipInfo'"></empty-state-box>
+	<!-- /ko -->
+	<!-- ko ifnot: isEmptyStateVisible -->
+	<!-- ko if: articleRelationships().length -->
+		<div id="generic-list-article-relationships" class="card generic-list">
+			<div class="card-header ch-alt">
+				<h2>@(Html.Localize("ArticleRelationships"))</h2>
+			</div>
+			<!-- ko with: genericArticleRelationships -->
+			<div class="generic-list listview lv-bordered">
+				<div class="lv-body">
+					<div data-bind="foreach: items">
+						@await Html.PartialAsync("GenericListItemGroup")
+						<!-- ko if: ParentId() !== $root.article().Id()-->
+						<!-- ko with: Parent -->
+						@await Html.PartialAsync("MaterialArticle")
+						<!--/ko-->
+						<!-- /ko -->
+						<!-- ko if: ParentId() === $root.article().Id() -->
+						<!-- ko with: Child -->
+						@await Html.PartialAsync("MaterialArticle")
+						<!--/ko-->
+						<!-- /ko -->
+					</div>
+				</div>
+			</div>
+			@await Html.PartialAsync("MaterialPaging") 
+			<!-- /ko -->
+		</div>
+	<!-- /ko -->
+	<!-- ko if: articleCompanyRelationships().length -->
+		<div id="generic-list-article-company-relationships" class="card generic-list">
+			<div class="card-header ch-alt">
+				<h2>@(Html.Localize("ArticleCompanyRelationships"))</h2>
+			</div>
+			<!-- ko with: articleCompanyRelationships.index.RelationshipTypeKey -->
+			<div class="listview lv-bordered">
+				<div class="lv-body" data-bind="foreach: { data: Object.keys($data).sort(), as: 'typeKey' }">
+					<div class="lv-header" data-bind="lookupValue: typeKey, lookups: $root.tabs()['tab-relationships']().lookups.articleCompanyRelationshipTypes"></div>
+					<!-- ko foreach: $parent[typeKey] -->
+						<!-- ko with: { company: Child, lookups: $root.tabs()['tab-relationships']().lookups } -->
+							<!-- ko with: company -->
+							 @await Html.PartialAsync("../CompanyList/MaterialItemTemplate") 
+							<!-- /ko -->
+						<!-- /ko -->
+					<!-- /ko -->
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- ko with: genericArticleCompanyRelationships -->
+				 @await Html.PartialAsync("MaterialPaging") 
+			<!-- /ko -->
+		</div>
+	<!-- /ko -->
+		@Html.PluginRenderActions("ArticleDetailsRelationshipTypeExtension")
+	<!-- /ko -->
+	<floating-action-button>
+		<li data-bind="with: $root">
+			<a id="add-article-relationship" href="#" data-mfb-label="@(Html.Localize("AddArticleRelationship"))" 
+			   data-route="Crm.Article/ArticleRelationship/EditTemplate/?articleType={{$root.article().ArticleTypeKey()}}" data-toggle="modal" data-target="#modal">
+				<i class="zmdi zmdi-shopping-cart"></i>
+			</a>
+		</li>
+		<li data-bind="with: $root">
+        	<a id="add-article-company-relationship" href="#" data-mfb-label="@(Html.Localize("AddCompanyRelationship"))" data-route="Crm.Article/ArticleCompanyRelationship/EditTemplate/" data-toggle="modal" data-target="#modal">
+        		<i class="zmdi zmdi-accounts-alt"></i>
+        	</a>
+        </li>
+		@Html.PluginRenderActions("ArticleDetailsRelationshipTypeActionExtension")
+	</floating-action-button>
+
+</div>

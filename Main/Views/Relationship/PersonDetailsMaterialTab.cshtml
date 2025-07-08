@@ -1,0 +1,15 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModel>
+@using Crm.ViewModels
+@using Crm.Library.Modularization.Extensions
+
+<div role="tabpanel" class="tab-pane" id="tab-relationships" data-bind="with: tabs()['tab-relationships']">
+	<!-- ko if: isEmptyStateVisible -->
+	<empty-state-box params="mood: 'sad', title: 'RelationshipsEmptyStateTitle', text: 'NoRelationshipInfo'"></empty-state-box>
+	<!-- /ko -->
+	<!-- ko ifnot: isEmptyStateVisible -->
+		@Html.PluginRenderActions("PersonDetailsRelationshipTypeExtension")
+	<!-- /ko -->
+	<floating-action-button>
+		@Html.PluginRenderActions("PersonDetailsRelationshipTypeActionExtension")
+	</floating-action-button>
+</div>

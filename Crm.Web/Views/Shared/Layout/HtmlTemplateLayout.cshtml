@@ -1,0 +1,25 @@
+@using Crm.Extensions
+@using Crm.Library.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.Library.ViewModels
+@{ Layout = "~/Views/Shared/Layout/ApplicationLayout.cshtml"; }
+
+@section HeaderContent {
+
+	@(Html.JsResource("jayDataJs"))
+	@Html.PluginRenderActions("TemplateHeadResource")
+
+	<script>
+		@(Model is HtmlTemplateViewModel ? string.Empty : Html.ToJsViewModel((object)Model))
+	</script>
+
+}
+
+@section MainContent {
+
+	@RenderSection("TemplateMainContent", false)
+	<script>
+		@(Model is HtmlTemplateViewModel ? Html.ToJsViewModel((object)Model) : string.Empty)
+	</script>
+
+}

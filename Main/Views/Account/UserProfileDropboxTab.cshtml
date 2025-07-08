@@ -1,0 +1,43 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-dropbox" data-bind="with: tabs()['tab-dropbox']">
+	<!-- ko requiredPermission: { name: 'UserResetDropboxToken', group: 'UserAdmin' } -->
+	<ul class="top-menu">
+		<li>
+			<a href="#" data-bind="click: resetDropboxToken">
+				@(Html.Localize("Reset"))
+			</a>
+		</li>
+	</ul>
+	<!-- /ko -->
+	<div class="card-body card-padding">
+		<!-- ko ifnot: userDropboxEmail -->
+		<p>
+			@(Html.Localize("DropboxAddressNotAvailable"))
+		</p>
+		<!-- /ko -->
+		<!-- ko if: userDropboxEmail -->
+		@(Html.Localize("DropboxPersonalAddress")):
+		<strong data-bind="text: userDropboxEmail"></strong>
+		<!-- ko requiredPermission: { name: 'ExportDropboxAddressAsVCard', group: 'UserAccount' } -->
+		<p>
+			<strong>@(Html.Localize("Hint"))</strong>
+		</p>
+		<p>
+			@(Html.Localize("DropboxDownloadHint"))
+			<br/>
+			<a href="{{userDropboxVCardLink}}" download="Dropbox.vcf">
+				@(Html.Localize("DropboxDownloadLink"))
+			</a>
+		</p>
+		<!-- /ko -->
+		<!-- /ko -->
+		<p>
+			<strong>@(Html.Localize("DropboxHowDoesItWorkHeader"))</strong>
+		</p>
+		<p>
+			@Html.Raw(Html.Localize("DropboxHowDoesItWorkDescription"))
+		</p>
+	</div>
+</div>

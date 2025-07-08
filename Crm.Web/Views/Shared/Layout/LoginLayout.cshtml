@@ -1,0 +1,30 @@
+﻿@using System.Globalization
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+@using Crm.ViewModels
+@using StackExchange.Profiling
+
+@{
+	bool verticallyCenteredContent = Model is LoginViewModel || new[] { "/Views/Account/ResetPassword.cshtml", "/Views/Account/Register.cshtml" }.Contains(this.ViewContext.View.Path);
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="@CultureInfo.CurrentUICulture.Name" translate="no">
+<head id="head">
+	@Html.PluginRenderActions("LoginHeadResource")
+	@RenderSection("TitleContent", false)
+</head>
+<body class="login-content @("login".If(Model is LoginViewModel)) @("v-center".If(verticallyCenteredContent))">
+@using (MiniProfiler.Current.Step("Rendering Header content"))
+{
+	@RenderSection("HeaderContent", false)
+}
+@using (MiniProfiler.Current.Step("Rendering Main content"))
+{
+	@RenderSection("MainContent", false)
+}
+<div id="loading-message" class="hide">@Html.Localize("loading")</div>
+@Html.PluginRenderActions("LoginBodyResource")
+</body>
+</html>

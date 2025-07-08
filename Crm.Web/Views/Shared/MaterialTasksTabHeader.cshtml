@@ -1,0 +1,10 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: isEditable() -->
+<li role="presentation">
+	<a class="col-xs-4" href="#tab-tasks" aria-controls="tab-tasks" role="tab" data-toggle="tab" aria-expanded="false">
+		@(Html.Localize("Tasks"))
+	</a>
+</li>
+<!-- /ko -->

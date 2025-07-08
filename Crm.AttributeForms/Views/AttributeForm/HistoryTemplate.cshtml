@@ -1,0 +1,38 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title">
+		@(Html.Localize("History")) 
+		@(Html.Localize("of")) 
+		<span data-bind="visible: propertyName, text: propertyName"></span>
+	</h4>
+</div>
+<div class="modal-body p-b-30">
+	<div class="p-t-30">
+		<span data-bind="translatedText: 'NoAttributeFormElementResponses', if: $root.items().length === 0"></span>
+	</div>
+	<!-- ko foreach: items -->
+	<div class="row history" data-bind="infiniteScrollItem: { index: $index(), array: $parent.items }">
+		<div data-bind="css: 'col-xs-8'">
+			<div data-bind="template: { name: 'attributeform-response-template-' + $data.FormElementType(), data: $data }"></div>
+		</div>
+		<div class="col-xs-4">
+			<span data-bind="dateText: ResponseObject().ModifyDate"></span> <span data-bind="dateText: { value: ResponseObject().ModifyDate, pattern: { time: 'short' } }"></span>
+			<p data-bind="userDisplayName: { UserName: ResponseObject().ModifyUser, Users: $root.users }, css: 'm-b-0'"></p>
+			<!-- ko if: !$index() -->
+				<i>(<span data-bind="translatedText: 'Current'"></span>)</i>
+			<!-- /ko -->
+		</div>
+	</div>
+	<hr/>
+	<!-- /ko -->
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-dismiss="modal">
+		@(Html.Localize("Close"))
+	</button>
+</div>

@@ -1,0 +1,12 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModelList<string>>
+@using Crm.Library.Modularization.Extensions
+@using Crm.Offline.Extensions
+
+@{
+	foreach (var elementType in Model.List)
+		using (Html.TemplateCondition(string.Format("FormElementType() == '{0}'", elementType))) {
+			@await Html.PartialAsync(string.Format("EditorTemplates/{0}", elementType))
+			Html.PluginRenderActions(string.Format("{0}EditorTemplate", elementType));
+		}
+	Html.PluginRenderActions("EditorTemplates");
+}

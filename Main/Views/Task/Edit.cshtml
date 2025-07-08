@@ -1,0 +1,59 @@
+@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<div class="modal-header card-header ch-alt" data-bind="with: task">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState === 20">@(Html.Localize("AddTask"))</h4>
+	<h4 class="modal-title" data-bind="visible: innerInstance.entityState !== 20">@(Html.Localize("EditTask"))</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<form role="form" action="#" data-bind="with: task">
+		<form-element params="value: Text, caption: 'Text', type: 'textarea'"></form-element>
+		<form-element id="TypeKey" params="value: TypeKey, caption: 'TaskType', type: 'select2'">
+			<select class="form-control" data-bind="select2autocompleter: { data: value, default: Helper.Lookup.getLookupValue($root.lookups.taskTypes, TypeKey), autocompleteOptions: Helper.Lookup.getAutocompleteOptions('Main_TaskType'), placeholder: placeholder }">
+			</select>
+		</form-element>
+		<div class="form-group has-feedback" data-bind="validationElement: DueDate">
+			<label class="control-label">@(Html.Localize("DueDate"))</label>
+			<div class="dtp-container fg-line">
+				<input type="text" class="form-control date-picker" data-bind="datePicker: DueDate" placeholder="@(Html.Localize("ClickHere"))">
+			</div>
+			<span class="zmdi zmdi-calendar form-control-feedback"></span>
+			<small class="help-block" data-bind="validationMessage: DueDate"></small>
+		</div>
+		<div class="form-group has-feedback" data-bind="validationElement: DueTime">
+			<label class="control-label">@(Html.Localize("DueTime"))</label>
+			<div class="dtp-container fg-line">
+				<input type="text" class="form-control date-picker" data-bind="datePicker: DueTime, datePickerOptions: { pickTime: true }" placeholder="@(Html.Localize("ClickHere"))">
+			</div>
+			<span class="zmdi zmdi-calendar form-control-feedback"></span>
+			<small class="help-block" data-bind="validationMessage: DueTime"></small>
+		</div>
+		<div class="form-group" data-bind="validationElement: ResponsibleUserGroupKey">
+			<div id="select2-responsible-user-group" class="select2">
+				<label class="control-label fg-label">@(Html.Localize("UserGroup"))</label>
+				<select class="form-control" data-bind="select2autocompleter: { data: ResponsibleUserGroupKey, autocompleteOptions: { orderBy: ['Name'], table: 'Main_Usergroup', mapDisplayObject: $root.mapUserGroupForSelect2Display.bind($root), getElementByIdQuery: Helper.User.filterUsergroupQueryById } }">
+				</select>
+			</div>
+			<small class="help-block" data-bind="validationMessage: ResponsibleUserGroupKey"></small>
+		</div>
+		<div id="select2-responsible-user" class="form-group" data-bind="validationElement: ResponsibleUser">
+			<div class="select2">
+				<label class="control-label fg-label">@(Html.Localize("ResponsibleUser"))</label>
+				<select class="form-control" data-bind="select2autocompleter: { data: ResponsibleUser, autocompleteOptions: { orderBy: ['LastName'], table: 'Main_User', mapDisplayObject: $root.mapForSelect2Display.bind($root), customFilter: function (query, term) { return Helper.User.filterUserQuery(query, term, $data.ResponsibleUserGroupKey()); } } }">
+				</select>
+			</div>
+			<small class="help-block" data-bind="validationMessage: ResponsibleUser"></small>
+		</div>
+	</form>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+		@(Html.Localize("Cancel"))
+	</button>
+	<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, disable: loading">
+		@(Html.Localize("Save"))
+	</button>
+</div>

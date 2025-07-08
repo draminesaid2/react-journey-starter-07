@@ -1,0 +1,15 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Offline.Extensions
+@using (Html.TemplateVisible("Tags().length > 0")) { 
+		<div class="contact-tags">
+			<span class="tag-image ptpx2">
+				@using (Html.TemplateCondition("Tags().length == 1")) { 
+					<i class="fa fa-tag"></i>
+				 } 
+				@using (Html.TemplateCondition("Tags().length > 1")) { 
+					<i class="fa fa-tags"></i>
+				 } 
+			</span>
+			<span class="tags" data-bind="text: window.ko.wrap.toJS(Tags).join(', ') "></span>
+		</div>
+	 } 

@@ -1,0 +1,72 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: files().length > 0 -->
+<ul class="lv-attrs" name="files">
+	<!-- ko foreach: files() -->
+	<li class="text-center" data-bind="visible: $index() < 2 || $parent.showFiles()">
+		<small>
+			<!-- ko if: Content() !== null || window.AuthorizationManager.isAuthorizedForAction("File", "GetContent") -->
+			<a class="m-r-5" data-bind="attr: { download: Filename }, fileResource: $data" target="_blank">
+				<i class="zmdi zmdi-download"></i>
+			</a>
+			<!-- ko if: !window.Helper.Offline || window.Helper.Offline.status === 'online' -->
+			<a data-bind="attr: { href: '@Url.Action("OpenFile", "File", new { plugin = "Main" })/'+ Id() }" target="_blank">
+				<span data-bind="text: Filename().trim()"></span>
+			</a>
+			<!-- /ko -->
+			<!-- ko ifnot: !window.Helper.Offline || window.Helper.Offline.status === 'online' -->
+			<a class="m-r-5" data-bind="fileResource: $data" target="_blank">
+				<span data-bind="text: Filename"></span>
+			</a>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: Content() === null && !window.AuthorizationManager.isAuthorizedForAction("File", "GetContent") -->
+			<span data-bind="text: Filename"></span>
+			<!-- /ko -->
+			(<span class="c-gray" data-bind="fileSize: Length"></span>)
+			<!-- ko if: $root.isEditable && $root.isEditable() -->
+			<a href="#" class="m-l-5" data-bind="click: () => $parentContext.$parentContext.$parent.deleteFileResource($data)">
+				<strong>×</strong>
+			</a>
+			<!-- /ko -->
+		</small>
+	</li>
+	<!-- /ko -->
+	<!-- ko if: files().length > 2 && !$data.showFiles() -->
+	<li>
+		<a href="#" data-bind="click: $data.toggleFiles">
+			<span data-bind="text: files().length - 2"></span>
+			<span> @(Html.Localize("more"))..</span>
+		</a>
+	</li>
+	<!-- /ko -->
+</ul>
+<!-- /ko -->
+<!-- ko if: links().length > 0 -->
+<ul class="lv-attrs" name="links">
+	<!-- ko foreach: links() -->
+	<li data-bind="visible: $index() < 2 || $parent.showLinks()">
+		<span>
+			<a data-bind="attr: { href: window.Helper.Url.prependHttp(Url()) }" target="_blank" onclick="window.open(this.href, '_system', 'location=no,top=20,closebuttoncaption=' + window.Helper.String.getTranslatedString('Close'));return false;">
+				<i class="zmdi zmdi-link"></i>
+				<span data-bind="text: Description() || Url()"></span>
+			</a>
+			<!-- ko if: $root.isEditable && $root.isEditable() -->
+			<a href="#" class="m-l-5" data-bind="click: () => $parentContext.$parentContext.$parent.deleteLinkResource($data)">
+				<strong>×</strong>
+			</a>
+			<!-- /ko -->
+		</span>
+	</li>
+	<!-- /ko -->
+	<!-- ko if: links().length > 2 && !$data.showLinks() -->
+	<li>
+		<a href="#" data-bind="click: $data.toggleLinks">
+			<span data-bind="text: links().length - 2"></span>
+			<span> @(Html.Localize("more"))..</span>
+		</a>
+	</li>
+	<!-- /ko -->
+</ul>
+<!-- /ko -->

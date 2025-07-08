@@ -1,0 +1,33 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<dynamic>
+@using Crm.Library.Globalization.Extensions
+
+
+<div class="pmb-block productfamilychildren">
+	<div class="pmbb-header">
+		<h2>
+			<i class="zmdi zmdi-layers"></i>
+			<span>@(Html.Localize("ChildProductFamilies"))</span>
+		</h2>		
+		<ul class="actions">
+			<li class="dropdown">
+				<!-- ko requiredPermission: { name: 'Create', group: 'ProductFamily' } -->
+				<a class="add-productfamilychild" href="#" data-bind="attr: { 'href': '#/Crm.Article/ProductFamily/CreateTemplate?parentId='+ ko.unwrap(productfamily().Id) + '&parentName='+ ko.unwrap(productfamily().Name) }, tooltip: true" title="@(Html.Localize("Add"))">
+					<i class="zmdi zmdi-plus-circle"></i>
+				</a>
+				<!-- /ko -->
+			</li>
+		</ul>
+	</div>
+	<div class="pmbb-body p-l-30">
+		<!-- ko with: productfamily -->
+		<!-- ko foreach: ChildProductFamilies() -->
+		<div>
+			<a href="#" data-bind="attr: { href: '#/Crm.Article/ProductFamily/DetailsTemplate/' + Id() }">
+				<span data-bind="text: Name()"></span>
+			</a>
+		</div>
+		<!-- /ko -->
+		<span data-bind="translatedText: 'NoProductFamilies', ifnot:  ChildProductFamilies().length > 0"></span>
+		<!-- /ko -->
+	</div>
+</div>

@@ -1,0 +1,7 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.BaseModel
+
+<div class="alert alert-warning" role="alert" data-bind="visible: Visibility() !== @((int)Visibility.Everybody)">
+	<h4 data-bind="translatedText: 'ProtectedArea'"></h4>
+	<p data-bind="text: $parent.visibilityAlertText"></p>
+</div>

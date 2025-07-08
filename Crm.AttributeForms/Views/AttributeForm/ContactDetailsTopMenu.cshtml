@@ -1,0 +1,9 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<li data-bind="requiredPermission: { name: 'Create', group: 'AttributeForm' }">
+	<a href="#" data-bind="attr: { 'data-route': 'Crm.AttributeForms/AttributeForm/CreateTemplate/?contactId=' + $root.contactId() + '&contactType=' + $root.contactType() }" data-toggle="modal" data-target="#modal" >
+		<i class="zmdi zmdi-collection-plus"></i>
+		@(Html.Localize("AddAttributeForm"))
+	</a>
+</li>

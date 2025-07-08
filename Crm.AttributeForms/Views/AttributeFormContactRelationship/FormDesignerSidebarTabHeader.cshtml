@@ -1,0 +1,9 @@
+﻿<li role="presentation" data-bind="visible: $root.form().CategoryKey() === 'AttributeForm'">
+	<a class="col-xs-4 p-b-0" href="#tab-attribute-form-contact-relationships" aria-controls="tab-attribute-form-contact-relationships" role="tab" data-toggle="tab" aria-expanded="false">
+		<i class="zmdi zmdi-share zmdi-hc-2x"></i>
+		<div class="h6">
+			<span data-bind="translatedText: 'Relationship'"></span>
+			<i class="zmdi zmdi-circle" data-bind="class: !!$root.form().ExtensionValues().ContactType() ? 'c-green' : 'c-red'"></i>
+		</div>
+	</a>
+</li>

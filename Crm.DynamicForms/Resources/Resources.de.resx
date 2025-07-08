@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddFields" xml:space="preserve">
+    <value>Felder hinzufügen</value>
+  </data>
+  <data name="AllDynamicForms" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="CheckBoxList" xml:space="preserve">
+    <value>Checkbox-Liste</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="ColumnLength" xml:space="preserve">
+    <value>Spaltenlänge</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="ConfirmDeleteDynamicForm" xml:space="preserve">
+    <value>Wollen Sie dieses Formular wirklich löschen?</value>
+  </data>
+  <data name="ConfirmDeleteDynamicFormElement" xml:space="preserve">
+    <value>Dieses Formular wurde bereits ausgefüllt. Beim Löschen dieses Elements werden alle Daten, welche mit diesem Feld verknüpft sind, entfernt. Fortfahren?</value>
+  </data>
+  <data name="CreateDynamicFormTitle" xml:space="preserve">
+    <value>Neues Formular erstellen</value>
+  </data>
+  <data name="CssExtra" xml:space="preserve">
+    <value>Extra CSS-Klassen</value>
+  </data>
+  <data name="DeleteSignatur" xml:space="preserve">
+    <value>Unterschrift löschen</value>
+  </data>
+  <data name="DropDown" xml:space="preserve">
+    <value>Dropdown-Liste</value>
+  </data>
+  <data name="DynamicFormDesignerEmptySlate" xml:space="preserve">
+    <value>Ziehen Sie ein neues Feld auf das Formular, um zu beginnen.</value>
+  </data>
+  <data name="DynamicFormEditFieldEmptySlate" xml:space="preserve">
+    <value>Wählen Sie links ein Feld, um es zu bearbeiten.</value>
+  </data>
+  <data name="DynamicFormElement" xml:space="preserve">
+    <value>Formularelement</value>
+  </data>
+  <data name="DynamicFormElementLiteralTitlePlaceholder" xml:space="preserve">
+    <value>Geben Sie hier einen Freitext ein.</value>
+  </data>
+  <data name="DynamicFormElementOptionPlaceholder" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="DynamicFormElementPageSeparatorTitlePlaceholder" xml:space="preserve">
+    <value>Neue Seite</value>
+  </data>
+  <data name="DynamicFormElementTitlePlaceholder" xml:space="preserve">
+    <value>Neues Element</value>
+  </data>
+  <data name="DynamicFormListEmptySlate" xml:space="preserve">
+    <value>Es gibt noch keine dynamischen Formulare. Jetzt ein neues erstellen.</value>
+  </data>
+  <data name="DynamicForms" xml:space="preserve">
+    <value>Dynamische Formulare</value>
+  </data>
+  <data name="EditField" xml:space="preserve">
+    <value>Feld bearbeiten</value>
+  </data>
+  <data name="EditForm" xml:space="preserve">
+    <value>Formular bearbeiten</value>
+  </data>
+  <data name="ElementRowLength" xml:space="preserve">
+    <value>Element Zeilenlänge</value>
+  </data>
+  <data name="FieldLabel" xml:space="preserve">
+    <value>Feldbezeichnung</value>
+  </data>
+  <data name="FormDesigner" xml:space="preserve">
+    <value>Formular erstellen</value>
+  </data>
+  <data name="FormPreview" xml:space="preserve">
+    <value>Formular-Vorschau</value>
+  </data>
+  <data name="IndexDynamicFormTitle" xml:space="preserve">
+    <value>Dynamische Formulare - Suche</value>
+  </data>
+  <data name="Large" xml:space="preserve">
+    <value>Groß</value>
+  </data>
+  <data name="Large1ElementRow" xml:space="preserve">
+    <value>Groß (1 Element/Zeile)</value>
+  </data>
+  <data name="Literal" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Wird geladen</value>
+  </data>
+  <data name="Long" xml:space="preserve">
+    <value>Lang</value>
+  </data>
+  <data name="MaxChoices" xml:space="preserve">
+    <value>Auswahl max.</value>
+  </data>
+  <data name="RuleViolation.MaxArrayLength" xml:space="preserve">
+    <value>Bitte wählen Sie nicht mehr als {0} Möglichkeiten aus</value>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>Länge max.</value>
+  </data>
+  <data name="MaxValue" xml:space="preserve">
+    <value>Wert max.</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Mittel</value>
+  </data>
+  <data name="Medium2ElementRow" xml:space="preserve">
+    <value>Mittel (2 Element/Zeile)</value>
+  </data>
+  <data name="Middle" xml:space="preserve">
+    <value>Mittel</value>
+  </data>
+  <data name="MinChoices" xml:space="preserve">
+    <value>Auswahl min.</value>
+  </data>
+  <data name="MinLength" xml:space="preserve">
+    <value>Länge min.</value>
+  </data>
+  <data name="MinValue" xml:space="preserve">
+    <value>Wert min.</value>
+  </data>
+  <data name="MultiLineText" xml:space="preserve">
+    <value>Mehrzeiliger Text</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="OneColumn" xml:space="preserve">
+    <value>Eine Spalte</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="PageSeparator" xml:space="preserve">
+    <value>Seitentrenner</value>
+  </data>
+  <data name="SectionSeparator" xml:space="preserve">
+    <value>Sektion</value>
+  </data>
+  <data name="RadioButtonList" xml:space="preserve">
+    <value>Options-Liste</value>
+  </data>
+  <data name="Randomized" xml:space="preserve">
+    <value>Randomisiert</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Benötigt</value>
+  </data>
+  <data name="RowSize" xml:space="preserve">
+    <value>Element Größe</value>
+  </data>
+  <data name="SaveForm" xml:space="preserve">
+    <value>Formular speichern</value>
+  </data>
+  <data name="SelectDropDownValue" xml:space="preserve">
+    <value>--- Wählen sie eine Option ---</value>
+  </data>
+  <data name="Short" xml:space="preserve">
+    <value>Kurz</value>
+  </data>
+  <data name="SideBySide" xml:space="preserve">
+    <value>Nebeneinander</value>
+  </data>
+  <data name="SignaturePad" xml:space="preserve">
+    <value>Unterschrift</value>
+  </data>
+  <data name="SingleLineText" xml:space="preserve">
+    <value>Einzeiliger Text</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Klein</value>
+  </data>
+  <data name="Small4ElementRow" xml:space="preserve">
+    <value>Klein (4 Element/Zeile)</value>
+  </data>
+  <data name="ThreeColumn" xml:space="preserve">
+    <value>Drei Spalten</value>
+  </data>
+  <data name="TwoColumn" xml:space="preserve">
+    <value>Zwei Spalten</value>
+  </data>
+  <data name="UnsavedChangesWillNotBeShown" xml:space="preserve">
+    <value>Nicht gespeicherte Änderungen werden nicht in der Vorschau angezeigt!</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicForm" xml:space="preserve">
+    <value>Formulare</value>
+  </data>
+  <data name="FileAttachmentDynamicFormElement" xml:space="preserve">
+    <value>Datei-Upload</value>
+  </data>
+  <data name="MinUploadCountNotReached" xml:space="preserve">
+    <value>Die Mindestanzahl an Anhängen ist noch nicht erreicht.</value>
+  </data>
+  <data name="MaxUploadFileSize" xml:space="preserve">
+    <value>Maximale Dateigröße</value>
+  </data>
+  <data name="MaxUploadCountExceeded" xml:space="preserve">
+    <value>Höchstzahl der Anhänge überschritten, folgende Dateien wurden ignoriert: </value>
+  </data>
+  <data name="MaxFileSizeExceeded" xml:space="preserve">
+    <value>Maximale Dateigröße überschritten, folgende Dateien wurden ignoriert: </value>
+  </data>
+  <data name="FileCount" xml:space="preserve">
+    <value>Anzahl der Anhänge</value>
+  </data>
+  <data name="ImageDimensionsInfo" xml:space="preserve">
+    <value>Bilder werden nicht auf maximale Dateigröße geprüft, sondern automatisch auf die gewünschte maximale Auflösung verkleinert.</value>
+  </data>
+  <data name="MaxFileSize" xml:space="preserve">
+    <value>Maximale Dateigröße</value>
+  </data>
+  <data name="MaxImageHeight" xml:space="preserve">
+    <value>Maximale Bildhöhe</value>
+  </data>
+  <data name="MaxImageWidth" xml:space="preserve">
+    <value>Maximale Bildbreite</value>
+  </data>
+  <data name="MaxUploadCount" xml:space="preserve">
+    <value>Höchstzahl der Anhänge</value>
+  </data>
+  <data name="MinUploadCount" xml:space="preserve">
+    <value>Mindestanzahl der Anhänge</value>
+  </data>
+  <data name="AttachedImage" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="DynamicForm" xml:space="preserve">
+    <value>Dynamisches Formular</value>
+  </data>
+  <data name="CompleteDynamicForm" xml:space="preserve">
+    <value>{0} abschließen</value>
+  </data>
+  <data name="DynamicFormLanguageAlreadyExists" xml:space="preserve">
+    <value>Sprache bereits vorhanden</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormCategory" xml:space="preserve">
+    <value>Kategorien für dynamische Formulare</value>
+  </data>
+  <data name="DynamicFormAlreadyReleasedWarning" xml:space="preserve">
+    <value>Dieses Formular wurde bereits freigegeben, bitte ändern Sie dieses nur mit besonderer Vorsicht.</value>
+  </data>
+  <data name="Released" xml:space="preserve">
+    <value>Freigegeben</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormLanguage" xml:space="preserve">
+    <value>Versionen von dynamischen Formularen</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormLocalization" xml:space="preserve">
+    <value>Übersetzungen von dynamischen Formularen</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormStatus" xml:space="preserve">
+    <value>Status von dynamischen Formularen</value>
+  </data>
+  <data name="DisableDynamicFormQuestion" xml:space="preserve">
+    <value>Dieses Formular wurde schon benutzt und kann daher nur deaktiviert werden, anstatt es vollständig zu löschen. Möchten Sie es deaktivieren?</value>
+  </data>
+  <data name="ShowPrivacyPolicy" xml:space="preserve">
+    <value>Zustimmung zur Datenschutzerklärung ist erforderlich</value>
+  </data>
+  <data name="SignaturePadWithPrivacyPolicy" xml:space="preserve">
+    <value>Unterschrift (GDPR)</value>
+  </data>
+  <data name="ExtraCss" xml:space="preserve">
+    <value>Extra CSS Klassen</value>
+  </data>
+  <data name="FormElementRules" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormElementRule" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormElementRuleCondition" xml:space="preserve">
+    <value>Regelbedingungen</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormResponse" xml:space="preserve">
+    <value>Antworten von dynamischen Formularen</value>
+  </data>
+  <data name="NoFormElementRule" xml:space="preserve">
+    <value>Für dieses Element wurden keine Regeln definiert</value>
+  </data>
+  <data name="CreateFormElementRule" xml:space="preserve">
+    <value>Regel erstellen</value>
+  </data>
+  <data name="CreateAnotherFormElementRule" xml:space="preserve">
+    <value>Weitere Regel erstellen</value>
+  </data>
+  <data name="DynamicFormElementRuleTypeShow" xml:space="preserve">
+    <value>Anzeigen wenn</value>
+  </data>
+  <data name="DynamicFormElementRuleTypeHide" xml:space="preserve">
+    <value>Ausblenden wenn</value>
+  </data>
+  <data name="DynamicFormElementRuleMatchTypeAny" xml:space="preserve">
+    <value>eine der Bedingungen erfüllt ist:</value>
+  </data>
+  <data name="DynamicFormElementRuleMatchTypeAll" xml:space="preserve">
+    <value>alle der Bedingungen erfüllt sind:</value>
+  </data>
+  <data name="DynamicFormElementConditionAfter" xml:space="preserve">
+    <value>ist später als</value>
+  </data>
+  <data name="DynamicFormElementConditionBefore" xml:space="preserve">
+    <value>ist früher als</value>
+  </data>
+  <data name="DynamicFormElementConditionBeginsWith" xml:space="preserve">
+    <value>beginnt mit</value>
+  </data>
+  <data name="DynamicFormElementConditionContains" xml:space="preserve">
+    <value>enthält</value>
+  </data>
+  <data name="DynamicFormElementConditionDoesNotContain" xml:space="preserve">
+    <value>enthält nicht</value>
+  </data>
+  <data name="DynamicFormElementConditionEmpty" xml:space="preserve">
+    <value>ist leer</value>
+  </data>
+  <data name="DynamicFormElementConditionEndsWith" xml:space="preserve">
+    <value>endet mit</value>
+  </data>
+  <data name="DynamicFormElementConditionEquals" xml:space="preserve">
+    <value>entspricht</value>
+  </data>
+  <data name="DynamicFormElementConditionFilesEqualTo" xml:space="preserve">
+    <value>Anzahl Dateien entspricht</value>
+  </data>
+  <data name="DynamicFormElementConditionFilesLessThan" xml:space="preserve">
+    <value>weniger Dateien als</value>
+  </data>
+  <data name="DynamicFormElementConditionFilesMoreThan" xml:space="preserve">
+    <value>mehr Dateien als</value>
+  </data>
+  <data name="DynamicFormElementConditionGreater" xml:space="preserve">
+    <value>ist mehr als</value>
+  </data>
+  <data name="DynamicFormElementConditionLess" xml:space="preserve">
+    <value>ist weniger als</value>
+  </data>
+  <data name="DynamicFormElementConditionNotEmpty" xml:space="preserve">
+    <value>ist nicht leer</value>
+  </data>
+  <data name="DynamicFormElementConditionNotEquals" xml:space="preserve">
+    <value>entspricht nicht</value>
+  </data>
+  <data name="DynamicFormElementConditionNotSigned" xml:space="preserve">
+    <value>ist nicht unterschrieben</value>
+  </data>
+  <data name="DynamicFormElementConditionSigned" xml:space="preserve">
+    <value>ist unterschrieben</value>
+  </data>
+  <data name="HideEmptyOptional" xml:space="preserve">
+    <value>Leere, nicht benötigte Antworten ausblenden</value>
+  </data>
+  <data name="DynamicFormCategory" xml:space="preserve">
+    <value>Kategorien für dynamische Formulare</value>
+  </data>
+  <data name="IncompatibleDynamicFormFormat" xml:space="preserve">
+    <value>Dateiformat nicht unterstützt</value>
+  </data>
+  <data name="DynamicFormTitle" xml:space="preserve">
+    <value>Dynamische Formulare Titel</value>
+  </data>
+  <data name="Warning_LanguageRequiresPdf" xml:space="preserve">
+    <value>Bitte Laden Sie eine PDF hoch, um diese Checkliste zu speichern zu können.</value>
+  </data>
+  <data name="Form validations" xml:space="preserve">
+    <value>Formularvalidierungen</value>
+  </data>
+  <data name="PdfUploadRequired" xml:space="preserve">
+    <value>Bitte Laden Sie eine Pdf-Datei hoch.</value>
+  </data>
+  <data name="AttachedPdf" xml:space="preserve">
+    <value>Angehängte Pdf</value>
+  </data>
+ <data name="RuleViolation.MinArrayLength" xml:space="preserve">
+    <value>Bitte wählen Sie mindestens {0} Möglichkeiten aus</value>
+  </data>
+  <data name="RuleViolation.OneRequired" xml:space="preserve">
+    <value>Eines dieser Felder ist erforderlich</value>
+  </data>
+  <data name="Warning_PdfRequiredBeforeReleasing" xml:space="preserve">
+    <value>Bevor Sie eine Checkliste freigeben können, muss für jede Sprache eine Pdf-Datei hinterlegt sein.</value>
+  </data>
+  <data name="Warning_Download" xml:space="preserve">
+    <value>Bitte Laden Sie eine PDF hoch, bevor Sie diese PDF herunterladen können.</value>
+  </data>
+  <data name="CrmDynamicForms_DynamicFormFileResponse" xml:space="preserve">
+    <value>Antwort von dynamischen Formularen (PDF)</value>
+  </data>
+  <data name="ChoiceIndex" xml:space="preserve">
+    <value>Auswahlindex</value>
+  </data>
+  <data name="DynamicFormReducedFunctionalityWarning" xml:space="preserve">
+    <value>Das Hinzufügen und Verschieben von Feldern ist auf mobilen Endgeräten nicht möglich.</value>
+  </data>
+  <data name="DynamicFormDragDropToast" xml:spac="preserve">
+    <value>Ziehen Sie das Element auf das Formular um es hinzuzufügen</value>
+  </data>
+  <data name="DynamicFormAboutToBeReleasedWarning" xml:space="preserve">
+    <value>Wenn das dynamische Formular freigegeben wird, müssen Änderungen mit besonderer Vorsicht durchgeführt werden.</value>
+  </data>
+</root>

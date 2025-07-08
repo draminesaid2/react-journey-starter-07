@@ -1,0 +1,44 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModelItem<Type>>
+@using Crm.Library.Globalization.Extensions
+@using Crm.ViewModels
+
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<div class="row">
+		<h4 class="modal-title col-md-8 col-xs-11">
+			@(Html.Localize("Preview"))
+		</h4>
+		<div class="col-md-3 col-xs-11">
+			<div class="fg-line select">
+				<select class="form-control" data-bind="options: DynamicForm().Languages, value: selectedLanguage, optionsValue: 'LanguageKey', optionsText: function (x) { return Helper.Lookup.getLookupValue($root.languages(), x.LanguageKey); }, visible: DynamicForm().Languages().length > 1, event: {change: changeLanguage}"></select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-body card-body card-padding">
+	<p data-bind="visible: isPreview, text: previewText"></p>
+
+	<canvas id="myCanvas" style="width: 100%"></canvas>
+	<ul class="pagination lv-pagination" data-bind="visible: pageCount() >1">
+		<li>
+			<a href="#" aria-label="Previous" data-bind=" visible: hasPrevPage(),click: onPrevPage, tooltip: true" title="@(Html.Localize("PreviousPager"))">
+				<i class="zmdi zmdi-chevron-left"></i>
+			</a>
+		</li>
+		<li class="active"><a href="#" data-bind="text: currentPage"></a></li>
+		<li>
+			<a href="#" aria-label="Next" data-bind="visible: hasNextPage(), click: onNextPage, tooltip: true" title="@(Html.Localize("NextPager"))">
+				<i class="zmdi zmdi-chevron-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<button class="btn btn-float bgm-blue m-btn" data-action="print" data-bind="click: downloadPdf">
+		<i class="zmdi zmdi-print"></i>
+	</button>
+
+</div>

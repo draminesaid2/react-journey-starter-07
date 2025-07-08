@@ -1,0 +1,34 @@
+﻿@using Crm.Library.Globalization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane animated fadeIn" id="tab-users" data-bind="with: tabs()['tab-users']">
+	<ul class="top-menu">
+		<li data-bind="visible: true, tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+			<a id="open-generic-list-filter" data-trigger="#right-nav" href="#" data-route="@("Main/UserList/FilterTemplate")">
+				<i class="tm-icon zmdi zmdi-search-in-page"></i>
+			</a>
+		</li>
+	</ul>
+	<empty-state-box params="mood: 'sad', title: 'AssignedUsers', text: 'NoAssignedUsers'" data-bind="visible: items().length === 0 && !isFiltered()">
+	</empty-state-box>
+	<div class="generic-list listview lv-bordered">
+		<div class="lv-body">
+			<div data-bind="foreach: items">
+				@await Html.PartialAsync("../UserList/MaterialItemTemplate")
+			</div>
+			<!-- ko if: items().length === 0 && isFiltered() -->
+			<div id="generic-list-empty-state" class="lv-item media">
+				<div class="row media-body">
+					<div class="col-xs-12">
+						<small class="lv-small">@(Html.Localize("NoRecordsForSearchCriteria"))</small>
+					</div>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
+	</div>
+	@await Html.PartialAsync("Material/GenericListPreloader")
+	<!-- ko requiredPermission: { name: 'Edit', group: 'Station' } -->
+	<floating-action-button data-route="Main/Station/Assign/{{station().Id}}" data-toggle="modal" data-target="#modal" params="title: 'Assign'"></floating-action-button>
+	<!-- /ko -->
+</div>

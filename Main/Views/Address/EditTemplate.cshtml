@@ -1,0 +1,27 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModel>
+@using Crm.Library.Globalization.Extensions
+@using Crm.ViewModels
+
+<div class="modal-header card-header ch-alt">
+	<button type="button" class="close" data-dismiss="modal" aria-label="@(Html.Localize("Close"))">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" data-bind="ifnot: addressId">@(Html.Localize("AddAddress"))</h4>
+	<h4 class="modal-title" data-bind="if: addressId">@(Html.Localize("EditAddress"))</h4>
+</div>
+<div class="modal-body card-body card-padding">
+	<div class="fg-line">
+		<label class="p-t-25 m-b-25 c-black b-0 f-500 f-14">
+			<span>@(Html.Localize("Addressinformation"))</span>
+		</label>
+	</div>
+	<address-editor params="companyId: companyId, contactId: contactId, addressId: addressId, onLoad: onLoadAddressEditor.bind($data), editMode: editMode, lookups: lookups, name: name"/>
+</div>
+<div class="modal-footer card-header ch-alt p-15">
+	<button type="button" class="btn btn-lg btn-default f-13 waves-effect" data-bind="click: Helper.Database.clearTrackedEntities" data-dismiss="modal">
+		@(Html.Localize("Cancel"))
+	</button>
+	<button type="button" class="btn btn-lg btn-primary f-13 waves-effect" data-bind="click: save, disable: loading">
+		@(Html.Localize("Save"))
+	</button>
+</div>

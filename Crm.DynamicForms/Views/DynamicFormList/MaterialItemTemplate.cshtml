@@ -1,0 +1,32 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div id="{{Id}}" class="lv-item media" data-bind="infiniteScrollItem: { index: $index(), array: $parent.items }">
+	<div class="lv-avatar pull-left" data-bind="text: $parent.getCategoryAbbreviation($data), style: { backgroundColor: $parent.getColor($data) }"></div>
+	<div class="media-body">
+		<div class="lv-title">
+			<!-- ko requiredPermission: { name: 'Edit', group: 'DynamicForms' } -->
+			<a href="#/Crm.DynamicForms/DynamicForm/EditTemplate/{{Id}}">
+				<span data-bind="text: Helper.DynamicForm.getTitle($data)"></span>
+			</a>
+			<!-- /ko -->
+			<!-- ko noRequiredPermission: { name: 'Edit', group: 'DynamicForms' } -->
+			<span data-bind="text: Helper.DynamicForm.getTitle($data)"></span>
+			<!-- /ko -->
+			<small class="c-gray" data-bind="lookupValue: CategoryKey, lookups: $parent.lookups.dynamicFormCategories"></small>
+		</div>
+		<small class="small">
+			<span data-bind="text: Helper.DynamicForm.getDescription($data)"></span>
+		</small>
+		<ul class="lv-attrs">
+			<!-- ko foreach: Languages -->
+			<li class="form-language">
+				<i class="zmdi zmdi-globe"></i>
+				<span data-bind="lookupValue: LanguageKey, lookups: $parentContext.$parent.lookups.languages"></span>: <span data-bind="lookupValue: StatusKey, lookups: $parentContext.$parent.lookups.dynamicFormStatuses"></span>
+			</li>
+			<!-- /ko -->
+			@Html.PluginRenderActions("MaterialDynamicFormExtensions")
+		</ul>
+		<lv-actions>@Html.PluginRenderActions("DynamicFormItemTemplateActions")</lv-actions>
+	</div>
+</div>

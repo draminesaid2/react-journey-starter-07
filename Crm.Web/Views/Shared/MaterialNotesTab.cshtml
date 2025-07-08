@@ -1,0 +1,10 @@
+﻿@using Crm.Library.Extensions
+@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div role="tabpanel" class="tab-pane" id="tab-notes" data-bind="with: tabs()['tab-notes']">
+	@Html.PluginRenderActions("ListIncompleteWarning")
+	<empty-state-box params="mood: 'sad', title: 'NotesEmptyStateTitle', text: 'NoNoteInfo'" data-bind="visible: items().length === 0 && !isFiltered()"></empty-state-box>
+	@Html.RenderAction("TabContent", "NoteList")
+</div>
+

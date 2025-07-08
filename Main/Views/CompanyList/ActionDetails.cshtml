@@ -1,0 +1,10 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+@using Crm.Library.Modularization.Extensions
+
+<li>
+	<a href="#/Main/Company/DetailsTemplate/{{Id}}">
+		@(Html.Localize("Details"))
+	</a>
+</li>
+@Html.PluginRenderActions("SecondaryCompanyItemTemplateActions")

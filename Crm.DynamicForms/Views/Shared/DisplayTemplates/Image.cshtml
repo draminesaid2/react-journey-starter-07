@@ -1,0 +1,13 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+
+<label class="control-label">
+	<span data-bind="text: $root.getLocalizationText($data)"></span>
+</label>
+<figure data-bind="if: FileResourceId">
+	<!-- ko if: $data.FileResource -->
+	<img class="img-responsive" data-bind="fileResource: $data.FileResource, attr: { alt: $root.getLocalizationText($data) }" style="max-width: 100%;" />
+	<!-- /ko -->
+	<!-- ko ifnot: $data.FileResource -->
+	<img class="img-responsive" data-bind="attr: { src: Helper.Url.resolveUrl('~/File/File/' + ko.unwrap($data.FileResourceId)), alt: $root.getLocalizationText($data) }" style="max-width: 100%;" />
+	<!-- /ko -->
+</figure>

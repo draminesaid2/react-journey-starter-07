@@ -1,0 +1,32 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+
+<!-- ko if: $parent.showNames -->
+	<!-- ko if: Name1 --><span data-bind="text: Name1"></span><br/><!-- /ko -->
+	<!-- ko if: Name2 --><span data-bind="text: Name2"></span><br/><!-- /ko -->
+	<!-- ko if: Name3 --><span data-bind="text: Name3"></span><br/><!-- /ko -->
+<!-- /ko -->
+<!-- ko if: Street --><span data-bind="text: Street"></span><br/><!-- /ko -->
+<!-- ko if: ko.unwrap(ZipCode) || ko.unwrap(City) -->
+<span>
+	<span data-bind="visible: ZipCode, text: ZipCode"></span>
+	<span data-bind="visible: City, text: City"></span>
+</span>
+<br/>
+<!-- /ko -->
+<!-- ko if: ko.unwrap(ZipCodePOBox) || ko.unwrap(POBox) -->
+<span>
+	<span>@(Html.Localize("POBox"))</span>
+	<span data-bind="visible: ZipCodePOBox, text: ZipCodePOBox"></span>
+	<span data-bind="visible: POBox, text: POBox"></span>
+</span>
+<br/>
+<!-- /ko -->
+<!-- ko if: ko.unwrap(RegionKey) || ko.unwrap(CountryKey) -->
+<span>
+	<span data-bind="if: RegionKey, lookupValue: RegionKey, lookups: $parent.lookups.regions, suffix: ko.unwrap(CountryKey) ? ',' : '' "></span>
+
+	<span data-bind="if: CountryKey, lookupValue: CountryKey, lookups: $parent.lookups.countries"></span>
+</span>
+<!-- /ko -->
+

@@ -1,0 +1,21 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Offline.Extensions
+
+@using (Html.TemplateForEach("Helper.DynamicForm.getChoicesArray($data)")) { 
+	<div class="form-element-layout p-l-0 p-r-0" style="margin-left: 0">
+		<p class="m-b-0" style="width: fit-content">
+			@using (Html.TemplateCondition("($parent.Response() || []).indexOf($data) !== -1")) { 
+				<span class="zmdi zmdi-check-square"></span>
+			 } 
+			@using (Html.TemplateCondition("($parent.Response() || []).indexOf($data) === -1")) { 
+				<span class="zmdi zmdi-square-o"></span>
+			 } 
+			<!-- ko if: $root.getLocalizationText -->
+			<span data-bind="text: $root.getLocalizationText($parent, $data)"></span>
+			<!-- /ko -->
+			<!-- ko if: $parents[3] && $parents[3].getLocalizationText && !$root.getLocalizationText -->
+			<span data-bind="text: $parents[3].getLocalizationText($parent, $data)"></span>
+			<!-- /ko -->
+		</p>
+	</div>
+ } 

@@ -1,0 +1,11 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<div class="row form-element-title">
+	<span data-bind="text: $root.getLocalizationText($data)">
+	</span>
+	&nbsp;
+</div>
+<div class="form-element-response">
+	<div class="row" data-bind="text: Response() && Response().length > 0 ? window.Globalize.formatNumber(parseFloat(Response())) : ''"></div>
+</div>
+

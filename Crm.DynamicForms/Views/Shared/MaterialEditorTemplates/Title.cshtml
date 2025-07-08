@@ -1,0 +1,29 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl
+@using Crm.Library.Globalization.Extensions
+<div class="form-group" data-bind="validationElement: $root.getLocalization($data).Value, validationOptions: { insertMessages: false }">
+	<div data-bind="css: { 'input-group': $root.form().Languages().length > 1 }">
+		<div class="fg-line">
+			<label class="fg-label control-label">
+				<span class="description" data-bind="translatedText: 'FieldLabel'"></span>
+			</label>
+			<!-- ko ifnot: FormElementType() === 'Literal' -->
+			<input class="form-control" data-bind="textInput: $root.getLocalization($data).Value, attr: { placeholder: Helper.String.getTranslatedString($data.FormElementType()) }" id="Title" name="Title" type="text"/>
+			<!-- /ko -->
+			<!-- ko if: FormElementType() === 'Literal' -->
+			<textarea class="form-control" data-bind="textInput: $root.getLocalization($data).Value, attr: { placeholder: Helper.String.getTranslatedString($data.FormElementType()) }" id="Title" name="Title" type="text"></textarea>
+			<!-- /ko -->
+		</div>
+		<span class="input-group-addon" data-bind="visible: $root.form().Languages().length > 1">
+			<!-- ko ifnot: FormElementType() === 'Literal' -->
+			<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: $root.editLocalizations, tooltip: true" title="@(Html.Localize("Translations"))">
+				<i class="zmdi zmdi-globe"></i>
+			</a>
+			<!-- /ko -->
+			<!-- ko if: FormElementType() === 'Literal' -->
+			<a class="btn btn-default btn-icon waves-effect waves-circle waves-float" href="#" data-bind="click: () => $root.editLocalizations($data, null, true), tooltip: true" title="@(Html.Localize("Translations"))">
+				<i class="zmdi zmdi-globe"></i>
+			</a>
+			<!-- /ko -->
+		</span>
+	</div>
+</div>

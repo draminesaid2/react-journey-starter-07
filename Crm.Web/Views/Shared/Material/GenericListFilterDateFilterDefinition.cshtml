@@ -1,0 +1,14 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<CrmModelItem<FilterDefinition>>
+@using Crm.Library.EntityConfiguration
+@using Crm.ViewModels
+@{ var filterDefinition = (DateFilterDefinition)Model.Item; }
+
+<div class="filter-element" id="@(filterDefinition.GetModelPath().ToLower().Replace(".", "-") + "-filter")" data-bind="component: { 
+  name: 'date-filter', 
+  params: { 
+	allowFutureDates: @(filterDefinition.AllowFutureDates ? "true" : "false"),
+	allowPastDates: @(filterDefinition.AllowPastDates ? "true" : "false"),
+	caption: '@(Model.Item.Caption ?? Model.Item.PropertyInfo.Name)',
+    value: getFilter('@(Model.Item.GetModelPath())')
+  }
+}"></div>

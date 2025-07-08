@@ -1,0 +1,40 @@
+﻿@using Crm.Library.Globalization.Extensions
+@using MimeKit.Text
+@inherits Crm.Library.Modularization.CrmViewUserControl
+
+<aside id="right-nav" class="sidebar c-overflow col-lg-4 col-md-6 col-sm-7
+	col-xs-10 p-l-0 p-r-0 mCS-autoHide toggled" 
+	style="overflow: visible;">
+	<div class="right-nav-content" style="visibility:visible;">
+		<ul class="top-menu bgm-blue p-l-0">
+			<li class="dropdown" data-bind="tooltip: true" data-placement="bottom" title="@(Html.Localize("Close"))">
+				<a id="close-generic-list-filter" href="#" data-trigger="#right-nav">
+					<i class="tm-icon zmdi zmdi-close"></i>
+				</a>
+			</li>
+			<li class="dropdown pull-right" data-bind="tooltip: true" data-placement="bottom" title="@(Html.Localize("Filter"))">
+				<a id="apply-generic-list-filter" href="#" data-trigger="#right-nav" data-bind="click: $root.filter">
+					<i class="tm-icon zmdi zmdi-check"></i>
+				</a>
+			</li>
+			<li class="dropdown pull-right" data-bind="tooltip: true" data-placement="bottom" title="@(Html.Localize("Reset"))">
+				<a id="reset-generic-list-filter" href="#" data-trigger="#right-nav" data-bind="click: resetFilter">
+					<i class="tm-icon zmdi zmdi-undo"></i>
+				</a>
+			</li>
+		</ul>
+		<div class="listview lv-bordered">
+		<div class="lv-item">
+			<form role="form" action="#">	
+				<div class="filter-element form-group" id="name-filter">
+					<div class="fg-line">
+						<label class="fg-label control-label">Name</label>
+						<input name="Name" type="text" class="form-control" data-bind="value: $root.searchCriteria">
+					</div>
+				</div>
+				</form>
+		</div>
+		</div>
+	</div>
+</aside>
+

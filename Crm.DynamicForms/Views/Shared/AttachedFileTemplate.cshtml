@@ -1,0 +1,24 @@
+﻿@inherits Crm.Library.Modularization.CrmViewUserControl<Crm.ViewModels.CrmModel>
+@using Crm.Library.Extensions
+@using Crm.Library.Globalization.Extensions
+@using Crm.Offline.Extensions
+@using Crm.Rest.Model
+
+@{ var fileSize = "<span data-bind=\"text: $root.getFileSize(Length())\"></span>"; }
+<div class="checklist-attached-file" style="margin: 5px 5px 0px 5px">
+	<div>
+		<strong>
+			@(Html.TemplateText<FileResourceRest>(fr => fr.Filename).AddClass("pre"))
+		</strong>
+	</div>
+	<small>
+		@Html.Raw($"({Html.TemplateText<FileResourceRest>(m => m.ContentType)}), {fileSize}")
+	</small>
+	<div style="float: right" data-bind="visible: !$root.formReference().Completed() && $data.CreateUser() == (window.ko.isObservable($root.currentUser) && window.ko.isObservable($root.currentUser().Id) ? $root.currentUser().Id() : document.getElementById('meta.CurrentUser').content)" %>
+		<a href="#" data-bind="click: $root.removeAttachedFile">
+			<small>
+				@(Html.Localize("Remove"))
+			</small>
+		</a>
+	</div>
+</div>

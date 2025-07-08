@@ -1,0 +1,95 @@
+﻿@using Crm.Library.Modularization.Extensions
+@inherits Crm.Library.Modularization.CrmViewUserControl
+<div class="container">
+	<div class="card">
+		<div class="card-header ch-alt">
+			<h2 data-bind="translatedText: 'AddNewUser'"></h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" data-bind="with: user">
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: FirstName, caption: 'Firstname', type: 'text'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: LastName, caption: 'LastName', type: 'text'"></form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: Email, caption: 'EMail', type: 'email'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: Id, caption: 'UserName', type: 'text', disable: !$parent.usernameIsEditable()"></form-element>
+					</div>
+				</div>
+				<form-element params="value: Remark, caption: 'Remark', type: 'textarea'"></form-element>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: $parent.password, caption: 'Password', type: 'password'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: $parent.password2, caption: 'ConfirmPassword', type: 'password'"></form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: PersonnelId, caption: 'PersonnelId', type: 'text'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: IdentificationNo, caption: 'IdentificationNo', type: 'text'"></form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: MasterRecordNo, caption: 'MasterRecordNo', type: 'text'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: AdName, caption: 'AdName', type: 'text'"></form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: DefaultLanguageKey, caption: 'DefaultLanguageKey', type: 'select'">
+							<select class="form-control" data-bind="select2autocompleter: { data: value, autocompleteOptions: { customFilter: Helper.User.languageFilter, table: 'Main_Language', mapDisplayObject: Helper.Lookup.mapLookupForSelect2Display, getElementByIdQuery: Helper.Lookup.getLookupByKeyQuery }, placeholder: placeholder }">
+						 	</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element params="value: DefaultLocale, caption: 'Locale', type: 'select'">
+							<select class="form-control" data-bind="select2autocompleter: { data: $root.locales, optionsText: Helper.Culture.getDisplayName }, value: value">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element params="value: DischargeDate, caption: 'DischargeDate', type: 'datePicker'"></form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element id="Stations" params="value: $root.stationIds, caption: 'Stations', type: 'select'">
+							<select name="Stations" class="form-control" multiple="multiple" data-bind="select2autocompleter: { data: value, autocompleteOptions: { orderBy: ['Name'], table: 'Main_Station', mapDisplayObject: window.Helper.Station.mapForSelect2Display, placeholder: $parent.placeholder } }">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form-element id="Roles" params="value: $root.roleIds, caption: 'Roles', type: 'select'">
+							<select name="Roles" class="form-control" multiple="multiple" data-bind="select2autocompleter: { data: value, autocompleteOptions: { orderBy: ['Name'], table: 'Main_PermissionSchemaRole', mapDisplayObject: Helper.User.mapRoleForSelect2Display, placeholder: placeholder } }">
+							</select>
+						</form-element>
+					</div>
+					<div class="col-md-6">
+						<form-element id="Usergroups" params="value: $root.usergroupIds, caption: 'UserGroups', type: 'select'">
+							<select name="Usergroups" class="form-control" multiple="multiple" data-bind="select2autocompleter: { data: value, autocompleteOptions: { orderBy: ['Name'], table: 'Main_Usergroup', mapDisplayObject: Helper.User.mapUsergroupForSelect2Display, placeholder: placeholder } }">
+							</select>
+						</form-element>
+					</div>
+				</div>
+				@Html.PluginRenderActions("CreateUser")
+			</form>
+		</div>
+		@await Html.PartialAsync("CreateFormFooter")
+	</div>
+</div>
