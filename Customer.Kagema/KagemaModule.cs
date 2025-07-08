@@ -3,7 +3,9 @@ using Autofac.Core;
 
 using Crm.Library.AutoFac;
 using Crm.Service.BackgroundServices;
+using Crm.Services;
 using Customer.Kagema.BackgroundServices;
+using Customer.Kagema.Services;
 
 namespace Customer.Kagema
 {
@@ -15,6 +17,7 @@ namespace Customer.Kagema
 			base.AttachToComponentRegistration(componentRegistry, registration);
 			registration.ReplaceRegistration<DispatchReportSenderAgent, KagemaDispatchReportSenderAgent>();
 			registration.ReplaceRegistration<ServiceOrderDocumentSaverAgent, KagemaServiceOrderDocumentSaverAgent>();
+			registration.ReplaceRegistration<NoteSyncService, KagemaNoteSyncService>();
 		}
 	}
 }
