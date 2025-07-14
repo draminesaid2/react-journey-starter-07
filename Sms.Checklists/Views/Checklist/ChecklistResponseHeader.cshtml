@@ -5,54 +5,171 @@
 @using Sms.Checklists.ViewModels
 @using (Html.TemplateContext("$root")) {
     @using (Html.TemplateCondition("formReference().ReferenceType() == 'ServiceOrderChecklist'")) {
-        <div class="row">
-            <div class="col-xs-6 p-l-0">
-                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder))
-                {
-                    <div class="row">
-                        <div class="col-xs-12 p-l-0">
-                            <span class="f-700">@Html.Localize("Customer")</span>:
-                            <span data-bind="text: Helper.Company.getDisplayName($root.CustomerContact())"></span>
+        <table style="width: 100%; page-break-inside: avoid;" class="m-t-20 m-b-20 break-word">
+            <tr>
+                <td class="col-xs-6 p-l-0 p-r-15 border-right border-light">
+                    @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.CustomerContact))
+                    {
+                        <div>
+                            <b>@Html.Localize("Customer")</b>
+                            <!-- ko if: $parent.ServiceOrder() && $parent.ServiceOrder().InitiatorContactKey() && $parent.ServiceOrder().InitiatorContactKey() === Id() -->
+                            /
+                            <b>@Html.Localize("Initiator")</b>
+                            <!-- /ko -->
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 p-l-0">
-                            <span class="f-700">@Html.Localize("Address")</span>:
-                            <span data-bind="text: Street"></span>,
-                            <span data-bind="text: ZipCode"></span>
-                            <span data-bind="text: City"></span>
+                        <div class="p-l-5">
+                            <div data-bind="text: Helper.Company.getDisplayName($data)"></div>
+                            <div data-bind="text: Name1"></div>
+                            <div data-bind="text: Street"></div>
+                            <div>
+                                <span data-bind="text: ZipCode"></span>
+                                <span data-bind="text: City"></span>
+                            </div>
+                            <div>
+                                <span data-bind="text: RegionName, visible: RegionName"></span>
+                                <span data-bind="text: CountryName, visible: CountryName"></span>
+                            </div>
                         </div>
-                    </div>
-                    <!-- ko if: $parent.ServiceOrderResponsibleUser() -->
-                    <div class="row">
-                        <div class="col-xs-12 p-l-0">
-                            <span class="f-700">@Html.Localize("ResponsibleUser")</span>:
-                            <span data-bind="text: Helper.User.getDisplayName($parent.ServiceOrderResponsibleUser())"></span>
+                    }
+                    
+                    <!-- ko if: ServiceOrder() && ServiceOrder().InitiatorContactKey() && CustomerContact() && ServiceOrder().InitiatorContactKey() !== CustomerContact().Id() -->
+                    <div class="p-10"></div>
+                    @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder))
+                    {
+                        <!-- ko with: InitiatorContact -->
+                        <div>
+                            <b>@Html.Localize("Initiator")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <div data-bind="text: Helper.Company.getDisplayName($data)"></div>
+                            <div data-bind="text: Name1"></div>
+                            <div data-bind="text: Street"></div>
+                            <div>
+                                <span data-bind="text: ZipCode"></span>
+                                <span data-bind="text: City"></span>
+                            </div>
+                            <div>
+                                <span data-bind="text: RegionName, visible: RegionName"></span>
+                                <span data-bind="text: CountryName, visible: CountryName"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    }
+                    <!-- /ko -->
+
+                    <!-- ko if: ServiceOrder() && ServiceOrder().ResponsiblePersonName() -->
+                    <div class="p-t-5">
+                        <div>
+                            <b>@Html.Localize("LocationPersonId")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <span data-bind="text: ServiceOrder().ResponsiblePersonName"></span>
                         </div>
                     </div>
                     <!-- /ko -->
-                }
-                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.Installation))
-                {
-                    <div class="row">
-                        <div class="col-xs-12 p-l-0">
-                            <!-- ko if: $root.MaintenanceOrderGenerationMode === 'OrderPerInstallation' -->
-                            <span class="f-700">@Html.Localize("Installation")</span>:
-                            <!-- /ko -->
-                            <!-- ko if: $root.MaintenanceOrderGenerationMode === 'JobPerInstallation' -->
-                            <span class="f-700">@Html.Localize("ServiceOrderTime")</span>:
-                            <!-- /ko -->
-                            <span data-bind="text: Helper.Installation.getDisplayName($data)"></span>
+
+                    <!-- ko if: ServiceOrder() && ServiceOrder().ResponsiblePersonPhone() -->
+                    <div class="p-t-5">
+                        <div>
+                            <b>@Html.Localize("Phone")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <span data-bind="text: ServiceOrder().ResponsiblePersonPhone"></span>
                         </div>
                     </div>
-                }
-            </div>
-            <div class="col-xs-6 p-r-0">
-                @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder)) {
-                    <h2 class="text-right">@(Html.Localize("OrderNo"))</h2>
-                    <h4 class="text-right c-gray" data-bind="text: OrderNo"></h4>
-                } 
-            </div>
-        </div>
-     } 
- } 
+                    <!-- /ko -->
+
+                    <!-- ko if: ServiceOrder() && ServiceOrder().ResponsiblePersonMobile() -->
+                    <div class="p-t-5">
+                        <div>
+                            <b>@Html.Localize("Mobile")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <span data-bind="text: ServiceOrder().ResponsiblePersonMobile"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- ko if: ServiceOrder() && ServiceOrder().ResponsiblePersonEmail() -->
+                    <div class="p-t-5">
+                        <div>
+                            <b>@Html.Localize("Email")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <span data-bind="text: ServiceOrder().ResponsiblePersonEmail"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </td>
+                <td class="col-xs-6 p-l-15 p-r-0">
+                    @using (Html.TemplateContext<ServiceOrderChecklistResponseViewModel>(x => x.ServiceOrder))
+                    {
+                        <!-- ko if: Name1() || Street() || CountryKey() || ZipCode() || City() -->
+                        <div>
+                            <b>@Html.Localize("DispatchLocation")</b>
+                        </div>
+                        <div class="p-l-5">
+                            <div data-bind="text: Name1"></div>
+                            <div data-bind="text: Street"></div>
+                            <div>
+                                <span data-bind="text: ZipCode"></span>
+                                <span data-bind="text: City"></span>
+                            </div>
+                            <div>
+                                <span data-bind="text: RegionName, visible: RegionName"></span>
+                                <span data-bind="text: CountryName, visible: CountryName"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <div class="p-10" data-bind="visible: ServiceLocationResponsiblePerson() || ServiceLocationPhone() || ServiceLocationMobile() || ServiceLocationEmail()"></div>
+                        
+                        <!-- ko if: ServiceLocationResponsiblePerson -->
+                        <div>
+                            <div>
+                                <b>@Html.Localize("LocationPersonId")</b>
+                            </div>
+                            <div class="p-l-5">
+                                <span data-bind="text: ServiceLocationResponsiblePerson"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: ServiceLocationPhone -->
+                        <div class="p-t-5">
+                            <div>
+                                <b>@Html.Localize("Phone")</b>
+                            </div>
+                            <div class="p-l-5">
+                                <span data-bind="text: ServiceLocationPhone"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: ServiceLocationMobile -->
+                        <div class="p-t-5">
+                            <div>
+                                <b>@Html.Localize("Mobile")</b>
+                            </div>
+                            <div class="p-l-5">
+                                <span data-bind="text: ServiceLocationMobile"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: ServiceLocationEmail -->
+                        <div class="p-t-5">
+                            <div>
+                                <b>@Html.Localize("Email")</b>
+                            </div>
+                            <div class="p-l-5">
+                                <span data-bind="text: ServiceLocationEmail"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    }
+                </td>
+            </tr>
+        </table>
+     }
+ }
